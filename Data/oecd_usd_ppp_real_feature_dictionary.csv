@@ -1,0 +1,6 @@
+feature,label,label_raw
+B1GQ__LR__USD_PPP,gross_domestic_product_chain_linked_volume_rebased_us_dollars_ppp_converted,"Gross domestic product | Chain linked volume (rebased) | US dollars, PPP converted"
+P3__LR__USD_PPP,final_consumption_expenditure_chain_linked_volume_rebased_us_dollars_ppp_converted,"Final consumption expenditure | Chain linked volume (rebased) | US dollars, PPP converted"
+P51G__LR__USD_PPP,gross_fixed_capital_formation_chain_linked_volume_rebased_us_dollars_ppp_converted,"Gross fixed capital formation | Chain linked volume (rebased) | US dollars, PPP converted"
+P6__LR__USD_PPP,exports_of_goods_and_services_chain_linked_volume_rebased_us_dollars_ppp_converted,"Exports of goods and services | Chain linked volume (rebased) | US dollars, PPP converted"
+P7__LR__USD_PPP,imports_of_goods_and_services_chain_linked_volume_rebased_us_dollars_ppp_converted,"Imports of goods and services | Chain linked volume (rebased) | US dollars, PPP converted"

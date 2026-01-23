@@ -1,0 +1,19 @@
+Period,Row,Winner,Non-winner,t-test
+1960–80,GDP (in thousands of 2015 US dollar millions),1292.76 (512.37),536.91 (1236.34),11.99***
+1960–80,Population (in millions),54.24 (13.93),26.03 (45.84),12.18***
+1960–80,GDP per capita,"23,187.93 (5,203.63)","22,219.72 (10,419.19)",1.81*
+1960–80,Year-on-Year GDP growth,4.21 (3.00),4.73 (3.56),-2.69***
+1980–2000,GDP (in thousands of 2015 US dollar millions),2197.33 (736.26),949.47 (2130.99),11.74***
+1980–2000,Population (in millions),61.15 (22.37),41.27 (100.62),3.99***
+1980–2000,GDP per capita,"36,315.83 (7,322.12)","31,503.05 (16,208.15)",5.91***
+1980–2000,Year-on-Year GDP growth,2.42 (1.79),3.27 (3.63),-4.63***
+2000–20,GDP (in thousands of 2015 US dollar millions),3109.93 (819.26),1368.24 (3020.17),12.57***
+2000–20,Population (in millions),84.89 (50.69),66.51 (197.17),2.03**
+2000–20,GDP per capita,"43,245.80 (13,238.25)","39,187.65 (21,569.91)",4.01***
+2000–20,Year-on-Year GDP growth,0.98 (3.29),2.58 (3.98),-8.38***
+Full sample,GDP (in thousands of 2015 US dollar millions),2277.67 (1040.89),1057.08 (2493.32),17.48***
+Full sample,Population (in millions),68.23 (37.34),49.65 (149.16),4.49***
+Full sample,GDP per capita,"35,020.24 (12,743.09)","33,077.68 (19,305.46)",3.52***
+Full sample,Year-on-Year GDP growth,2.52 (3.29),3.39 (3.96),-7.49***
+Full sample,Number of countries,6,42,
+Full sample,Number of observations,1315,7422,
