@@ -1,0 +1,84 @@
+% Methodology Section
+% This section describes the empirical strategy and estimation procedures
+
+\section{Methodology}
+
+This section outlines the empirical strategy used to estimate the causal effect of winning the FIFA World Cup on economic outcomes. The analysis follows the approach of \citet{Mello2024} while extending it to additional outcome variables and robustness checks.
+
+\subsection{Empirical Strategy}
+
+The identification strategy exploits the quasi-random nature of World Cup victories. While the outcome of a World Cup final is not truly random, it is largely unpredictable and influenced by factors (such as referee decisions, weather, injuries, and luck) that are plausibly exogenous to a country's economic conditions. This quasi-randomness allows us to treat World Cup victories as exogenous shocks to national sentiment and international visibility.
+
+\subsection{Event Study Specification}
+
+The primary event study specification follows the standard panel data framework:
+
+\begin{equation}
+Y_{it} = \alpha_i + \lambda_t + \sum_{k=-16}^{-2} \beta_k \mathbf{1}[E_{it} = k] + \sum_{k=0}^{6} \beta_k \mathbf{1}[E_{it} = k] + \gamma \mathbf{1}[Host_{it}] + \varepsilon_{it}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $Y_{it}$ is the year-over-year growth rate (in percentage points) of the outcome variable for country $i$ in quarter $t$
+    \item $\alpha_i$ are country fixed effects
+    \item $\lambda_t$ are time (quarter-year) fixed effects
+    \item $E_{it}$ is the relative time to the World Cup victory (with $E_{it} = 0$ denoting the quarter of victory)
+    \item $\beta_k$ are the event study coefficients of interest
+    \item $Host_{it}$ is an indicator for whether country $i$ hosted the World Cup in quarter $t$
+    \item The period $k = -1$ is omitted as the reference category
+\end{itemize}
+
+The coefficients $\beta_k$ for $k < -1$ allow us to test for pre-trends, while $\beta_k$ for $k \geq 0$ capture the post-victory effects. Standard errors are clustered at the country level to account for serial correlation.
+
+\subsection{Synthetic Difference-in-Differences Specification}
+
+The SDID analysis follows the methodology of \citet{Arkhangelsky2021}. For each outcome variable, we estimate:
+
+\begin{equation}
+\hat{\tau}^{SDID} = \frac{1}{N_1} \sum_{i \in \mathcal{T}} \left( Y_{i,post} - \sum_{j \in \mathcal{C}} \hat{\omega}_j Y_{j,post} \right)
+\end{equation}
+
+where $\mathcal{T}$ is the set of treated units (World Cup winners), $\mathcal{C}$ is the set of control units, $\hat{\omega}_j$ are the estimated synthetic control weights, and $Y_{i,post}$ and $Y_{j,post}$ are post-treatment outcomes.
+
+The weights are chosen to minimize the pre-treatment prediction error:
+
+\begin{equation}
+\hat{\omega} = \arg\min_{\omega} \sum_{i \in \mathcal{T}} \sum_{t \in \mathcal{T}_{pre}} \left( Y_{it} - \sum_{j \in \mathcal{C}} \omega_j Y_{jt} \right)^2
+\end{equation}
+
+subject to $\sum_{j \in \mathcal{C}} \omega_j = 1$ and $\omega_j \geq 0$ for all $j \in \mathcal{C}$.
+
+\subsection{Outcome Variables}
+
+The analysis examines five main outcome variables:
+\begin{enumerate}
+    \item \textbf{GDP}: Gross Domestic Product (chain-linked volume, rebased, USD PPP converted, year-over-year growth)
+    \item \textbf{Consumption}: Final consumption expenditure (chain-linked volume, rebased, USD PPP converted, year-over-year growth)
+    \item \textbf{Investment}: Gross fixed capital formation (chain-linked volume, rebased, USD PPP converted, year-over-year growth)
+    \item \textbf{Exports}: Exports of goods and services (chain-linked volume, rebased, USD PPP converted, year-over-year growth)
+    \item \textbf{Imports}: Imports of goods and services (chain-linked volume, rebased, USD PPP converted, year-over-year growth)
+\end{enumerate}
+
+All variables are measured as year-over-year growth rates in percentage points, consistent with \citet{Mello2024}.
+
+\subsection{Robustness Checks}
+
+To assess the robustness of our findings, we conduct several additional analyses:
+
+\begin{enumerate}
+    \item \textbf{Alternative event window specifications}: We vary the length of the pre- and post-event windows to examine sensitivity to the choice of event horizon.
+    
+    \item \textbf{Sample restrictions}: We restrict the analysis to specific time periods or country groups to examine whether results are driven by particular observations.
+    
+    \item \textbf{Placebo tests}: We conduct placebo tests by randomly assigning treatment status to control countries and re-estimating the models to verify that we do not find spurious effects.
+    
+    \item \textbf{Finalist and semi-finalist analysis}: We examine whether countries that reach the final or semi-finals (but do not win) experience similar economic effects, which would help distinguish between the effect of winning versus the effect of strong performance.
+    
+    \item \textbf{Alternative control groups}: We compare results using different sets of control countries, including matching-based control groups similar to those used in \citet{Mello2024}.
+\end{enumerate}
+
+\subsection{Implementation}
+
+All analyses are conducted using R statistical software. Event study regressions are estimated using the \texttt{fixest} package, which efficiently handles fixed effects in panel data models. SDID estimates are obtained using the \texttt{synthdid} package, which implements the methodology of \citet{Arkhangelsky2021} and \citet{Ben-Michael2021}.
+
+Standard errors for event study regressions are clustered at the country level. For SDID estimates, standard errors are computed using a block bootstrap procedure with 300 replications, where blocks are defined at the country level to account for within-country correlation over time.

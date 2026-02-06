@@ -1,0 +1,80 @@
+% Data Section
+% This section describes the data sources, sample construction, and descriptive statistics
+
+\section{Data}
+
+\subsection{Data Sources}
+
+The primary data source for this analysis is the OECD Quarterly National Accounts (QNA) database, which provides quarterly economic indicators for OECD member countries and selected partner economies. This is the same data source used by \citet{Mello2024}, ensuring comparability of results.
+
+The dataset includes the following key variables:
+\begin{itemize}
+    \item Gross Domestic Product (GDP) in chain-linked volumes, rebased, converted to USD using purchasing power parity (PPP) exchange rates
+    \item Final consumption expenditure
+    \item Gross fixed capital formation (investment)
+    \item Exports of goods and services
+    \item Imports of goods and services
+    \item Population data for per-capita calculations
+\end{itemize}
+
+All economic variables are measured in real terms (chain-linked volumes) and converted to USD using PPP exchange rates to ensure cross-country comparability. The data are seasonally adjusted and available at quarterly frequency.
+
+World Cup results data are compiled from official FIFA records, identifying the winner, runner-up, and semi-finalists for each World Cup edition from 1966 to 2022. The analysis focuses on the men's FIFA World Cup, as data availability for earlier periods is limited for the women's tournament.
+
+\subsection{Sample Construction}
+
+The sample includes all countries for which quarterly economic data are available in the OECD database over the period 1961-2024. The analysis focuses on World Cup winners from 1966 onwards, as quarterly data availability is limited for earlier periods.
+
+The treatment group consists of countries that won the World Cup during the sample period:
+\begin{itemize}
+    \item England (1966)
+    \item West Germany/Germany (1974, 1990, 2014)
+    \item Argentina (1978, 1986, 2022)
+    \item Italy (1982, 2006)
+    \item France (1998, 2018)
+    \item Brazil (2002)
+    \item Spain (2010)
+\end{itemize}
+
+The control group includes all other countries in the OECD database that did not win the World Cup during the sample period. This includes both OECD member countries and partner economies for which data are available.
+
+For the event study analysis, we construct a balanced panel where each country-quarter observation is assigned a relative time indicator $E_{it}$ that measures the number of quarters before or after a World Cup victory. For countries that never won, $E_{it}$ is set to a large negative value (indicating they are always in the pre-treatment or never-treated state).
+
+\subsection{Variable Construction}
+
+The primary outcome variables are constructed as year-over-year growth rates:
+
+\begin{equation}
+Y_{it} = 100 \times \left( \frac{X_{it} - X_{i,t-4}}{X_{i,t-4}} \right)
+\end{equation}
+
+where $X_{it}$ is the level of the economic variable (GDP, consumption, investment, exports, or imports) for country $i$ in quarter $t$, and $X_{i,t-4}$ is the value four quarters earlier. This transformation yields growth rates in percentage points, which are more comparable across countries and time periods than absolute levels.
+
+\subsection{Descriptive Statistics}
+
+Table \ref{tab:summary_stats} presents summary statistics for the main outcome variables. The sample includes [N] country-quarter observations covering [X] countries over the period [YEAR1]-[YEAR2].
+
+[Note: Insert summary statistics table here once generated]
+
+Key features of the data:
+\begin{itemize}
+    \item The average year-over-year GDP growth rate across all countries and periods is approximately [X] percentage points
+    \item There is substantial variation in growth rates both across countries and over time
+    \item Export and import growth rates tend to be more volatile than GDP growth
+    \item Investment growth shows the highest volatility among the components
+\end{itemize}
+
+\subsection{Data Quality and Limitations}
+
+Several data limitations should be noted:
+\begin{enumerate}
+    \item \textbf{Country coverage}: The analysis is limited to countries included in the OECD database, which may not be representative of all World Cup participants, particularly for earlier tournaments.
+    
+    \item \textbf{Time coverage}: Quarterly data availability varies by country, with some countries having shorter time series than others.
+    
+    \item \textbf{Measurement}: Economic data are subject to revision, and the analysis uses the most recent available vintage. Historical revisions could potentially affect results, though this is unlikely to systematically bias estimates.
+    
+    \item \textbf{Aggregation}: The analysis uses national-level aggregates, which may mask heterogeneous effects across regions or sectors within countries.
+\end{enumerate}
+
+Despite these limitations, the OECD data represent the most comprehensive and reliable source of quarterly economic indicators for the countries and time period of interest, and are the standard data source used in similar macroeconomic analyses.
