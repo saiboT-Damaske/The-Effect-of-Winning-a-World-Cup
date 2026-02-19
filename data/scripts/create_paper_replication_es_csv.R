@@ -11,13 +11,14 @@ library(dplyr)
 library(stringr)
 library(tidyr)
 
-setwd("C:/Users/tobif/Documents/Master Thesis (local)/")
+# Set working directory to data folder (parent of scripts)
+setwd("..")
 
 # -------------------------
 # 1) Load enriched GDP+POP+WC+YoY (NO pruning upstream)
 # -------------------------
 gdp_pop <- read_csv(
-  "Data/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq_plus_yoy.csv",
+  "oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq_plus_yoy.csv",
   show_col_types = FALSE
 )
 
@@ -71,7 +72,7 @@ if (length(missing_countries) > 0) {
 # -------------------------
 # 4) Save the trimmed replication panel (already contains YoY cols)
 # -------------------------
-write_csv(paper_replication_df, "paper_replication_dataset_q_1961_2021.csv")
+write_csv(paper_replication_df, "mello_paper_replication/paper_replication_dataset_q_1961_2021.csv")
 
 # ============================================================
 # 5) EVENT-STUDY SAMPLE FILTER FOR TABLE 1 (OBES 2024):
@@ -90,7 +91,7 @@ df_es <- df %>%
   arrange(country, tq) %>%
   filter(!is.na(gross_domestic_product_chain_linked_volume_rebased_us_dollars_ppp_converted_yoy_log_4q))
 
-write.csv(df_es, "paper_replication_event_study_sample.csv", row.names = FALSE)
+write.csv(df_es, "mello_paper_replication/paper_replication_event_study_sample.csv", row.names = FALSE)
 
 # quick check
 df_es %>%
@@ -145,7 +146,7 @@ event_study_df <- event_study_df %>%
 cat("Events (wins):", nrow(events), "\n")
 cat("Stacked rows:", nrow(event_study_df), "\n")
 
-write_csv(event_study_df, "event_study_dataset_stacked_L16.csv")
+write_csv(event_study_df, "mello_paper_replication/event_study_dataset_stacked_L16.csv")
 
 
 ################################################################################
@@ -156,7 +157,7 @@ library(dplyr)
 library(stringr)
 library(readr)
 
-df <- read_csv("paper_replication_event_study_sample.csv", show_col_types = FALSE)
+df <- read_csv("mello_paper_replication/paper_replication_event_study_sample.csv", show_col_types = FALSE)
 
 coverage <- df %>%
   mutate(

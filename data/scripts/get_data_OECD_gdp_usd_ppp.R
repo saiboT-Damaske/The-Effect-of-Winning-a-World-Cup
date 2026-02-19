@@ -9,6 +9,7 @@
 #  4) oecd_usd_ppp_real_country_feature_timespans_wide_named.csv
 ############################################################
 
+# Set working directory to data folder (parent of scripts)
 setwd("..")
 
 # =========================
@@ -98,7 +99,7 @@ df_base_long_real <- df_q_real %>%
 cat("BASE LONG rows:", nrow(df_base_long_real), "\n")
 cat("Countries:", n_distinct(df_base_long_real$ref_area), "\n\n")
 
-write_csv(df_base_long_real, "oecd_usd_ppp_real_base_long_q_sa_1960_2024.csv")
+write_csv(df_base_long_real, "oecd_source/oecd_usd_ppp_real_base_long_q_sa_1960_2024.csv")
 
 # =========================
 # 4) Fix macro aggregation (P3 is split by sector in this flow)
@@ -162,8 +163,8 @@ rename_map <- setNames(feature_dict$label, feature_dict$feature)
 df_base_wide_real_named <- df_base_wide_real %>%
   rename_with(~ rename_map[.x], .cols = intersect(names(df_base_wide_real), names(rename_map)))
 
-write_csv(df_base_wide_real_named, "oecd_usd_ppp_real_base_panel_wide_named.csv")
-write_csv(feature_dict, "oecd_usd_ppp_real_feature_dictionary.csv")
+write_csv(df_base_wide_real_named, "oecd_processed/oecd_usd_ppp_real_base_panel_wide_named.csv")
+write_csv(feature_dict, "oecd_metadata/oecd_usd_ppp_real_feature_dictionary.csv")
 
 # =========================
 # 7) Coverage metadata (country × feature) as time spans "start-end"
@@ -187,6 +188,6 @@ coverage_span_wide <- df_base_wide_real %>%
 coverage_span_wide_named <- coverage_span_wide %>%
   rename_with(~ rename_map[.x], .cols = intersect(names(coverage_span_wide), names(rename_map)))
 
-write_csv(coverage_span_wide_named, "oecd_usd_ppp_real_country_feature_timespans_wide_named.csv")
+write_csv(coverage_span_wide_named, "oecd_metadata/oecd_usd_ppp_real_country_feature_timespans_wide_named.csv")
 
 cat("DONE: wrote 4 output CSV files.\n")

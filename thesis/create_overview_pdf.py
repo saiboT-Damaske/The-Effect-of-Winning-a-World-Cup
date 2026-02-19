@@ -415,17 +415,13 @@ def create_overview_pdf():
     
     files_data = [
         ['File/Directory', 'Description'],
-        ['oecd_manual_analysis.ipynb', 'Main data processing and analysis notebook'],
-        ['wc_event_plots.ipynb', 'Event study visualization generation'],
-        ['sdid_replication.ipynb', 'SDID analysis implementation'],
-        ['summary_statistics.ipynb', 'Summary statistics and Table 1 replication'],
-        ['argentina_wc2022_prediction.ipynb', 'Argentina 2022 extension analysis'],
-        ['paper_replicate_sdid.R', 'R script for SDID replication'],
-        ['paper_replicate_event_study.R', 'R script for event study replication'],
-        ['Data/', 'Raw data files and processing scripts'],
-        ['event descriptive plots/', 'Generated event study visualizations'],
-        ['sdid results/', 'SDID analysis output plots'],
-        ['argentina_2022_analysis/', 'Argentina extension outputs'],
+        ['mello_paper_replication/', 'Paper replication analysis (notebooks, R scripts, results)'],
+        ['finalist_analysis/', 'Finalist (top 2) analysis'],
+        ['semi_finalist_analysis/', 'Semi-finalist (top 4) analysis'],
+        ['argentina_2022/', 'Argentina 2022 extension analysis'],
+        ['data/', 'Data folder (oecd_source, oecd_processed, world_cup, etc.)'],
+        ['thesis/', 'Thesis chapters and documentation'],
+        ['literature/', 'Reference papers and literature'],
     ]
     
     files_table = Table(files_data, colWidths=[5.5*cm, 8.5*cm])

@@ -35,11 +35,11 @@ pop_total <- pop_raw %>%
 # quick unit check (important)
 pop_total %>% count(unit_measure)
 
-write_csv(pop_total, "oecd_population_annual_1960_2024.csv")
+write_csv(pop_total, "oecd_source/oecd_population_annual_1960_2024.csv")
 
 
 
-pop <- read_csv("oecd_population_annual_1960_2024.csv", show_col_types = FALSE)
+pop <- read_csv("oecd_source/oecd_population_annual_1960_2024.csv", show_col_types = FALSE)
 
 pop_coverage <- pop %>%
   filter(!is.na(population)) %>%
@@ -61,7 +61,7 @@ library(readr)
 library(dplyr)
 library(ggplot2)
 
-pop <- read_csv("oecd_population_annual_1960_2024.csv", show_col_types = FALSE)
+pop <- read_csv("oecd_source/oecd_population_annual_1960_2024.csv", show_col_types = FALSE)
 
 # pick first five countries alphabetically (stable & reproducible)
 countries_5 <- pop %>%

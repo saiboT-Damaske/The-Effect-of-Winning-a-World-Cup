@@ -3,7 +3,7 @@ library(dplyr)
 library(stringr)
 library(tidyr)
 
-df <- read_csv("Data/paper_replication_event_study_sample.csv", show_col_types = FALSE)
+df <- read_csv("../data/mello_paper_replication/paper_replication_event_study_sample.csv", show_col_types = FALSE)
 
 df2 <- df %>%
   mutate(
@@ -76,7 +76,7 @@ library(dplyr)
 library(stringr)
 library(tidyr)
 
-df <- read_csv("Data/paper_replication_event_study_sample.csv", show_col_types = FALSE)
+df <- read_csv("../data/mello_paper_replication/paper_replication_event_study_sample.csv", show_col_types = FALSE)
 
 # --- detect GDP column (use the first column that contains "gross_domestic_product")
 gdp_col <- names(df)[str_detect(names(df), "gross_domestic_product")][1]
@@ -155,8 +155,8 @@ library(stringr)
 library(tidyr)
 
 
-df <- read_csv("Data/paper_replication_event_study_sample.csv", show_col_types = FALSE)
-df <- read_csv("Data/paper_replication_dataset_q_1961_2021.csv", show_col_types = FALSE)
+df <- read_csv("../data/mello_paper_replication/paper_replication_event_study_sample.csv", show_col_types = FALSE)
+df <- read_csv("../data/mello_paper_replication/paper_replication_dataset_q_1961_2021.csv", show_col_types = FALSE)
 
 
 target_col <- "gross_domestic_product_chain_linked_volume_rebased_us_dollars_ppp_converted_yoy_log_4q"
@@ -232,7 +232,7 @@ library(dplyr)
 library(stringr)
 library(tidyr)
 
-df <- read_csv("Data/paper_replication_event_study_sample.csv", show_col_types = FALSE) 
+df <- read_csv("../data/mello_paper_replication/paper_replication_event_study_sample.csv", show_col_types = FALSE) 
 df_es <- df
 
 gdp_level_col <- "gross_domestic_product_chain_linked_volume_rebased_us_dollars_ppp_converted"
@@ -320,7 +320,7 @@ library(stringr)
 library(tidyr)
 library(kableExtra)
 
-df <- read_csv("Data/paper_replication_event_study_sample.csv", show_col_types = FALSE)
+df <- read_csv("../data/mello_paper_replication/paper_replication_event_study_sample.csv", show_col_types = FALSE)
 
 # ---- Variables (edit here only if needed) ----
 gdp_level_col <- "gross_domestic_product_chain_linked_volume_rebased_us_dollars_ppp_converted"
@@ -477,7 +477,7 @@ kbl
 #           FULL TABLE    DF                                                  ##
 ################################################################################
 
-df <- read_csv("paper_replication_event_study_sample.csv", show_col_types = FALSE)
+df <- read_csv("../data/mello_paper_replication/paper_replication_event_study_sample.csv", show_col_types = FALSE)
 
 # --- columns ---
 gdp_level_col  <- "gross_domestic_product_chain_linked_volume_rebased_us_dollars_ppp_converted"

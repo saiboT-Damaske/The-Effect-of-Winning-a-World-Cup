@@ -6,7 +6,10 @@ library(janitor)
 library(stringr)
 
 
-imf <- read.csv("IMF_Data_col.csv")
+# Set working directory to data folder (parent of scripts)
+setwd("..")
+
+imf <- read.csv("imf/IMF_Data_col.csv")
 head(imf)
 
 

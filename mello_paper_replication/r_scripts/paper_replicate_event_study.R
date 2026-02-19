@@ -23,7 +23,7 @@ library(lfe)
 # 1) Load enriched panel (already contains *_yoy_log_4q and *_yoy_pct)
 # -----------------------------
 df0 <- read_csv(
-  "Data/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq_plus_yoy.csv",
+  "../data/oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq_plus_yoy.csv",
   show_col_types = FALSE
 ) %>%
   mutate(country = as.character(country))

@@ -32,7 +32,7 @@ library(synthdid)
 message(">>> Loading enriched OECD panel ...")
 
 df0 <- read_csv(
-  "Data/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq_plus_yoy.csv",
+  "../data/oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq_plus_yoy.csv",
   show_col_types = FALSE
 ) %>%
   mutate(country = as.character(country))
@@ -237,7 +237,7 @@ gg_es <- es_tab %>%
   scale_x_continuous(breaks = seq(-16, 16, by = 2)) +
   theme_minimal()
 gg_es
-ggsave("Finalist_analysis/finalist_event_study_R.png",
+ggsave("plots/finalist_event_study_R.png",
        gg_es, width = 8, height = 4.5, dpi = 300)
 
 
@@ -397,7 +397,7 @@ run_one_outcome_finalist <- function(df_in, outcome_name, y_col, reps = 300) {
     print(p_final)
     
     # Save plot
-    filename <- paste0("Finalist_analysis/SDID_Finalist_", 
+    filename <- paste0("plots/SDID_Finalist_", 
                       gsub(" ", "_", outcome_name), ".png")
     ggsave(filename, p_final, width = 10, height = 6, dpi = 300)
     cat("Saved:", filename, "\n")
@@ -410,7 +410,7 @@ run_one_outcome_finalist <- function(df_in, outcome_name, y_col, reps = 300) {
     )
     
     # Save base graphics plot
-    filename <- paste0("Finalist_analysis/SDID_Finalist_", 
+    filename <- paste0("plots/SDID_Finalist_", 
                       gsub(" ", "_", outcome_name), ".png")
     dev.copy(png, filename, width = 10, height = 6, units = "in", res = 300)
     dev.off()
@@ -484,7 +484,7 @@ comparison_all <- tibble::tibble(
   N_Control = sapply(results_list, function(x) x$N_control)
 )
 
-write_csv(comparison_all, "Finalist_analysis/finalist_analysis_results_R.csv")
+write_csv(comparison_all, "results/finalist_analysis_results_R.csv")
 
 cat("\n================================================\n")
 cat("FINALIST SDID RESULTS SUMMARY\n")

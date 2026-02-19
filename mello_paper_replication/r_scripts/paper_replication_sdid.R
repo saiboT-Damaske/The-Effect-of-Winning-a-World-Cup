@@ -22,7 +22,7 @@ library(synthdid)
 # -----------------------------
 # 1) Load data
 # -----------------------------
-df <- read_csv("Data/paper_replication_event_study_sample.csv", show_col_types = FALSE) %>%
+df <- read_csv("../data/mello_paper_replication/paper_replication_event_study_sample.csv", show_col_types = FALSE) %>%
   mutate(
     country = as.character(country),
     year    = as.integer(year),

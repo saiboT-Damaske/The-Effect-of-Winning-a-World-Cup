@@ -108,7 +108,7 @@ df_base_long <- build_base_long(df_q_nsa, key_cols)
 message("Base LONG rows: ", nrow(df_base_long))
 
 # Optional write
-write_csv(df_base_long, "oecd_qna_base_long_q_nsa_1960_2024.csv")
+write_csv(df_base_long, "oecd_source/oecd_qna_base_long_q_nsa_1960_2024.csv")
 
 # ----------------------------
 # 4) Feature dictionary (codes -> readable column names)
@@ -126,7 +126,7 @@ build_feature_dictionary <- function(df_base_long) {
 }
 
 feature_dict <- build_feature_dictionary(df_base_long)
-write_csv(feature_dict, "oecd_feature_dictionary.csv")
+write_csv(feature_dict, "oecd_metadata/oecd_feature_dictionary.csv")
 
 rename_map <- setNames(feature_dict$feature_label, feature_dict$feature)
 
@@ -163,14 +163,14 @@ build_base_wide <- function(df_base_long) {
 
 df_base_wide <- build_base_wide(df_base_long)
 message("Base WIDE rows: ", nrow(df_base_wide), " | cols: ", ncol(df_base_wide))
-write_csv(df_base_wide, "oecd_base_panel_wide.csv")
+write_csv(df_base_wide, "oecd_processed/oecd_base_panel_wide.csv")
 
 # Rename feature columns to readable names (optional but recommended)
 df_base_wide_named <- df_base_wide %>%
   rename_with(~ rename_map[.x], .cols = intersect(names(df_base_wide), names(rename_map)))
 
 message("Base WIDE (named) rows: ", nrow(df_base_wide_named), " | cols: ", ncol(df_base_wide_named))
-write_csv(df_base_wide_named, "oecd_base_panel_wide_named.csv")
+write_csv(df_base_wide_named, "oecd_processed/oecd_base_panel_wide_named.csv")
 
 # ----------------------------
 # 6) Export per-country WIDE CSVs
@@ -190,7 +190,7 @@ export_country_wide_csvs <- function(df_base_wide_named, out_dir = "oecd_by_coun
   message("Wrote ", length(countries), " files to: ", normalizePath(out_dir))
 }
 
-export_country_wide_csvs(df_base_wide_named, out_dir = "oecd_by_country_wide")
+export_country_wide_csvs(df_base_wide_named, out_dir = "oecd_processed/oecd_by_country_wide")
 
 # ----------------------------
 # 7) Metadata: coverage timespans per country-feature (WIDE)
@@ -216,13 +216,13 @@ build_coverage_timespan_wide <- function(df_base_wide) {
 }
 
 coverage_span_wide <- build_coverage_timespan_wide(df_base_wide)
-write_csv(coverage_span_wide, "oecd_country_feature_timespans_wide.csv")
+write_csv(coverage_span_wide, "oecd_metadata/oecd_country_feature_timespans_wide.csv")
 
 # Rename coverage columns to readable names as well (optional)
 coverage_span_wide_named <- coverage_span_wide %>%
   rename_with(~ rename_map[.x], .cols = intersect(names(coverage_span_wide), names(rename_map)))
 
-write_csv(coverage_span_wide_named, "oecd_country_feature_timespans_wide_named.csv")
+write_csv(coverage_span_wide_named, "oecd_metadata/oecd_country_feature_timespans_wide_named.csv")
 
 # ----------------------------
 # 8) Quick inspection helpers (optional)
@@ -234,7 +234,7 @@ df_base_long %>%
   print(n = Inf)
 
 # Example: load one per-country wide file
-DEU <- read_csv("oecd_by_country_wide/DEU.csv", show_col_types = FALSE)
+DEU <- read_csv("oecd_processed/oecd_by_country_wide/DEU.csv", show_col_types = FALSE)
 head(DEU)
 
 ############### paper derivation ####################

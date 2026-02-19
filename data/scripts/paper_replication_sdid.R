@@ -21,7 +21,10 @@ library(synthdid)
 # -----------------------------
 # 1) Load data
 # -----------------------------
-df <- read_csv("Data/paper_replication_event_study_sample.csv", show_col_types = FALSE) %>%
+# Set working directory to data folder (parent of scripts)
+setwd("..")
+
+df <- read_csv("mello_paper_replication/paper_replication_event_study_sample.csv", show_col_types = FALSE) %>%
   mutate(
     country = as.character(country),
     year    = as.integer(year),
