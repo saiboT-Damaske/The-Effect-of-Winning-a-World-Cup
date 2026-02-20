@@ -6,10 +6,15 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{setspace}
 
-\newcommand{\mytitle}{My Super Fancy Thesis Title}
-\newcommand{\myname}{Jane Doe}
-\newcommand{\mysupervisor}{Dr Dre}
+\newcommand{\mytitle}{A Kick for the GDP: Replicating and Extending the Analysis of World Cup Victory Effects on Economic Growth}
+\newcommand{\myname}{Tobias Damaske}
+\newcommand{\mysupervisor}{[Vincent Starck, Ph.D.]}
 
 \usepackage[a4paper, width = 160mm, top = 35mm, bottom = 30mm, 
 bindingoffset = 0mm]{geometry}
@@ -35,6 +40,8 @@ bindingoffset = 0mm]{geometry}
 \setlength{\headheight}{14.5pt}
 \setlength{\parindent}{0pt}
 \interfootnotelinepenalty = 10000
+
+\graphicspath{{figures/}}
 
 % ------------------------------------------------------------------------------
 % MAIN -------------------------------------------------------------------------
@@ -71,7 +78,7 @@ Ludwig-Maximilians-Universität München
 \vfill
 
 \large
-Munich, Month Day\textsuperscript{th}, Year
+Munich, February 24\textsuperscript{th}, 2026
       
 \vfill
 
@@ -94,14 +101,14 @@ Supervised by \mysupervisor
 \newpage
 
 \begin{abstract}
+\onehalfspacing
+This thesis replicates and extends the analysis of \citet{Mello2024}, who examines whether winning the FIFA World Cup boosts GDP growth. Using quarterly data from OECD countries and implementing both event-study and synthetic difference-in-differences (SDID) methodologies, this study confirms that winning the World Cup increases year-over-year GDP growth by approximately 0.48 percentage points in the two subsequent quarters. The effect appears primarily driven by enhanced export growth, consistent with increased international visibility and appeal of national products following victory. Beyond replication, this thesis extends the analysis to examine effects on additional GDP components (consumption, investment, imports), investigates whether countries reaching the final or semi-finals experience similar effects, and provides a case study of Argentina's 2022 World Cup victory. The findings contribute to the growing literature on the economic effects of major sporting events, while the detailed replication provides methodological transparency and validates the robustness of the original results across different implementations.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-culpa qui officia deserunt mollit anim id est laborum.
+\vspace{0.5cm}
+\noindent\textbf{Keywords:} FIFA World Cup, GDP growth, event study, synthetic difference-in-differences, sports economics, causal inference
 
+% \vspace{0.5cm}
+% \noindent\textbf{JEL Classification:} Z20, O47, F43
 \end{abstract}
 
 \newpage
@@ -122,6 +129,11 @@ culpa qui officia deserunt mollit anim id est laborum.
 \section{Introduction}
 \label{intro}
 \input{chapters/introduction}
+\newpage
+
+\section{Background}
+\label{background}
+\input{chapters/background}
 \newpage
 
 \section{Theoretical Background}

@@ -259,6 +259,13 @@ tab2_like_lfe <- ct2 %>%
 cat("\n--- Table-2-like (LFE) ---\n")
 print(tab2_like_lfe, n = Inf)
 
+# Save event study coefficients to CSV for comparison with Python
+write.csv(tab2_like_fixest, "../results/event_study_coefficients_R_fixest.csv", row.names = FALSE)
+write.csv(tab2_like_lfe, "../results/event_study_coefficients_R_lfe.csv", row.names = FALSE)
+cat("\nResults saved to:\n")
+cat("  - results/event_study_coefficients_R_fixest.csv\n")
+cat("  - results/event_study_coefficients_R_lfe.csv\n")
+
 # -----------------------------
 # 9) Quick cross-check: any lingering ln_gdp_l4 NA at a specific bin?
 # -----------------------------

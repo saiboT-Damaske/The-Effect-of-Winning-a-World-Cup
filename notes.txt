@@ -1,0 +1,150 @@
+Papers to include:
+CVM willingniess to pay for winning a world cup
+
+Wicker, Pamela & Prinz, Joachim & von Hanau, Tassilo, 2012. "Estimating the value of national sporting success," Sport Management Review, Elsevier, vol. 15(2), pages 200-210. 
+
+Linn-Brit Bakkenbüll and Alexander Dilger’s study, "
+The Willingness to Pay for a German Win of the 2014 FIFA World Cup in Brazil" (working paper 2015, published 2018)
+
+The value of sporting success to Germans: Comparing the 2012 UEFA Championships with the 2012 Olympics; 2013	DE	Pride/identity proxy via CVM/WTP	Average WTP: €47.31 (football European title) vs €37.06 (ranked #1 in Olympic medal table); aggregate WTP €3.3 bn vs €2.6 bn
+(just say that World Cup is more important to fans than the Olympics)
+
+
+
+
+
+
+How Major Sporting Tournaments Affect Patriotism and National Pride
+Executive summary
+
+Across the best-identified empirical literature, elite-sport tournaments can measurably move patriotism / national pride / national identification, but the typical pattern is short-lived “spikes” rather than durable shifts—and effects depend strongly on context and measurement.
+
+The most rigorous evidence is concentrated in football (soccer). Quasi-experimental designs around match outcomes in sub-Saharan Africa show that national team victories can shift identification away from ethnic identity toward national identity and increase inter-ethnic trust, with additional downstream reductions in conflict.
+
+For FIFA World Cups specifically, evidence combining surveys “around” the event indicates a pronounced during-tournament rise in national pride that largely recedes after the event (e.g., Germany 2006), while longer-horizon resident surveys in a host-country context (South Africa 2010) find increased “psychic income” (pride/euphoria) but mixed or even negative movement in some social-capital dimensions.
+
+The same identity surge that can support “inclusive” nation-building can also heighten exclusionary nationalism and related behaviors (e.g., more negative views of refugees’ contribution to national diversity after a narrow win in a major football match; and evidence connecting World Cup-related nationalism to greater interstate aggression in certain contexts).
+Information needs and research approach
+
+Key information needs for a rigorous, thesis-ready synthesis (scope: “tournaments → patriotism”):
+
+    Credible identification strategies (panel, event-study, DiD, RD, survey experiments) that isolate tournament shocks from confounding time trends.
+    Clear operationalizations of patriotism (national pride items, national identification indices, symbolic/behavioral proxies, resource-allocation preferences).
+    Comparable effect sizes and time horizons (hours/days vs weeks vs months/years), plus decay vs persistence.
+    Evidence on heterogeneity (demographics, baseline attachment, tournament salience, political regime, host vs non-host, “win” vs “participate/qualify”).
+    Cross-event contrasts: multi-sport mega-events vs football generally vs FIFA World Cups.
+
+Connector-first step (per request): Only the GitHub connector was enabled (repository: saiboT-Damaske/The-Effect-of-Winning-a-World-Cup). The repository’s thesis materials focus on macroeconomic outcomes of a FIFA World Cup victory (e.g., GDP growth) and primarily cite causal inference method papers (event-study, synthetic DiD) rather than patriotism/sports-nationalism literatures. This is evident from the bibliography and methodological/theoretical-background chapters.
+Because the repository did not provide a substantive patriotism-focused bibliography, the core evidence below comes from targeted web-based discovery of high-quality empirical studies.
+Ranked evidence base across event types
+
+Ranking metric (explicit assumption; user left it unspecified): methodological rigor + sample size + influence (proxied by publication venue prominence and widespread use/citation in later work). When effect sizes are not reported in accessible abstracts/excerpts, this is flagged as “not specified.”
+Ranked top papers
+
+    Building Nations through Shared Experiences: Evidence from African Football (2020) — strongest identification + multiple outcomes (identity, trust, conflict) with sizeable effects and explicit tests against generic “euphoria.”
+
+    Patriots for three weeks: Effects of Euro 2012 on national identification in Germany (2013) — explicit patriotism/nationalism measures, with panel structure and mediation pathways; clear short horizon.
+
+    Team and Nation: Sports, Nationalism, and Attitudes Toward Refugees (2021) — survey experiment + DiD logic around a narrow win; shows both pride increases and exclusionary reactions, plus framing intervention effects.
+
+    Nationalism and Conflict: Lessons from International Sports (2017) — exploits discontinuities in World Cup qualification; links “World Cup nationalism” to consequential behavioral outcomes (state aggression), and shows conditioning by soccer popularity and context.
+
+    Sport and national identity: comparison of 2006 and 2010 FIFA World Cups (2007) — directly relevant to World Cups; documents a large but temporary rise in German national pride during 2006 and links to xenophobia discussions.
+
+    Psychic income and social capital among host nation residents: 2010 FIFA World Cup in South Africa (2014) — large samples pre/post; directly operationalizes pride/euphoria and social cohesion proxies; heterogeneity by race/age/gender.
+
+    5,535 Hours of Impact: Effects of the Olympics on nationalism and internationalism (2013) — large cross-national sample and repeated measures; links Olympic media consumption to nationalism/patriotism patterns (but with weaker causal identification).
+
+    Residents’ perceptions toward impacts of the Beijing 2008 Olympic Games (2009) — large resident survey with direct “pride” items; good measurement transparency, but mainly anticipatory/perceptual rather than causal.
+
+    Happiness, pride and elite sporting success (Germany) (2013) — nationally representative survey with clear pride shares and heterogeneity; outcome is pride from sporting success broadly rather than one tournament shock.
+
+    ‘Back the Bid’: valuing intangible impacts of London’s Olympic bid (2008) — directly values “intangible impacts” with clear monetary magnitudes; patriotism is proxied via willingness-to-pay rather than direct attitude items.
+
+Comparison table of key studies and effects
+
+Quality rating legend: High (credible quasi-experiment/experiment with clear timing and/or discontinuity), Medium (strong descriptive/panel but identification weaker), Low–Medium (perceptions/anticipatory or correlational).
+Author(s) / year (full names)	Title	Level (A/B/C)	Context	Data & N	Design	Patriotism / nationalism measure	Main reported effect size	Horizon	Heterogeneity	Quality
+Emilio Depetris-Chauvin; Ruben Durante; Filipe R. Campante (2020)	Building Nations through Shared Experiences: Evidence from African Football	B	Sub-Saharan Africa; national team matches and AFCON qualification	Survey interviews timed around matches; match data 2000–2015; conflict outcomes over subsequent months (N not specified in excerpt)	Quasi-experimental timing + close-qualification RD logic for conflict	Shift from ethnic to national identification; inter-ethnic trust	37% less likely to identify primarily with ethnic group; 30% more likely to trust other ethnicities; 9% fewer conflict episodes after barely qualifying	Days after win (attitudes); ~6 months (conflict)	Effect “not explained by generic euphoria/optimism” (mechanism test)	High
+Michael Mutz (2013)	Patriots for three weeks: The effects of the 2012 UEFA European Football Championship on national identification in Germany	B	Germany; Euro 2012	Panel of 1,064 German university students	Panel / cross-lagged SEM (identified “success” → identity)	Patriotism & nationalism scales; mediators: identification, atmosphere, personal importance	Predicted increase in patriotism for average respondent: ≈0.87 scale units; nationalism ≈0.47; mediation paths e.g., identification → patriotism 0.29, atmosphere → patriotism 0.24	Tournament window (“three weeks”)	Effects depend on identification/atmosphere/personal importance	Medium–High
+Leah R. Rosenzweig; Yang-Yang Zhou (2021)	Team and Nation: Sports, Nationalism, and Attitudes Toward Refugees	B	Kenya vs Tanzania match (Africa Cup)	Online panel N = 2,647 recruited via Facebook	Survey experiment + DiD framing around narrow win	National pride; allocation preferences toward conationals; attitudes toward refugees (diversity, etc.)	Win increases national pride and preferences for allocating resources toward conationals; also increases negative views of refugees’ contribution to diversity; inclusive framing offsets (and can reverse) the negative sentiment	“Several days” after match; framing effects reported lasting ~3 days	Treatment framing matters (inclusive/superordinate identity reframes)	High
+Andrew D. Bertoli (2017)	Nationalism and Conflict: Lessons from International Sports	C	World Cup qualification 1958–2010; interstate disputes	RD sample described as 142 countries near qualification cut (in report)	Regression discontinuity around qualification threshold + case evidence	Nationalism proxied by qualification/participation; aggression via militarized interstate disputes	For World Cup opponent pairs, likelihood of at least one conflict +56% (pairs with conflict 9 → 14); disputes 9 → 21 (report summary)	Post-qualification / post-World-Cup year; also referenced longer windows elsewhere	Larger effects where soccer is favorite sport (and by political context, in commentary)	High
+Norbert Kersting (2007)	Sport and national identity: a comparison of the 2006 and 2010 FIFA World Cups	C	Germany 2006; comparison framing with South Africa 2010	Survey analysis (ALLBUS 2006 mentioned; N not specified in excerpt)	Pre/during/post comparisons (survey-based)	National pride; national identity; xenophobia discussion	National pride in Germany: 71% before → 78% during → 72% months after (returns near baseline)	During tournament → months after	Small reported reductions in xenophobia (in summary)	Medium
+Heather J. Gibson; Matthew Walker; Brijesh Thapa; Kyriaki Kaplanidou; Sue Geldenhuys; Willie Coetzee (2014)	Psychic income and social capital among host nation residents: A pre-post analysis of the 2010 FIFA World Cup in South Africa	C	South Africa; host cities, 2010 World Cup	Surveys: n=1,749 (3 months pre), n=2,020 (8 months post)	Quasi-experimental trend (pre/post); ANOVA/MANOVA/MANCOVA	Psychic income (includes pride/euphoria); social capital dimensions	Psychic income increased significantly; pride/patriotism component had high mean (M=4.08/5 pre); reported overall change significant (e.g., F=2.89, p=.029 in excerpt) while several social-capital dimensions decreased	3 months pre vs 8 months post	Higher psychic income among males and Black South Africans; social-capital patterns differ by race/age	Medium–High
+Andrew C. Billings; Kenon A. Brown; Natalie A. Brown (2013)	5,535 Hours of Impact: The Effects of the Olympics on Nationalism and Internationalism	A	Olympics; cross-national	12,144 citizens in 19 countries; 3 survey waves	Survey with media-consumption stratification (observational)	Nationalism / patriotism / internationalism; “smugness”	Heavy Olympic consumption associated with higher nationalism/patriotism; across time most outcomes stable, with “smugness” increasing	Pre/during/post Olympic period	Consumption intensity differences	Medium
+Yong Joe Zhou; John Ap (2009)	Residents’ perceptions towards the impacts of the Beijing 2008 Olympic Games	A	China; Beijing	Resident survey n=1,165	Cross-sectional resident survey; factor analysis + clustering	Items include “increase the pride of local residents” and related social-psychological impacts	Very high pride endorsement: 93.2% agree that Olympics “increase pride”; mean around 6.1 (7-point) in table	Pre-event perceptions (timing not specified in excerpt)	“Embracers” vs “tolerators” clusters differ on support and social-psychological items	Medium
+Kirstin Hallmann; Christoph Breuer; Benedikt Kühnreich (2013)	Happiness, pride and elite sporting success: What population segments gain most from national athletic achievements?	A	Germany; major international (and national) sporting events broadly	Nation-wide CATI survey n=2,006	Cross-sectional survey; regressions of pride/happiness on covariates	Self-reported national pride when athletes succeed (and happiness)	66.2% felt proud when athletes were successful at major events	Not tournament-bound; general effect of success	Larger effects reported for women, low education/income, and migration background	Medium
+Giles Atkinson; Susana Mourato; Stefan Szymanski; Ece Ozdemiroglu (2008)	Are we willing to pay enough to ‘Back the Bid’?: valuing the intangible impacts of London’s bid to host the 2012 Summer Olympic Games	A	United Kingdom; London/Manchester/Glasgow	Contingent valuation survey (N not specified in abstract)	CVM (stated preference)	Patriotism proxied by willingness-to-pay for “intangible impacts”	Mean annual WTP: £22 (London), £12 (Manchester), £11 (Glasgow) for 10 years; implied total UK WTP ≈ £2bn	Valued over 10 years	WTP explained by support for the bid (determinants)	Medium
+Causal pathways from tournaments to patriotism
+
+mermaid
+
+flowchart TD
+  A[Tournament shock: hosting / win / surprising run] --> B[Mass media exposure + shared attention]
+  B --> C[Collective emotions: euphoria, pride, relief]
+  C --> D[Identity salience: "we" vs "they"]
+  D --> E[Patriotism / national pride]
+  D --> F[In-group favoritism (allocation to conationals)]
+  E --> G[Social cohesion / social capital (may rise or fall by dimension)]
+  E --> H[Political attitudes & behaviors: support for leaders, policy preferences]
+  F --> I[Out-group attitudes: tolerance OR cultural threat]
+  I --> J[Intergroup trust / xenophobia / discrimination]
+  H --> K[International and domestic conflict behavior (in some contexts)]
+  C --> L[Short-term decay: effects fade without reinforcement]
+  G --> M[Longer-run legacy possible if institutionalized (schools, rituals, ongoing performance)]
+
+Ready-to-paste synthesis paragraph contrasting A vs B vs C
+
+Across large sporting tournaments, the most consistent finding is a short-term increase in national pride/patriotism or national identification salience, with limited evidence of long-run persistence without reinforcement. For multi-sport mega-events, resident surveys and media-exposure studies show very high pride-related responses (e.g., high agreement that the Olympics increase local pride in Beijing) and associations between Olympic media consumption and nationalism/patriotism, but identification is often correlational or anticipatory rather than causal. In contrast, football/soccer tournaments provide stronger quasi-experimental evidence: national team victories in sub-Saharan Africa shift identity away from ethnic attachments toward national identity, increase inter-ethnic trust, and reduce subsequent conflict in close-qualification settings, effects that are not explained by generic euphoria. However, soccer wins can also heighten exclusionary reactions toward foreign out-groups unless the victory is framed inclusively. For FIFA World Cups specifically, national pride can rise sharply during the tournament and then revert toward baseline after it ends (Germany 2006), while host-nation panel-type evidence from South Africa 2010 shows increased pride/euphoria (“psychic income”) but mixed changes in social cohesion proxies and, in certain contexts, potential spillovers into more aggressive interstate behavior linked to World Cup nationalism shocks.
+Evidence gaps and thesis-relevant robustness checks
+
+The evidence base is rich on “short-run salience” but thinner on long-run persistence and on separating winning vs hosting vs merely participating. Across many studies, measurement is also heterogeneous (pride items vs identity indices vs WTP vs behavioral proxies), limiting direct meta-analytic pooling without full-text extraction.
+
+Robustness checks that are especially thesis-relevant:
+
+    Pre-trend and placebo timing tests: apply pseudo-event dates (random match days) and pseudo-wins to verify that estimated pride/identity shifts do not appear absent the tournament shock (especially in DiD/event-study designs).
+    Alternative control windows: compare immediate effects (hours/days) with longer windows (weeks/months) to quantify decay rather than assuming it.
+    Mechanism falsification: test whether effects are explained by generic mood/optimism; the strongest football paper explicitly tackles this, and similar checks should be replicated where possible.
+    Heterogeneity discipline: preregister (or at least restrict) subgroup analyses (gender, income, migration background, baseline identification, regime type, soccer popularity) because many credible effects are conditional.
+    Out-group vs in-group outcomes together: jointly estimate pride and out-group attitudes to detect whether “nation-building” is inclusive (inter-ethnic trust) or exclusionary (refugee cultural-threat narratives).
+    Measurement harmonization strategy: map each paper’s outcome to a common latent construct (e.g., “national identity salience,” “constructive patriotism,” “exclusionary nationalism”) and report results by construct family rather than forcing a single scalar effect size.
+
+Prioritized sources
+
+Primary or near-primary sources most useful for thesis citation and replication are the open-access or institutionally archived versions of the following (titles shown; citations provide the link):
+
+    Building Nations through Shared Experiences: Evidence from African Football
+    Patriots for three weeks: The effects of the 2012 UEFA European Football Championship on national identification in Germany
+    Team and Nation: Sports, Nationalism, and Attitudes Toward Refugees
+    Nationalism and Conflict: Lessons from International Sports
+    Psychic income and social capital among host nation residents: A pre-post analysis of the 2010 FIFA World Cup in South Africa
+    Sport and national identity: a comparison of the 2006 and 2010 FIFA World Cups
+    Residents’ perceptions towards the impacts of the Beijing 2008 Olympic Games
+    5,535 Hours of Impact: The Effects of the Olympics on Nationalism and Internationalism
+    Happiness, pride and elite sporting success: What population segments gain most from national athletic achievements?
+    Are we willing to pay enough to ‘Back the Bid’?: valuing the intangible impacts of London’s bid to host the 2012 Summer Olympic Games
+
+
+
+
+
+
+
+
+-----------------------------------
+Viewership for world cup:
+https://inside.fifa.com/tournament-organisation/world-cup-2022-in-numbers
+over a million visitors and a billion viewrs for the final
+
+https://www.worldsoccershop.com/guide/how-many-people-watch-the-world-cup-viewership#cumulative
+
+Most watched events 
+https://www.roadtrips.com/blog/the-most-watched-sporting-events-in-the-world/
+
+https://inside.fifa.com/tournament-organisation/audience-reports/qatar-2022
+(most important source for viewership)
+
+
+---------------------------------------
+for later:
+This effect is statistically significant at conventional levels and robust to various specification checks, including alternative lag structures, matched control samples, and exclusion of France's 1998 victory (where the winner was also the host).

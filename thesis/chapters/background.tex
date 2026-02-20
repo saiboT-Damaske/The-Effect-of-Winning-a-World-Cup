@@ -1,0 +1,91 @@
+\subsection{Sports Event Research}
+
+\subsubsection{Social and Psychological Effects}
+
+International sporting events generate powerful collective emotions. When national teams compete on the world stage, citizens experience heightened patriotism, pride, and shared identity. These effects are most pronounced during mega-events where simultaneous mass viewership amplifies the collective experience.
+
+Research documents both positive and negative social effects. \citet{Mutz2013} shows temporary increases in patriotism following tournament performance, while \citet{Kersting2007} documents similar patterns for national pride. \citet{DepetrisChauvin2020} provide rigorous causal evidence that national team victories shift citizens' identification toward national identity and increase inter-ethnic trust. \citet{Billings2013} find associations between Olympic media consumption and nationalism. On the negative side, \citet{RosenzweigZhou2021} show that sports victories can increase negative attitudes toward outgroups, and \citet{Bertoli2017} demonstrates spillovers into interstate disputes.
+
+Beyond attitudes, mega-events generate substantial intangible value. \citet{DolanKavetsos2019} find increased life satisfaction from hosting, while \citet{GibsonWalker2014} document ``psychic income'' among host populations. \citet{Zhou2009} report widespread agreement that hosting increases local pride.
+
+\subsubsection{Economic Effects of Hosting}
+
+The economic consequences of hosting mega-events have been extensively studied. For the Olympic Games, \citet{BillingHolladay2012} and \citet{LiBlakeThomas2013} find limited long-term effects. \citet{RoseSpiegel2011} show that bid submission alone generates trade increases, suggesting signaling effects independent of hosting.
+
+The FIFA World Cup literature reaches similar conclusions. \citet{BaadeMatheson2004} estimate losses for US host cities, \citet{HagnMaennig2008} find no employment effects from Germany 1974, and \citet{Szymanski2010} concludes that benefits are typically overstated. \citet{LeeTaylor2005} and \citet{Peeters2014} examine tourism effects, finding that receipts rarely justify infrastructure costs. Despite this evidence, ex ante projections remain optimistic \citep{FIFA2024}.
+
+If any event can generate macroeconomic effects through emotional channels, it is the FIFA World Cup. \citet{Wicker2012} and \citet{Hallmann2013} document substantial willingness-to-pay for football success, exceeding WTP for Olympic success. The 2022 World Cup attracted approximately 5 billion cumulative viewers \citep{FIFA2022}.
+
+\subsubsection{The Economics of Winning}
+
+Research on winning effects is remarkably thin. \citet{Fett2020} finds positive effects in the post-1990 era but lacks appropriate counterfactual construction. \citet{Mello2024} provides the first rigorous causal analysis, finding that winning increases GDP growth by approximately 0.5 percentage points, primarily through exports. The scarcity of research motivates the present thesis.
+
+\subsection{Applied Models Theory}
+
+This section presents the theoretical foundations of the estimation methods used in this thesis. I begin with the general framework for causal inference, then discuss event studies and synthetic difference-in-differences in detail.
+
+\subsubsection{The Average Treatment Effect}
+
+The fundamental goal of causal inference is to estimate the effect of a treatment on an outcome. Following the potential outcomes framework of \citet{Rubin1974} and \citet{Holland1986}, each unit $i$ has two potential outcomes: $Y_i(1)$ under treatment and $Y_i(0)$ under control. The individual treatment effect is $\tau_i = Y_i(1) - Y_i(0)$, but since each unit is observed in only one state, individual effects are not identified.
+
+The average treatment effect (ATE) is defined as $\tau = E[Y_i(1) - Y_i(0)]$. Under random assignment, treated and control groups have the same expected potential outcomes, so the ATE equals the difference in observed means. In observational settings, identification requires assumptions that rule out confounding between treatment and potential outcomes.
+
+For panel data with staggered treatment adoption, the estimand is typically the average treatment effect on the treated (ATT), $\tau^{ATT} = E[Y_i(1) - Y_i(0) | D_i = 1]$, which measures the effect for units that actually received treatment.
+
+\subsubsection{Event Study Design}
+
+Event study methodology, introduced by \citet{Fama1969} and formalized by \citet{MacKinlay1997}, estimates dynamic treatment effects by comparing outcomes at different points in time relative to an event. The approach has become standard for analyzing policy changes, shocks, and other discrete events in panel data settings.
+
+Consider a balanced panel of $N$ units over $T$ periods, where unit $i$ receives treatment at time $E_i$ (with $E_i = \infty$ for never-treated units). The relative time to treatment is $K_{it} = t - E_i$. The event study specification is
+
+\begin{equation}
+Y_{it} = \alpha_i + \lambda_t + \sum_{k \neq k^*} \beta_k \cdot \mathbf{1}[K_{it} = k] + X_{it}'\gamma + \varepsilon_{it}
+\label{eq:event_study_theory}
+\end{equation}
+
+where $\alpha_i$ are unit fixed effects, $\lambda_t$ are time fixed effects, $X_{it}$ are time-varying controls, and one relative time period $k^*$ is omitted as reference. The coefficients $\beta_k$ estimate the average effect at horizon $k$ relative to the reference period.
+
+Identification rests on two assumptions. The \textit{parallel trends assumption} requires that absent treatment, treated and control units would follow parallel outcome paths. The \textit{no anticipation assumption} requires that treatment does not affect outcomes before it occurs. The pre-treatment coefficients $\{\beta_k : k < 0\}$ provide a testable implication: under these assumptions, they should be statistically indistinguishable from zero.
+
+In settings with staggered treatment and heterogeneous effects, \citet{Goodman-Bacon2021} shows that standard two-way fixed effects estimators are weighted averages of all pairwise comparisons, some using already-treated units as controls. \citet{Sun2021} and \citet{Callaway2021} propose robust alternatives. When treatment effect heterogeneity is limited---as when few units are treated---the standard specification remains valid.
+
+Standard errors are typically clustered at the unit level to account for serial correlation, following \citet{Bertrand2004}.
+
+\subsubsection{Synthetic Control Method}
+
+The synthetic control method (SCM), developed by \citet{Abadie2003} and \citet{Abadie2010}, constructs a counterfactual for a treated unit using a weighted combination of control units. Rather than assuming global parallel trends, SCM requires only that the synthetic control approximate the treated unit's pre-treatment trajectory.
+
+The method finds unit weights $\omega = (\omega_1, \ldots, \omega_J)'$ minimizing
+
+\begin{equation}
+\sum_{t=1}^{T_0} \left( Y_{1t} - \sum_{j=2}^{J+1} \omega_j Y_{jt} \right)^2
+\label{eq:scm_weights}
+\end{equation}
+
+subject to $\omega_j \geq 0$ and $\sum_j \omega_j = 1$. The treatment effect is estimated as the post-treatment difference between the treated unit and its synthetic counterpart. SCM is particularly valuable when no single control unit provides a good comparison, but a weighted combination can match the treated unit's characteristics.
+
+\subsubsection{Synthetic Difference-in-Differences}
+
+Synthetic difference-in-differences (SDID), proposed by \citet{Arkhangelsky2021}, combines the reweighting approach of synthetic control with the double-differencing logic of difference-in-differences. The method constructs both unit weights $\hat{\omega}$ and time weights $\hat{\lambda}$ to create a counterfactual robust to both unit-specific trends and time-varying confounders.
+
+For a panel with $N$ units over $T$ periods, where unit 1 is treated in periods $t > T_0$, the SDID estimator is
+
+\begin{equation}
+\hat{\tau}^{sdid} = \left( \bar{Y}_{1,post} - \sum_{t=1}^{T_0} \hat{\lambda}_t Y_{1t} \right) - \sum_{j=2}^{N} \hat{\omega}_j \left( \bar{Y}_{j,post} - \sum_{t=1}^{T_0} \hat{\lambda}_t Y_{jt} \right)
+\label{eq:sdid_estimator}
+\end{equation}
+
+The unit weights solve
+
+\begin{equation}
+\hat{\omega} = \argmin_{\omega \in \Omega} \sum_{t=1}^{T_0} \left( Y_{1t} - \sum_{j=2}^{N} \omega_j Y_{jt} \right)^2 + \zeta^2 T_0 \|\omega\|_2^2
+\label{eq:sdid_unit_weights}
+\end{equation}
+
+subject to $\omega_j \geq 0$ and $\sum_{j} \omega_j = 1$. The regularization term $\zeta^2$ prevents overfitting when control units are numerous. Time weights are constructed analogously to ensure that pre-treatment averages predict post-treatment outcomes.
+
+The key innovation is the dual weighting scheme: unit weights create a synthetic control that matches the treated unit's pre-treatment path, while time weights emphasize periods most predictive of post-treatment outcomes. This strengthens identification when parallel trends hold only approximately.
+
+\citet{Arkhangelsky2021} establish that under regularity conditions, the SDID estimator is consistent and asymptotically normal. Inference typically uses bootstrap at the unit level, preserving within-unit dependence while resampling across units. The placebo variance estimator provides an alternative based on treatment effects estimated for control units in placebo exercises.
+
+SDID is well-suited for analyzing World Cup victories because treatment timing is staggered across countries, pre-treatment trends may vary, and the synthetic control component allows matching each winner's pre-victory trajectory.

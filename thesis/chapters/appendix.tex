@@ -1,146 +1,168 @@
-% Appendix Section
-% This section contains supplementary tables, figures, and robustness checks
+\subsection{Full Regression Output}
 
-\section{Appendix}
+Table~\ref{tab:full_event_study} presents the complete event study regression output with all 33 relative time indicators.
 
-\subsection{Summary Statistics}
-
-\subsubsection{Descriptive Statistics Table}
-[Note: Insert Table 1: Summary statistics for all outcome variables]
-
-\subsubsection{Country Coverage}
-[Note: Insert table showing which countries are included in the sample and their data availability]
-
-\subsection{Event Study Results}
-
-\subsubsection{GDP Event Study}
-[Note: Insert event study plot for GDP]
-[Note: Insert event study coefficient table for GDP]
-
-\subsubsection{Consumption Event Study}
-[Note: Insert event study plot for consumption]
-[Note: Insert event study coefficient table for consumption]
-
-\subsubsection{Investment Event Study}
-[Note: Insert event study plot for investment]
-[Note: Insert event study coefficient table for investment]
-
-\subsubsection{Exports Event Study}
-[Note: Insert event study plot for exports]
-[Note: Insert event study coefficient table for exports]
-
-\subsubsection{Imports Event Study}
-[Note: Insert event study plot for imports]
-[Note: Insert event study coefficient table for imports]
-
-\subsubsection{Individual Winner Country Plots}
-[Note: Insert individual event study plots for each World Cup winner:
-\begin{itemize}
-    \item England 1966
-    \item West Germany 1974
-    \item Argentina 1978
-    \item Italy 1982
-    \item Argentina 1986
-    \item West Germany 1990
-    \item France 1998
-    \item Brazil 2002
-    \item Italy 2006
-    \item Spain 2010
-    \item Germany 2014
-    \item France 2018
-    \item Argentina 2022
-\end{itemize}
-]
-
-\subsubsection{Summary Overlay Plots}
-[Note: Insert summary overlay plots showing all winners together for:
-\begin{itemize}
-    \item GDP
-    \item Consumption
-    \item Investment
-    \item Exports
-    \item Imports
-\end{itemize}
-]
-
-\subsubsection{Host Country Analysis}
-[Note: Insert event study plots for host countries (separate from winners)]
-
-\subsection{SDID Results}
-
-\subsubsection{SDID GDP Results}
-[Note: Insert SDID plot for GDP showing actual vs. synthetic control]
-[Note: Insert SDID results table for GDP]
-
-\subsubsection{SDID Consumption Results}
-[Note: Insert SDID plot for consumption]
-[Note: Insert SDID results table for consumption]
-
-\subsubsection{SDID Investment Results}
-[Note: Insert SDID plot for investment]
-[Note: Insert SDID results table for investment]
-
-\subsubsection{SDID Exports Results}
-[Note: Insert SDID plot for exports]
-[Note: Insert SDID results table for exports]
-
-\subsubsection{SDID Imports Results}
-[Note: Insert SDID plot for imports]
-[Note: Insert SDID results table for imports]
-
-\subsection{Finalist and Semi-Finalist Analysis}
-
-\subsubsection{Finalist Event Study}
-[Note: Insert event study plot for finalists]
-[Note: Insert event study results table for finalists]
-
-\subsubsection{Finalist SDID Results}
-[Note: Insert SDID plots for finalists (GDP, consumption, investment, exports, imports)]
-[Note: Insert SDID results table comparing winners vs. finalists]
-
-\subsubsection{Semi-Finalist Event Study}
-[Note: Insert event study plot for semi-finalists]
-[Note: Insert event study results table for semi-finalists]
-
-\subsubsection{Semi-Finalist SDID Results}
-[Note: Insert SDID plots for semi-finalists]
-[Note: Insert SDID results table for semi-finalists]
-
-\subsection{Argentina 2022 Case Study}
-
-\subsubsection{Argentina Actual vs. Counterfactual}
-[Note: Insert plot showing Argentina's actual economic trajectory vs. SDID counterfactual for all outcome variables]
-
-\subsubsection{Argentina Pre-Post Summary}
-[Note: Insert table comparing pre-World Cup and post-World Cup means for Argentina across all outcome variables]
+\begin{longtable}{lcc}
+\caption{Full Event Study Regression Output} \label{tab:full_event_study} \\
+\toprule
+\textbf{Variable} & \textbf{Coefficient} & \textbf{Std. Error} \\
+\midrule
+\endfirsthead
+\multicolumn{3}{c}{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\toprule
+\textbf{Variable} & \textbf{Coefficient} & \textbf{Std. Error} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\textit{Continued on next page}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+GDP$_{t-4}$ (logged) & -1.368** & (0.588) \\
+Host & -0.591 & (0.545) \\
+\midrule
+\multicolumn{3}{l}{\textit{Winning indicators relative to World Cup}} \\
+$k \leq -16$ (binned) & 0.640 & (0.673) \\
+$k = -15$ & 0.363 & (0.538) \\
+$k = -14$ & 0.276 & (0.655) \\
+$k = -13$ & 0.286 & (0.474) \\
+$k = -12$ & -0.082 & (0.503) \\
+$k = -11$ & -0.226 & (0.604) \\
+$k = -10$ & 0.074 & (0.769) \\
+$k = -9$ & -0.139 & (0.616) \\
+$k = -8$ & 0.098 & (0.695) \\
+$k = -7$ & 0.209 & (0.570) \\
+$k = -6$ & 0.196 & (0.589) \\
+$k = -5$ & 0.484 & (0.621) \\
+$k = -4$ & -0.107 & (0.535) \\
+$k = -3$ & -0.288 & (0.479) \\
+$k = -2$ & -0.605 & (0.432) \\
+$k = -1$ & \multicolumn{2}{c}{(reference category)} \\
+$k = +1$ & 0.454* & (0.246) \\
+$k = +2$ & 0.683* & (0.370) \\
+$k = +3$ & 0.233 & (0.335) \\
+$k = +4$ & 0.140 & (0.317) \\
+$k = +5$ & -0.189 & (0.357) \\
+$k = +6$ & -0.034 & (0.422) \\
+$k = +7$ & -0.288 & (0.761) \\
+$k = +8$ & -0.314 & (0.985) \\
+$k = +9$ & 0.418 & (0.387) \\
+$k = +10$ & -0.145 & (0.421) \\
+$k = +11$ & 0.021 & (0.461) \\
+$k = +12$ & 0.289 & (0.583) \\
+$k = +13$ & -0.593 & (0.606) \\
+$k = +14$ & -0.320 & (0.628) \\
+$k = +15$ & -0.412 & (0.676) \\
+$k \geq +16$ (binned) & -0.109 & (0.477) \\
+\midrule
+Observations & 8,637 & \\
+Within $R^2$ & 0.423 & \\
+Country FE & Yes & \\
+Quarter FE & Yes & \\
+\end{longtable}
+\floatfoot{\textit{Notes}: Event-study OLS estimates. Standard errors clustered at the country level in parentheses. Significance levels: *$p<0.10$, **$p<0.05$, ***$p<0.01$.}
 
 \subsection{Robustness Checks}
 
-\subsubsection{Alternative Event Window Specifications}
-[Note: Insert tables/plots showing results with different event window lengths]
+\subsubsection{Alternative Lag Specifications}
 
-\subsubsection{Sample Restrictions}
-[Note: Insert results for different time periods]
-[Note: Insert results for different country groups]
+\begin{table}[H]
+\centering
+\caption{Robustness: Alternative GDP Lag Specifications}
+\label{tab:app_lag_robust}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+& \textbf{(1)} & \textbf{(2)} & \textbf{(3)} & \textbf{(4)} & \textbf{(5)} & \textbf{(6)} \\
+& No lag & Lag 3 & Lag 4 & Lag 5 & Lag 6 & All lags \\
+\midrule
+$k = +1$ & 0.458* & 0.454* & 0.454* & 0.456* & 0.451* & 0.539*** \\
+& (0.245) & (0.246) & (0.246) & (0.247) & (0.247) & (0.190) \\
+$k = +2$ & 0.694* & 0.691* & 0.683* & 0.687* & 0.683* & 0.239 \\
+& (0.370) & (0.372) & (0.370) & (0.371) & (0.373) & (0.171) \\
+\midrule
+Observations & 8,637 & 8,637 & 8,637 & 8,589 & 8,541 & 8,541 \\
+Within $R^2$ & 0.418 & 0.420 & 0.423 & 0.426 & 0.429 & 0.858 \\
+\bottomrule
+\multicolumn{7}{l}{\footnotesize *$p<0.10$, **$p<0.05$, ***$p<0.01$}
+\end{tabular}
+\end{table}
 
-\subsubsection{Placebo Tests}
-[Note: Insert placebo test results (distribution of placebo treatment effects)]
+\subsubsection{Matched Sample Results}
 
-\subsubsection{Alternative Control Groups}
-[Note: Insert results using matched control groups (by GDP levels, by population levels, etc.)]
-
-\subsection{Additional Tables}
-
-\subsubsection{Comparison with Mello (2024)}
-[Note: Insert side-by-side comparison table of key results]
-
-\subsubsection{Full Regression Output}
-[Note: Insert full regression output tables with all coefficients and standard errors]
+\begin{table}[H]
+\centering
+\caption{Robustness: Matched Control Group}
+\label{tab:app_matched}
+\begin{tabular}{lcccc}
+\toprule
+& \multicolumn{2}{c}{\textbf{GDP Matched}} & \multicolumn{2}{c}{\textbf{Population Matched}} \\
+& Coef. & SE & Coef. & SE \\
+\midrule
+$k = +1$ & 0.513** & (0.219) & 0.665** & (0.307) \\
+$k = +2$ & 0.936** & (0.335) & 0.987*** & (0.307) \\
+$k = +3$ & 0.032 & (0.441) & 0.660 & (0.466) \\
+$k = +4$ & -0.079 & (0.581) & 0.652 & (0.543) \\
+\midrule
+Observations & 5,174 & & 5,710 & \\
+Within $R^2$ & 0.588 & & 0.445 & \\
+\bottomrule
+\end{tabular}
+\floatfoot{\textit{Notes}: Matching by GDP: Canada, India, Indonesia ($\times$2), Japan ($\times$3), Korea, Mexico ($\times$8), Russia ($\times$4). Matching by population: Colombia, Indonesia, Japan, Korea ($\times$3), Mexico ($\times$4), Russia, South Africa ($\times$3), Turkey ($\times$6).}
+\end{table}
 
 \subsection{Data Appendix}
 
-\subsubsection{Data Sources and Variable Definitions}
-[Note: Detailed description of data sources, variable construction, and any data cleaning procedures]
+\subsubsection{Variable Definitions}
 
-\subsubsection{Country List and Sample Periods}
-[Note: Table showing which countries are included and their sample periods]
+\begin{table}[H]
+\centering
+\caption{Variable Definitions and Sources}
+\label{tab:app_variables}
+\small
+\begin{tabular}{p{3.5cm}p{9cm}}
+\toprule
+\textbf{Variable} & \textbf{Definition and Source} \\
+\midrule
+GDP & Gross Domestic Product, chain-linked volume, rebased, USD PPP converted. Source: OECD QNA (B1\_GS1). \\
+Consumption & Final consumption expenditure, chain-linked volume, rebased, USD PPP converted. Source: OECD QNA (P3S1). \\
+Investment & Gross fixed capital formation, chain-linked volume, rebased, USD PPP converted. Source: OECD QNA (P51). \\
+Exports & Exports of goods and services, chain-linked volume, rebased, USD PPP converted. Source: OECD QNA (P6). \\
+Imports & Imports of goods and services, chain-linked volume, rebased, USD PPP converted. Source: OECD QNA (P7). \\
+Population & Total population. Source: OECD annual population statistics. \\
+YoY Growth & Year-over-year growth rate: $100 \times (X_t - X_{t-4})/X_{t-4}$. \\
+Winner & Indicator for country winning World Cup in quarter $t$ or within $\pm$16 quarters. \\
+Host & Indicator for country hosting World Cup in year containing quarter $t$. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{World Cup Results 1966-2022}
+
+\begin{table}[H]
+\centering
+\caption{FIFA World Cup Results 1966-2022}
+\label{tab:app_wc_results}
+\small
+\begin{tabular}{cllll}
+\toprule
+\textbf{Year} & \textbf{Host} & \textbf{Winner} & \textbf{Runner-up} & \textbf{Third Place} \\
+\midrule
+1966 & England & England & West Germany & Portugal \\
+1970 & Mexico & Brazil & Italy & West Germany \\
+1974 & West Germany & West Germany & Netherlands & Poland \\
+1978 & Argentina & Argentina & Netherlands & Brazil \\
+1982 & Spain & Italy & West Germany & Poland \\
+1986 & Mexico & Argentina & West Germany & France \\
+1990 & Italy & West Germany & Argentina & Italy \\
+1994 & USA & Brazil & Italy & Sweden \\
+1998 & France & France & Brazil & Croatia \\
+2002 & Japan/South Korea & Brazil & Germany & Turkey \\
+2006 & Germany & Italy & France & Germany \\
+2010 & South Africa & Spain & Netherlands & Germany \\
+2014 & Brazil & Germany & Argentina & Netherlands \\
+2018 & Russia & France & Croatia & Belgium \\
+2022 & Qatar & Argentina & France & Croatia \\
+\bottomrule
+\end{tabular}
+\end{table}

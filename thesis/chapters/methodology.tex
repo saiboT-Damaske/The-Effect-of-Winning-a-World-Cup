@@ -1,84 +1,43 @@
-% Methodology Section
-% This section describes the empirical strategy and estimation procedures
+This section outlines the empirical strategy used to estimate the causal effect of winning the FIFA World Cup on economic outcomes. The analysis follows the approach of \citet{Mello2024}, implementing both event study and synthetic difference-in-differences methods.
 
-\section{Methodology}
+\subsection{Identification Strategy}
 
-This section outlines the empirical strategy used to estimate the causal effect of winning the FIFA World Cup on economic outcomes. The analysis follows the approach of \citet{Mello2024} while extending it to additional outcome variables and robustness checks.
-
-\subsection{Empirical Strategy}
-
-The identification strategy exploits the quasi-random nature of World Cup victories. While the outcome of a World Cup final is not truly random, it is largely unpredictable and influenced by factors (such as referee decisions, weather, injuries, and luck) that are plausibly exogenous to a country's economic conditions. This quasi-randomness allows us to treat World Cup victories as exogenous shocks to national sentiment and international visibility.
+The identification strategy exploits the quasi-random nature of World Cup final outcomes. While reaching the final is not random, the outcome of a single elimination match is influenced by factors---referee decisions, weather, injuries, and luck---that are plausibly exogenous to a country's economic fundamentals. This quasi-randomness, combined with fixed effects that absorb permanent country differences and common time shocks, allows us to interpret the estimated coefficients as causal effects.
 
 \subsection{Event Study Specification}
 
-The primary event study specification follows the standard panel data framework:
+The event study specification follows the theoretical framework from Section~\ref{background}, with controls added as in \citet{Mello2024}:
 
 \begin{equation}
-Y_{it} = \alpha_i + \lambda_t + \sum_{k=-16}^{-2} \beta_k \mathbf{1}[E_{it} = k] + \sum_{k=0}^{6} \beta_k \mathbf{1}[E_{it} = k] + \gamma \mathbf{1}[Host_{it}] + \varepsilon_{it}
+\Delta_4 \ln(\text{GDP}_{c,t}) = \alpha_c + \mu_t + \sum_{l=-16}^{-2} \beta_l \cdot \mathbf{1}[\text{WIN}^l_{c,t}] + \sum_{l=1}^{16} \beta_l \cdot \mathbf{1}[\text{WIN}^l_{c,t}] + \theta \cdot \text{HOST}_{c,t} + \zeta \cdot \ln(\text{GDP}_{c,t-4}) + \varepsilon_{c,t}
+\label{eq:event_study_applied}
 \end{equation}
 
-where:
-\begin{itemize}
-    \item $Y_{it}$ is the year-over-year growth rate (in percentage points) of the outcome variable for country $i$ in quarter $t$
-    \item $\alpha_i$ are country fixed effects
-    \item $\lambda_t$ are time (quarter-year) fixed effects
-    \item $E_{it}$ is the relative time to the World Cup victory (with $E_{it} = 0$ denoting the quarter of victory)
-    \item $\beta_k$ are the event study coefficients of interest
-    \item $Host_{it}$ is an indicator for whether country $i$ hosted the World Cup in quarter $t$
-    \item The period $k = -1$ is omitted as the reference category
-\end{itemize}
+The outcome $\Delta_4 \ln(\text{GDP}_{c,t})$ is year-over-year GDP growth for country $c$ in quarter $t$, computed as the log-difference between current and year-ago GDP. The indicators $\text{WIN}^l_{c,t}$ equal one when country $c$ is $l$ quarters from a World Cup victory. Country fixed effects $\alpha_c$ absorb time-invariant characteristics, while quarter-year fixed effects $\mu_t$ control for global economic conditions. The host indicator $\text{HOST}_{c,t}$ captures hosting effects, and the fourth lag of log GDP controls for convergence dynamics. The reference category is $l = 0$, the quarter when finals occur.
 
-The coefficients $\beta_k$ for $k < -1$ allow us to test for pre-trends, while $\beta_k$ for $k \geq 0$ capture the post-victory effects. Standard errors are clustered at the country level to account for serial correlation.
+The sample covers 48 countries from 1961-Q1 to 2021-Q4, yielding 8,637 observations after dropping missing values. Six countries are winners with 10 observed victories: Germany (1974, 1990, 2014), Italy (1982, 2006), France (1998, 2018), Brazil (2002), Spain (2010), and England 1966 (mapped to UK aggregate). Standard errors are clustered at the country level. The model is estimated using the \texttt{fixest} package in R.
 
 \subsection{Synthetic Difference-in-Differences Specification}
 
-The SDID analysis follows the methodology of \citet{Arkhangelsky2021}. For each outcome variable, we estimate:
+The SDID analysis focuses on the six World Cups from 1998 to 2018. Following \citet{Arkhangelsky2021}, I construct 10-quarter subseries around each tournament, spanning $q = -7$ to $q = +2$ relative to Q2 of the World Cup year. Each country contributes one subseries per tournament, creating a stacked panel.
+
+The SDID estimator computes:
 
 \begin{equation}
-\hat{\tau}^{SDID} = \frac{1}{N_1} \sum_{i \in \mathcal{T}} \left( Y_{i,post} - \sum_{j \in \mathcal{C}} \hat{\omega}_j Y_{j,post} \right)
+\hat{\tau}^{sdid} = \left( \bar{Y}_{tr,post} - \sum_{q=-7}^{0} \hat{\lambda}_q Y_{tr,q} \right) - \sum_{n \in \mathcal{C}} \hat{\omega}_n \left( \bar{Y}_{n,post} - \sum_{q=-7}^{0} \hat{\lambda}_q Y_{n,q} \right)
+\label{eq:sdid_applied}
 \end{equation}
 
-where $\mathcal{T}$ is the set of treated units (World Cup winners), $\mathcal{C}$ is the set of control units, $\hat{\omega}_j$ are the estimated synthetic control weights, and $Y_{i,post}$ and $Y_{j,post}$ are post-treatment outcomes.
+where $\bar{Y}_{tr,post}$ is the post-treatment average for treated subseries (winners in quarters $q = 1, 2$), $\hat{\omega}_n$ are unit weights on control subseries, and $\hat{\lambda}_q$ are time weights on pre-treatment quarters.
 
-The weights are chosen to minimize the pre-treatment prediction error:
-
-\begin{equation}
-\hat{\omega} = \arg\min_{\omega} \sum_{i \in \mathcal{T}} \sum_{t \in \mathcal{T}_{pre}} \left( Y_{it} - \sum_{j \in \mathcal{C}} \omega_j Y_{jt} \right)^2
-\end{equation}
-
-subject to $\sum_{j \in \mathcal{C}} \omega_j = 1$ and $\omega_j \geq 0$ for all $j \in \mathcal{C}$.
+The treated subseries are France 1998, Brazil 2002, Italy 2006, Spain 2010, Germany 2014, and France 2018. Host-country subseries (other than winners) are excluded from the donor pool. After requiring balanced panels, the estimation sample contains 274 subseries (6 treated, 268 control) with 2,740 observations. Standard errors are computed via 1,000 bootstrap replications using the \texttt{synthdid} package.
 
 \subsection{Outcome Variables}
 
-The analysis examines five main outcome variables:
-\begin{enumerate}
-    \item \textbf{GDP}: Gross Domestic Product (chain-linked volume, rebased, USD PPP converted, year-over-year growth)
-    \item \textbf{Consumption}: Final consumption expenditure (chain-linked volume, rebased, USD PPP converted, year-over-year growth)
-    \item \textbf{Investment}: Gross fixed capital formation (chain-linked volume, rebased, USD PPP converted, year-over-year growth)
-    \item \textbf{Exports}: Exports of goods and services (chain-linked volume, rebased, USD PPP converted, year-over-year growth)
-    \item \textbf{Imports}: Imports of goods and services (chain-linked volume, rebased, USD PPP converted, year-over-year growth)
-\end{enumerate}
-
-All variables are measured as year-over-year growth rates in percentage points, consistent with \citet{Mello2024}.
+The analysis examines five outcome variables, all measured as year-over-year growth rates in percentage points: GDP, private consumption, government consumption, gross fixed capital formation (investment), and exports. All variables come from OECD Quarterly National Accounts, chain-linked volume in constant USD PPP. This decomposition follows Mello's mechanism analysis and helps identify whether any aggregate effect operates through demand channels or trade channels.
 
 \subsection{Robustness Checks}
 
-To assess the robustness of our findings, we conduct several additional analyses:
+The robustness analysis includes alternative lag specifications for the event study (no lag, lags 3 through 6, and all lags simultaneously), matched control samples selected by GDP or population nearest neighbors, and comparison of winners to runners-up to distinguish winning effects from tournament visibility. I also implement the heterogeneity-robust estimators of \citet{Sun2021} and conduct placebo tests by reassigning treatment to control countries and shifting treatment timing to pre-event periods.
 
-\begin{enumerate}
-    \item \textbf{Alternative event window specifications}: We vary the length of the pre- and post-event windows to examine sensitivity to the choice of event horizon.
-    
-    \item \textbf{Sample restrictions}: We restrict the analysis to specific time periods or country groups to examine whether results are driven by particular observations.
-    
-    \item \textbf{Placebo tests}: We conduct placebo tests by randomly assigning treatment status to control countries and re-estimating the models to verify that we do not find spurious effects.
-    
-    \item \textbf{Finalist and semi-finalist analysis}: We examine whether countries that reach the final or semi-finals (but do not win) experience similar economic effects, which would help distinguish between the effect of winning versus the effect of strong performance.
-    
-    \item \textbf{Alternative control groups}: We compare results using different sets of control countries, including matching-based control groups similar to those used in \citet{Mello2024}.
-\end{enumerate}
-
-\subsection{Implementation}
-
-All analyses are conducted using R statistical software. Event study regressions are estimated using the \texttt{fixest} package, which efficiently handles fixed effects in panel data models. SDID estimates are obtained using the \texttt{synthdid} package, which implements the methodology of \citet{Arkhangelsky2021} and \citet{Ben-Michael2021}.
-
-Standard errors for event study regressions are clustered at the country level. For SDID estimates, standard errors are computed using a block bootstrap procedure with 300 replications, where blocks are defined at the country level to account for within-country correlation over time.
+All analysis is conducted in R with data processing in Python. The complete pipeline is provided in the electronic appendix.

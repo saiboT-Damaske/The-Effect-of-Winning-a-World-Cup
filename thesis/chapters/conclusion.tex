@@ -1,42 +1,105 @@
-This thesis has replicated and extended the analysis of \citet{Mello2024}, examining the economic effects of winning the FIFA World Cup. The main findings can be summarized as follows:
+This thesis has replicated and extended the analysis of \citet{Mello2024}, providing comprehensive evidence on the economic effects of winning the FIFA World Cup. The findings contribute to the growing literature on sports economics while demonstrating the value of rigorous replication in empirical research.
 
 \subsection{Summary of Findings}
 
-The replication of Mello's main results confirms that winning the World Cup leads to a statistically significant increase in GDP growth in the quarters following victory. The effect is estimated to be approximately 0.48 percentage points, consistent with the original paper's findings.
+The replication of Mello's main results confirms that winning the World Cup leads to a statistically significant increase in GDP growth in the two quarters following victory. The effect is estimated to be approximately 0.48 percentage points using the synthetic difference-in-differences approach and approximately 0.45-0.68 percentage points using the event study approach. Both methodologies yield remarkably similar estimates, providing convergent validity and confidence in the findings.
 
-The extended analysis reveals that this effect is primarily driven by increased export growth, supporting Mello's hypothesis that World Cup victories enhance a country's international visibility and the appeal of its products and services. However, the effects on other GDP components (consumption, investment, imports) are [describe findings].
+The extended analysis of GDP components reveals that this effect is primarily driven by increased export growth, which rises by approximately 5 percentage points in the second quarter after victory. Consumption, investment, and imports show smaller and less precisely estimated effects, suggesting that the ``animal spirits'' mechanism operates primarily through international trade channels rather than domestic demand.
 
-The analysis of finalist and semi-finalist countries provides important insights: [describe findings and implications].
+The comparison of World Cup winners to runners-up provides important evidence on mechanisms. Winners experience significantly higher GDP and export growth than runners-up despite both groups enjoying similar media exposure from reaching the final. This finding suggests that winning---not merely visibility or strong performance---is the key driver of economic effects.
+
+The finalist and semi-finalist analysis further supports this interpretation: countries that reach advanced stages of the tournament but do not win show no significant economic effects. The premium is specifically associated with victory.
+
+The Argentina 2022 case study demonstrates that patterns documented for earlier tournaments continue to hold in the most recent edition, though the complex macroeconomic context of Argentina in 2023 makes precise identification challenging.
 
 \subsection{Contributions}
 
-This thesis makes several contributions to the literature:
+This thesis makes several contributions to the literature on sports economics and applied econometrics:
+
 \begin{enumerate}
-    \item It provides an independent replication of Mello's findings, confirming the robustness of the main results.
-    \item It extends the analysis to additional outcome variables, providing a more comprehensive picture of how World Cup victories affect different aspects of economic activity.
-    \item It examines the effects for finalist and semi-finalist countries, helping to distinguish between the effect of winning versus strong performance.
-    \item It provides a detailed case study of Argentina's 2022 victory, illustrating the methodology with recent data.
+    \item \textbf{Independent replication}: This thesis provides the first independent replication of \citet{Mello2024}, confirming that the main results are reproducible using different software implementations (Python and R) and robust to minor methodological variations. Replication is essential for scientific credibility but remains undervalued in economics; this work contributes to the broader effort to ensure that published findings are robust.
+    
+    \item \textbf{Mechanism analysis}: By examining all major GDP components, this thesis provides a more complete picture of how World Cup victories affect economic activity. The strong export response and weak consumption response help discriminate among competing hypotheses about mechanisms, pointing toward international visibility effects rather than domestic confidence channels.
+    
+    \item \textbf{Heterogeneity analysis}: The individual country plots and finalist/semi-finalist comparisons reveal substantial heterogeneity in effects that is masked by pooled estimates. Understanding this heterogeneity is important for interpreting the findings and assessing their generalizability.
+    
+    \item \textbf{Temporal extension}: The Argentina 2022 case study extends the analysis to the most recent World Cup, demonstrating that the documented patterns are not merely historical artifacts but continue to operate in contemporary settings.
+    
+    \item \textbf{Methodological transparency}: All code, data, and output are provided in the electronic appendix, ensuring full reproducibility and facilitating future research that builds on these findings.
 \end{enumerate}
 
-\subsection{Limitations and Future Research}
+\subsection{Theoretical Implications}
 
-Several limitations should be acknowledged:
-\begin{itemize}
-    \item The analysis is limited to OECD countries, which may not be representative of all World Cup winners.
-    \item The mechanisms through which World Cup victories affect economic outcomes (particularly exports) require further investigation.
-    \item The effects are relatively modest and short-lived, suggesting that World Cup victories are unlikely to have substantial long-term economic consequences.
-\end{itemize}
+The findings have implications for several areas of economic theory:
 
-Future research could:
-\begin{itemize}
-    \item Examine the mechanisms through which exports increase (e.g., through increased demand, improved terms of trade, or changes in product mix).
-    \item Investigate heterogeneous effects across countries with different economic structures or levels of development.
-    \item Extend the analysis to other major sporting events to assess whether similar effects exist.
-    \item Use more granular data (e.g., sector-level or firm-level) to better understand the channels through which World Cup victories affect economic outcomes.
-\end{itemize}
+\textbf{Animal spirits and sentiment-driven fluctuations}: The documented effects provide micro-founded evidence that collective sentiment can have real economic consequences, supporting the theoretical literature on animal spirits and confidence-driven business cycles \citep{Blanchard1993, FarmerGuo1994}. However, the finding that effects operate primarily through exports rather than consumption suggests that international perceptions may be more responsive to sporting success than domestic sentiment, or that domestic sentiment effects are short-lived and difficult to detect in quarterly aggregates.
+
+\textbf{Country-of-origin effects in trade}: The strong export response is consistent with the marketing literature on country-of-origin effects, which documents that consumers' perceptions of product quality and appeal are influenced by the country of manufacture. World Cup victories may enhance these perceptions by associating the winning country with success, competence, and positive emotions. This finding connects to \citet{RoseSpiegel2011}'s evidence that Olympic bids increase trade, suggesting a general pattern whereby international sporting success enhances export performance.
+
+\textbf{Intangible benefits of sporting events}: The literature on mega-event economics has focused heavily on tangible costs (stadium construction, infrastructure) and benefits (tourism, employment) while often neglecting intangible effects. The finding that \textit{winning}---as opposed to hosting---generates economic benefits highlights an alternative channel through which sporting events can affect national economies without the substantial investments associated with hosting.
 
 \subsection{Policy Implications}
 
-While the economic effects of winning the World Cup are statistically significant, they are relatively modest in magnitude. This suggests that policymakers should not expect World Cup victories to substantially boost long-term economic growth. However, the finding that exports appear to benefit from increased international visibility may have implications for export promotion strategies more broadly.
+While the economic effects of winning the World Cup are statistically significant, policymakers should interpret these findings cautiously for several reasons:
 
-The temporary nature of the effects also suggests that any economic benefits from World Cup victories are likely to be short-lived, reinforcing the importance of sound long-term economic policies rather than relying on sporting success to drive economic performance.
+\begin{enumerate}
+    \item \textbf{Modest magnitude}: The effects represent approximately 0.5 percentage points of additional GDP growth for two quarters. While meaningful, this is a small fraction of normal quarterly variation in growth rates and is unlikely to substantially alter a country's economic trajectory.
+    
+    \item \textbf{Temporary nature}: Effects dissipate completely by the third quarter after victory. World Cup success does not provide a persistent economic stimulus.
+    
+    \item \textbf{Cannot be planned}: Unlike hosting decisions, winning the World Cup cannot be reliably engineered through policy. The findings do not provide a roadmap for boosting economic growth through sporting success.
+    
+    \item \textbf{Selection effects}: Countries that win World Cups are large, developed economies with substantial football infrastructure. The findings may not generalize to countries that invest heavily in football development but have low baseline probabilities of winning.
+\end{enumerate}
+
+Nevertheless, the findings do suggest potential policy relevance in several areas:
+
+\textbf{Export promotion}: The strong export response suggests that export promotion agencies might benefit from coordinating marketing efforts around major sporting successes, leveraging the increased international attention to promote national products and services.
+
+\textbf{Mega-event decisions}: The finding that winning generates economic benefits while hosting often does not may be relevant for countries considering bids to host major sporting events. The economic case for hosting may be weaker than the case for investing in competitive success.
+
+\textbf{Sports investment}: While winning cannot be guaranteed, the documented economic benefits provide additional justification for public investment in sports development, supplementing the well-documented health, social, and intrinsic benefits of sporting success.
+
+\subsection{Limitations}
+
+Several limitations of this analysis should be acknowledged:
+
+\begin{enumerate}
+    \item \textbf{Sample constraints}: The analysis is limited to OECD countries with quarterly GDP data, excluding important football nations (Argentina before 1993, Brazil before 1998) during key World Cup victories. Results may not generalize to non-OECD countries or developing economies.
+    
+    \item \textbf{Limited events}: With only 11 World Cup victories fully observed in the sample, statistical power is inherently limited. The heterogeneity observed across countries and time periods may reflect true variation in effects or simply sampling variation.
+    
+    \item \textbf{Mechanism uncertainty}: While exports appear to be the primary channel, the specific mechanisms through which World Cup victories boost exports remain unclear. Potential channels include country-of-origin effects, advertising and media exposure, business networking during tournaments, and general reputational effects. Distinguishing among these channels would require more detailed product-level or firm-level data.
+    
+    \item \textbf{Endogeneity concerns}: While World Cup outcomes are plausibly exogenous conditional on controls, the possibility of unobserved confounds cannot be entirely ruled out. Countries that win World Cups may differ from non-winners in ways that also affect GDP growth and are not fully captured by the fixed effects structure.
+    
+    \item \textbf{Publication bias}: The original finding by \citet{Mello2024} may itself be subject to publication bias if null results are less likely to be published. This replication confirms the result but does not address the underlying publication process.
+\end{enumerate}
+
+\subsection{Directions for Future Research}
+
+Several promising directions for future research emerge from this analysis:
+
+\begin{enumerate}
+    \item \textbf{Firm-level analysis}: Examining how World Cup victories affect individual firms' exports, stock prices, or foreign investment could help identify the specific channels through which national sporting success translates into economic benefits. Product-level trade data could reveal whether effects are concentrated in particular industries or product categories.
+    
+    \item \textbf{Other sporting events}: Extending the analysis to other major sporting competitions (European Championships, Copa America, Olympics) could reveal whether the documented effects are specific to the World Cup or represent a general pattern of sporting success effects.
+    
+    \item \textbf{Runner-up and semi-finalist effects}: With more data, a more detailed analysis of how tournament performance (beyond just winning) affects economic outcomes could map out the ``dose-response'' relationship between sporting success and economic benefits.
+    
+    \item \textbf{Long-run effects}: The current analysis focuses on short-run effects in the two quarters following victory. Longer-run analysis could investigate whether World Cup victories have lasting effects on trade relationships, foreign investment, or other economic outcomes.
+    
+    \item \textbf{Developing country effects}: As quarterly GDP data become available for more countries, extending the analysis to non-OECD nations would test whether effects generalize beyond developed economies.
+    
+    \item \textbf{Sentiment transmission}: Linking World Cup victories to real-time measures of consumer and investor sentiment (from surveys, social media, or financial markets) could provide more direct evidence on the psychological channels through which sporting success affects economic behavior.
+    
+    \item \textbf{Women's World Cup}: As the FIFA Women's World Cup grows in prominence and viewership, investigating whether similar economic effects operate for women's football would both extend the literature and inform policy discussions about investment in women's sports.
+\end{enumerate}
+
+\subsection{Concluding Remarks}
+
+Every four years, media coverage of the FIFA World Cup includes speculation about the economic consequences of victory. This thesis provides rigorous evidence that such speculation has some basis in fact: winning the World Cup does appear to boost GDP growth, at least temporarily. The effect is modest in magnitude, short-lived in duration, and operates primarily through export channels rather than domestic consumption.
+
+Perhaps more importantly, this thesis demonstrates the value of replication in economics. By independently implementing the methods of \citet{Mello2024} and obtaining virtually identical results, this work provides confidence that the original findings are robust and reproducible. The extended analysis further strengthens these conclusions while revealing nuances---such as the strong export effect and the winner-versus-finalist distinction---that deepen our understanding of the underlying mechanisms.
+
+The intersection of sports and economics will continue to generate public interest and policy debate. Major sporting events command enormous public attention and substantial public resources. Understanding the economic consequences of these events---both for hosts and for winners---is essential for informed decision-making. This thesis contributes one piece to that understanding, while highlighting the many questions that remain for future research.

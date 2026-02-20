@@ -218,6 +218,20 @@ c(
   p_value = p_value
 )
 
+# Save SDID results to CSV for comparison with Python
+sdid_results <- data.frame(
+  method = "R_synthdid",
+  outcome = "GDP_yoy_pct",
+  ATT = ATT,
+  SE = SE,
+  z_stat = z_stat,
+  p_value = p_value,
+  CI_lower = ATT - 1.96 * SE,
+  CI_upper = ATT + 1.96 * SE
+)
+write.csv(sdid_results, "../results/sdid_results_R.csv", row.names = FALSE)
+cat("\nResults saved to: results/sdid_results_R.csv\n")
+
 
 
 # control-unit weights (length N0)
