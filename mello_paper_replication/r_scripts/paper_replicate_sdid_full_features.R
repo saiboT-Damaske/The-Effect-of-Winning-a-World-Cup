@@ -37,6 +37,10 @@ df <- read_csv("../data/mello_paper_replication/paper_replication_event_study_sa
     tq_num = 4L * year + (qtr - 1L)  # strictly increasing quarterly index
   )
 
+# Output directory for results and plots
+OUT_DIR <- "sdid_results"
+dir.create(OUT_DIR, showWarnings = FALSE)
+
 # -----------------------------
 # 2) SDiD event years and event quarter
 #    World Cups used in SDiD: 1998, 2002, 2006, 2010, 2014, 2018
@@ -157,8 +161,9 @@ build_sdid_mats <- function(df_in, y_col, drop_host_only_controls = TRUE) {
 
 # -----------------------------
 # 4) Runner: estimate ATT, bootstrap SE, p-value, plot
+#     save_plot_path: if set, save plot to this path (e.g. "sdid_results/SDID_GDP.png")
 # -----------------------------
-run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000) {
+run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000, save_plot_path = NULL) {
   
   cat("\n================================================\n")
   cat("Outcome:", outcome_name, "\nColumn:", y_col, "\n")
@@ -183,69 +188,101 @@ run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000) {
   
   # Plot
   p_obj <- synthdid::synthdid_plot(tau_hat)
+  title_main <- paste0("SDiD: World Cup win effect on YoY ", outcome_name, " growth (pp)")
   if (inherits(p_obj, "ggplot")) {
-    print(
-      p_obj +
-        ggplot2::ggtitle(paste0("SDiD: World Cup win effect on YoY ", outcome_name, " growth (pp)")) +
-        ggplot2::labs(x = "Quarter to/from World Cup (q = rel_time)",
-                      y = "YoY growth (pp)")
-    )
+    p_final <- p_obj +
+      ggplot2::ggtitle(title_main) +
+      ggplot2::labs(x = "Quarter to/from World Cup (q = rel_time)",
+                    y = "YoY growth (pp)")
+    print(p_final)
+    if (!is.null(save_plot_path)) {
+      ggplot2::ggsave(save_plot_path, p_final, width = 10, height = 6, dpi = 300)
+      cat("Saved plot:", save_plot_path, "\n")
+    }
   } else {
     # base path
     graphics::title(
-      main = paste0("SDiD: World Cup win effect on YoY ", outcome_name, " growth (pp)"),
+      main = title_main,
       xlab = "Quarter to/from World Cup (q = rel_time)",
       ylab = "YoY growth (pp)"
     )
+    if (!is.null(save_plot_path)) {
+      dev.copy(png, save_plot_path, width = 10, height = 6, units = "in", res = 300)
+      dev.off()
+      cat("Saved plot:", save_plot_path, "\n")
+    }
   }
   
-  invisible(list(tau_hat = tau_hat, ATT = ATT, SE = se_hat, z = z, p = p))
+  invisible(list(tau_hat = tau_hat, ATT = ATT, SE = se_hat, z = z, p = p, outcome_name = outcome_name))
 }
 
 # ============================================================
 # 5) One section per feature (as requested)
 #    IMPORTANT: We use *_yoy_pct columns (YoY percent change, in pp).
+#    Results and plots are saved to OUT_DIR.
 # ============================================================
 
+results_list <- list()
+
 # GDP
-run_one_outcome(
+results_list[["GDP"]] <- run_one_outcome(
   df,
   outcome_name = "GDP",
   y_col = "gross_domestic_product_chain_linked_volume_rebased_us_dollars_ppp_converted_yoy_pct",
-  reps = 1000
+  reps = 1000,
+  save_plot_path = file.path(OUT_DIR, "SDID_GDP.png")
 )
 
 # Final consumption (you only have "final consumption", not gov/private split)
-run_one_outcome(
+results_list[["Final_consumption"]] <- run_one_outcome(
   df,
   outcome_name = "Final consumption",
   y_col = "final_consumption_expenditure_chain_linked_volume_rebased_us_dollars_ppp_converted_yoy_pct",
-  reps = 1000
+  reps = 1000,
+  save_plot_path = file.path(OUT_DIR, "SDID_Final_consumption.png")
 )
 
 # Gross fixed capital formation
-run_one_outcome(
+results_list[["Gross_fixed_capital_formation"]] <- run_one_outcome(
   df,
   outcome_name = "Gross fixed capital formation",
   y_col = "gross_fixed_capital_formation_chain_linked_volume_rebased_us_dollars_ppp_converted_yoy_pct",
-  reps = 1000
+  reps = 1000,
+  save_plot_path = file.path(OUT_DIR, "SDID_Gross_fixed_capital_formation.png")
 )
 
 # Exports
-run_one_outcome(
+results_list[["Exports"]] <- run_one_outcome(
   df,
   outcome_name = "Exports",
   y_col = "exports_of_goods_and_services_chain_linked_volume_rebased_us_dollars_ppp_converted_yoy_pct",
-  reps = 1000
+  reps = 1000,
+  save_plot_path = file.path(OUT_DIR, "SDID_Exports.png")
 )
 
 # Imports
-run_one_outcome(
+results_list[["Imports"]] <- run_one_outcome(
   df,
   outcome_name = "Imports",
   y_col = "imports_of_goods_and_services_chain_linked_volume_rebased_us_dollars_ppp_converted_yoy_pct",
-  reps = 1000
+  reps = 1000,
+  save_plot_path = file.path(OUT_DIR, "SDID_Imports.png")
 )
+
+# -----------------------------
+# 6) Save all computed results to CSV
+# -----------------------------
+results_df <- tibble::tibble(
+  Outcome       = names(results_list),
+  ATT_pp        = vapply(results_list, function(x) x$ATT,  numeric(1)),
+  SE            = vapply(results_list, function(x) x$SE,   numeric(1)),
+  CI_lower      = vapply(results_list, function(x) x$ATT - 1.96 * x$SE, numeric(1)),
+  CI_upper      = vapply(results_list, function(x) x$ATT + 1.96 * x$SE, numeric(1)),
+  z_stat        = vapply(results_list, function(x) x$z,    numeric(1)),
+  p_value       = vapply(results_list, function(x) x$p,   numeric(1))
+)
+readr::write_csv(results_df, file.path(OUT_DIR, "sdid_results_summary.csv"))
+cat("\nResults saved to:", file.path(OUT_DIR, "sdid_results_summary.csv"), "\n")
 
 cat("\nDone.\n")
 
