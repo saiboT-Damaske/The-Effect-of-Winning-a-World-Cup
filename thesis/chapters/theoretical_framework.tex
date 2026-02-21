@@ -1,0 +1,111 @@
+This section presents the theoretical foundations of the causal inference methods used in this thesis. I begin with the fundamental framework for treatment effect estimation, then discuss event studies and synthetic difference-in-differences---the two main approaches employed in both \citet{Mello2024} and this replication.
+
+\subsection{The Average Treatment Effect}
+
+The fundamental goal of causal inference is to estimate the effect of a treatment on an outcome. Following the potential outcomes framework, each unit $i$ has two potential outcomes: $Y_i(1)$ under treatment and $Y_i(0)$ under control. Since each unit is observed in only one state, individual treatment effects $\tau_i = Y_i(1) - Y_i(0)$ are not directly identified.
+
+The average treatment effect (ATE) is defined as:
+\begin{equation}
+\tau^{ATE} = E[Y_i(1) - Y_i(0)]
+\label{eq:ate}
+\end{equation}
+
+In observational settings with panel data and staggered treatment adoption---such as World Cup victories occurring at different times for different countries---the estimand of interest is typically the average treatment effect on the treated (ATT):
+\begin{equation}
+\tau^{ATT} = E[Y_i(1) - Y_i(0) \mid D_i = 1]
+\label{eq:att}
+\end{equation}
+which measures the effect specifically for units that received treatment. This is the quantity estimated by both the event study and SDID approaches in this thesis.
+
+\subsection{Event Study Design}
+
+Event study methodology estimates dynamic treatment effects by comparing outcomes at different points in time relative to an event. The approach has become standard for analyzing policy changes, economic shocks, and discrete interventions in panel data settings.
+
+Consider a balanced panel of $N$ units (countries) over $T$ periods (quarters), where unit $i$ receives treatment at time $E_i$. The relative time to treatment is $K_{it} = t - E_i$. The event study specification is:
+\begin{equation}
+Y_{it} = \alpha_i + \lambda_t + \sum_{k \neq k^*} \beta_k \cdot \mathbf{1}[K_{it} = k] + X_{it}'\gamma + \varepsilon_{it}
+\label{eq:event_study}
+\end{equation}
+where $\alpha_i$ are unit fixed effects absorbing time-invariant country characteristics, $\lambda_t$ are time fixed effects absorbing common shocks affecting all countries, $X_{it}$ are time-varying controls, and one relative time period $k^*$ is omitted as reference (typically $k^* = -1$, the period before treatment). The coefficients $\beta_k$ estimate the average effect at horizon $k$ relative to the reference period.
+
+\subsubsection{Identification Assumptions}
+
+Event study identification rests on two key assumptions:
+
+\textbf{Parallel trends:} Absent treatment, treated and control units would follow parallel outcome paths. Formally:
+\begin{equation}
+E[Y_{it}(0) - Y_{i,t-1}(0) \mid D_i = 1] = E[Y_{it}(0) - Y_{i,t-1}(0) \mid D_i = 0]
+\label{eq:parallel_trends}
+\end{equation}
+
+\textbf{No anticipation:} Treatment does not affect outcomes before it occurs:
+\begin{equation}
+Y_{it}(1) = Y_{it}(0) \quad \text{for all } t < E_i
+\label{eq:no_anticipation}
+\end{equation}
+
+The pre-treatment coefficients $\{\beta_k : k < 0\}$ provide a testable implication: under these assumptions, they should be statistically indistinguishable from zero. A flat pre-trend supports the parallel trends assumption, though it cannot definitively prove it.
+
+\subsubsection{Challenges with Heterogeneous Treatment Effects}
+
+In settings with staggered treatment timing and potentially heterogeneous treatment effects, \citet{Goodman-Bacon2021} demonstrates that standard two-way fixed effects (TWFE) estimators are weighted averages of all pairwise comparisons between groups---including comparisons that use already-treated units as controls. When treatment effects vary across cohorts or over time, these ``forbidden comparisons'' can introduce bias.
+
+The Goodman-Bacon decomposition shows that the TWFE estimator $\hat{\beta}^{TWFE}$ can be written as:
+\begin{equation}
+\hat{\beta}^{TWFE} = \sum_{k} w_k \cdot \hat{\beta}_k
+\label{eq:goodman_bacon}
+\end{equation}
+where $\hat{\beta}_k$ are treatment effects from different $2 \times 2$ comparisons (early vs. late treated, treated vs. never-treated, etc.) and $w_k$ are data-dependent weights that can be negative when already-treated units serve as controls.
+
+For the World Cup application, this concern is mitigated by several features of the setting: (1) there are relatively few treated units (10 World Cup winners from 1966--2018), (2) treatment effects are assumed to be transitory rather than permanent, meaning already-treated units return to baseline before potentially serving as controls, and (3) we include a large pool of never-treated OECD countries providing clean comparisons. Nevertheless, we complement the event study with SDID, which explicitly addresses these concerns.
+
+\subsection{Synthetic Difference-in-Differences}
+
+Synthetic difference-in-differences (SDID), proposed by \citet{Arkhangelsky2021}, combines the strengths of synthetic control methods with difference-in-differences logic. The method addresses limitations of both approaches by constructing unit weights (like synthetic control) and time weights (novel to SDID) to create a robust counterfactual.
+
+Figure~\ref{fig:sdid_comparison} illustrates the intuition behind SDID by comparing three approaches using the canonical California tobacco control example from \citet{Abadie2010}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{sdid_comparison.png}
+\caption{Comparison of difference-in-differences (DID), synthetic control (SC), and synthetic difference-in-differences (SDID). In DID, the treatment effect is estimated as the difference between the treated unit's post-treatment outcome and a simple average of control units. In SC, unit weights are optimized to match the pre-treatment trajectory exactly. SDID combines both approaches: unit weights create a synthetic control while time weights emphasize periods most predictive of post-treatment outcomes. Adapted from \citet{Arkhangelsky2021}.}
+\label{fig:sdid_comparison}
+\end{figure}
+
+\subsubsection{The SDID Estimator}
+
+For a panel with $N$ units over $T$ periods, where the treated unit(s) receive treatment in periods $t > T_0$, SDID constructs both unit weights $\hat{\omega} = (\hat{\omega}_1, \ldots, \hat{\omega}_{N_0})'$ and time weights $\hat{\lambda} = (\hat{\lambda}_1, \ldots, \hat{\lambda}_{T_0})'$. The estimator is:
+\begin{equation}
+\hat{\tau}^{SDID} = \left( \bar{Y}_{tr,post} - \bar{Y}_{tr,pre}^{\lambda} \right) - \sum_{j \in \mathcal{C}} \hat{\omega}_j \left( \bar{Y}_{j,post} - \bar{Y}_{j,pre}^{\lambda} \right)
+\label{eq:sdid_estimator}
+\end{equation}
+where $\bar{Y}_{tr,post}$ is the post-treatment average for treated units, $\bar{Y}_{tr,pre}^{\lambda} = \sum_{t=1}^{T_0} \hat{\lambda}_t Y_{tr,t}$ is the weighted pre-treatment average, and analogously for control units $j \in \mathcal{C}$.
+
+The unit weights solve a regularized optimization problem:
+\begin{equation}
+\hat{\omega} = \argmin_{\omega \in \Omega} \sum_{t=1}^{T_0} \left( Y_{tr,t} - \sum_{j \in \mathcal{C}} \omega_j Y_{j,t} \right)^2 + \zeta^2 T_0 \|\omega\|_2^2
+\label{eq:sdid_weights}
+\end{equation}
+subject to $\omega_j \geq 0$ and $\sum_{j} \omega_j = 1$. The regularization parameter $\zeta$ prevents overfitting when control units are numerous.
+
+Time weights are constructed analogously to find periods most predictive of post-treatment outcomes, ensuring that the pre-treatment comparison focuses on the most informative portion of the pre-period.
+
+\subsubsection{Why SDID for World Cup Analysis}
+
+SDID is particularly well-suited for analyzing World Cup victories for several reasons:
+
+\begin{enumerate}
+\item \textbf{Staggered treatment timing:} World Cup victories occur at different times (1966, 1974, 1982, etc.), creating a staggered adoption design that SDID handles naturally through its panel structure.
+
+\item \textbf{Approximate parallel trends:} Pre-treatment GDP growth trajectories may not be perfectly parallel across countries. The synthetic control component allows matching each winner's pre-victory trajectory rather than assuming a common pre-trend.
+
+\item \textbf{Few treated units:} With only 10 World Cup winners in the sample period, having flexibility in constructing appropriate counterfactuals is valuable. SDID allows the synthetic control to be a weighted combination of all available donor countries.
+
+\item \textbf{Robustness to model specification:} By combining reweighting with differencing, SDID is doubly robust---consistent if either the parallel trends assumption holds globally or if the weighting successfully matches the treated unit's trajectory.
+\end{enumerate}
+
+\subsubsection{Inference}
+
+Under regularity conditions, \citet{Arkhangelsky2021} establish that the SDID estimator is consistent and asymptotically normal. In practice, inference typically uses bootstrap methods at the unit level, preserving within-unit serial correlation while resampling across units. The placebo variance estimator provides an alternative approach based on treatment effects estimated for control units in placebo exercises---treating each control unit as if it were treated and examining the distribution of placebo effects.
+
+For detailed implementation of both event study and SDID in this thesis, including the specific model specifications and variable definitions, see Section~\ref{methodology}.
