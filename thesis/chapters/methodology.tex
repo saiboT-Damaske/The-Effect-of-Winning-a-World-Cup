@@ -1,89 +1,92 @@
-This section describes the empirical methodology used to estimate the causal effect of winning the FIFA World Cup on economic outcomes. The analysis thoroughly replicates the approach of \citet{Mello2024} and then extends it to additional outcome variables, robustness checks, and new cases.
+This section details the empirical implementation of the methods introduced in Section~\ref{theory}. I first describe the replication of \citet{Mello2024}, then present the extensions that constitute the novel contributions of my thesis.
 
-\subsection{Replication Strategy}
+\subsection{Replication of Mello (2024)}
 
-The primary objective is to replicate Mello's main results using independently written code and verify that the findings are reproducible. I implement both the event study and SDID methodologies from first principles using R, following the specifications described in the original paper. The replication covers:
+The primary objective of this thesis is to replicate and compare the analysis in \citet{Mello2024}. As a first step, this involves reconstructing the dataset from OECD sources as the author did not make his code publicly available\footnote{The \citet{Mello2024} paper included a replication package link: \url{https://doi.org/10.3886/E188961} but it leads to a completely different research paper of droughts in Brazil (last visited 02/26).}, reproducing the summary statistics, and estimating both the event study and synthetic difference-in-differences models. The full replication should serve two purposes: validate the original findings using independently constructed data, and additionally establish the foundation for the extensions that follow.
+\subsubsection{Data Construction}
 
-\begin{itemize}
-\item The main event study regression (Table 2 in Mello)
-\item The SDID estimation of the average treatment effect (Figure 1 in Mello)
-\item Extension to all GDP components: consumption, investment, exports, and imports
-\end{itemize}
+The replication uses quarterly national accounts data from the OECD, covering the period 1961--2021. The sample includes 48 countries: 6 World Cup winners during the sample period, 12 host countries, and 36 countries that neither won nor hosted. Following \citet{Mello2024}, Argentina is classified as a control country because its GDP series begins only in 1993---ten years after its last victory in 1986. Brazil enters the treated group starting in 1998-Q2, four years after its 1994 victory, contributing only its 2002 win to the analysis.
 
-Data for this analysis comes from OECD quarterly national accounts, covering 48 countries from 1961-Q1 to 2021-Q4. The sample includes both World Cup winners and a large pool of control countries that never won during the sample period. For detailed information on data sources, variable construction, and sample restrictions, see Section~\ref{data}.
-
-\subsection{Event Study Specification}
-
-The event study regression follows the standard panel data framework with two-way fixed effects. The dependent variable is the year-over-year (YoY) GDP growth rate, defined as:
+The outcome variable is year-over-year (YoY) GDP growth, computed as:
 \begin{equation}
-\Delta_4 \ln Y_{it} = \ln Y_{it} - \ln Y_{i,t-4}
-\label{eq:yoy_growth}
+\Delta_4 \ln GDP_{c,t} = \ln GDP_{c,t} - \ln GDP_{c,t-4}
+\label{eq:yoy_gdp}
 \end{equation}
-where $Y_{it}$ is real GDP (chain-linked volume, PPP-converted to USD) for country $i$ in quarter $t$. This transformation removes seasonal patterns while capturing quarterly dynamics.
+which compares GDP in quarter $t$ to the same quarter one year earlier. This transformation removes seasonal patterns and provides a directly interpretable measure of annual growth at quarterly frequency.
 
-The estimated specification is:
+For descriptive statistics and sample composition, see Section~\ref{data}.
+
+\subsubsection{Event Study Specification}
+
+The event study follows the specification in \citet{Mello2024}, which estimates dynamic treatment effects around World Cup victories:
 \begin{equation}
-\Delta_4 \ln GDP_{it} = \alpha_i + \lambda_t + \sum_{k=-16}^{-2} \beta_k \cdot W_{it}^k + \sum_{k=0}^{16} \beta_k \cdot W_{it}^k + \gamma \cdot Host_{it} + \delta \cdot \ln GDP_{i,t-4} + \varepsilon_{it}
-\label{eq:event_study_spec}
+\Delta_4 \ln GDP_{c,t} = \alpha_c + \lambda_t + \sum_{k \neq 0} \beta_k \cdot \mathbf{1}[K_{ct} = k] \cdot W_c + \theta \cdot HOST_{c,t} + \zeta \cdot \ln GDP_{c,t-4} + \varepsilon_{c,t}
+\label{eq:mello_event_study}
 \end{equation}
-where:
-\begin{itemize}
-\item $W_{it}^k = \mathbf{1}[\text{country } i \text{ is } k \text{ quarters from winning}]$ indicates relative time to World Cup victory
-\item $\alpha_i$ are country fixed effects
-\item $\lambda_t$ are quarter-year fixed effects
-\item $Host_{it}$ is an indicator for whether country $i$ hosted the World Cup in quarter $t$
-\item $\ln GDP_{i,t-4}$ is the lagged log GDP level, controlling for convergence dynamics
-\item The period $k = -1$ is omitted as the reference category
-\end{itemize}
+where $\alpha_c$ are country fixed effects, $\lambda_t$ are quarter fixed effects, $K_{ct} = t - E_c$ is the relative time to country $c$'s World Cup victory at time $E_c$, and $W_c$ is an indicator for ever-winning countries. The reference period is $k = 0$, corresponding to Q2 of the World Cup year. $HOST_{c,t}$ controls for hosting effects in the calendar year of the tournament, and $\ln GDP_{c,t-4}$ controls for the level of economic development four quarters prior.
 
-The coefficients $\{\beta_k : k < -1\}$ allow testing for pre-trends---under the parallel trends assumption, these should be statistically indistinguishable from zero. The coefficients $\{\beta_k : k \geq 0\}$ capture the post-victory effects. Standard errors are clustered at the country level to account for serial correlation within countries.
+The relative time indicators span $k \in \{-16, \ldots, -1, +1, \ldots, +16\}$, with quarters beyond this window binned into aggregate endpoints. For countries winning multiple World Cups (Germany: 1974, 1990, 2014; Italy: 1982, 2006; France: 1998, 2018), the relative time counter restarts at the midpoint between consecutive victories.
 
-World Cup victories are coded at $k = 0$ for the second quarter (Q2) of each World Cup year, as finals are typically held in late June or early July. The sample includes ten World Cup winners: England (GBR) 1966, Germany (DEU) 1974, Italy (ITA) 1982, Germany (DEU) 1990, France (FRA) 1998, Brazil (BRA) 2002, Italy (ITA) 2006, Spain (ESP) 2010, Germany (DEU) 2014, and France (FRA) 2018.
+Standard errors are clustered at the country level to account for serial correlation within countries.
 
-\subsection{SDID Specification}
+\subsubsection{Synthetic Difference-in-Differences Specification}
 
-For the synthetic difference-in-differences estimation, I follow the stacked panel approach. For each World Cup year $w \in \{1998, 2002, 2006, 2010, 2014, 2018\}$, I create a subseries of observations spanning 8 pre-treatment quarters ($k \in \{-7, \ldots, 0\}$) and 2 post-treatment quarters ($k \in \{1, 2\}$). Each country-World Cup combination forms a unit in the stacked panel.
+The SDID analysis follows \citet{Mello2024} in constructing 10-quarter subseries around each post-1994 World Cup. For each tournament in $\{1998, 2002, 2006, 2010, 2014, 2018\}$, I create subseries spanning $q \in [-7, +2]$ relative to Q2 of the World Cup year. This yields 6 treated subseries (one per winner: France 1998 and 2018, Brazil 2002, Italy 2006, Spain 2010, Germany 2014) and approximately 260 control subseries from the donor pool.
 
-Treatment is defined as:
+Host country subseries are excluded from the donor pool to avoid contamination, except for France 1998 which both hosted and won. The SDID estimator then solves:
 \begin{equation}
-D_{it} = \mathbf{1}[\text{country } i \text{ won World Cup } w] \times \mathbf{1}[k \geq 1]
-\label{eq:sdid_treatment}
+\hat{\tau}^{SDID} = \operatorname*{arg\,min}_{\tau, \mu, \alpha, \beta} \sum_{n=1}^{N} \sum_{q=-7}^{2} \left( \Delta_4 \ln GDP_{n,q} - \mu - \alpha_n - \beta_q - W_{n,q} \tau \right)^2 \hat{\omega}_n \hat{\lambda}_q
+\label{eq:mello_sdid}
 \end{equation}
+where $W_{n,q} = 1$ for treated subseries in post-treatment quarters ($q \geq 1$), and the unit weights $\hat{\omega}_n$ and time weights $\hat{\lambda}_q$ are constructed as described in Section~\ref{theory}.
 
-The SDID estimator is then:
+Inference uses 1,000 bootstrap replications with clustering at the country-subseries level, following \citet{Mello2024}.
+
+\subsubsection{GDP Components}
+
+Both the event study and SDID are also estimated separately for GDP components: private consumption, government consumption, gross fixed capital formation, exports, and imports. These decompositions help identify the channels through which World Cup victories affect aggregate output. \citet{Mello2024} finds that the effect is primarily export-driven, which I seek to replicate.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Extensions: Tournament Performance Effects}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Beyond replicating Mello's analysis of World Cup winners, this thesis extends the investigation to other tournament outcomes. If winning generates economic effects through national pride, international visibility, or consumer confidence, then reaching the final or semifinals might produce similar---albeit smaller---effects. Conversely, unexpectedly poor performance might generate negative sentiment effects.
+
+\subsubsection{Finalist Effect}
+
+Countries that reach the World Cup final but lose receive extensive media coverage and experience heightened national attention, similar to winners. To test whether this ``runner-up effect'' generates measurable economic consequences, I estimate:
 \begin{equation}
-\hat{\tau}^{SDID} = \left( \frac{1}{N_{tr} \cdot T_{post}} \sum_{i \in \mathcal{T}} \sum_{t > T_0} Y_{it} - \sum_{t \leq T_0} \hat{\lambda}_t Y_{it} \right) - \sum_{j \in \mathcal{C}} \hat{\omega}_j \left( \frac{1}{T_{post}} \sum_{t > T_0} Y_{jt} - \sum_{t \leq T_0} \hat{\lambda}_t Y_{jt} \right)
-\label{eq:sdid_implemented}
+\Delta_4 \ln GDP_{c,t} = \alpha_c + \lambda_t + \sum_{k \neq 0} \beta_k^{F} \cdot \mathbf{1}[K_{ct} = k] \cdot F_c + \theta \cdot HOST_{c,t} + \zeta \cdot \ln GDP_{c,t-4} + \varepsilon_{c,t}
+\label{eq:finalist_event_study}
 \end{equation}
-where $\mathcal{T}$ is the set of treated units (winners: FRA-1998, BRA-2002, ITA-2006, ESP-2010, DEU-2014, FRA-2018), $\mathcal{C}$ is the set of control units, and $\hat{\omega}_j$ and $\hat{\lambda}_t$ are the estimated unit and time weights.
+where $F_c$ indicates countries that reached the final but did not win (e.g., Netherlands 1974, 1978, 2010; Germany 1982, 1986, 2002; Argentina 2014; Croatia 2018). This specification mirrors Mello's approach but with finalists as the treated group.
 
-Host-only subseries (countries that hosted but did not win) are excluded from the donor pool to avoid contamination from hosting effects. Standard errors are computed using block bootstrap with 1,000 replications, where blocks are defined at the unit level.
+\subsubsection{Semifinalist Effect}
 
-\subsection{Outcome Variables}
+Reaching the semifinals represents exceptional tournament performance that may generate national pride effects. The specification follows the same structure:
+\begin{equation}
+\Delta_4 \ln GDP_{c,t} = \alpha_c + \lambda_t + \sum_{k \neq 0} \beta_k^{S} \cdot \mathbf{1}[K_{ct} = k] \cdot S_c + \theta \cdot HOST_{c,t} + \zeta \cdot \ln GDP_{c,t-4} + \varepsilon_{c,t}
+\label{eq:semifinalist_event_study}
+\end{equation}
+where $S_c$ indicates countries reaching the semifinals (finishing in the top 4). This extends the treatment group considerably, providing more statistical power but potentially diluting the effect if only winning matters.
 
-The analysis examines five main outcome variables, all measured as year-over-year growth rates in percentage points:
-\begin{enumerate}
-\item \textbf{GDP}: Gross domestic product (chain-linked volume, rebased, USD PPP)
-\item \textbf{Consumption}: Final consumption expenditure (chain-linked volume, rebased, USD PPP)
-\item \textbf{Investment}: Gross fixed capital formation (chain-linked volume, rebased, USD PPP)
-\item \textbf{Exports}: Exports of goods and services (chain-linked volume, rebased, USD PPP)
-\item \textbf{Imports}: Imports of goods and services (chain-linked volume, rebased, USD PPP)
-\end{enumerate}
+\subsubsection{Early Elimination Effect}
 
-\subsection{Robustness Checks and Extensions}
+The psychological literature suggests that unexpected negative outcomes can affect sentiment and behavior. A highly-ranked team being eliminated in the group stage or early knockout rounds represents a negative shock to national expectations. To investigate whether such disappointments have measurable economic consequences, I identify cases where pre-tournament favorites (based on FIFA rankings or betting odds) exited earlier than expected.
 
-To assess the robustness and generalizability of the findings, I conduct several additional analyses:
+The specification is:
+\begin{equation}
+\Delta_4 \ln GDP_{c,t} = \alpha_c + \lambda_t + \sum_{k \neq 0} \beta_k^{E} \cdot \mathbf{1}[K_{ct} = k] \cdot E_c + \theta \cdot HOST_{c,t} + \zeta \cdot \ln GDP_{c,t-4} + \varepsilon_{c,t}
+\label{eq:early_exit_event_study}
+\end{equation}
+where $E_c$ indicates unexpected early elimination. Candidate events include Italy's group stage exit in 2010 (defending champion), Spain's group stage exit in 2014 (defending champion), and Germany's group stage exit in 2018 (defending champion).
 
-\begin{enumerate}
-\item \textbf{The 2022 World Cup:} I examine Argentina's 2022 victory as an out-of-sample test, checking whether the patterns documented for earlier tournaments persist in the most recent edition.
+This extension tests whether the psychological mechanisms operate symmetrically for positive and negative tournament outcomes.
 
-\item \textbf{Finalist and semi-finalist effects:} I investigate whether countries reaching the final or semi-finals but not winning experience similar economic effects. This helps distinguish between the specific effect of winning versus the broader effect of strong tournament performance.
-
-\item \textbf{Early elimination effects:} I examine whether there is a reverse effect for countries eliminated early in the tournament, particularly for nations with high football expectations where early exits might negatively impact national sentiment.
-
-\item \textbf{Alternative specifications:} I vary the event window length and control variable specifications to assess sensitivity.
-\end{enumerate}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Implementation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-All analyses are conducted in R. Event study regressions are estimated using the \texttt{fixest} package, which efficiently handles high-dimensional fixed effects. SDID estimates are obtained using the \texttt{synthdid} package, which implements the methodology of \citet{Arkhangelsky2021}. Results are cross-validated using the \texttt{lfe} package as an alternative estimator. All code and data are provided in the electronic appendix for full reproducibility.
+All analyses are implemented in R. The event study regressions use the \texttt{fixest} package \citep{fixest}, which provides efficient estimation of high-dimensional fixed effects models with clustered standard errors. The SDID estimation uses the \texttt{synthdid} package \citep{synthdid_package}, which implements the \citet{Arkhangelsky2021} estimator with bootstrap inference.
+
+Code and data for full replication are available in the accompanying repository.
