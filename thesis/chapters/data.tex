@@ -1,152 +1,184 @@
+% ==============================================================================
+% DATA CHAPTER
+% ==============================================================================
+
 \subsection{Data Sources}
 
-The primary data source for this analysis is the OECD Quarterly National Accounts (QNA) database, which provides quarterly economic indicators for OECD member countries and selected partner economies. This is the same data source used by \citet{Mello2024}, ensuring direct comparability of results. The OECD QNA database represents the most comprehensive and reliable source of quarterly economic indicators for developed economies, with standardized definitions and methodologies that facilitate cross-country comparisons.
+The primary data source is the OECD Quarterly National Accounts (QNA) database, accessed via the \texttt{OECD} R package \citep{OECD_R_pkg}.\footnote{Source tables: B1\_GS1 (GDP), P31S14\_S15 (private consumption), P3S13 (government consumption), P51 (gross fixed capital formation), P6 (exports), P7 (imports). All series are chain-linked volumes, rebased, seasonally adjusted, and converted to US dollars using purchasing power parity (PPP) exchange rates. Population data are from OECD annual statistics, interpolated to quarterly frequency.}
+This is the same data source used by \citet{Mello2024}, ensuring direct comparability.
+The dataset covers 48 countries over the period 1960--2024, though the estimation sample is restricted to 1962--2021 after accounting for lag requirements and the sample window specified in the original paper.
 
-The dataset includes the following key variables:
-\begin{itemize}
-    \item \textbf{Gross Domestic Product (GDP)}: Chain-linked volumes, rebased, converted to USD using purchasing power parity (PPP) exchange rates
-    \item \textbf{Final consumption expenditure}: Comprising private household consumption and government consumption
-    \item \textbf{Gross fixed capital formation}: Investment in fixed assets
-    \item \textbf{Exports of goods and services}: Total value of goods and services sold to foreign countries
-    \item \textbf{Imports of goods and services}: Total value of goods and services purchased from foreign countries
-    \item \textbf{Population data}: Annual population figures interpolated to quarterly frequency for per-capita calculations where needed
-\end{itemize}
+The six macroeconomic variables are:
+\begin{enumerate}[noitemsep]
+    \item Gross Domestic Product (GDP)
+    \item Private consumption expenditure
+    \item Government consumption expenditure
+    \item Gross fixed capital formation (investment)
+    \item Exports of goods and services
+    \item Imports of goods and services
+\end{enumerate}
+Compared to \citet{Mello2024}, who reports results for GDP, aggregate consumption, investment, exports, and imports, the present study disaggregates consumption into its private and government components.
+Annual population figures supplement the dataset for descriptive purposes.
 
-All economic variables are measured in real terms (chain-linked volumes) and converted to USD using PPP exchange rates to ensure cross-country comparability. The data are seasonally adjusted and available at quarterly frequency. The use of chain-linked volumes ensures that growth rates reflect real changes in economic activity rather than price level changes, while PPP conversion accounts for differences in price levels across countries.
+World Cup results---winners, runners-up, semi-finalists, and host countries---are compiled from official FIFA records for all editions from 1930 to 2022.\footnote{The full list of World Cup results is available in Table~\ref{tab:app_wc_results} in the Appendix.}
 
-World Cup results data are compiled from official FIFA records, identifying the winner, runner-up, host country, and semi-finalists for each World Cup edition from 1966 to 2022. The analysis focuses on the men's FIFA World Cup, as data availability for earlier periods is limited and the women's tournament has a shorter history with less complete economic data coverage for participating countries.
 
 \subsection{Sample Construction}
+\label{sec:sample_construction}
 
-The sample includes all countries for which quarterly economic data are available in the OECD database over the period 1961--2024. The analysis focuses on World Cup winners from 1966 onwards, as quarterly data availability is limited for earlier periods. The baseline event-study sample comprises 8,737 country-quarter observations spanning 48 countries.
-
-The treatment group consists of countries that won the World Cup during the sample period for which sufficient quarterly data are available:
-\begin{itemize}
-    \item \textbf{England/United Kingdom} (1966): GDP data for UK available from 1961-Q1
-    \item \textbf{West Germany/Germany} (1974, 1990, 2014): GDP data available from 1961-Q1
-    \item \textbf{Italy} (1982, 2006): GDP data available from 1961-Q1
-    \item \textbf{France} (1998, 2018): GDP data available from 1961-Q1
-    \item \textbf{Brazil} (2002): GDP data available only from 1998-Q2, limiting analysis to the 2002 victory
-    \item \textbf{Spain} (2010): GDP data available from 1961-Q1
-\end{itemize}
-
-Two notable cases require special treatment. Argentina won the World Cup in 1978, 1986, and 2022, but quarterly GDP data are only available from 1993-Q1. Since the 2022 World Cup falls outside the main estimation window used for replication (which ends in 2021), Argentina is classified as a control country in the main analysis but is examined separately in the Argentina 2022 case study extension. Brazil's quarterly GDP series begins in 1998-Q2, which is precisely four years after their 1994 World Cup victory. Therefore, Brazil's 1994 victory cannot be included in the analysis, though their 2002 victory is fully observed.
-
-The control group includes all other countries in the OECD database that did not win the World Cup during the sample period. This includes both OECD member countries and partner economies for which data are available. Following \citet{Mello2024}, host countries are included in the sample but a host indicator is included as a control variable to absorb any hosting-specific effects on GDP growth.
-
-For the event study analysis, we construct a panel where each country-quarter observation is assigned a relative time indicator $K_{it}$ that measures the number of quarters before or after a World Cup victory. For countries that never won during the sample period, $K_{it}$ is set to $\infty$ (never-treated). For countries with multiple victories, the relative time counter restarts at the midpoint between consecutive victories, following the convention in \citet{Mello2024}.
-
-\subsection{Variable Construction}
-
-The primary outcome variables are constructed as year-over-year (YoY) growth rates:
+The estimation sample is constructed to closely replicate that of \citet{Mello2024}.
+The dependent variable is the year-over-year log growth rate:
 \begin{equation}
-Y_{it} = 100 \times \left( \frac{X_{it} - X_{i,t-4}}{X_{i,t-4}} \right)
+    Y_{it} = \ln X_{it} - \ln X_{i,t-4}
+    \label{eq:yoy}
 \end{equation}
-where $X_{it}$ is the level of the economic variable (GDP, consumption, investment, exports, or imports) for country $i$ in quarter $t$, and $X_{i,t-4}$ is the value four quarters earlier. This transformation yields growth rates in percentage points, removes quarterly seasonality while capturing the relevant growth dynamics, and facilitates interpretation of treatment effects.
+where $X_{it}$ is the level of the economic variable for country $i$ in quarter $t$.
+This transformation removes quarterly seasonality and approximates the year-over-year percentage growth rate.
 
-The event quarter is defined as $q=0$ in the second quarter of each World Cup year, as World Cups traditionally take place between June and July, straddling Q2 and Q3. The 2022 Qatar World Cup is an exception, having taken place in Q4, and is handled accordingly in the Argentina case study.
+Computing~\eqref{eq:yoy} requires four quarters of lagged data, which introduces a subtlety in sample construction.
+For most countries, OECD series begin in 1960-Q1 and the paper's stated window starts in 1961-Q1, yet the first valid growth observation is 1962-Q1 (since it requires the lag at 1961-Q1, which is the first quarter in the sample window).
+A small number of countries with later data availability---Brazil (1998-Q2), Argentina (1993-Q1), Russia (1995-Q1), Chile (1996-Q1)---use external OECD data before their stated start dates to compute the initial growth rates.
+This asymmetric lag treatment is documented only implicitly in \citet{Mello2024}, and matching it exactly was essential for reproducing the published observation counts:
 
-Treatment indicators are constructed for each relative quarter from $k=-16$ to $k=+16$, with $k=-1$ serving as the omitted reference category. Additionally, residual indicators bin together all quarters more than 16 quarters before or after the victory, following the specification in \citet{Mello2024}.
+\begin{table}[htbp]
+\centering
+\caption{Observation counts: replication vs.\ \citet{Mello2024}}
+\label{tab:obs_comparison}
+\small
+\begin{tabular}{lccc}
+\toprule
+ & \textbf{Winners} & \textbf{Non-winners} & \textbf{Total} \\
+\midrule
+\citet{Mello2024} & 1,295 & 7,342 & 8,637 \\
+This study         & 1,295 & 7,338 & 8,633 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes:} ``Winners'' denotes all observations from countries that won a World Cup during the sample period (BRA, DEU, ESP, FRA, GBR, ITA). The four missing non-winner observations are attributable to Russia's OECD series ending in 2020-Q4 in our data download rather than 2021-Q4.
+\end{tablenotes}
+\end{table}
+
+Six countries contribute as World Cup winners: Brazil, Germany, Spain, France, the United Kingdom, and Italy, covering 10 distinct victory events between 1966 and 2018 (Table~\ref{tab:wc_events}).
+Argentina won the World Cup in 1978, 1986, and 2022, but quarterly GDP data begin only in 1993-Q1; since the 2022 event falls outside the main estimation window, Argentina is classified as a control country here and examined separately as a case study.
+Brazil's 1994 victory similarly cannot be included because it requires pre-event data availability four years prior to the event (1990-Q2), but Brazilian data begin only in 1998-Q2.
+
+\begin{table}[htbp]
+\centering
+\caption{World Cup events in the estimation sample}
+\label{tab:wc_events}
+\small
+\begin{tabular}{llllcc}
+\toprule
+\textbf{Year} & \textbf{Winner} & \textbf{Host} & \textbf{Event Q} & \textbf{Winner} & \textbf{Host} \\
+ & & & & \textbf{in sample} & \textbf{in sample} \\
+\midrule
+1966 & England        & England        & Q2 & \checkmark & \checkmark \\
+1970 & Brazil         & Mexico         & Q2 & --         & \checkmark \\
+1974 & West Germany   & West Germany   & Q2 & \checkmark & \checkmark \\
+1978 & Argentina      & Argentina      & Q2 & --         & --         \\
+1982 & Italy          & Spain          & Q2 & \checkmark & \checkmark \\
+1986 & Argentina      & Mexico         & Q2 & --         & \checkmark \\
+1990 & West Germany   & Italy          & Q2 & \checkmark & \checkmark \\
+1994 & Brazil         & USA            & Q2 & --         & \checkmark \\
+1998 & France         & France         & Q2 & \checkmark & \checkmark \\
+2002 & Brazil         & Japan / Korea  & Q2 & \checkmark & \checkmark \\
+2006 & Italy          & Germany        & Q2 & \checkmark & \checkmark \\
+2010 & Spain          & South Africa   & Q2 & \checkmark & \checkmark \\
+2014 & Germany        & Brazil         & Q2 & \checkmark & \checkmark \\
+2018 & France         & Russia         & Q2 & \checkmark & \checkmark \\
+\midrule
+2022 & Argentina      & Qatar          & Q4 & \multicolumn{2}{c}{\textit{Case study}} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes:} Event quarter is Q2 for all editions except Qatar~2022 (Q4). ``--'' indicates insufficient OECD data to include the event. The sample contains 10 winner events and 14 host events. Japan and Korea co-hosted in 2002. Full results including runners-up and semi-finalists are in Table~\ref{tab:app_wc_results}.
+\end{tablenotes}
+\end{table}
+
 
 \subsection{Descriptive Statistics}
 
-Table~\ref{tab:summary_stats} presents summary statistics for the main variables, broken down by winner status and time period. The sample includes 8,737 country-quarter observations covering 48 countries, with 6 World Cup winners contributing 1,315 observations and 42 non-winning countries contributing 7,422 observations.
+Table~\ref{tab:summary_stats} reports summary statistics for all macroeconomic variables, comparing countries that won a World Cup during the sample period (``winners'') with those that did not (``non-winners'').
+Winner countries are systematically larger: their average GDP is roughly 2.2 times that of non-winners, and their average population is about 1.4 times larger.
+This reflects the fact that World Cup success tends to be concentrated among large, wealthy nations---only eight countries have ever won the men's FIFA World Cup.
+
+\input{tables/table1_summary_statistics}
+
+Notably, winner countries exhibit \textit{lower} average growth rates across all six variables.
+Average $\Delta_4 \ln$ GDP growth is 2.38 for winners versus 3.24 for non-winners ($t = -8.61$).
+The same pattern holds for consumption, investment, exports, and imports, consistent with the convergence phenomenon: larger, more developed economies tend to grow more slowly.
+This underscores the importance of the causal identification strategy, since na\"ive comparisons would suggest a negative association between World Cup success and economic growth.
+
+Figure~\ref{fig:avg_winners_hosts} plots the average $\Delta_4 \ln$ GDP growth trajectory around World Cup events, separately for winner and host countries.
+While both groups show stable pre-event growth, the post-event paths diverge---winner countries display a mild uptick in the quarters immediately following the tournament, an observation that motivates the formal econometric analysis.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{summary_avg_winners_vs_hosts.png}
+\caption{Average $\Delta_4 \ln$ GDP growth around World Cup events: winners vs.\ hosts ($\pm$16~quarters). The dashed red line marks the event quarter (Q2 of the World Cup year).}
+\label{fig:avg_winners_hosts}
+\end{figure}
+
+Figure~\ref{fig:all_features_avg} extends this comparison across all six macroeconomic variables for winner countries.
+GDP, private consumption, and government consumption follow similar, relatively smooth trajectories.
+Investment, exports, and imports are substantially more volatile, limiting the statistical power for detecting treatment effects in these series.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{summary_winners_all_features_avg.png}
+\caption{Average $\Delta_4 \ln$ growth by macroeconomic variable for World Cup winners ($\pm$16~quarters).}
+\label{fig:all_features_avg}
+\end{figure}
+
+
+\subsection{Pre-Tournament Rankings}
+\label{sec:rankings}
+
+To contextualise the strength of World Cup participants and identify ``underperformance'' (a top-ranked team eliminated in the group stage), we compile pre-tournament rankings from two independent sources:
+
+\begin{itemize}[noitemsep]
+    \item \textbf{ELO ratings} from \texttt{eloratings.net} \citep{EloRatings}, available for all 16 World Cups from 1962 to 2022. ELO ratings are based on all historical match results and update continuously.
+    \item \textbf{FIFA World Rankings} from the FIFA internal API,\footnote{Endpoint: \texttt{inside.fifa.com/api/ranking-overview}. The ranking series begins in December 1992, covering 8~World Cups (1994--2022).} which reflect a points-based system incorporating match results, opponent strength, and confederation weights.
+\end{itemize}
+
+The two ranking systems are strongly correlated among World Cup participants (Table~\ref{tab:rank_corr}).
+Spearman rank correlations range from 0.63 (1998) to 0.90 (2018), with a clear upward trend indicating convergence over time.
+When defining ``underperformance'' as a top-10 ranked team (among WC participants) being eliminated in the group stage, only 5 out of 128 team-tournament observations (1994--2022) received a different label depending on the ranking system used.
+In all five cases, ELO ranked the team inside the top~10 while FIFA did not, reflecting ELO's greater weight on historical performance.\footnote{The five cases are: Colombia (1994), Russia (1994), Spain (1998), Croatia (2002), and Uruguay (2022). See \citet{EloRatings} for methodology.}
 
 \begin{table}[htbp]
 \centering
-\caption{Summary Statistics by Winner Status and Time Period}
-\label{tab:summary_stats}
+\caption{Rank correlation between ELO and FIFA rankings among World Cup participants}
+\label{tab:rank_corr}
 \small
-\begin{tabular}{lcccc}
+\begin{tabular}{lccc}
 \toprule
-& \textbf{Winner} & \textbf{Non-winner} & \textbf{t-test} \\
-& Mean (SD) & Mean (SD) & \\
+\textbf{WC Year} & \textbf{$N$ teams} & \textbf{Spearman $\rho$} & \textbf{Mean $|$rank diff$|$} \\
 \midrule
-\multicolumn{4}{l}{\textit{1960--1980}} \\
-GDP (thousands 2015 USD millions) & 1,292.76 (512.37) & 536.91 (1,236.34) & 11.99*** \\
-Population (millions) & 54.24 (13.93) & 26.03 (45.84) & 12.18*** \\
-GDP per capita & 23,187.93 (5,203.63) & 22,219.72 (10,419.19) & 1.81* \\
-YoY GDP growth (\%) & 4.21 (3.00) & 4.73 (3.56) & -2.69*** \\
-\midrule
-\multicolumn{4}{l}{\textit{1980--2000}} \\
-GDP (thousands 2015 USD millions) & 2,197.33 (736.26) & 949.47 (2,130.99) & 11.74*** \\
-Population (millions) & 61.15 (22.37) & 41.27 (100.62) & 3.99*** \\
-GDP per capita & 36,315.83 (7,322.12) & 31,503.05 (16,208.15) & 5.91*** \\
-YoY GDP growth (\%) & 2.42 (1.79) & 3.27 (3.63) & -4.63*** \\
-\midrule
-\multicolumn{4}{l}{\textit{2000--2020}} \\
-GDP (thousands 2015 USD millions) & 3,109.93 (819.26) & 1,368.24 (3,020.17) & 12.57*** \\
-Population (millions) & 84.89 (50.69) & 66.51 (197.17) & 2.03** \\
-GDP per capita & 43,245.80 (13,238.25) & 39,187.65 (21,569.91) & 4.01*** \\
-YoY GDP growth (\%) & 0.98 (3.29) & 2.58 (3.98) & -8.38*** \\
-\midrule
-\multicolumn{4}{l}{\textit{Full Sample}} \\
-GDP (thousands 2015 USD millions) & 2,277.67 (1,040.89) & 1,057.08 (2,493.32) & 17.48*** \\
-Population (millions) & 68.23 (37.34) & 49.65 (149.16) & 4.49*** \\
-GDP per capita & 35,020.24 (12,743.09) & 33,077.68 (19,305.46) & 3.52*** \\
-YoY GDP growth (\%) & 2.52 (3.29) & 3.39 (3.96) & -7.49*** \\
-\midrule
-Number of countries & 6 & 42 & \\
-Number of observations & 1,315 & 7,422 & \\
-\bottomrule
-\multicolumn{4}{l}{\footnotesize Significance levels: *$p<0.10$, **$p<0.05$, ***$p<0.01$}
-\end{tabular}
-\end{table}
-
-Several patterns emerge from the descriptive statistics. First, World Cup winning countries are systematically larger than non-winners in terms of both population and GDP. The average GDP of winning countries over the full sample is approximately 2.15 times larger than that of non-winners, and average population is 1.37 times larger. This pattern reflects the fact that World Cup success requires substantial investment in football infrastructure and player development, resources more readily available to larger, wealthier nations. Only eight countries have ever won the men's FIFA World Cup, and all are either large European economies or South American football powerhouses.
-
-Second, and somewhat counterintuitively, World Cup winners exhibit \textit{lower} average GDP growth rates than non-winners across all time periods. This reflects both the convergence phenomenon (larger, more developed economies tend to grow more slowly) and the composition of the control group, which includes rapidly growing emerging economies. The negative difference in growth rates underscores the importance of the econometric strategy: simple comparisons of winners versus non-winners would suggest a negative association between World Cup success and GDP growth. The event study and SDID approaches identify the causal effect of winning by comparing growth trajectories before and after victory, controlling for permanent country differences and common time trends.
-
-Third, the data reveal substantial heterogeneity over time. Average GDP growth rates have declined across all countries from approximately 4--5\% in the 1960--1980 period to around 1--3\% in the 2000--2020 period. This secular decline in growth rates reflects the maturation of developed economies and the slowdown following the 2008 financial crisis. The methodology accounts for this by including quarter fixed effects that absorb common time shocks.
-
-\subsection{World Cup Events in the Sample}
-
-Table~\ref{tab:wc_events} lists all World Cup events included in the analysis, along with the availability of GDP data for winners and hosts. A country's victory contributes to the treatment effect estimation only if quarterly GDP data are available around the event date.
-
-\begin{table}[htbp]
-\centering
-\caption{World Cup Events in the Analysis Sample}
-\label{tab:wc_events}
-\small
-\begin{tabular}{lllcc}
-\toprule
-\textbf{Year} & \textbf{Winner} & \textbf{Host} & \textbf{Winner in Sample} & \textbf{Host in Sample} \\
-\midrule
-1966 & England & England & Yes & Yes \\
-1970 & Brazil & Mexico & No & Yes \\
-1974 & West Germany & West Germany & Yes & Yes \\
-1978 & Argentina & Argentina & No & No \\
-1982 & Italy & Spain & Yes & Yes \\
-1986 & Argentina & Mexico & No & Yes \\
-1990 & West Germany & Italy & Yes & Yes \\
-1994 & Brazil & USA & No & Yes \\
-1998 & France & France & Yes & Yes \\
-2002 & Brazil & Japan/South Korea & Yes & Yes \\
-2006 & Italy & Germany & Yes & Yes \\
-2010 & Spain & South Africa & Yes & Yes \\
-2014 & Germany & Brazil & Yes & Yes \\
-2018 & France & Russia & Yes & Yes \\
-2022 & Argentina & Qatar & Case Study & No \\
+1994 & 24 & 0.70 & 4.1 \\
+1998 & 32 & 0.63 & 6.4 \\
+2002 & 32 & 0.84 & 4.2 \\
+2006 & 32 & 0.85 & 4.1 \\
+2010 & 32 & 0.86 & 3.6 \\
+2014 & 32 & 0.89 & 3.3 \\
+2018 & 31 & 0.90 & 3.2 \\
+2022 & 31 & 0.89 & 3.0 \\
 \bottomrule
 \end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes:} Rankings are among World Cup participants only. Spearman $\rho$ is the rank correlation between ELO and FIFA pre-tournament rankings. FIFA rankings begin in 1992, so no comparison is available before 1994.
+\end{tablenotes}
 \end{table}
 
-For the main analysis, we have complete data for 11 World Cup victories: England 1966, Germany 1974, Italy 1982, Germany 1990, France 1998, Brazil 2002, Italy 2006, Spain 2010, Germany 2014, and France 2018. Argentina's 2022 victory is analyzed separately as a case study given the recency of the event and the different timing (Q4 rather than Q2).
 
 \subsection{Data Quality and Limitations}
 
-Several data limitations should be acknowledged:
-
-\begin{enumerate}
-    \item \textbf{Country coverage}: The analysis is limited to countries included in the OECD database, which predominantly covers developed economies. This means that some World Cup winners (Brazil pre-2002, Argentina) have limited or no coverage during certain victory periods. The findings may not generalize to non-OECD countries or developing economies.
-    
-    \item \textbf{Time coverage}: Quarterly data availability varies by country, with some countries having shorter time series than others. Earlier World Cups (1950s--1960s) have more limited coverage, potentially affecting the representativeness of older treatment effects.
-    
-    \item \textbf{Data revisions}: Economic data are subject to revision, and this analysis uses the most recent available vintage (accessed in 2024). Historical revisions could potentially affect results, though this is unlikely to systematically bias estimates since revisions are not plausibly correlated with World Cup outcomes.
-    
-    \item \textbf{Aggregation}: The analysis uses national-level aggregates, which may mask heterogeneous effects across regions, sectors, or firm types within countries. Future research with more granular data could investigate these distributional effects.
-    
-    \item \textbf{PPP conversion}: While PPP conversion facilitates cross-country comparison, it introduces measurement issues related to the accuracy of purchasing power parity estimates, particularly for countries with less developed price survey infrastructure.
-\end{enumerate}
-
-Despite these limitations, the OECD data represent the most comprehensive and reliable source of quarterly economic indicators for the countries and time period of interest. The use of standardized OECD methodology ensures consistency in variable definitions and seasonal adjustment procedures across countries, which is crucial for valid cross-country comparisons. Furthermore, using the same data source as \citet{Mello2024} ensures that any differences in results can be attributed to methodological choices rather than data differences.
+Several limitations should be acknowledged.
+First, the OECD database predominantly covers developed economies, meaning that some World Cup winners (Brazil before 2002, Argentina throughout) have limited or no coverage during their victory periods.
+Second, time-series length varies across countries, with several Eastern European and emerging economies entering the sample only in the mid-1990s (see Table~\ref{tab:app_coverage}).
+Third, economic data are subject to revision; this analysis uses the most recent vintage accessed in 2024.
+Finally, using national-level aggregates may mask heterogeneous effects across regions or sectors.
+Despite these limitations, the OECD data represent the most comprehensive source of standardised quarterly national accounts and ensure consistency with \citet{Mello2024}.

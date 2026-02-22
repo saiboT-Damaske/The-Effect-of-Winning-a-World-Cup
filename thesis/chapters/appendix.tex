@@ -125,12 +125,13 @@ Within $R^2$ & 0.588 & & 0.445 & \\
 \textbf{Variable} & \textbf{Definition and Source} \\
 \midrule
 GDP & Gross Domestic Product, chain-linked volume, rebased, USD PPP converted. Source: OECD QNA (B1\_GS1). \\
-Consumption & Final consumption expenditure, chain-linked volume, rebased, USD PPP converted. Source: OECD QNA (P3S1). \\
+Private consumption & Household final consumption expenditure, chain-linked volume, rebased, USD PPP converted. Source: OECD QNA (P31S14\_S15). \\
+Gov.\ consumption & General government final consumption expenditure, chain-linked volume, rebased, USD PPP converted. Source: OECD QNA (P3S13). \\
 Investment & Gross fixed capital formation, chain-linked volume, rebased, USD PPP converted. Source: OECD QNA (P51). \\
 Exports & Exports of goods and services, chain-linked volume, rebased, USD PPP converted. Source: OECD QNA (P6). \\
 Imports & Imports of goods and services, chain-linked volume, rebased, USD PPP converted. Source: OECD QNA (P7). \\
-Population & Total population. Source: OECD annual population statistics. \\
-YoY Growth & Year-over-year growth rate: $100 \times (X_t - X_{t-4})/X_{t-4}$. \\
+Population & Total population. Source: OECD annual population statistics, interpolated to quarterly frequency. \\
+$\Delta_4 \ln$ growth & Year-over-year log growth: $Y_{it} = \ln X_{it} - \ln X_{i,t-4}$. Approximates percentage growth while ensuring additivity of components. \\
 Winner & Indicator for country winning World Cup in quarter $t$ or within $\pm$16 quarters. \\
 Host & Indicator for country hosting World Cup in year containing quarter $t$. \\
 \bottomrule
@@ -166,3 +167,72 @@ Host & Indicator for country hosting World Cup in year containing quarter $t$. \
 \bottomrule
 \end{tabular}
 \end{table}
+
+\subsubsection{Country Coverage}
+
+\begin{longtable}{llcc}
+\caption{Country coverage in the event-study sample} \label{tab:app_coverage} \\
+\toprule
+\textbf{Country} & \textbf{ISO3} & \textbf{Period} & \textbf{Obs.} \\
+\midrule
+\endfirsthead
+\multicolumn{4}{c}{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\toprule
+\textbf{Country} & \textbf{ISO3} & \textbf{Period} & \textbf{Obs.} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\textit{Continued on next page}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+Argentina      & ARG & 1994-Q1 -- 2021-Q4 & 112 \\
+Australia      & AUS & 1962-Q1 -- 2021-Q4 & 240 \\
+Austria        & AUT & 1962-Q1 -- 2021-Q4 & 240 \\
+Belgium        & BEL & 1962-Q1 -- 2021-Q4 & 240 \\
+Bulgaria       & BGR & 1997-Q1 -- 2021-Q4 & 100 \\
+Brazil         & BRA & 1998-Q2 -- 2021-Q4 & 95 \\
+Canada         & CAN & 1962-Q1 -- 2021-Q4 & 240 \\
+Switzerland    & CHE & 1962-Q1 -- 2021-Q4 & 240 \\
+Chile          & CHL & 1997-Q1 -- 2021-Q4 & 100 \\
+Colombia       & COL & 1995-Q1 -- 2021-Q4 & 108 \\
+Costa Rica     & CRI & 1992-Q1 -- 2021-Q4 & 120 \\
+Czechia        & CZE & 1996-Q1 -- 2021-Q4 & 104 \\
+Germany        & DEU & 1962-Q1 -- 2021-Q4 & 240 \\
+Denmark        & DNK & 1962-Q1 -- 2021-Q4 & 240 \\
+Spain          & ESP & 1962-Q1 -- 2021-Q4 & 240 \\
+Estonia        & EST & 1996-Q1 -- 2021-Q4 & 104 \\
+Finland        & FIN & 1962-Q1 -- 2021-Q4 & 240 \\
+France         & FRA & 1962-Q1 -- 2021-Q4 & 240 \\
+United Kingdom & GBR & 1962-Q1 -- 2021-Q4 & 240 \\
+Greece         & GRC & 1962-Q1 -- 2021-Q4 & 240 \\
+Croatia        & HRV & 1996-Q1 -- 2021-Q4 & 104 \\
+Hungary        & HUN & 1996-Q1 -- 2021-Q4 & 104 \\
+Indonesia      & IDN & 1991-Q1 -- 2021-Q4 & 124 \\
+India          & IND & 1997-Q2 -- 2021-Q4 & 99 \\
+Ireland        & IRL & 1962-Q1 -- 2021-Q4 & 240 \\
+Iceland        & ISL & 1962-Q1 -- 2021-Q4 & 240 \\
+Israel         & ISR & 1996-Q1 -- 2021-Q4 & 104 \\
+Italy          & ITA & 1962-Q1 -- 2021-Q4 & 240 \\
+Japan          & JPN & 1962-Q1 -- 2021-Q4 & 240 \\
+South Korea    & KOR & 1962-Q1 -- 2021-Q4 & 240 \\
+Lithuania      & LTU & 1996-Q1 -- 2021-Q4 & 104 \\
+Luxembourg     & LUX & 1962-Q1 -- 2021-Q4 & 240 \\
+Latvia         & LVA & 1996-Q1 -- 2021-Q4 & 104 \\
+Mexico         & MEX & 1962-Q1 -- 2021-Q4 & 240 \\
+Netherlands    & NLD & 1962-Q1 -- 2021-Q4 & 240 \\
+Norway         & NOR & 1962-Q1 -- 2021-Q4 & 240 \\
+New Zealand    & NZL & 1962-Q1 -- 2021-Q4 & 240 \\
+Poland         & POL & 1996-Q1 -- 2021-Q4 & 104 \\
+Portugal       & PRT & 1962-Q1 -- 2021-Q4 & 240 \\
+Romania        & ROU & 1996-Q1 -- 2021-Q4 & 104 \\
+Russia         & RUS & 1996-Q1 -- 2021-Q3 & 103 \\
+Saudi Arabia   & SAU & 2011-Q1 -- 2021-Q4 & 44 \\
+Slovakia       & SVK & 1994-Q1 -- 2021-Q4 & 112 \\
+Slovenia       & SVN & 1997-Q1 -- 2021-Q4 & 100 \\
+Sweden         & SWE & 1962-Q1 -- 2021-Q4 & 240 \\
+Turkey         & TUR & 1962-Q1 -- 2021-Q4 & 240 \\
+United States  & USA & 1962-Q1 -- 2021-Q4 & 240 \\
+South Africa   & ZAF & 1962-Q1 -- 2021-Q4 & 240 \\
+\end{longtable}
+\floatfoot{\textit{Notes}: 48 countries. Full-coverage countries (1962-Q1 to 2021-Q4) account for 26 of 48 countries (6,240 of 8,633 observations). Winner countries (BRA, DEU, ESP, FRA, GBR, ITA) contribute 1,295 observations.}
