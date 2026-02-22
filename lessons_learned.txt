@@ -1,0 +1,59 @@
+Lessons Learned
+===============
+
+1. Two competing effects when computing YoY for the paper sample
+----------------------------------------------------------------
+The paper's estimation sample uses Δ4 log GDP growth, which requires a
+4-quarter lag.  There are two groups of countries that behave differently:
+
+  a) EARLY-START countries (OECD data from 1960-Q1, paper window 1961+):
+     The paper does NOT include 1961 YoY values.  Even though 1960 data
+     exists in OECD, the paper's effective first YoY quarter is 1962-Q1
+     (whose lag at 1961-Q1 is the first quarter in the stated window).
+     This means the paper treats the sample window as the boundary for
+     lag availability.
+
+  b) LATE-START countries (BRA 1998-Q2, ARG 1993-Q1, RUS 1995-Q1, CHL 1996-Q1):
+     The paper DOES include their first 4 quarters of YoY.  For example,
+     Brazil's GDP series "starts" at 1998-Q2 per Table A1, but OECD has
+     Brazilian GDP from 1996-Q1.  So the YoY at 1998-Q2 uses the 1997-Q2
+     lag (available in OECD but before the stated start date).
+
+The correct approach (variant E in investigate_missing_8_obs.R):
+  - Keep master-panel YoY (computed on all available OECD data)
+  - Apply per-country effective start dates:
+      * Most countries: 1962-Q1 (not 1961-Q1)
+      * BRA: 1998-Q2, ARG: 1993-Q1, RUS: 1995-Q1, CHL: 1996-Q1
+  - Then filter for non-NA YoY
+
+This yields W=1295, NW=7338 (paper: W=1295, NW=7342).  The 4 missing
+non-winner obs are likely Russia, whose OECD data in our download ends
+in 2020 rather than 2021.
+
+2. The paper only documents series ranges for a few countries
+-------------------------------------------------------------
+Table A1 in Mello (2024) lists the GDP start quarter only for countries
+whose series begin later than 1961-Q1 (BRA, ARG, RUS, CHL).  For the
+majority of countries the paper simply states "1961-Q1" as the start,
+without explaining that YoY growth is only defined from 1962-Q1 onward.
+This is an implicit convention: the sample window defines when lags are
+available, not external data availability — but only for the 1960-start
+countries.  Late-start countries use external OECD data for their lags.
+
+3. Observation counts as a diagnostic
+-------------------------------------
+Comparing observation counts (winners / non-winners) against the paper's
+Table 1 is a quick way to verify correct sample construction.
+
+  Paper:     W = 1,295    NW = 7,342    Total = 8,637
+  Ours:      W = 1,295    NW = 7,338    Total = 8,633
+
+The initial ~24-obs discrepancy (1315 vs 1295 winners) pointed to the
+1961 YoY issue.  The remaining 4 non-winner obs are attributable to
+Russia's shorter OECD series in our data download.
+
+4. Pipeline history
+-------------------
+  v1: YoY computed on full OECD → trim to 1961+  →  too many obs (1315 W)
+  v2: trim to 1961+ → recompute YoY in window    →  too few obs (1291 W)
+  v3: master YoY + Table A1 start dates           →  correct (1295 W)

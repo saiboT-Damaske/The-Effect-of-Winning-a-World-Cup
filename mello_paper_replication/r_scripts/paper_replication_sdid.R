@@ -1,6 +1,6 @@
 # ============================================================
 # Replicate Figure 1 (SDiD) — Mello (OBES)
-# Data: Data/paper_replication_event_study_sample.csv
+# Data: Data/mello_paper_replication/paper_replication_sample.csv
 # ============================================================
 
 rm(list = ls())
@@ -19,10 +19,14 @@ library(ggplot2)
 # remotes::install_github("synth-inference/synthdid")
 library(synthdid)
 
+# Working directory = repo root (~/The-Effect-of-Winning-a-World-Cup)
+# Set once in your R session, or uncomment:
+# setwd("~/The-Effect-of-Winning-a-World-Cup")
+
 # -----------------------------
 # 1) Load data
 # -----------------------------
-df <- read_csv("../data/mello_paper_replication/paper_replication_event_study_sample.csv", show_col_types = FALSE) %>%
+df <- read_csv("Data/mello_paper_replication/paper_replication_sample.csv", show_col_types = FALSE) %>%
   mutate(
     country = as.character(country),
     year    = as.integer(year),
@@ -229,8 +233,8 @@ sdid_results <- data.frame(
   CI_lower = ATT - 1.96 * SE,
   CI_upper = ATT + 1.96 * SE
 )
-write.csv(sdid_results, "../results/sdid_results_R.csv", row.names = FALSE)
-cat("\nResults saved to: results/sdid_results_R.csv\n")
+write.csv(sdid_results, "mello_paper_replication/results/sdid_results_R.csv", row.names = FALSE)
+cat("\nResults saved to: mello_paper_replication/results/sdid_results_R.csv\n")
 
 
 

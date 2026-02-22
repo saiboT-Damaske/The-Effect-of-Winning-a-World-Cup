@@ -3,10 +3,12 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-setwd("..")
+# Working directory = repo root (~/The-Effect-of-Winning-a-World-Cup)
+# Set once in your R session, or uncomment:
+# setwd("~/The-Effect-of-Winning-a-World-Cup")
 
 # read generated dataset
-wc <- read_csv("world_cup/world_cup_results_wide_entities.csv", show_col_types = FALSE)
+wc <- read_csv("Data/world_cup/world_cup_results_wide_entities.csv", show_col_types = FALSE)
 
 # keep countries only (drop EU/G7/G20)
 wc_countries <- wc %>%
@@ -51,7 +53,7 @@ library(readr)
 library(dplyr)
 library(stringr)
 
-wc <- read_csv("world_cup/world_cup_results_wide_entities.csv", show_col_types = FALSE)
+wc <- read_csv("Data/world_cup/world_cup_results_wide_entities.csv", show_col_types = FALSE)
 
 years <- wc %>%
   select(starts_with("WC_")) %>%
@@ -79,7 +81,7 @@ for (y in years) {
   }
 }
 
-write_csv(wc, "world_cup/world_cup_results_wide_entities.csv")
+write_csv(wc, "Data/world_cup/world_cup_results_wide_entities.csv")
 
 wc %>%
   filter(entity_type == "country") %>%

@@ -7,13 +7,18 @@
 #   - exports, imports, GDP
 ############################################################
 
-setwd("..")
 
 library(readr)
 library(dplyr)
 library(tidyr)
 library(janitor)
 library(stringr)
+
+# Working directory = repo root (~/The-Effect-of-Winning-a-World-Cup)
+# Set once in your R session, or uncomment:
+# setwd("~/The-Effect-of-Winning-a-World-Cup")
+
+cat("Working directory:", getwd(), "\n\n")
 
 # =========================
 # 1) Download (OECD SDMX)
@@ -43,8 +48,8 @@ df_q_real <- df_raw %>%
 # =========================
 p3_sectors <- df_q_real %>%
   filter(transaction == "P3") %>%
-  distinct(institutional_sector, institutional_sector_name) %>%
-  arrange(institutional_sector)
+  distinct(sector, institutional_sector) %>%
+  arrange(sector)
 
 print(p3_sectors, n = Inf)
 
@@ -53,18 +58,18 @@ print(p3_sectors, n = Inf)
 # - government: code contains S13 or name contains "government"
 hh_codes <- p3_sectors %>%
   filter(
-    str_detect(toupper(institutional_sector), "S14") |
-      str_detect(tolower(institutional_sector_name), "house")
+    str_detect(toupper(sector), "S14") |
+      str_detect(tolower(institutional_sector), "house")
   ) %>%
-  pull(institutional_sector) %>%
+  pull(sector) %>%
   unique()
 
 gov_codes <- p3_sectors %>%
   filter(
-    str_detect(toupper(institutional_sector), "S13") |
-      str_detect(tolower(institutional_sector_name), "government")
+    str_detect(toupper(sector), "S13") |
+      str_detect(tolower(institutional_sector), "government")
   ) %>%
-  pull(institutional_sector) %>%
+  pull(sector) %>%
   unique()
 
 cat("\nHousehold (private) sector codes used:\n"); print(hh_codes)
@@ -109,12 +114,12 @@ gfcf <- df_q_real %>%
   transmute(country = ref_area, quarter = time_period, capital_formation = value)
 
 c_priv <- df_q_real %>%
-  filter(transaction == "P3", institutional_sector %in% hh_codes) %>%
+  filter(transaction == "P3", sector %in% hh_codes) %>%
   agg_country_quarter() %>%
   transmute(country = ref_area, quarter = time_period, private_consumption = value)
 
 c_gov <- df_q_real %>%
-  filter(transaction == "P3", institutional_sector %in% gov_codes) %>%
+  filter(transaction == "P3", sector %in% gov_codes) %>%
   agg_country_quarter() %>%
   transmute(country = ref_area, quarter = time_period, government_consumption = value)
 
@@ -135,6 +140,6 @@ print(na_check)
 # =========================
 # 6) Save
 # =========================
-write_csv(panel, "oecd_processed/oecd_usd_ppp_real_paper_features_wide.csv")
+write_csv(panel, "Data/oecd_processed/oecd_usd_ppp_real_paper_features_wide.csv")
 
-cat("\nDONE: wrote oecd_processed/oecd_usd_ppp_real_paper_features_wide.csv\n")
+cat("\nDONE: wrote Data/oecd_processed/oecd_usd_ppp_real_paper_features_wide.csv\n")

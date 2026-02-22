@@ -2,12 +2,14 @@ library(readr)
 library(dplyr)
 library(stringr)
 
-# Set working directory to data folder (parent of scripts)
-setwd("..")
+# Working directory = repo root (~/The-Effect-of-Winning-a-World-Cup)
+# Set once in your R session, or uncomment:
+# setwd("~/The-Effect-of-Winning-a-World-Cup")
 
-# --- load
-gdp <- read_csv("oecd_processed/oecd_usd_ppp_real_base_panel_wide_named.csv", show_col_types = FALSE)
-pop <- read_csv("oecd_source/oecd_population_annual_1960_2024.csv", show_col_types = FALSE)
+# --- load (6-feature panel: gdp, private_consumption, government_consumption,
+#          capital_formation, exports, imports)
+gdp <- read_csv("Data/oecd_processed/oecd_usd_ppp_real_paper_features_wide.csv", show_col_types = FALSE)
+pop <- read_csv("Data/oecd_source/oecd_population_annual_1960_2024.csv", show_col_types = FALSE)
 
 # --- detect GDP time column (usually "time" or "time_period")
 gdp_time_col <- intersect(names(gdp), c("quarter", "time"))[1]
@@ -81,8 +83,8 @@ if (nrow(pop_gap_vs_gdp) > 0) print(pop_gap_vs_gdp, n = Inf)
 
 ########### JOIN the data #################
 
-gdp <- read_csv("oecd_processed/oecd_usd_ppp_real_base_panel_wide_named.csv", show_col_types = FALSE)
-pop <- read_csv("oecd_source/oecd_population_annual_1960_2024.csv", show_col_types = FALSE)
+gdp <- read_csv("Data/oecd_processed/oecd_usd_ppp_real_paper_features_wide.csv", show_col_types = FALSE)
+pop <- read_csv("Data/oecd_source/oecd_population_annual_1960_2024.csv", show_col_types = FALSE)
 
 # keep only real countries (drop group codes; keep exactly 3-letter ISO3)
 gdp2 <- gdp %>% filter(str_detect(country, "^[A-Z]{3}$"))
@@ -102,7 +104,7 @@ gdp_pop <- gdp2 %>%
 # quick check: how many GDP rows still missing population?
 cat("GDP rows with missing population:", sum(is.na(gdp_pop$population)), "\n")
 
-write_csv(gdp_pop, "oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop.csv")
+write_csv(gdp_pop, "Data/oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop.csv")
 
 
 
@@ -119,12 +121,12 @@ library(tidyr)
 # 1) Load datasets
 # -------------------------------------------------
 gdp_pop <- read_csv(
-  "oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop.csv",
+  "Data/oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop.csv",
   show_col_types = FALSE
 )
 
 wc <- read_csv(
-  "world_cup/world_cup_results_wide_entities.csv",
+  "Data/world_cup/world_cup_results_wide_entities.csv",
   show_col_types = FALSE
 )
 
@@ -183,7 +185,7 @@ gdp_pop_wc <- gdp_pop2 %>%
 # -------------------------------------------------
 # 6) save raw
 # -------------------------------------------------
-write_csv(gdp_pop_wc, "oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq.csv")
+write_csv(gdp_pop_wc, "Data/oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq.csv")
 
 
 
@@ -245,7 +247,7 @@ gdp_pop_wc2 <- gdp_pop_wc2 %>%
 # Save enriched master panel (NO trimming yet)
 write_csv(
   gdp_pop_wc2,
-  "oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq_plus_yoy.csv"
+  "Data/oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq_plus_yoy.csv"
 )
 
 cat("Saved enriched panel with YoY columns.\n")

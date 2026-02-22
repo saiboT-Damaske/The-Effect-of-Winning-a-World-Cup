@@ -2,7 +2,9 @@ library(readr)
 library(dplyr)
 library(janitor)
 
-setwd("..")
+# Working directory = repo root (~/The-Effect-of-Winning-a-World-Cup)
+# Set once in your R session, or uncomment:
+# setwd("~/The-Effect-of-Winning-a-World-Cup")
 
 base <- "https://sdmx.oecd.org/public/rest/data"
 flow <- "OECD.ELS.SAE,DSD_POPULATION@DF_POP_HIST,1.0"
@@ -35,11 +37,11 @@ pop_total <- pop_raw %>%
 # quick unit check (important)
 pop_total %>% count(unit_measure)
 
-write_csv(pop_total, "oecd_source/oecd_population_annual_1960_2024.csv")
+write_csv(pop_total, "Data/oecd_source/oecd_population_annual_1960_2024.csv")
 
 
 
-pop <- read_csv("oecd_source/oecd_population_annual_1960_2024.csv", show_col_types = FALSE)
+pop <- read_csv("Data/oecd_source/oecd_population_annual_1960_2024.csv", show_col_types = FALSE)
 
 pop_coverage <- pop %>%
   filter(!is.na(population)) %>%
@@ -61,7 +63,7 @@ library(readr)
 library(dplyr)
 library(ggplot2)
 
-pop <- read_csv("oecd_source/oecd_population_annual_1960_2024.csv", show_col_types = FALSE)
+pop <- read_csv("Data/oecd_source/oecd_population_annual_1960_2024.csv", show_col_types = FALSE)
 
 # pick first five countries alphabetically (stable & reproducible)
 countries_5 <- pop %>%

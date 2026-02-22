@@ -19,11 +19,15 @@ library(tidyr)
 library(fixest)
 library(lfe)
 
+# Working directory = repo root (~/The-Effect-of-Winning-a-World-Cup)
+# Set once in your R session, or uncomment:
+# setwd("~/The-Effect-of-Winning-a-World-Cup")
+
 # -----------------------------
 # 1) Load enriched panel (already contains *_yoy_log_4q and *_yoy_pct)
 # -----------------------------
 df0 <- read_csv(
-  "../data/oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq_plus_yoy.csv",
+  "Data/oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq_plus_yoy.csv",
   show_col_types = FALSE
 ) %>%
   mutate(country = as.character(country))
@@ -65,8 +69,8 @@ df <- df0 %>%
 #    Outcome: Δ4 log GDP (pp) already exists as *_yoy_log_4q
 #    Control: ln(GDP_{t-4}) computed from levels (not a YoY)
 # -----------------------------
-gdp_level  <- "gross_domestic_product_chain_linked_volume_rebased_us_dollars_ppp_converted"
-gdp_yoylog <- paste0(gdp_level, "_yoy_log_4q")
+gdp_level  <- "gdp"
+gdp_yoylog <- "gdp_yoy_log_4q"
 
 stopifnot(gdp_level %in% names(df), gdp_yoylog %in% names(df))
 
@@ -260,11 +264,11 @@ cat("\n--- Table-2-like (LFE) ---\n")
 print(tab2_like_lfe, n = Inf)
 
 # Save event study coefficients to CSV for comparison with Python
-write.csv(tab2_like_fixest, "../results/event_study_coefficients_R_fixest.csv", row.names = FALSE)
-write.csv(tab2_like_lfe, "../results/event_study_coefficients_R_lfe.csv", row.names = FALSE)
+write.csv(tab2_like_fixest, "mello_paper_replication/results/event_study_coefficients_R_fixest.csv", row.names = FALSE)
+write.csv(tab2_like_lfe, "mello_paper_replication/results/event_study_coefficients_R_lfe.csv", row.names = FALSE)
 cat("\nResults saved to:\n")
-cat("  - results/event_study_coefficients_R_fixest.csv\n")
-cat("  - results/event_study_coefficients_R_lfe.csv\n")
+cat("  - mello_paper_replication/results/event_study_coefficients_R_fixest.csv\n")
+cat("  - mello_paper_replication/results/event_study_coefficients_R_lfe.csv\n")
 
 # -----------------------------
 # 9) Quick cross-check: any lingering ln_gdp_l4 NA at a specific bin?

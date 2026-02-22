@@ -1,0 +1,6 @@
+n_countries,n_obs,n_winners,n_nonwinners,min_quarter,max_quarter,measure_id
+43,5269,6,37,1962-Q1,2021-Q4,NatCurr_flow | L | XDC
+5,475,0,5,1994-Q1,2021-Q4,NatCurr_flow | Q | XDC
+47,5756,6,41,1962-Q1,2021-Q4,NatCurr_flow | V | XDC
+48,8629,6,42,1962-Q1,2021-Q4,USD_flow | LR | USD_PPP
+48,8629,6,42,1962-Q1,2021-Q4,USD_flow | V | USD_PPP

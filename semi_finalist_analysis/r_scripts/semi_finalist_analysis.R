@@ -7,6 +7,10 @@
 #     * Finalist_analysis/finalist_analysis.R (finalist treatment)
 # ============================================================
 
+# Working directory = repo root (~/The-Effect-of-Winning-a-World-Cup)
+# Set once in your R session, or uncomment:
+# setwd("~/The-Effect-of-Winning-a-World-Cup")
+
 rm(list = ls())
 
 # -----------------------------
@@ -33,7 +37,7 @@ library(synthdid)
 message(">>> Loading enriched OECD panel ...")
 
 df0 <- read_csv(
-  "../data/oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq_plus_yoy.csv",
+  "Data/oecd_processed/oecd_usd_ppp_real_base_panel_wide_named_plus_pop_plus_wc_eventq_plus_yoy.csv",
   show_col_types = FALSE
 ) %>%
   mutate(country = as.character(country))
@@ -494,7 +498,7 @@ comparison_all <- tibble::tibble(
   N_Control = sapply(results_list, function(x) x$N_control)
 )
 
-write_csv(comparison_all, "results/semi_finalist_analysis_results_R.csv")
+write_csv(comparison_all, "semi_finalist_analysis/results/semi_finalist_analysis_results_R.csv")
 
 cat("\n================================================\n")
 cat("SEMI-FINALIST SDID RESULTS SUMMARY\n")

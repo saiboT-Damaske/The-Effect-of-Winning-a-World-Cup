@@ -1,7 +1,7 @@
 # ============================================================
 # SDiD replication — GDP + components (Figure + ATT/SE/P-value)
 # Paper: Mello (OBES) "A Kick for the GDP"
-# Data: Data/paper_replication_event_study_sample.csv
+# Data: Data/mello_paper_replication/paper_replication_sample.csv
 # Robust version: NO panel.matrices() (avoids false "no variation")
 # ============================================================
 
@@ -21,10 +21,14 @@ library(ggplot2)
 # remotes::install_github("synth-inference/synthdid")
 library(synthdid)
 
+# Working directory = repo root (~/The-Effect-of-Winning-a-World-Cup)
+# Set once in your R session, or uncomment:
+# setwd("~/The-Effect-of-Winning-a-World-Cup")
+
 # -----------------------------
 # 1) Load data
 # -----------------------------
-df <- read_csv("../data/mello_paper_replication/paper_replication_event_study_sample.csv", show_col_types = FALSE) %>%
+df <- read_csv("Data/mello_paper_replication/paper_replication_sample.csv", show_col_types = FALSE) %>%
   mutate(
     country = as.character(country),
     quarter = as.character(quarter),
