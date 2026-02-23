@@ -1,4 +1,4 @@
-This section presents the theoretical foundations of the causal inference methods used in this thesis. I begin with the potential outcomes framework for treatment effect estimation, then discuss event studies and synthetic difference-in-differences---the two main approaches employed in both \citet{Mello2024} and this replication.
+This section presents the theoretical foundations of the causal inference methods used in this thesis. I begin with the potential outcomes framework for treatment effect estimation, then discuss event studies and synthetic difference-in-differences - the two main approaches employed in both \citet{Mello2024} and this replication.
 
 \subsection{The Potential Outcomes Framework}
 
@@ -10,7 +10,7 @@ The average treatment effect (ATE) is defined as:
 \label{eq:ate}
 \end{equation}
 
-In observational settings with panel data and staggered treatment adoption---such as World Cup victories occurring at different times for different countries---the estimand of interest is typically the average treatment effect on the treated (ATT):
+In observational settings with panel data and staggered treatment adoption, such as World Cup victories occurring at different times for different countries, the estimate of interest is typically the average treatment effect on the treated (ATT):
 \begin{equation}
 \tau^{ATT} = E[Y_i(1) - Y_i(0) \mid D_i = 1]
 \label{eq:att}
@@ -19,7 +19,7 @@ which measures the effect specifically for units that received treatment, i.e., 
 
 \subsection{Event Study Design}
 
-Event study methodology estimates dynamic treatment effects by comparing outcomes at different points in time relative to an event. Originally developed in finance to study stock price reactions \citep{Fama1969}, the approach has become standard for analyzing policy changes, economic shocks, and discrete interventions in panel data settings \citep{Angrist2009}.
+The event study methodology estimates dynamic treatment effects by comparing outcomes at different points in time relative to an event. Originally developed in finance to study stock price reactions \citep{Fama1969}, the approach has become standard for analyzing policy changes, economic shocks, and discrete interventions in panel data settings \citep{Angrist2009}.
 
 Let us consider a balanced panel of $N$ units (countries) over $T$ periods (quarters), where unit $i$ receives treatment at time $E_i$. The relative time to treatment is $K_{it} = t - E_i$, such that the indicator $\mathbf{1}[K_{it} = k]$ equals one when unit $i$ is exactly $k$ periods from its treatment date. The event study specification is:
 \begin{equation}
@@ -57,7 +57,7 @@ There exist potential problems with two-way fixed effects (TWFE) estimators -- r
 \end{equation}
 where $\hat{\beta}_k$ are treatment effect estimates from different $2 \times 2$ comparisons (early vs.\ late treated, treated vs.\ never-treated, etc.) and $w_k$ are data-dependent weights. Crucially, these weights can be negative when already-treated units serve as controls. When treatment effects vary across cohorts or fade over time, these problematic comparisons can bias the overall estimate.
 
-For the World Cup application, these concerns are not handled by Mello and are mitigated by several features: (1) there are relatively few treated units (10 World Cup winners from 1966--2018; see Section~\ref{data} for details), (2) treatment effects are expected to be transitory, meaning already-treated units return to baseline before serving as controls, and (3) a I have a large pool of never-treated OECD countries provides clean comparisons. Importantly, I complement the event study with SDID to provide converging evidence: while the event study reveals the dynamic pattern of effects over time, SDID constructs an explicit synthetic counterfactual that does not rely on the parallel trends assumption holding globally. When both approaches yield consistent results, our confidence in the causal interpretation is strengthened.
+For the World Cup application, these concerns are not handled by Mello and are mitigated by several features: (1) there are relatively few treated units (10 World Cup winners from 1966--2018; see Section~\ref{data} for details), (2) treatment effects are expected to be transitory, meaning already-treated units return to baseline before serving as controls, and (3) a I have a large pool of never-treated OECD countries provides clean comparisons. Importantly, I complement the event study with SDID to provide converging evidence: while the event study reveals the dynamic pattern of effects over time, SDID constructs an explicit synthetic counterfactual that does not rely on the parallel trends assumption holding globally. When both approaches yield consistent results, confidence in the causal interpretation is strengthened.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -99,6 +99,6 @@ where $\bar{Y}_{tr,pre}^{\lambda} = \sum_{t=1}^{T_0} \hat{\lambda}_t \bar{Y}_{tr
 
 \subsubsection{Properties and Inference}
 
-\citet{Arkhangelsky2021} establish that under regularity conditions, the SDID estimator is consistent and asymptotically normal. The method inherits a form of double robustness: it remains consistent if either parallel trends hold globally or if the unit weights successfully match the treated unit's trajectory. In practice, inference relies on bootstrap methods that resample at the unit level, preserving within-unit serial correlation. Following \citet{Mello2024}, we use 1,000 bootstrap replications with standard errors clustered at the country-subseries level.
+\citet{Arkhangelsky2021} establish that under regularity conditions, the SDID estimator is consistent and asymptotically normal. The method inherits a form of double robustness: it remains consistent if either parallel trends hold globally or if the unit weights successfully match the treated unit's trajectory. In practice, inference relies on bootstrap methods that resample at the unit level, preserving within-unit serial correlation. Following \citet{Mello2024}, I use 1,000 bootstrap replications with standard errors clustered at the country-subseries level.
 
 SDID is well-suited for the World Cup setting because it can construct tailored counterfactuals for each of the winner countries by optimally weighting the control/never-winning OECD countries according to their pre-victory trajectories. 

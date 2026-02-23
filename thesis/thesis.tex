@@ -21,7 +21,7 @@
 
 \newcommand{\mytitle}{Scoring Economic Gains: Replicating and Extending the Analysis of World Cup Victory Effects on Economic Growth}
 \newcommand{\myname}{Tobias Damaske}
-\newcommand{\mysupervisor}{[Vincent Starck, Ph.D.]}
+\newcommand{\mysupervisor}{Vincent Starck, Ph.D.}
 
 \usepackage[a4paper, width = 160mm, top = 35mm, bottom = 30mm, 
 bindingoffset = 0mm]{geometry}
@@ -109,7 +109,7 @@ Supervised by \mysupervisor
 
 \begin{abstract}
 \onehalfspacing
-This thesis replicates and extends the analysis of \citet{Mello2024}, who examines whether winning the FIFA World Cup boosts GDP growth. Using quarterly data from OECD countries and implementing both event-study and synthetic difference-in-differences (SDID) methodologies, this study confirms that winning the World Cup increases year-over-year GDP growth by approximately 0.5 percentage points in the two subsequent quarters, driven primarily by enhanced export growth. Beyond replication, this thesis extends the analysis to finalists, semi-finalists, and underperformers---top-10 ELO-rated countries eliminated in the group stage. The finalist and semi-finalist extensions show positive but insignificant effects that attenuate as the treatment group broadens, confirming the premium is specific to winning. The underperformer analysis finds no evidence that early elimination depresses GDP; most SDID estimates are positive, with the notable exception of exports, where the ATT turns negative---consistent with the export channel operating in reverse. The findings reinforce that international visibility and trade constitute the primary mechanism, and suggest that investigating overperformers would be a valuable direction for future research.
+This thesis replicates and extends the analysis of \citet{Mello2024}, who examines whether winning the FIFA World Cup boosts GDP growth. Using quarterly data from OECD countries and implementing both event-study and synthetic difference-in-differences (SDID) methodologies, this study confirms that winning the World Cup increases year-over-year GDP growth by approximately 0.5 percentage points in the two subsequent quarters, driven primarily by enhanced export growth. Beyond replication, this thesis extends the analysis to finalists, semi-finalists, and underperformers---top-10 ELO-rated countries eliminated in the group stage. The finalist and semi-finalist extensions show positive but insignificant effects that attenuate as the treatment group broadens, confirming the premium is specific to winning. The underperformer analysis finds no evidence that early elimination depresses GDP; most SDID estimates are positive, with the notable exception of exports, where the ATT turns negative which is consistent with the export channel operating in reverse. The findings reinforce the idea that international visibility and trade are the primary mechanism for economic growth after a victory, and suggest that investigating more detailed economic components (e.g. tourism or employment) as well as  the effect for unexpected overperformers would be a valuable direction for future research.
 
 \vspace{0.5cm}
 \noindent\textbf{Keywords:} FIFA World Cup, GDP growth, event study, synthetic difference-in-differences, sports economics, causal inference
@@ -158,7 +158,7 @@ This thesis replicates and extends the analysis of \citet{Mello2024}, who examin
 \input{chapters/data}
 \newpage
 
-\section{Results}
+\section{Replication Results}
 \label{results}
 \input{chapters/results}
 \newpage
@@ -186,6 +186,9 @@ This thesis replicates and extends the analysis of \citet{Mello2024}, who examin
 \renewcommand{\thefigure}{A.\arabic{figure}}
 \setcounter{table}{0}
 \setcounter{figure}{0}
+% Give hyperref unique anchors so appendix refs don't collide with main-text ones
+\renewcommand{\theHtable}{A.\arabic{table}}
+\renewcommand{\theHfigure}{A.\arabic{figure}}
 
 \section{Appendix}
 \label{app}

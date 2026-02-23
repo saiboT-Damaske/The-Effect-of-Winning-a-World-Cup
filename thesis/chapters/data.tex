@@ -26,7 +26,7 @@ where $X_{it}$ is the level of the economic variable for country $i$ in quarter 
 
 \subsection{Population and World Cup Data}
 
-Annual population figures were retrieved from a separate OECD population statistics table to replicate the summary statistics in \citeauthor{Mello2024}'s Table~1. Following Mello, population is not used as a denominator for the dependent variable and serves only as a descriptive variable. As shown in Table \ref{tab:summary_comparison}, population turned out to be the closest match to the published figures and the most reliable cross-check for confirming that the sample composition is correct.
+Annual population figures were retrieved from a separate OECD population statistics table to replicate the summary statistics in \citet[Table~1]{Mello2024}. Following Mello, population is not used as a denominator for the dependent variable and serves only as a descriptive variable. As shown in Table \ref{tab:summary_comparison}, population turned out to be the closest match to the published figures and the most reliable cross-check for confirming that the sample composition is correct.
 
 World Cup results---winners, runners-up, semi-finalists, and host countries---were compiled for all editions from 1930 to 2022. This is arguably the most straightforward part of the data collection: tournament outcomes are publicly available from FIFA and, more conveniently, from Wikipedia.\footnote{The full list of World Cup results, including all top-four finishers and host countries, is provided in Table~\ref{tab:app_wc_results} in the Appendix.} Each World Cup is assigned an event quarter: Q2 of the World Cup year for all editions from 1966 to 2018, since these tournaments were held in June and July. The 2022 Qatar World Cup, held in November and December, is assigned to Q4. \citet{Mello2024} notes that ``the World Cup has always taken place every four years between June and July, namely in between the end of the second quarter and the beginning of the third quarter of a given year,'' and the only exception---Qatar 2022---falls outside his estimation window.
 
@@ -34,7 +34,7 @@ Six countries contribute as World Cup winners in the estimation sample: Brazil, 
 
 As discussed in Section~\ref{sec:sample_construction}, data availability excludes several victory events. Argentina's 1978 and 1986 victories predate its OECD coverage, and the 2022 victory falls outside the estimation window; it is therefore classified as a control country in the main analysis and examined separately in Section~\ref{sec:argentina_case}. Brazil contributes only through its 2002 success, with earlier victories excluded by analogous data constraints.
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{World Cup events in the estimation sample}
 \label{tab:wc_events}
@@ -59,7 +59,7 @@ As discussed in Section~\ref{sec:sample_construction}, data availability exclude
 2014 & Germany        & Brazil         & Q2 & \checkmark & \checkmark \\
 2018 & France         & Russia         & Q2 & \checkmark & \checkmark \\
 \midrule
-2022 & Argentina      & Qatar          & Q4 & \multicolumn{2}{c}{\textit{Case study}} \\
+2022 & Argentina      & Qatar          & Q4 & \multicolumn{2}{c}{\textit{Potential case study}} \\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -72,7 +72,7 @@ As discussed in Section~\ref{sec:sample_construction}, data availability exclude
 \subsection{Comparing the Replicated Dataset to \citet{Mello2024}}
 \label{sec:comparison}
 
-A central goal of the data construction was to match the published dataset as closely as possible. Since the replication package is unavailable, the summary statistics reported in \citeauthor{Mello2024}'s Table~1 and the Appendix tables serve as the primary benchmark. Table~\ref{tab:obs_comparison} compares the observation counts.
+A central goal of the data construction was to match the published dataset as closely as possible. Since the replication package is unavailable, the summary statistics reported in \citet[Table~1]{Mello2024} and the appendix tables therein serve as the primary benchmark. Table~\ref{tab:obs_comparison} compares the observation counts.
 
 \begin{table}[htbp]
 \centering
@@ -95,7 +95,7 @@ This study         & 1,295 & 7,338 & 8,633 \\
 
 The winner count matches exactly at 1,295. The non-winner count differs by only four observations (7,338 versus 7,342), which I guess is Russia's OECD series ending earlier than the rest in my download. Assuming that 1,295 winner quarters are the exact same as Mello's, the four differing observations are only controls and can be neglected. \citet{Mello2024} reports a total of ``8,637 observations, with an average of about 180 quarterly GDP records per country''; my total of 8,633 is consistent with this.
 
-Table~\ref{tab:summary_comparison} presents the core validation step: a side-by-side comparison of the summary statistics from \citeauthor{Mello2024}'s Table~1 (reproduced in the left panel) and the corresponding statistics from this replication (right panel). The table follows the same format as the original, reporting GDP, population, GDP per capita, and year-over-year GDP growth by sub-period and winner status.
+Table~\ref{tab:summary_comparison} presents the core validation step: a side-by-side comparison of the summary statistics from \citet[Table~1]{Mello2024} (reproduced in the left panel) and the corresponding statistics from this replication (right panel). The table follows the same format as the original, reporting GDP, population, GDP per capita, and year-over-year GDP growth by sub-period and winner status.
 
 \begin{table}[htbp]
 \centering
@@ -137,7 +137,7 @@ Table~\ref{tab:summary_comparison} presents the core validation step: a side-by-
 \end{tabular}
 \begin{tablenotes}
 \footnotesize
-\item Left panel reproduces Table~1 from \citet{Mello2024}. Right panel shows the corresponding statistics from this replication. GDP in thousands of 2015 US dollar millions (PPP); population in millions. Year-on-Year growth is $\Delta_4 \ln$ (Equation~\ref{eq:yoy}). Sub-period boundaries differ slightly: Mello uses 1960--80, 1980--2000, 2000--20; this study uses 1962--1980, 1980--2000, 2000--2021 (reflecting the actual data range after computing growth rates).
+\item Left panel reproduces \citet[Table~1]{Mello2024}. Right panel shows the corresponding statistics from this replication. GDP in thousands of 2015 US dollar millions (PPP); population in millions. Year-on-Year growth is $\Delta_4 \ln$ (Equation~\ref{eq:yoy}). Sub-period boundaries differ slightly: Mello uses 1960--80, 1980--2000, 2000--20; this study uses 1962--1980, 1980--2000, 2000--2021 (reflecting the actual data range after computing growth rates).
 \end{tablenotes}
 \end{table}
 
