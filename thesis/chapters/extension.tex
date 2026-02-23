@@ -27,7 +27,7 @@ In the post-treatment period, the coefficients at $l = +1$ ($0.275$\,pp, SE $= 0
 \end{figure}
 
 \paragraph{Synthetic difference-in-differences.}
-The SDiD estimate corroborates the event study findings.  Figure~\ref{fig:ext_finalist_sdid} shows the stacked SDiD plot for the finalist treatment group.  The estimated ATT is $0.109$\,pp (SE $= 0.246$, $p = 0.657$), substantially smaller than the winner ATT of $0.544$\,pp and statistically indistinguishable from zero.  The synthetic control trajectory closely tracks the treated group in the pre-treatment window, but the post-treatment gap is negligible.  With 11~treated and 262~control subseries, the donor pool is well populated, yet the treatment effect is too diffuse to detect.
+The SDiD estimate corroborates the event study findings.  Figure~\ref{fig:ext_finalist_sdid} shows the stacked SDiD plot for the finalist treatment group.  The estimated ATT is $0.109$\,pp (SE $= 0.246$, $p = 0.657$), substantially smaller than the winner ATT of $0.527$\,pp and statistically indistinguishable from zero.  The synthetic control trajectory closely tracks the treated group in the pre-treatment window, but the post-treatment gap is negligible.  With 11~treated and 262~control subseries, the donor pool is well populated, yet the treatment effect is too diffuse to detect.
 
 \begin{figure}[H]
 \centering
@@ -87,7 +87,7 @@ In the immediate post-treatment window, the $l = +1$ coefficient decreases monot
 
 At longer horizons ($l = +5$ to $l = +16$), the coefficients for all three groups fluctuate around zero with no consistent pattern, indicating that any post-tournament effect dissipates within a year.  The pre-treatment coefficients merit separate attention: while the winner and semi-finalist specifications show no systematic pre-trends, the finalist specification exhibits several significant pre-treatment coefficients (e.g., $l = -16$, $l = -9$, $l = -5$), suggesting that finalist countries may differ from non-finalists in ways not fully captured by the country fixed effects.
 
-The SDiD estimates reinforce these findings.  The winner ATT ($0.544$\,pp, SE $= 0.309$) is the largest, followed by the semi-finalist ATT ($0.207$\,pp, SE $= 0.202$) and the finalist ATT ($0.109$\,pp, SE $= 0.246$).  None of the extension ATTs are statistically significant, confirming that the economic effect of World Cup performance is concentrated in winning.  The positive direction of both the event study and SDiD estimates across all three specifications is consistent with a general ``tournament performance'' channel, but only winning generates effects that are economically meaningful relative to their standard errors.
+The SDiD estimates reinforce these findings.  The winner ATT ($0.527$\,pp, SE $= 0.274$) is the largest, followed by the semi-finalist ATT ($0.207$\,pp, SE $= 0.202$) and the finalist ATT ($0.109$\,pp, SE $= 0.246$).  None of the extension ATTs are statistically significant, confirming that the economic effect of World Cup performance is concentrated in winning.  The positive direction of both the event study and SDiD estimates across all three specifications is consistent with a general ``tournament performance'' channel, but only winning generates effects that are economically meaningful relative to their standard errors.
 
 % ====================================================================
 \subsection{Underperformer Analysis}
@@ -183,19 +183,19 @@ Table~\ref{tab:sdid_three_way_comparison} compares the SDiD ATTs across three an
 \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
 Component & ATT & (SE) & ATT & (SE) & ATT & (SE) \\
 \midrule
-GDP                       & $0.763$     & (0.688) & $0.544$     & (0.309) & $0.481$*   & (0.263) \\
-Private consumption       & $0.410$     & (0.234) & $-0.202$    & (0.361) & ---        &  ---    \\
-Government consumption    & $0.570$     & (0.635) & $-0.428$    & (0.575) & $-0.314$   & (0.463) \\
-Gross fixed capital form. & $2.566$     & (1.967) & $1.026$     & (1.087) & $1.214$    & (1.238) \\
-Exports                   & $-1.290$    & (1.435) & $5.073$     & (4.513) & $4.507$*   & (3.916) \\
-Imports                   & $2.147$*    & (1.105) & $-0.583$    & (1.075) & $-0.112$   & (1.095) \\
+GDP                       & $0.763$     & (0.688) & $0.527$*    & (0.274) & $0.481$*   & (0.263) \\
+Private consumption       & $0.410$     & (0.234) & $-0.212$    & (0.338) & $-0.009$   & (0.355) \\
+Government consumption    & $0.570$     & (0.635) & $-0.331$    & (0.591) & $-0.314$   & (0.463) \\
+Gross fixed capital form. & $2.566$     & (1.967) & $1.251$     & (1.120) & $1.214$    & (1.238) \\
+Exports                   & $-1.290$    & (1.435) & $4.769$     & (3.989) & $4.507$*   & (3.916) \\
+Imports                   & $2.147$*    & (1.105) & $-0.247$    & (1.169) & $-0.112$   & (1.095) \\
 \bottomrule
 \multicolumn{7}{l}{\footnotesize *\,$p<0.10$,\; **\,$p<0.05$,\; ***\,$p<0.01$.\; Bootstrap SEs (1,000 replications).} \\
 \multicolumn{7}{p{14cm}}{\footnotesize \textit{Notes}: ATT denotes the average treatment effect in the two post-World Cup quarters.  Underperformer: 11~treated (10 for components), 259--261~control subseries.  Replication \& Mello: 6~treated, ${\sim}$268~control subseries.  All estimates in percentage points.}
 \end{tabular}
 \end{table}
 
-Most underperformer ATTs are \emph{positive}---GDP ($0.763$\,pp), private consumption ($0.410$\,pp), government consumption ($0.570$\,pp), capital formation ($2.566$\,pp), and imports ($2.147$\,pp, marginally significant at $p = 0.052$)---which runs counter to the hypothesis that early elimination depresses economic activity.  The notable exception is \textbf{exports} ($-1.290$\,pp), which is the only component with a negative ATT for underperformers.  This is consistent with the findings from both the replication and \citet{Mello2024}, where exports are the feature most responsive to World Cup outcomes: winners see a large positive export boost (${\sim}5$\,pp), while underperformers experience a decline.  The trade channel thus appears to be the primary mechanism through which World Cup outcomes affect the economy, operating in both directions.
+Most underperformer ATTs are \emph{positive}---GDP ($0.763$\,pp), private consumption ($0.410$\,pp), government consumption ($0.570$\,pp), capital formation ($2.566$\,pp), and imports ($2.147$\,pp, marginally significant at $p = 0.052$)---which runs counter to the hypothesis that early elimination depresses economic activity.  The notable exception is \textbf{exports} ($-1.290$\,pp), which is the only component with a negative ATT for underperformers.  This is consistent with the findings from both the replication and \citet{Mello2024}, where exports are the feature most responsive to World Cup outcomes: winners see a large positive export boost ($\sim$5\,pp), while underperformers experience a decline.  The trade channel thus appears to be the primary mechanism through which World Cup outcomes affect the economy, operating in both directions.
 
 None of the underperformer ATTs are statistically significant at conventional levels (except imports at $p = 0.052$), and the standard errors are generally large, reflecting the heterogeneity of the underperformer sample---which includes both large diversified economies (Germany 2018, France 2002) and smaller ones (Czech Republic 2006, Croatia 2002).  An interesting extension for future work would be to investigate ``overperformers''---countries that significantly exceeded pre-tournament expectations---to test whether the trade channel operates symmetrically on the positive side for non-winners as well.
 

@@ -162,7 +162,8 @@ build_sdid_mats <- function(df_in, y_col, drop_host_only_controls = TRUE) {
 # -----------------------------
 # 4) Runner: estimate ATT, bootstrap SE, p-value, plot
 # -----------------------------
-run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000) {
+run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000,
+                            output_dir = "mello_paper_replication/sdid_plots") {
   
   cat("\n================================================\n")
   cat("Outcome:", outcome_name, "\nColumn:", y_col, "\n")
@@ -185,26 +186,35 @@ run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000) {
   cat(sprintf("z       = %.3f\n", z))
   cat(sprintf("p-value = %.3f\n", p))
   
+  # Build output filename from outcome name
+  if (!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
+  safe_name <- tolower(gsub("\\s+", "_", outcome_name))
+  plot_path <- file.path(output_dir, paste0("sdid_replication_", safe_name, ".png"))
+  
   # Plot (treated = red, synthetic control = blue)
   p_obj <- synthdid::synthdid_plot(tau_hat)
   color_vals <- c("synthetic control" = "#4269d0", "treated" = "#ff585d")
   if (inherits(p_obj, "ggplot")) {
-    print(
-      p_obj +
-        ggplot2::ggtitle(paste0("SDiD: World Cup win effect on YoY ", outcome_name, " growth (pp)")) +
-        ggplot2::labs(x = "Quarter to/from World Cup (q = rel_time)",
-                      y = "YoY growth (pp)") +
-        ggplot2::scale_colour_manual(values = color_vals) +
-        ggplot2::scale_fill_manual(values = color_vals)
-    )
+    p_final <- p_obj +
+      ggplot2::ggtitle(paste0("SDiD: World Cup win effect on YoY ", outcome_name, " growth (pp)")) +
+      ggplot2::labs(x = "Quarter to/from World Cup (q = rel_time)",
+                    y = "YoY growth (pp)") +
+      ggplot2::scale_colour_manual(values = color_vals) +
+      ggplot2::scale_fill_manual(values = color_vals)
+    print(p_final)
+    ggplot2::ggsave(plot_path, plot = p_final, width = 8, height = 5, dpi = 300)
   } else {
-    # base path
+    # base graphics path — open a PNG device, re-draw, then close
+    grDevices::png(plot_path, width = 2400, height = 1500, res = 300)
+    synthdid::synthdid_plot(tau_hat)
     graphics::title(
       main = paste0("SDiD: World Cup win effect on YoY ", outcome_name, " growth (pp)"),
       xlab = "Quarter to/from World Cup (q = rel_time)",
       ylab = "YoY growth (pp)"
     )
+    grDevices::dev.off()
   }
+  cat(sprintf("Plot saved to: %s\n", plot_path))
   
   invisible(list(tau_hat = tau_hat, ATT = ATT, SE = se_hat, z = z, p = p))
 }
