@@ -1,0 +1,2411 @@
+
+OXFORD BULLETIN OF ECONOMICS AND STATISTICS, 86, 6 (2024) 0305-9049
+doi: 10.1111/obes.12627
+
+A Kick for the GDP: The Effect of Winning the FIFA
+World Cup
+MARCO MELLO†,‡
+†Economics Department, Business School, University of Aberdeen, Aberdeen, Scotland e-mail:
+marco.mello@abdn.ac.uk
+‡School of Economics, University of Surrey, Guildford, UK
+
+Abstract
+This paper uses OECD data to examine whether winning the men’s FIFA World Cup
+boosts GDP growth, as claimed by analysts and media outlets concomitantly with every
+edition of this football competition. By implementing both an event-study design and
+a synthetic difference-in-difference strategy, the analysis shows that winning the World
+Cup increases year-over-year GDP growth by at least 0.48 percentage points in the two
+subsequent quarters. This result seems primarily driven by enhanced export growth, which
+is consistent with a greater appeal enjoyed by national products and services on the global
+market after victory in a major sporting event.
+
+I. Introduction
+It is commonly believed that winning the men’s FIFA World Cup leads to a boost in GDP
+growth. This popular conviction relies on the idea that success in one of the globally most
+viewed and prestigious sport competitions increases consumers’ and investors’ confidence
+who, if spurred by the victory and moved by enhanced Keynesian animal spirits, have the
+potential to affect the business cycle (Blanchard, 1993, Farmer and Guo, 1994). A 2018
+Washington Times article argued that the winner of the 2018 World Cup final between
+France and Croatia was bound ‘to get a nice boost in the pocketbook back home’.1 This
+economic stimulus is at best believed to be very short-lived, since GDP growth generally
+contracts in the year following the victory of the World Cup, a phenomenon that in 2014
+Forbes called the ‘World Cup GDP Curse’.2
+These insights are however based on simple and superficial glances at the national
+GDP time series of the most recent World Cup winners. Hence, they do not bear any
+causal interpretation, as they do not rely on a counterfactual scenario for how the GDP
+JEL Classification numbers: Z20, O47, F43.
+Marco Mello, The author is thankful to the Editor Jonathan Temple, two anonymous reviewers, Giuseppe
+Moscelli, Ricardo Nunes, Valentina Corradi and Cosimo Petracchi for their useful comments and suggestions.
+https://www.washingtontimes.com/news/2018/jul/12/world-cup-winners-can-expect-gdp-boost-economy.
+https://www.forbes.com/sites/allenstjohn/2014/07/13/world-cup-gdp-curse/?sh=2771f9447db0.
+
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+This is an open access article under the terms of the Creative Commons Attribution License, which permits use, distribution and
+reproduction in any medium, provided the original work is properly cited.
+
+
+Bulletin
+
+growth rate of the same countries would have behaved had they not won the World Cup.
+This lack of evidence is somehow surprising, considering that winning the World Cup is
+by and large an unpredictable event influenced by factors that are unrelated to recent GDP
+growth. As a result, the identification of the economic consequences of winning the World
+Cup should be less prone to the endogeneity issues that usually characterize attempts to
+estimate a treatment effect, whatever the latter may be.
+Nevertheless, analyses on the World Cup have primarily investigated only whether
+hosting the World Cup is beneficial to the national economy (Burgan and Mules, 1992,
+Szymanski, 2010). Most studies in the literature are relatively pessimistic regarding
+the effective economic returns of hosting mega sport events like the World Cup. For
+instance, Baade and Matheson (2004) conclude that US host cities of the 1994 World
+Cup experienced up to $9.3 billion in cumulative losses, contrarily to the expected
+$4-billion gain. Similarly, Hagn and Maennig (2008) argue that the 1974 World Cup
+held in Germany did not have long-term effects on employment. More optimistic figures
+are provided by Lee and Taylor (2005), who examine the 2002 tournament held in
+Japan and South Korea. Using survey data, the paper distinguishes between World Cup
+and non-World Cup tourists to identify the economic stimulus brought by the former,
+which the authors estimate to be of about $713 million of added value for South Korea.
+However, such boost to the tourism sector is unlikely to cover the costs that come together
+with hosting the World Cup; according to Peeters, Matheson, and Szymanski (2014),
+each tourist attracted by the 2010 World Cup cost South Africa up to $13,000 in stadia
+construction.
+The Olympic Games are another major sport event widely studied in the literature.
+Again, most efforts have been devoted to measure the economy of the Summer Olympics,
+which also are likely to bring little economic benefits to the host country, especially
+in the long run (see Billings and Holladay, 2012, Li, Blake, and Thomas, 2013,
+Baade and Matheson, 2016).3 However, Rose and Spiegel (2011) show that already
+submitting a bid to host the Olympic Games generates a permanent 20% rise in
+trade, regardless of whether eventually the bid was successful or not. Furthermore,
+Hotchkiss, Moore, and Zobay (2003) show that hosting the Games in 1996 increased
+at least employment rates in the counties of Georgia which were close to Olympic
+activity. Finally, Dolan et al. (2019) conclude that being the host city of the Olympic
+Games has intangible positive consequences, such as an increase in residents’ life
+satisfaction.
+This paper contributes to this body of research by providing among the first evidence
+on the economic effects of winning the World Cup. It implements an event-study design
+that studies whether GDP growth increases in the quarters following the victory of the
+World Cup, by comparing countries which won the tournament between 1961 and 2018
+with a set of countries that, by contrast, did not win the Cup.4 It also provides a synthetic
+
+A notable exception is Bernard and Busse (2004), who examined the determinants of Olympic success between
+1960 and 1996. The authors find that population size and income per capita are relevant predictors of the number of
+medals won at the Olympic Games. See also Donald (1972) and Grimes, Kelly, and Rubin (1974).
+4 The main exceptions are Argentina (World Cup winner in 1978, 1986 and 2022) and Brazil (World Cup winner
+in 1958, 1962, 1970, 1994 and 2002), for which quarterly data on GDP are available only since 1993 and 1996,
+respectively. Since this study does not analyze the 2022 World Cup held in Qatar, Argentina will be classified
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+
+difference-in-difference (DiD) analysis by following the novel approach proposed by
+Arkhangelsky et al. (2021), which allows an examination of the GDP growth rate of
+winning countries and compares it with a counterfactual GDP time series created from
+the set of control countries for the explicit purpose of satisfying the parallel trend
+assumption.
+Consistently with the conventional view, both approaches show that winning the
+World Cup increases significantly GDP growth only in the two quarters following the
+football competition. Possibly more surprisingly, this effect seems export-led rather than
+driven by consumption growth or capital accumulation.
+The rest of the paper is organized as follows. Section II presents the econometric
+strategy and the data. Section III reports the results. Section IV tests their robustness.
+Section V draws conclusions.
+
+II. Econometric strategy
+Event study
+
+The baseline model estimated in this study consists of the following event-study
+specification:
+4 GDPc,t =
+
+
+
+βl WINlc,t + θ1 HOSTc,t + ζ1 GDPc,t−4 + αc + μt + c,t ,
+
+(1)
+
+l,l=0
+
+where 4 denotes the fourth-difference operator, while GDPc,t is the logged GDP of
+country c in quarter t. Thus, this paper investigates the effects of winning the World Cup
+on the GDP growth rate, which is computed by comparing logged GDP levels of a given
+country in the same quarter of two consecutive years, that is, year-over-year (YoY) GDP
+growth.5
+The variables of interest are the relative-time indicators WINlc,t . They take value one
+for country c being l quarters from winning the World Cup and 0 otherwise. For countries
+that never won the World Cup in the period under study (i.e. the control countries), WINlc,t
+are therefore always zero-valued. The only winning indicator excluded from (1) has l = 0,
+which corresponds to the second quarter of the year when the Word Cup won by country
+c took place.6 Importantly, the vector WINlc,t comprises two residual indicators, WIN−16
+c,t
+and WIN+16
+,
+which
+bin
+together
+all
+quarters
+that
+are
+more
+than
+four
+years
+before
+and
+after
+c,t
+the victory of the World Cup, respectively. In addition, the counter of winning relative
+quarters, l, restarts exactly halfway in between two consecutive football successes of a
+country that won the World Cup more than once during the study period. Overall, the
+among the control countries. Instead, Brazil will contribute to the estimation of the treatment effect of interest only
+through its 2002 World Cup success. See section II for more details.
+GDP is not expressed in per-capita terms as population data at quarterly frequency are available only for a few
+countries prior to the mid 1990s. Moreover, even population levels may be affected by a victory in a major sport
+competition like the World Cup (see Fumarco and Principe, 2021).
+6 Indeed, the World Cup has always taken place every four years between June and July, namely in between the
+end of the second quarter and the beginning of the third quarter of a given year. The only exception was the last
+completed World Cup, which is not part of the analysis; it was held in Qatar at the end of the fourth quarter of 2022.
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+A Kick for the GDP
+
+
+Bulletin
+
+vector of coefficients βl will measure how winning the World Cup affects national GDP
+growth for each quarter around the running of the football competition.
+HOSTc,t denotes a control dummy for hosting the World Cup. It takes value one in
+the year when country c hosted a World Cup and zero otherwise. Its inclusion in (1)
+controls for the short-term economic effects of hosting the World Cup, which is a potential
+confounding factor in the analysis. Indeed, hosting the World Cup may affect GDP growth
+through the tourism inflow and the vast range of economic activities that are directly
+associated with the running and organization of the tournament.
+Instead, the inclusion of the fourth lag in logged GDP, GDPc,t−4 , on the right-hand
+side of (1) controls for the fact that the likelihood of winning the World Cup appears
+correlated with the size of the national economy. Indeed, only eight countries and
+exclusively from Western Europe or South America (i.e. Argentina, Brazil, England,
+France, Germany, Italy, Spain and Uruguay) won at least one of the 22 editions of
+the World Cup. Moreover, the coefficient ζ1 provides a chance to test the so-called
+conditional convergence hypothesis, namely to verify whether current GDP growth is
+negatively related to past GDP levels (Barro, 1991, Barro and Sala-i Martin, 1992,
+Mankiw, Romer, and Weil, 1992, Islam, 1995).7
+αc are country-specific fixed effects and μt are quarter-specific fixed effects. The
+former set of fixed effects accounts for unobserved and time-invariant country traits
+that affect economic growth. Quarterly fixed effects control for global shocks to GDP
+growth that hit all countries c on the same quarter. Finally, c,t is the error term, which
+subsumes all residual time-varying and country-specific shocks to GDP growth. Because
+the latter is computed by means of a fourth-difference transformation, which compares
+two GDP records that are four calendar quarters distant from each other, c,t is not only
+autocorrelated (as standard in a panel framework) but also likely to present a Moving
+Average (MA) structure. Indeed, any significant determinant of GDP growth omitted from
+Equation 1 and absorbed by c,t could propagate in time and affect even GDP growth
+computed at the interim lags between t and t − 4.
+This statistical pattern is likely to characterize any analysis that relies on a longdifference transformation. By measuring the difference between two non-consecutive
+realizations of the outcome, long-differences inevitably introduce a MA component of
+an order which is directly tied to that of the chosen data transformation. Here, this
+issue gets possibly exacerbated by the spirit of the empirical strategy, which aims at
+estimating a plausibly temporary in nature effect such as that of winning the World
+Cup on GDP growth. Thus, failing to control for relevant shocks to GDP growth in the
+period immediately preceding the World Cup may compromise the identification of the
+event-study coefficients in the very short term following the treatment event. Equation (1)
+shall be able to consistently estimate the vector of interest, βl , only under the condition that
+all the existing residual shocks do not systematically hit World Cup winners. Contrarily,
+any positive shock to GDP growth that also increases the chances of winning the World
+7 As noted by Caselli, Esquivel, and Lefort (1996), the growth model (1) is equivalent to a dynamic equation
+for (logged) GDP levels with a fourth lag on the right-hand side. In that case, the coefficient on lagged GDP is a
+measure of persistence rather than the speed of convergence, but otherwise the models are statistically identical.
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+
+Cup (e.g. large investments in the national football sector) would represent a source of
+upward bias in the treatment effects of interest potentially more serious than usual.
+For this reason, it is important that the analysis appropriately accounts for the nonrandom probability of winning the World Cup. In this paper, I experiment with alternative
+lag specifications in logged GDP on the right-hand side of Equation (1), in order to reduce
+the risk of omitted variables in the baseline model. Furthermore, the next section presents
+a more agnostic identification strategy which does not aim at modeling selection into
+treatment explicitly, but rather compares countries with a similar evolution in GDP growth
+up to the occurrence of each World Cup event. Reasonably, this approach identifies GDP
+growth series affected by a similar set of factors, either observable or not, thus limiting
+the relevance of any MA error structure considerably. Still, the Data S1 discusses the
+results of a supplementary analysis which, using a multi-step approach, directly attempts
+at identifying and filtering out the MA component of 4 GDPc,t before the estimation of
+any treatment effect. Equation (1) is estimated via ordinary least squares (OLS) and SEs
+are clustered at the country level.
+Identification of βl in fact relies on three key assumptions: (i) parallel pre-trends; (ii) no
+anticipation effects; (iii) and exogeneity of a World Cup victory. Intuitively, the parallel
+trend assumption imposes that, prior to the football competition, countries winning the
+World Cup do not display trends in GDP growth that systematically differ from those of
+the control countries. Along the same lines, the absence of anticipation effects requires
+GDP growth not to react before the World Cup is actually won by country c. Finally,
+the exogeneity of a success in the World Cup assumes that the unobserved time-varying
+factors which influence the likelihood of winning the World Cup do not affect GDP
+growth either. Considering that, conditional on past GDP levels (proxied by the fourth
+lag in logged GDP) and factors like the historical football culture of a nation (absorbed
+by country fixed effects), a success in the World Cup is hardly predictable and often
+determined by pseudo-random factors (e.g. drawings of teams, game-specific episodes),
+all these requirements can be thought of as arguably satisfied.8
+Synthetic DiD
+
+Nevertheless, this paper implements even the synthetic DiD (SDiD) approach proposed
+by Arkhangelsky et al. (2021), which combines features from Synthetic Control (Abadie
+and Gardeazabal, 2003, Abadie, Diamond, and Hainmueller, 2010) and DiD (Ashenfelter
+and Card, 1985, Bertrand, Duflo, and Mullainathan, 2004) to model settings in which the
+parallel trend assumption is potentially violated. Because the SDiD strategy requires a
+reasonable pool of control units to construct an appropriate counterfactual trend in GDP
+growth to that of the World Cup winners, the attention in the SDiD analysis will be
+devoted only to the six World Cups held between 1994 and 2018.9 Indeed, GDP data
+at quarterly frequency are available just for a limited number of countries prior to 1994
+(more details are provided in section II).
+See also Acemoglu et al. (2019), who rely on a similar identification strategy to study how transition to or away
+from democracy affects growth.
+Thus, the set of World Cup winners in the SDiD model is made of: France (1998 and 2018), Brazil (2002), Italy
+(2006), Spain (2010) and Germany (2014).
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+Bulletin
+
+Another challenge to estimate a SDiD model in the current framework is that France
+won the World Cup both in 1998 and 2018 (i.e. multiple treatments at different timing).
+To accommodate this feature of the data, the SDiD analysis will use a sample obtained by
+splitting the GDP time series into national subseries of 10 quarters, each of them covering
+the period around the running of a given World Cup. More specifically, for each country I
+define GDP subseries which start in the seventh quarter prior (i.e. q = −7) and terminate
+in the second quarter after (i.e. q = 2) the post-1994 World Cup that they refer to. Only
+the subseries of the winning country which covers the period around the World Cup won
+will be considered as affected by the treatment. In addition, this approach will permit the
+SDiD strategy to estimate an average treatment effect in the very short run, which is the
+only time window when the event-study design outlined in subsection II highlights an
+increase in GDP growth due to victory in the World Cup (see section III).
+As an example, the GDP time series of Spain is divided into six shorter time series.
+The earliest subseries covers the period around the 1998 World Cup, by starting in the
+third quarter of 1996 and ending in the fourth quarter of 1998. Instead, the most recent
+subseries covers the period around the 2018 World Cup: it starts in the third quarter of
+2016 and ends in the fourth quarter of 2018. Only one of these six subseries includes
+the second quarter of 2010, when Spain won the first (and last, so far) World Cup of its
+history. This latter subseries will be included in the set of treated series, denoted by N1 .
+The remaining five subseries of Spain will be part of the control group N0 , which in total
+will comprise 268 GDP subseries. The overall number of time series n used for the SDiD
+analysis therefore results from the number of countries and their number of available
+10-quarter subseries (N = N0 + N1 = 268 + 6 = 274). Hence, the total number of GDP
+records used for the SDiD analysis is 2,740.
+The SDID problem to solve can be written as:
+⎧
+⎫
+274 
+⎨
+⎬
+
+2
+(λ̂, β̂, α̂, μ̂) = arg min
+4 GDPn,q − βWINn,q − αn − μq ω̂n τ̂ q ,
+(2)
+⎭
+(λ,β,α,μ) ⎩
+n=1 q=−7
+
+where λ is the average treatment effect of winning the World Cup in the two subsequent
+quarters, while WINn,q is a static DiD indicator that takes value one after winning the
+World Cup and 0 otherwise. The right-hand side of (2) does not include any indicator
+for hosting the World Cup, since host countries do not represent good counterfactuals of
+winning countries as they are themselves potentially affected by the event under study.
+For this reason, the analysis described in this section is performed by discarding from the
+sample the subseries n which belongs to country c and covers the quarter when the World
+Cup was hosted by c (e.g. the subseries of Brazil covering the period around the 2014
+World Cup held in Brazil).10
+Similarly, (2) does not include any lag in logged GDP. Indeed, selection effects into
+treatment are explicitly modeled by ω̂n and τˆq , which, respectively, denote subseriesspecific and relative quarter-specific synthetic weights. The objective of the former is to
+10 The only exception is the French GDP subseries around the 1998 World Cup, which is retained in the main
+SDiD analysis because France both hosted and won that World Cup. However, results are provided even after
+excluding this specific GDP subseries (see section III).
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+
+create parallel trends in GDP growth in the eight pre-World Cup quarters between the
+six treated subseries and a convex combination of the 268 control series. This goal is
+achieved by solving a problem of the following form:
+(ωˆ0 , ω̂) = arg min
+
+
+
+⎛
+⎝ω0 +
+
+(ω0 ∈R,ω∈ )q=−7
+
+
+
+⎞2
+1 
+ωn0 4 GDPn0 ,q −
+4 GDPn1 ,q ⎠ + ζ 2 8||ω||22 ,
+
+n0 =1
+
+n1 =269
+
+(3)
+where the synthetic weights for the control series, ωn0 , vary and need to sum up to one,
+while the six treated series receive the same weight. ω0 denotes an intercept term. Its
+inclusion in (3) provides some flexibility with respect to the pre-trends of treated and
+control series, which are not required to match perfectly (as in a standard synthetic control
+model) but only to be parallel.11 Any constant difference between the two groups is in
+fact controlled by the series-specific fixed effects, αn , included in (2). Instead, ζ is a
+regularization parameter, which guarantees the uniqueness of the synthetic weights by
+matching the average change in GDP growth of the control series.
+On the other hand, the relative quarter-specific synthetic weights, τq , guarantee that
+the post-World Cup GDP growth of each control series differs by up to a constant from
+its average GDP growth in the pre-event period. Formally:
+(τˆ0 , τ̂ ) = arg min
+
+
+
+⎛
+
+⎞2
+
+⎝τ0 +
+τq 4 GDPn0 ,q −
+4 GDPn0 ,q ⎠ .
+q=−7
+
+(τ0 ,τ ) n =1
+
+
+
+(4)
+
+q=1
+
+Again, the synthetic weights for the pre-World Cup period, τq with q ≤ 0, vary and
+need to sum up to one. Instead, the two post-World Cup quarters receive an equal weight
+of 0.5.
+Data and samples
+
+Time series data at quarterly frequency on GDP (and components) by country come from
+the OECD quarterly national accounts (QNA) dataset. The event-study model, (1), is
+estimated using a sample starting in 1961 and ending in 2021 inclusive. However, the
+GDP time series provided by the OECD starts after 1961 for several countries. As a result
+of this framework, the baseline sample is unbalanced and the GDP growth rates of only
+a subset of the actual number of World Cup winners and hosts are observed around the
+football tournament date. The information is summarized in Table A1.
+Two countries of particular interest are Argentina and Brazil, which both won the
+World Cup more than once but present a quarterly GDP series starting only in 1993 and
+11 Another advantage of the algorithm developed by Arkhangelsky et al. (2021) is the possibility to estimate the
+treatment effect of interest by exploiting information from all World Cup winners at once, while standard synthetic
+control analyses often have to focus on settings in which only one unit is affected by the treatment of interest (see
+for instance Billmeier and Nannicini, 2013 and Campos, Coricelli, and Moretti, 2019). Given the limited number of
+countries for which GDP records are available at quarterly frequency, a synthetic control type of analysis for each
+separate World Cup event would be severely underpowered.
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+Bulletin
+Table 1
+
+Summary statistics for the event-study sample
+Winner
+Mean
+
+Non-winner
+SD
+
+Mean
+
+SD
+
+t-test
+
+1960–80
+GDP (in thousands of 2015 US dollar millions) 1,098.60
+(417.39)
+498.43
+(1,163.13) 9.91***
+Population (in millions)
+54.43
+(13.91)
+26.15
+(46.02)
+11.85***
+GDP per capita
+19,697.70 (4,049.61) 19,708.23 (9015.79)
+−0.02
+Year-on-Year GDP growth
+3.96
+(2.83)
+4.54
+(3.42)
+−3.08***
+1980–2000
+GDP (in thousands of 2015 US dollar millions) 1,802.83
+(592.64)
+(1,958.94) 9.99***
+Population (in millions)
+60.93
+(22.04)
+40.59
+(99.01)
+4.24***
+GDP per capita
+29,873.18 (5,652.38) 27,323.93 (14,022.82) 3.72***
+Year-on-Year GDP growth
+2.25
+(1.82)
+3.14
+(3.54)
+−5.11***
+2000–20
+GDP (in thousands of 2015 US dollar millions) 2,563.41
+(659.91)
+1,211.01 (2,750.20) 10.99***
+Population (in millions)
+84.61
+(50.41)
+65.80
+(194.02)
+2.17**
+GDP per capita
+35,574.93 (10,442.53) 33,633.54 (19,068.19) 2.24**
+Year-on-Year GDP growth
+1.05
+(3.48)
+2.55
+(3.91)
+−8.17***
+Full sample
+GDP (in thousands of 2015 US dollar millions) 1,908.88
+(843.57)
+958.65
+(2,302.79) 14.68***
+Population (in millions)
+68.51
+(37.53)
+49.65
+(148.58)
+4.54***
+GDP per capita
+29,258.50 (10,061.40) 28,887.99 (16,921.76)
+0.76
+Year-on-Year GDP growth
+2.33
+(3.24)
+3.22
+(3.87)
+−7.81***
+Number of countries
+Number of observations
+Notes: Summary statistics by winner status for the full sample and selected 20-year subperiods. The t-statistics
+reported in the last column test whether the mean differences between winning and non-winning countries are
+statistically significant. GDP and population figures come from OECD data provided at quarterly and yearly
+frequency, respectively.
+
+1996, respectively.12 Since the 2022 Qatar World Cup is not part of the analysis and the
+Argentinian GDP series starts 10 years later than its previous World Cup success (Mexico
+1986), the analysis collocates Argentina in the set of control countries. On the contrary,
+Brazil is collocated in the treated group and its GDP series hence starts only in the second
+quarter of 1998, which corresponds to precisely four years after the victory in the 1994
+World Cup held in the USA.
+A breakdown between host, winning and control countries is provided in Table A2.
+Six countries won at least one World Cup in the period when their GDP time series is
+examined: England (in 1966), Germany (in 1974, 1990 and 2014), Italy (in 1982 and
+2006), France (in 1998 and 2018), Brazil (in 2002) and Spain (in 2010). Twelve countries
+hosted the World Cup. Thirty-six countries neither won nor hosted the World Cup in the
+analysis window.
+The event-study sample is made of 8,637 observations, with an average of about
+180 quarterly GDP records per country. Summary statistics by winner status for both
+the full sample and selected twenty-year periods are provided in Table 1, together
+Another type of exception is England, which hosted and won the 1966 World Cup, but for which GDP data are
+available only at the aggregate level of the UK.
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+
+with a t-statistic testing whether mean differences are statistically significant. On
+average, winning countries are characterized by larger populations and economies,
+especially starting from the eighties when quarterly GDP records are available for most
+countries.
+
+III. Results
+The economic effects of winning the World Cup
+
+The main results of the event-study design are provided in Table 2. Most of the pre-victory
+coefficients are not statistically different from zero. This finding indicates that, conditional
+on past GDP levels and country fixed effects, the likelihood of winning the World Cup is
+largely unrelated to GDP growth. On the contrary, national GDP displays an accelerated
+growth in the first two quarters after success in the World Cup. More specifically, column
+1 of Table 2 indicates that winning the World Cup causes quarterly GDP to grow by
+0.454 and 0.683 percentage points in the first and second quarter following the football
+competition, respectively. These effects are statistically significant at the 10% level and
+indistinguishable from each other.13 However, GDP growth returns to the pre-World
+Cup rate starting from the third quarter following the tournament: none of the remaining
+posttreatment indicators are in fact statistically significant. Thus, winning the World Cup
+seems to increase GDP growth only temporarily, with an effect that vanishes completely
+already after two quarters.
+Finally, the coefficient associated with the host dummy is negative and not statistically
+significant. This finding is in line with the existing literature, as it confirms that there are
+limited economic returns from the act of hosting the World Cup itself.
+A magnifying lens on the short term
+
+The results reported in section III suggest that winning the World Cup has only a weak and
+short-lived positive effect on GDP growth, which seems to last for at most two quarters.
+This section provides additional evidence in support of this finding, by focusing on a
+narrower time window around the World Cup date and using the synthetic DiD approach
+presented in section II. The results of this analysis are summarized in Figure 1.
+The trend in GDP growth of the synthetic control resembles well that of the winning
+country in the pretournament period. The two GDP growth series differ between each
+other only by a term that seems constant over time. Instead, after the running of the World
+Cup, the winning country presents a more pronounced GDP growth than its synthetic
+control. The gap in YoY GDP growth between the average World Cup winner and its
+counterfactual seems partially closed after two quarters from the World Cup. Overall, the
+average treatment effect in the two post-World Cup periods is estimated to be of 0.481
+percentage points in GDP growth, which is slightly lower than the one recorded by the
+baseline event-study specification (see Table 2), but again statistically significant at the
+10% level.
+13 A Wald test for their equality yields a P-value of 0.22.
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+Bulletin
+Table 2
+
+Event-study OLS estimates
+4 GDP
+GDP (-4)
+Host
+Winning the World Cup (−16 or more)
+Winning the World Cup (−15)
+Winning the World Cup (−14)
+Winning the World Cup (−13)
+Winning the World Cup (−12)
+Winning the World Cup (−11)
+Winning the World Cup (−10)
+Winning the World Cup (−9)
+Winning the World Cup (−8)
+Winning the World Cup (−7)
+Winning the World Cup (−6)
+Winning the World Cup (−5)
+Winning the World Cup (−4)
+Winning the World Cup (−3)
+Winning the World Cup (−2)
+Winning the World Cup (−1)
+Winning the World Cup (+1)
+Winning the World Cup (+2)
+Winning the World Cup (+3)
+Winning the World Cup (+4)
+Winning the World Cup (+5)
+Winning the World Cup (+6)
+Winning the World Cup (+7)
+Winning the World Cup (+8)
+Winning the World Cup (+9)
+Winning the World Cup (+10)
+Winning the World Cup (+11)
+Winning the World Cup (+12)
+Winning the World Cup (+13)
+Winning the World Cup (+14)
+Winning the World Cup (+15)
+Winning the World Cup (+16 or more)
+Observations
+Within R2
+
+(1)
+
+(2)
+
+−1.368**
+−0.591
+0.640
+0.363
+0.276
+0.286
+−0.082
+−0.226
+0.074
+−0.139
+0.098
+0.209
+0.196
+0.484
+−0.107
+−0.288
+−0.605
+0.125
+0.454*
+0.683*
+0.233
+0.140
+−0.189
+−0.034
+−0.288
+−0.314
+0.418
+−0.145
+0.021
+0.289
+−0.593
+−0.320
+−0.412
+−0.109
+
+(0.588)
+(0.545)
+(0.673)
+(0.538)
+(0.655)
+(0.474)
+(0.503)
+(0.604)
+(0.769)
+(0.616)
+(0.695)
+(0.570)
+(0.589)
+(0.621)
+(0.535)
+(0.479)
+(0.432)
+(0.206)
+(0.246)
+(0.370)
+(0.335)
+(0.317)
+(0.357)
+(0.422)
+(0.761)
+(0.985)
+(0.387)
+(0.421)
+(0.461)
+(0.583)
+(0.606)
+(0.628)
+(0.676)
+(0.477)
+0.423
+
+Notes: Event-study OLS coefficients reported in column 1. Clustered SEs at the country level reported in column 2.
+Significance levels: ∗ P < 0.1; ∗∗ P < 0.05; ∗∗∗ P < 0.01.
+
+Similar results are displayed in Figure A1, which replicates the SDiD analysis after
+excluding the French subseries around the 1998 World Cup, both hosted and won by
+France. If anything, the average treatment effect is slightly larger and more imprecisely
+estimated than the one reported at the bottom of Figure 1.
+Mechanisms
+
+This section explores the nature of the drivers standing behind the increase in GDP growth
+that immediately follows a success in the World Cup. To do so, it replicates the entire
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+control
+
+
+country
+
+SE = 0.263. P-value = 0.067.
+
+Figure 1. A synthetic difference-in-difference approach [Colour figure can be viewed at
+wileyonlinelibrary.com]
+Notes: average treatment effect of winning the World Cup on year-over-year (YoY) GDP growth as estimated
+by the synthetic difference-in-difference model (2). The solid red line displays the GDP growth of the average
+World Cup winning subseries. The blue dashed line displays the GDP growth of its synthetic counterfactual.
+Standard errors are clustered at the country-subseries level and obtained via 1,000 bootstrap replications.
+The green areas at the bottom of the figure measure the time-specific synthetic weights, as estimated by
+equation (4). The analysis uses 10-quarter GDP subseries around the six World Cups held between 1998 and
+2018. The total number of GDP records used is 2,740 (i.e. 274 GDP subseries)
+
+analysis, but using as outcome variables the growth rates of the following five GDP
+components: private consumption, government consumption, capital formation, exports
+and imports. The results of the event-study approach are summarized in Figure 2, while
+the full set of coefficients is reported in Table A3.
+The findings suggest that the effect on GDP growth is mainly determined by an increase
+in export growth. The fourth panel of Figure 2 shows that export growth is, on average,
+5.12 percentage points higher in the second quarter following the victory of the World
+Cup. However, the growth rate of the export sector was already increasing for the winning
+country in the quarters preceding the World Cup, which clearly represents a violation of
+the parallel trend assumption. For this reason, the export time series is also examined
+using the synthetic DiD approach, the results of which are summarized in Figure 3. This
+strategy is considerably more successful in matching the pretrend in export growth rates
+between the set of treated units and the set of control ones. In the post-World Cup period,
+Figure 3 clearly shows how the export growth of the average winning country increases
+sharply if compared to its counterfactual. However, the associated treatment effect (an
+increase of 4.5 percentage points in export growth) is estimated very imprecisely and it is
+not statistically significant.
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+Bulletin
+
+consumption
+
+consumption
+
+formation
+
+Figure 2. The effect of winning the World Cup on GDP components [Colour figure can be viewed at
+wileyonlinelibrary.com]
+Notes: OLS coefficients and 95% confidence intervals for the event-study indicators for winning the World
+Cup included in (1), estimated separately for each of the following GDP components: private consumption,
+government consumption, capital formation, exports and imports. Standard errors are clustered at the country
+level
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+control
+
+
+country
+
+SE = 3.916. P-value = 0.250.
+
+Figure 3. A synthetic difference-in-difference approach (Export growth). [Colour figure can be viewed at
+wileyonlinelibrary.com]
+Notes: average treatment effect of winning the World Cup on year-over-year (YoY) export growth as
+estimated by the synthetic difference-in-difference model (2). The solid red line displays the export growth
+of the average World Cup winning subseries. The blue dashed line displays the export growth of its synthetic
+counterfactual. SEs are clustered at the country-subseries level and obtained via 1,000 bootstrap replications.
+The green areas at the bottom of the figure measure the time-specific synthetic weights, as estimated by
+equation (4). The analysis uses 10-quarter export subseries around the 6 World Cups held between 1998 and
+2018. The total number of export records used is 2,690 (i.e. 269 export subseries)
+
+The remaining panels of Figure 2 indicate that, following the victory of the World
+Cup, capital formation increases only slightly, with such effects that are not statistically
+significant. Winning the World Cup is also associated with an increase in import growth,
+although this boost is less pronounced (1.43 percentage points) than that of the export
+sector. Furthermore, it is noticeable from Table A3 how every GDP component presents
+a negative and significant convergence coefficient, which is larger in magnitude for
+capital formation and imports than for private consumption, government consumption
+or exports. Finally, qualitatively similar patterns emerge from performing the synthetic
+DiD strategy on each of these alternative outcomes, the results of which are displayed in
+Figures A2–A5.
+
+IV. Robustness checks
+GDP dynamics
+
+This section tests further the robustness of the results by providing a set of analyses that
+deviate from equation (1) in the way they model GDP dynamics. Indeed, the inclusion
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+Bulletin
+
+of the fourth lag in GDP as a covariate in equation (1) might not control for all the
+economic factors which potentially correlate with both GDP growth and the probability
+of success in the World Cup. Hence, it is important to investigate how the estimates
+of the baseline coefficients change when modelling the GDP dynamics with alternative
+specifications.
+To begin, column 1 of Table A4 reports estimates after excluding the fourth lag in
+GDP from the set of control variables. The rationale of this sensitivity check is that lagged
+GDP may be in turn affected by the event under study, thus potentially representing a
+‘bad control’ in the model and leading to the contamination of the main estimates of
+interest. However, the event-study coefficients provided in column 1 are very similar to
+the baseline ones displayed in Table 2. Hence, the findings of this paper do not rely on the
+inclusion of lagged GDP in the regression model, even though this control variable is a
+significant predictor of current GDP growth and possibly of the likelihood of winning the
+World Cup.
+Columns 2-4 of Table A4 experiment by replacing the fourth lag in logged GDP with
+respectively the third, fifth and sixth lag in logged GDP. All models report findings that
+are in line with the rest of the paper. This fact suggests that the order of the lag does not
+matter, provided that it is sufficiently predetermined to the first two quarters following the
+World Cup.
+Instead, column 4 includes all the first six lags as controls, thus modeling GDP
+dynamics with a rich autoregressive specification similar to Acemoglu et al. (2019). The
+results of this model should be taken with caution, since the inclusion of the very first
+lags in GDP is likely to impact directly the temporary treatment effect identified by the
+event-study indicators. The coefficients reported in column 5 highlight an increase in GDP
+growth only in the first quarter following the World Cup, which however is statistically
+significant at the 1% level.
+Column 6 provides results for a model in which the fourth lag in logged GDP gets
+interacted with decade dummies, in order to capture the potential time-varying evolution
+of convergence effects. Indeed, a current debate in the convergence literature is about
+whether convergence patterns have changed over time (see for instance Acemoglu and
+Molina, 2021 and Kremer, Willis, and You, 2022). The coefficients of these interaction
+terms indicate that, if anything, the convergence phenomenon has sharpened over the last
+thirty years. Nevertheless, the event-study indicators associated with the first two quarters
+after the victory of the World Cup remain positive and statistically significant at the 10%
+level. Thus, the possible time-varying nature of convergence patterns does not represent
+an issue for the conclusions of this study. Overall, the set of results reported in this section
+confirms the existence of a short-lived boost to national GDP due to a success in the
+World Cup.
+Country selection
+
+Another concern related to the results presented so far is that they are obtained from a
+sample of countries that is quite heterogeneous. For instance, the control group listed
+in Table A2 consists of countries that are generally considered to have virtually no
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+
+chance to either win or host a World Cup. As a result, the same countries might have
+experienced alternative types of treatment related to the World Cup, such as an against
+any odds qualification to the final stage of the tournament or a better ranking placement
+compared to the expectations. These instances can all represent a confounding factor in the
+analysis.
+For this reason, the current section provides a robustness check in which the baseline
+event-study model, (1), is estimated using a smaller and more homogeneous sample of
+countries. For each World Cup under study, I select the two control countries that—in the
+year prior to the football event—resemble the most the World Cup winner in either yearly
+GDP levels or total population. If a control country is selected as the nearest neighbour
+of a World Cup winner more than once, its GDP time series is duplicated accordingly
+(i.e. matching with replacement). Then, I estimate (1) using only the sample made of
+World Cup winners and matched control countries. This alternative subgroup of control
+countries certainly presents more similarities to the sample of World Cup winners listed
+in Table A2, thus allowing to verify whether the heterogeneity in the baseline sample
+poses a risk to identification.
+Results are summarized by Figure 4, the notes of which fully specify the outcome of
+the matching procedure. For instance, Mexico turns out to be the most similar control
+country to a World Cup winner in terms of GDP levels. Indeed, it is chosen 8 times as
+the nearest GDP neighbour. Instead, Turkey best resembles World Cup winners in terms
+of total population, by being selected six times as the control country with the closest
+population size. Nevertheless, estimating (1) following these matching algorithms makes
+the first two post-World Cup indicators highly significant. Their associated coefficients
+are even larger in magnitude than those reported in Table 2 (see Table A5). Thus, the
+differences between treated and control countries do not seem to represent an issue for the
+conclusions of this study.
+
+Media coverage of the World Cup finalists
+
+Since the treatment effect estimated in this paper seems primarily linked to the export
+sector, a natural question is whether the goods and services produced by the World Cup
+winner simply benefit from the unique visibility offered by the final game of the World
+Cup, which is an event generally viewed by more than 1 billion people worldwide. Large
+companies which operate internationally may be willing to exploit the reaching of the final
+by the national team, for instance through the purchase of advertising space on foreign
+broadcasters in order to increase their global market shares.
+To investigate whether this potential mechanism is at play, this section presents
+the results of a standard difference-in-difference (DiD) model which compares the
+growth rates of World Cup winners and runners-up. Reasonably, these two groups
+of countries enjoy a similar amount and type of media coverage on the day(s) of
+the final. Furthermore, their national teams played the same and maximum possible
+number of World Cup games, which are a potential source of distraction for the
+population. Consequently, reaching the World Cup final may reduce productivity levels
+and induce a (negative) anticipation effect on GDP growth. Thus, the World Cup
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+Bulletin
+
+Figure 4. Robustness check using a matched sample of countries. [Colour figure can be viewed at
+wileyonlinelibrary.com]
+Notes: OLS coefficients and 95% confidence intervals for the winning event-study indicators included in (1),
+that is, βl . The control group is chosen based on a matching algorithm (with replacement) selecting the control
+countries that are most similar to World Cup winners in terms of either GDP levels (top panel) or population
+levels (bottom panel). The control group matched by GDP levels comprises: Canada; India; Indonesia (×2);
+Japan (×3); Korea; Mexico (×8); Russia (×4). The control group matched by population levels comprises:
+Colombia; Indonesia; Japan; Korea (×3); Mexico (×4); Russia; South Africa (×3); Turkey (×6)
+
+runners-up provide an ideal counterfactual to test the economic effects of winning the
+World Cup.
+To do so, I first pool together all the available subseries used for the SDiD analysis
+and retain only those associated with the pair of finalists in a given World Cup (e.g. the
+subseries of France and Italy around the 2006 World Cup). Then, I estimate a similar
+specification to (1) which replaces the event-study indicators with their static counterpart,
+WINn,q , in order to estimate the average treatment effect in the two post-World Cup
+quarters.14
+The results and additional details on this analysis are provided in Table 3. The first
+column displays a positive and statistically significant effect (at the 10% level) on YoY
+GDP growth for the World Cup winner, which is twice as large as the SDiD estimate
+reported in Figure 3 and closer to the post-matching ATT displayed in Figure 4. Again,
+most of this effect appears driven by the export sector, the growth rate of which increases
+by up to 6.36 percentage points on average.15 Hence, the findings of this paper cannot be
+explained by the exceptional media coverage devoted to the World Cup finalists in the
+run-up to the final.
+14 Importantly, the analysis described in this section makes use of only the World Cups around which I can
+observe the GDP levels of both the winner and the runner-up.
+15 However, this time the analysis highlights even a weak increase in both private and government consumption.
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+
+Table 3
+
+DiD analysis comparing World Cup winners and runners-up
+4 GDP component
+Winner * Post World Cup
+Observations
+Within R2
+
+Total
+
+Exports
+
+Imports
+
+PCons
+
+GCons
+
+CapForm
+
+1.022*
+(0.487)
+
+6.357***
+(1.699)
+
+1.857
+(2.301)
+
+0.874*
+(0.447)
+
+1.112*
+(0.623)
+
+−0.249
+(1.577)
+
+0.388
+
+0.412
+
+0.525
+
+0.428
+
+0.311
+
+0.364
+
+
+Notes: DiD models comparing 10-quarter GDP component subseries of winners and runners-up at the following
+World Cups: UK 1966; Germany 1974; Spain 1982; France 1998; Korea and Japan 2002; Germany 2006; South
+Africa 2010; Brazil 2014; Russia 2018. PCons = Private Consumption; GCons = Government Consumption;
+CapForm = Capital Formation. Controls included but not reported: fourth lag in the examined GDP component;
+indicators for the second, third and fourth quarter of the calendar year. Clustered standard errors at the subseries
+level reported in parenthesis.
+Significance levels: ∗ P < 0.1; ∗∗ P < 0.05; ∗∗∗ P < 0.01.
+
+V. Conclusions
+Every four years, media outlets and analysts claim that the men’s FIFA World Cup
+winner will experience a boost in GDP as a result of a wave of national pride which
+translates into higher economic activity. However, robust evidence in this respect is
+relatively scarce. This paper has investigated if winning the World Cup actually involves
+a positive effect on GDP growth, by using time series data provided by the OECD and
+implementing both an event-study design and the synthetic DiD approach proposed by
+Arkhangelsky et al. (2021). Importantly, the econometric strategy makes use of a variety
+of dynamic model specifications to control for past GDP levels, which not only determine
+the probability of winning major sport competitions as documented by Bernard and
+Busse (2004), but also affect the current rate of economic growth (Barro, 1991, Barro and
+Sala-i Martin, 1992).
+The analysis has shown that winning the World Cup leads to a statistically significant
+increase in GDP growth only in the two quarters following the victory of the World
+Cup. Over this period, YoY GDP growth is, according to the most conservative estimates
+produced by this study, 0.48 percentage points higher if compared to a counterfactual
+situation in which the World Cup had not been won. This effect seems to be driven
+by enhanced export growth, which possibly results from the greater international appeal
+enjoyed by a country after winning the most renowned among the football competitions.
+Similar arguments are at least sponsored by the International Olympic Committee (IOC)
+to promote bids and projects for hosting the Olympic Games, which is certainly an
+opportunity for a country to be in the global spotlight.16 Moreover, an expected boost
+to exports is mentioned by Preuss (2004) as one of the reasons behind the decision of
+the South Korean government to host in Seoul the 1988 Games, which were supposed to
+‘raise international awareness of Korean manufactured products’. Similarly to Bayar and
+Schaur (2014), the current paper argues that a visibility channel of this sort may apply
+even to the winner of a major sport event.
+See for instance the Olympic Games Framework 2024 at: https://stillmed.olympic.org/Documents/Host_city
+_elections/IOC_Olympic_Games_Framework_English_Interactive.pdf .
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+Bulletin
+
+The findings perhaps clash with the general pessimism of the literature on the economic
+returns of major sport events, which in multiple occasions resulted in an unprofitable
+enterprise for the host country (Hagn and Maennig, 2008, Baade and Matheson, 2016).
+Indeed, this analysis suggests that winning a major sport competition might lead to a
+short-lived economic boost, without the need to incur the financial burden which is usually
+associated with its organization. Overall, the results provided in this study have shed some
+light on a publicly debated issue that ends up influencing macroeconomic forecasts and,
+consequently, policymaking. Moreover, they assume particular relevance in light of the
+recent FIFA proposal to make the World Cup a more frequent event, which supposedly
+should take place every 2 years.
+Final Manuscript Received: October 2022
+
+References
+Abadie, A. and Gardeazabal, J. (2003). ‘The economic costs of conflict: a case study of the Basque Country’,
+American Economic Review, Vol. 93, pp. 113–132.
+Abadie, A., Diamond, A. and Hainmueller, J. (2010). ‘Synthetic control methods for comparative case
+studies: estimating the effect of California’s tobacco control program’, Journal of the American Statistical
+Association, Vol. 105, pp. 493–505.
+Acemoglu, D. and Molina, C. (2021). ‘Comment on ‘‘Converging to Convergence’’’, NBER Macroeconomics
+Annual, Vol. 2021, pp. 425–442.
+Acemoglu, D., Naidu, S., Restrepo, P. and Robinson, J. A. (2019). ‘Democracy does cause growth’, Journal
+of Political Economy, Vol. 127, pp. 47–100.
+Arkhangelsky, D., Athey, S., Hirshberg, D. A., Imbens, G. W. and Wager, S. (2021). ‘Synthetic differencein-differences’, American Economic Review, Vol. 111, pp. 4088–4118.
+Ashenfelter, O. and Card, D. (1985). ‘Using the longitudinal structure of earnings to estimate the effect of
+training programs’, Review of Economics and Statistics, Vol. 67, pp. 648–660.
+Baade, R. A. and Matheson, V. A. (2004). ‘The quest for the Cup: assessing the economic impact of the
+World Cup’, Regional Studies, Vol. 38, pp. 343–354.
+Baade, R. A. and Matheson, V. A. (2016). ‘Going for the gold: the economics of the Olympics’, Journal of
+Economic Perspectives, Vol. 30, pp. 201–218.
+Barro, R. J. (1991). ‘Economic growth in a cross section of countries’, Quarterly Journal of Economics, Vol.
+106, pp. 407–443.
+Barro, R. J. and Sala-i Martin, X. (1992). ‘Convergence’, Journal of Political Economy, Vol. 100, pp.
+223–251.
+Bayar, O. and Schaur, G. (2014). ‘The impact of visibility on trade: evidence from the World Cup’, Review
+of International Economics, Vol. 22, pp. 759–782.
+Bernard, A. B. and Busse, M. R. (2004). ‘Who wins the Olympic games: economic resources and medal
+totals’, Review of Economics and Statistics, Vol. 86, pp. 413–417.
+Bertrand, M., Duflo, E. and Mullainathan, S. (2004). ‘How much should we trust differences-in-differences
+estimates?’, Quarterly Journal of Economics, Vol. 119, pp. 249–275.
+Billings, S. B. and Holladay, J. S. (2012). ‘Should cities go for the gold? The long-term impacts of hosting
+the Olympics’, Economic Inquiry, Vol. 50, pp. 754–772.
+Billmeier, A. and Nannicini, T. (2013). ‘Assessing economic liberalization episodes: a synthetic control
+approach’, Review of Economics and Statistics, Vol. 95, pp. 983–1001.
+Blanchard, O. (1993). ‘Consumption and the recession of 1990-1991’, American Economic Review, Vol. 83,
+pp. 270–274.
+Burgan, B. and Mules, T. (1992). ‘Economic impact of sporting events’, Annals of Tourism Research, Vol.
+19, pp. 700–710.
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+
+Campos, N. F., Coricelli, F. and Moretti, L. (2019). ‘Institutional integration and economic growth in Europe’,
+Journal of Monetary Economics, Vol. 103, pp. 88–104.
+Caselli, F., Esquivel, G. and Lefort, F. (1996). ‘Reopening the convergence debate: a new look at cross-country
+growth empirics’, Journal of Economic Growth, Vol. 1, pp. 363–389.
+Dolan, P., Kavetsos, G., Krekel, C., Mavridis, D., Metcalfe, R., Senik, C., Szymanski, S. and Ziebarth, N. R.
+(2019). ‘Quantifying the intangible impact of the Olympics using subjective well-being data’, Journal of
+Public Economics, Vol. 177, p. 104043.
+Donald, W. B. (1972). ‘Olympic Games competition: structural correlates of national success’, International
+Journal of Comparative Sociology, Vol. 13, p. 186.
+Farmer, R. E. and Guo, J.-T. (1994). ‘Real business cycles and the animal spirits hypothesis’, Journal of
+Economic Theory, Vol. 63, pp. 42–72.
+Fumarco, L. and Principe, F. (2021). ‘More goals, fewer babies? On national team performance and birth
+rates’, Economics Letters, Vol. 208, 110086.
+Grimes, A. R., Kelly, W. J. and Rubin, P. H. (1974). ‘A socioeconomic model of national Olympic
+performance’, Social Science Quarterly, Vol. 55, pp. 777–783.
+Hagn, F. and Maennig, W. (2008). ‘Employment effects of the football World Cup 1974 in Germany’, Labour
+Economics, Vol. 15, pp. 1062–1075.
+Hotchkiss, J. L., Moore, R. E. and Zobay, S. M. (2003). ‘Impact of the 1996 Summer Olympic Games on
+employment and wages in Georgia’, Southern Economic Journal, Vol. 69, pp. 691–704.
+Islam, N. (1995). ‘Growth empirics: a panel data approach’, Quarterly Journal of Economics, Vol. 110, pp.
+1127–1170.
+Kremer, M., Willis, J. and You, Y. (2022). ‘Converging to convergence’, NBER Macroeconomics Annual,
+Vol. 36, pp. 337–412.
+Lee, C.-K. and Taylor, T. (2005). ‘Critical reflections on the economic impact assessment of a mega-event:
+the case of 2002 FIFA World Cup’, Tourism Management, Vol. 26, pp. 595–603.
+Li, S., Blake, A. and Thomas, R. (2013). ‘Modelling the economic impact of sports events: the case of the
+Beijing Olympics’, Economic Modelling, Vol. 30, pp. 235–244.
+Mankiw, N. G., Romer, D. and Weil, D. N. (1992). ‘A contribution to the empirics of economic growth’,
+Quarterly Journal of Economics, Vol. 107, pp. 407–437.
+Peeters, T., Matheson, V. and Szymanski, S. (2014). ‘Tourism and the 2010 World Cup: lessons for developing
+countries’, Journal of African Economies, Vol. 23, pp. 290–320.
+Preuss, H. (2004). The Economics of Staging the Olympics: A Comparison of the Games, 1972-2008, Edward
+Elgar Publishing, Cheltenham, UK.
+Rose, A. K. and Spiegel, M. M. (2011). ‘The Olympic effect’, The Economic Journal, Vol. 121, pp. 652–677.
+Szymanski, S. (2010). ‘The economic impact of the World Cup’, in Football Economics and Policy, Palgrave
+Macmillan, London, UK, pp. 226–235.
+
+Supporting Information
+Additional Supporting Information may be found in the online Appendix:
+Data S1. Supporting information.
+Data replication package: the data replication package is available at
+https://doi.org/10.3886/E188961
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+Bulletin
+
+Appendix A:
+control
+
+country
+
+SE = 0.321. P-value = 0.097.
+
+Figure A1. SDiD analysis without the French GDP records around the 1998 World Cup. [Colour figure can
+be viewed at wileyonlinelibrary.com]
+Notes: Average treatment effect of winning the World Cup on year-over-year (YoY) GDP growth as estimated
+by the synthetic difference-in-difference model (2). The analysis excludes the 10 French GDP records around
+the 1998 World Cup, because France was both the host and the winner of the 1998 World Cup. The solid red
+line displays the GDP growth of the average World Cup winning subseries. The blue dashed line displays the
+GDP growth of its synthetic counterfactual. Standard errors are clustered at the country-subseries level and
+obtained via 1,000 bootstrap replications. The green areas at the bottom of the figure measure the time-specific
+synthetic weights, as estimated by equation (4). The analysis uses 10-quarter GDP subseries around the six
+World Cups held between 1998 and 2018. The total number of GDP records used is 2,730 (i.e. 273 GDP
+subseries)
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+country
+
+consumption growth
+
+control
+
+
+SE = 0.355. P-value = 0.980.
+
+Figure A2. A synthetic difference-in-difference approach (Private consumption growth). [Colour figure can
+be viewed at wileyonlinelibrary.com]
+Notes: Average treatment effect of winning the World Cup on year-over-year (YoY) private consumption
+growth as estimated by the synthetic difference-in-difference model (2). The solid red line displays the private
+consumption growth of the average World Cup winning subseries. The blue dashed line displays the private
+consumption growth of its synthetic counterfactual. Standard errors are clustered at the country-subseries
+level and obtained via 1,000 bootstrap replications. The green areas at the bottom of the figure measure the
+time-specific synthetic weights, as estimated by equation (4). The analysis uses 10-quarter private consumption
+subseries around the six World Cups held between 1998 and 2018. The total number of private consumption
+records used is 2,690 (i.e. 269 private consumption subseries)
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+Bulletin
+
+country
+
+consumption growth
+
+control
+
+SE = 0.463. P-value = 0.498.
+
+Figure A3. A synthetic difference-in-difference approach (Government consumption growth) [Colour figure
+can be viewed at wileyonlinelibrary.com]
+Notes: average treatment effect of winning the World Cup on year-over-year (YoY) government consumption
+growth as estimated by the synthetic difference-in-difference model (2). The solid red line displays the
+government consumption growth of the average World Cup winning subseries. The blue dashed line displays
+the government consumption growth of its synthetic counterfactual. Standard errors are clustered at the
+country-subseries level and obtained via 1,000 bootstrap replications. The green areas at the bottom of the
+figure measure the time-specific synthetic weights, as estimated by equation (4). The analysis uses 10-quarter
+government consumption subseries around the six World Cups held between 1998 and 2018. The total number
+of government consumption records used is 2,690 (i.e. 269 government consumption subseries)
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+country
+
+formation growth
+
+control
+
+
+SE = 1.238. P-value = 0.327.
+
+Figure A4. A synthetic difference-in-difference approach (Capital formation growth). [Colour figure can be
+viewed at wileyonlinelibrary.com]
+Notes: Average treatment effect of winning the World Cup on year-over-year (YoY) capital formation growth
+as estimated by the synthetic difference-in-difference model (2). The solid red line displays the capital
+formation growth of the average World Cup winning subseries. The blue dashed line displays the capital
+formation growth of its synthetic counterfactual. Standard errors are clustered at the country-subseries level
+and obtained via 1,000 bootstrap replications. The green areas at the bottom of the figure measure the
+time-specific synthetic weights, as estimated by equation (4). The analysis uses 10-quarter capital formation
+subseries around the six World Cups held between 1998 and 2018. The total number of capital formation
+records used is 2,690 (i.e. 269 capital formation subseries)
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+Bulletin
+
+control
+
+country
+
+SE = 1.095. P-value = 0.919.
+
+Figure A5. A synthetic difference-in-difference approach (Import growth). [Colour figure can be viewed at
+wileyonlinelibrary.com]
+Notes: average treatment effect of winning the World Cup on year-over-year (YoY) import growth as
+estimated by the synthetic difference-in-difference model (2). The solid red line displays the import growth of
+the average World Cup winner. The blue dashed line displays the import growth of its synthetic counterfactual.
+Standard errors are clustered at the country-subseries level and obtained via 1,000 bootstrap replications.
+The green areas at the bottom of the figure measure the time-specific synthetic weights, as estimated by
+equation (4). The analysis uses 10-quarter import subseries around the six World Cups held between 1998
+and 2018. The total number of import records used is 2,690 (i.e. 269 import subseries)
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+
+Table A1
+
+Treated sample description
+World Cup
+
+Host
+Country
+GDP start
+Chile
+1996-Q1
+England*
+1961-Q1
+Mexico
+1961-Q1
+Germany (West)
+1961-Q1
+Argentina
+1993-Q1
+Spain
+1961-Q1
+Mexico
+1961-Q1
+Italy
+1961-Q1
+USA
+1961-Q1
+France
+1961-Q1
+Japan/South Korea
+1961-Q1
+Germany
+1961-Q1
+South Africa
+1961-Q1
+1998-Q2
+Brazil†
+Russia
+1995-Q1
+
+In-sample
+No
+Yes
+Yes
+Yes
+No
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+
+Country
+Brazil*
+England*
+Brazil*
+Germany (West)
+Argentina
+Italy
+Argentina
+Germany (West)
+Brazil†
+France
+Brazil†
+Italy
+Spain
+Germany
+France
+
+Winner
+GDP start
+1998-Q2
+1961-Q1
+1998-Q2
+1961-Q1
+1993-Q1
+1961-Q1
+1993-Q1
+1961-Q1
+1998-Q2
+1961-Q1
+1998-Q2
+1961-Q1
+1961-Q1
+1961-Q1
+1961-Q1
+
+In-sample
+No
+Yes
+No
+Yes
+No
+Yes
+No
+Yes
+No
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+
+Notes: GDP start denotes the first record of the GDP time series of each World Cup winner or host starting from
+1961. The in-sample column indicates whether the quarterly GDP time series of a given country is available during
+the period when the country hosted or won the World Cup.
+∗
+The GDP time series used for England is that of the UK as a whole.
+† The GDP series of Brazil is let it start in the second quarter of 1998, namely 4 years after its victory in the 1994
+World Cup.
+
+Table A2
+
+Breakdown of the event-study sample
+Control
+Argentina
+Australia
+Austria
+Belgium
+Bulgaria
+Canada
+Chile
+Colombia
+Costa Rica
+Croatia
+Czech Republic
+Denmark
+Estonia
+Finland
+Greece
+Hungary
+India
+Indonesia
+Iceland
+Ireland
+Israel
+Latvia
+Lithuania
+Luxembourg
+Netherlands
+New Zealand
+Norway
+Poland
+Portugal
+Romania
+Saudi Arabia
+Slovak Republic
+Slovenia
+Sweden
+Switzerland
+Turkey
+
+Host
+Brazil
+England
+France
+Germany
+Italy
+Japan
+Mexico
+South Africa
+South Korea
+Spain
+Russia
+USA
+
+Winner
+Brazil
+England
+France
+Germany
+Italy
+Spain
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+1.046**
+0.059
+0.353
+0.308
+0.514
+0.929
+0.894
+0.652
+0.637
+0.626
+0.380
+0.275
+−0.368
+−0.489
+−0.763
+−0.202
+−0.169
+0.214
+−0.198
+−0.149
+0.170
+0.247
+0.156
+−0.184
+0.390
+0.047
+−0.116
+0.163
+
+(0.518)
+(0.578)
+(0.557)
+(0.413)
+(0.466)
+(0.631)
+(0.618)
+(0.657)
+(0.847)
+(0.740)
+(0.623)
+(0.651)
+(0.574)
+(0.522)
+(0.456)
+(0.203)
+(0.515)
+(0.559)
+(0.982)
+(1.087)
+(0.730)
+(0.775)
+(0.681)
+(0.527)
+(0.879)
+(1.034)
+(1.174)
+(0.842)
+
+(2)
+0.454
+1.024*
+0.860*
+0.766
+0.466
+0.168
+0.584
+0.868**
+0.941
+0.408
+0.651
+0.071
+0.678
+0.100
+−0.093
+0.265
+0.384
+0.080
+0.264
+0.082
+0.547
+0.863
+0.407
+−0.640
+0.347
+−0.451
+−0.522
+0.138
+
+(3)
+(0.731)
+(0.566)
+(0.471)
+(0.492)
+(0.435)
+(0.496)
+(0.599)
+(0.403)
+(0.799)
+(0.933)
+(0.812)
+(0.732)
+(0.779)
+(0.760)
+(0.668)
+(0.536)
+(0.368)
+(0.501)
+(0.884)
+(0.752)
+(0.563)
+(0.620)
+(0.863)
+(1.507)
+(0.885)
+(0.794)
+(0.715)
+(1.483)
+
+(4)
+
+4 GCons
+2.723*
+2.417
+2.260
+0.230
+−0.240
+−0.949
+−0.041
+1.357
+0.797
+1.085
+1.248
+1.303
+−0.417
+−0.286
+−1.708
+−0.811
+0.229
+1.552
+1.228
+−0.029
+0.898
+0.398
+0.454
+1.892
+2.371
+2.550
+1.576
+1.331
+
+(5)
+(1.438)
+(1.451)
+(1.734)
+(1.551)
+(1.559)
+(1.325)
+(1.425)
+(1.913)
+(1.876)
+(1.778)
+(1.856)
+(1.980)
+(1.587)
+(1.522)
+(1.092)
+(0.868)
+(0.515)
+(1.128)
+(1.370)
+(2.008)
+(2.066)
+(2.100)
+(2.222)
+(1.932)
+(1.604)
+(1.573)
+(1.331)
+(1.704)
+
+(6)
+
+4 CapForm
+2.040
+0.185
+1.025
+1.935
+0.519
+0.260
+0.438
+−2.109
+−1.538
+−0.709
+−1.263
+0.275
+2.327
+2.584
+2.555
+3.840**
+3.183
+5.124*
+3.844
+5.049
+1.506
+−1.297
+−0.277
+−1.381
+0.204
+0.815
+−0.916
+1.110
+
+(7)
+(2.171)
+(1.769)
+(2.032)
+(2.591)
+(2.103)
+(2.090)
+(3.159)
+(2.583)
+(2.126)
+(3.120)
+(1.832)
+(1.979)
+(2.565)
+(1.802)
+(2.022)
+(1.620)
+(2.631)
+(2.767)
+(2.359)
+(3.631)
+(1.816)
+(1.918)
+(2.606)
+(2.643)
+(2.832)
+(3.302)
+(2.953)
+(2.725)
+
+(8)
+
+4 Exports
+3.603
+3.202*
+4.664**
+1.808
+1.188
+0.245
+0.091
+1.007
+0.711
+2.183
+1.131
+0.421
+0.409
+−0.659
+−0.333
+0.436
+1.719
+1.429
+3.138
+4.326**
+2.844
+4.260
+2.432
+1.331
+2.196
+1.218
+1.100
+0.886
+
+(9)
+
+(2.417)
+(1.685)
+(2.192)
+(1.514)
+(1.528)
+(0.848)
+(1.361)
+(2.093)
+(2.667)
+(3.730)
+(3.354)
+(3.713)
+(3.427)
+(2.225)
+(1.334)
+(1.111)
+(1.201)
+(1.245)
+(1.947)
+(2.084)
+(1.786)
+(3.007)
+(2.410)
+(2.131)
+(2.222)
+(1.813)
+(2.853)
+(2.586)
+
+(10)
+
+4 Imports
+
+Bulletin
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+Winning the World Cup (−16 or more)
+Winning the World Cup (−15)
+Winning the World Cup (−14)
+Winning the World Cup (−13)
+Winning the World Cup (−12)
+Winning the World Cup (−11)
+Winning the World Cup (−10)
+Winning the World Cup (−9)
+Winning the World Cup (−8)
+Winning the World Cup (−7)
+Winning the World Cup (−6)
+Winning the World Cup (−5)
+Winning the World Cup (−4)
+Winning the World Cup (−3)
+Winning the World Cup (−2)
+Winning the World Cup (−1)
+Winning the World Cup (+1)
+Winning the World Cup (+2)
+Winning the World Cup (+3)
+Winning the World Cup (+4)
+Winning the World Cup (+5)
+Winning the World Cup (+6)
+Winning the World Cup (+7)
+Winning the World Cup (+8)
+Winning the World Cup (+9)
+Winning the World Cup (+10)
+Winning the World Cup (+11)
+Winning the World Cup (+12)
+
+(1)
+
+4 PCons
+
+The effect of winning the World Cup on GDP components
+
+Table A3
+
+
+
+0.352
+
+(1)
+−0.136
+0.185
+0.395
+0.186
+−0.098
+−2.665***
+
+(2)
+(0.950)
+(0.679)
+(0.528)
+(0.538)
+(0.801)
+(0.651)
+
+Continued
+
+(1.278)
+
+−3.349**
+
+0.129
+
+(4)
+(0.679)
+(0.568)
+(0.631)
+(0.520)
+(0.265)
+
+(3)
+−1.105
+−0.646
+−0.424
+−0.060
+−0.155
+
+4 GCons
+
+0.213
+
+−7.795***
+
+(5)
+0.535
+0.212
+1.755
+0.185
+−1.606
+(1.624)
+
+(6)
+(1.282)
+(1.672)
+(1.464)
+(1.256)
+(1.404)
+
+4 CapForm
+
+0.380
+
+−3.730***
+
+(7)
+−0.430
+−0.466
+0.714
+0.501
+1.249
+
+(0.754)
+
+(8)
+(2.692)
+(2.418)
+(1.945)
+(1.726)
+(0.983)
+
+4 Exports
+
+0.364
+
+−6.056***
+
+(9)
+0.215
+0.719
+1.729
+2.266
+−0.390
+
+(0.952)
+
+(10)
+(2.633)
+(2.477)
+(2.558)
+(2.872)
+(1.909)
+
+4 Imports
+
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+Notes: PCons = Private Consumption; GCons = Government Consumption; CapForm = Capital Formation. Event-study estimates for winning the World Cup reported in
+columns 1, 3, 5, 7 and 9. Clustered SEs at the country level reported in columns 2, 4, 6, 8 and 10.
+Significance levels: ∗ P < 0.1; ∗∗ P < 0.05; ∗∗∗ P < 0.01.
+
+Winning the World Cup (+13)
+Winning the World Cup (+14)
+Winning the World Cup (+15)
+Winning the World Cup (+16 or more)
+Host
+PCons (−4)
+GCons (−4)
+CapForm (−4)
+Exports (−4)
+Imports (−4)
+Observations
+Within R2
+
+4 PCons
+
+Table A3
+
+
+
+Bulletin
+Table A4
+
+Robustness checks to GDP dynamics
+4 GDP
+Winning the World Cup (−6)
+Winning the World Cup (−5)
+Winning the World Cup (−4)
+Winning the World Cup (−3)
+Winning the World Cup (−2)
+Winning the World Cup (−1)
+Winning the World Cup (+1)
+Winning the World Cup (+2)
+Winning the World Cup (+3)
+Winning the World Cup (+4)
+Winning the World Cup (+5)
+Winning the World Cup (+6)
+
+(1)
+
+(2)
+
+(3)
+
+(4)
+
+(5)
+
+(6)
+
+0.136
+(0.593)
+0.435
+(0.631)
+−0.160
+(0.548)
+−0.339
+(0.483)
+−0.653
+(0.436)
+0.119
+(0.206)
+0.458*
+(0.245)
+0.694*
+(0.370)
+0.206
+(0.334)
+0.120
+(0.306)
+−0.210
+(0.351)
+−0.051
+(0.415)
+
+0.166
+(0.592)
+0.467
+(0.628)
+−0.129
+(0.542)
+−0.309
+(0.483)
+−0.628
+(0.435)
+0.122
+(0.207)
+0.454*
+(0.246)
+0.691*
+(0.372)
+0.219
+(0.336)
+0.134
+(0.313)
+−0.198
+(0.354)
+−0.041
+(0.420)
+
+0.201
+(0.586)
+0.503
+(0.616)
+−0.120
+(0.539)
+−0.284
+(0.479)
+−0.601
+(0.431)
+0.131
+(0.204)
+0.456*
+(0.247)
+0.687*
+(0.371)
+0.263
+(0.331)
+0.146
+(0.317)
+−0.192
+(0.357)
+−0.032
+(0.421)
+
+0.204
+(0.585)
+0.504
+(0.615)
+−0.104
+(0.536)
+−0.301
+(0.482)
+−0.601
+(0.432)
+0.127
+(0.203)
+0.451*
+(0.247)
+0.683*
+(0.373)
+0.265
+(0.331)
+0.170
+(0.314)
+−0.191
+(0.356)
+−0.041
+(0.420)
+
+0.216
+(0.601)
+0.504
+(0.631)
+−0.087
+(0.556)
+−0.269
+(0.509)
+−0.586
+(0.464)
+0.126
+(0.205)
+0.453*
+(0.245)
+0.682*
+(0.369)
+0.252
+(0.343)
+0.158
+(0.323)
+−0.170
+(0.360)
+−0.015
+(0.427)
+
+−1.645***
+(0.585)
+
+0.266
+(0.308)
+−0.088
+(0.252)
+−0.029
+(0.206)
+0.057
+(0.186)
+−0.053
+(0.167)
+0.516
+(0.320)
+0.539***
+(0.190)
+0.239
+(0.171)
+0.175
+(0.265)
+−0.174
+(0.270)
+0.123
+(0.167)
+0.333
+(0.225)
+92.314***
+(3.108)
+13.347***
+(4.735)
+1.118
+(3.890)
+−98.354***
+(5.155)
+−8.741**
+(3.580)
+−0.117
+(2.124)
+
+0.429
+
+0.858
+
+GDP (−1)
+GDP (−2)
+−0.771
+(0.690)
+
+GDP (−3)
+GDP (−4)
+
+−1.476**
+(0.585)
+
+GDP (−5)
+GDP (−6)
+GDP (−4) * 1970s
+GDP (−4) * 1980s
+GDP (−4) * 1990s
+GDP (−4) * 2000s
+GDP (−4) * 2010s
+Observations
+Within R2
+
+0.418
+
+0.420
+
+0.426
+
+−1.240**
+(0.585)
+
+−0.169
+(0.196)
+−0.157
+(0.121)
+−0.327*
+(0.192)
+−0.449***
+(0.167)
+−0.204
+(0.177)
+0.426
+
+Notes: Event-study OLS estimates for winning the World Cup with different model specifications in terms of GDP
+dynamics. Clustered SEs by country are reported in parenthesis.
+Significance levels: ∗ P < 0.1; ∗∗ P < 0.05; ∗∗∗ P < 0.01.
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+
+
+
+Table A5
+
+Event study estimates after matching
+4 GDP
+Matching by GDP levels
+GDP (−4)
+Host
+Winning the World Cup (−16 or more)
+Winning the World Cup (−15)
+Winning the World Cup (−14)
+Winning the World Cup (−13)
+Winning the World Cup (−12)
+Winning the World Cup (−11)
+Winning the World Cup (−10)
+Winning the World Cup (−9)
+Winning the World Cup (−8)
+Winning the World Cup (−7)
+Winning the World Cup (−6)
+Winning the World Cup (−5)
+Winning the World Cup (−4)
+Winning the World Cup (−3)
+Winning the World Cup (−2)
+Winning the World Cup (−1)
+Winning the World Cup (+1)
+Winning the World Cup (+2)
+Winning the World Cup (+3)
+Winning the World Cup (+4)
+Winning the World Cup (+5)
+Winning the World Cup (+6)
+Winning the World Cup (+7)
+Winning the World Cup (+8)
+Winning the World Cup (+9)
+Winning the World Cup (+10)
+Winning the World Cup (+11)
+Winning the World Cup (+12)
+Winning the World Cup (+13)
+Winning the World Cup (+14)
+Winning the World Cup (+15)
+Winning the World Cup (+16 or more)
+Observations
+Within R2
+
+Matching by population levels
+
+(1)
+
+(2)
+
+(3)
+
+(4)
+
+−1.668**
+−1.675**
+−0.128
+0.198
+0.362
+0.608
+0.264
+−0.191
+−0.123
+−0.530
+−0.688
+−0.544
+−0.645
+−0.269
+−0.526
+−0.767
+−0.952
+0.261
+0.513**
+0.936**
+0.032
+−0.079
+−0.441
+−0.470
+−0.753
+−0.606
+0.057
+−0.452
+−0.186
+0.233
+−0.340
+−0.184
+−0.859
+0.050
+
+(0.685)
+(0.637)
+(1.070)
+(0.953)
+(0.973)
+(0.823)
+(0.896)
+(0.909)
+(0.914)
+(0.821)
+(0.984)
+(0.854)
+(1.018)
+(1.055)
+(1.001)
+(0.814)
+(0.603)
+(0.388)
+(0.219)
+(0.335)
+(0.441)
+(0.581)
+(0.676)
+(0.635)
+(1.018)
+(1.145)
+(0.470)
+(0.696)
+(0.593)
+(0.615)
+(0.853)
+(0.783)
+(0.897)
+(0.854)
+
+−1.009
+−1.297
+0.946
+1.243
+0.850
+0.838
+0.320
+0.157
+0.547
+0.557
+0.511
+0.723
+0.819
+1.112
+0.610
+0.128
+−0.226
+0.326
+0.665**
+0.987***
+0.660
+0.652
+0.097
+0.002
+−0.466
+−0.335
+0.442
+0.155
+0.428
+0.656
+−0.048
+0.208
+−0.116
+0.404
+
+(0.581)
+(0.757)
+(1.243)
+(0.913)
+(0.883)
+(0.893)
+(1.051)
+(1.131)
+(1.301)
+(1.231)
+(1.429)
+(1.291)
+(1.551)
+(1.604)
+(1.427)
+(1.154)
+(0.823)
+(0.442)
+(0.307)
+(0.307)
+(0.466)
+(0.543)
+(0.525)
+(0.574)
+(1.031)
+(1.197)
+(0.801)
+(0.953)
+(0.520)
+(0.485)
+(0.579)
+(0.635)
+(0.725)
+(0.929)
+
+0.588
+
+0.445
+
+Notes: OLS estimates for the event-study model obtained by using a more homogeneous sample of countries. The
+control group is chosen based on a matching algorithm (with replacement) selecting the control countries that are
+most similar to World Cup winners in terms of either GDP levels (columns 1 and 2) or population levels (columns
+3 and 4). The control group matched by GDP levels comprises: Canada; India; Indonesia (×2); Japan (×3); Korea;
+Mexico (×8); Russia (×4). The control group matched by population levels comprises: Colombia; Indonesia; Japan;
+Korea (×3); Mexico (×4); Russia; South Africa (×3); Turkey (×6). Clustered SEs by country are reported in
+parenthesis.
+Significance levels: ∗ P < 0.1; ∗∗ p<0.05; ∗∗∗ p<0.01.
+
+© 2024 The Author(s). Oxford Bulletin of Economics and Statistics published by Oxford University and John Wiley & Sons Ltd.
+
+
+

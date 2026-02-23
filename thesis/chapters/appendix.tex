@@ -142,36 +142,63 @@ Host & Indicator for country hosting World Cup in year containing quarter $t$. \
 
 \begin{table}[H]
 \centering
-\caption{FIFA World Cup Results 1966-2022}
+\caption{FIFA World Cup Results 1966--2022}
 \label{tab:app_wc_results}
-\small
-\begin{tabular}{cllll}
+\footnotesize
+\begin{tabular}{clllll}
 \toprule
-\textbf{Year} & \textbf{Host} & \textbf{Winner} & \textbf{Runner-up} & \textbf{Third Place} \\
+\textbf{Year} & \textbf{Host} & \textbf{Winner} & \textbf{Runner-up} & \textbf{Third Place} & \textbf{Fourth Place} \\
 \midrule
-1966 & England & England & West Germany & Portugal \\
-1970 & Mexico & Brazil & Italy & West Germany \\
-1974 & West Germany & West Germany & Netherlands & Poland \\
-1978 & Argentina & Argentina & Netherlands & Brazil \\
-1982 & Spain & Italy & West Germany & Poland \\
-1986 & Mexico & Argentina & West Germany & France \\
-1990 & Italy & West Germany & Argentina & Italy \\
-1994 & USA & Brazil & Italy & Sweden \\
-1998 & France & France & Brazil & Croatia \\
-2002 & Japan/South Korea & Brazil & Germany & Turkey \\
-2006 & Germany & Italy & France & Germany \\
-2010 & South Africa & Spain & Netherlands & Germany \\
-2014 & Brazil & Germany & Argentina & Netherlands \\
-2018 & Russia & France & Croatia & Belgium \\
-2022 & Qatar & Argentina & France & Croatia \\
+1966 & England & England & West Germany & Portugal & Soviet Union \\
+1970 & Mexico & Brazil & Italy & West Germany & Uruguay \\
+1974 & West Germany & West Germany & Netherlands & Poland & Brazil \\
+1978 & Argentina & Argentina & Netherlands & Brazil & Italy \\
+1982 & Spain & Italy & West Germany & Poland & France \\
+1986 & Mexico & Argentina & West Germany & France & Belgium \\
+1990 & Italy & West Germany & Argentina & Italy & England \\
+1994 & USA & Brazil & Italy & Sweden & Bulgaria \\
+1998 & France & France & Brazil & Croatia & Netherlands \\
+2002 & Japan/South Korea & Brazil & Germany & Turkey & South Korea \\
+2006 & Germany & Italy & France & Germany & Portugal \\
+2010 & South Africa & Spain & Netherlands & Germany & Uruguay \\
+2014 & Brazil & Germany & Argentina & Netherlands & Brazil \\
+2018 & Russia & France & Croatia & Belgium & England \\
+2022 & Qatar & Argentina & France & Croatia & Morocco \\
 \bottomrule
 \end{tabular}
+\end{table}
+
+\subsubsection{Rank Correlation between ELO and FIFA Rankings}
+
+\begin{table}[H]
+\centering
+\caption{Rank correlation between ELO and FIFA rankings among World Cup participants}
+\label{tab:rank_corr}
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{WC Year} & \textbf{$N$ teams} & \textbf{Spearman $\rho$} & \textbf{Mean $|$rank diff$|$} \\
+\midrule
+1994 & 24 & 0.70 & 4.1 \\
+1998 & 32 & 0.63 & 6.4 \\
+2002 & 32 & 0.84 & 4.2 \\
+2006 & 32 & 0.85 & 4.1 \\
+2010 & 32 & 0.86 & 3.6 \\
+2014 & 32 & 0.89 & 3.3 \\
+2018 & 31 & 0.90 & 3.2 \\
+2022 & 31 & 0.89 & 3.0 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes:} Rankings are among World Cup participants only. Spearman $\rho$ is the rank correlation between ELO and FIFA pre-tournament rankings. FIFA rankings begin in 1992, so no comparison is available before 1994.
+\end{tablenotes}
 \end{table}
 
 \subsubsection{Country Coverage}
 
 \begin{longtable}{llcc}
-\caption{Country coverage in the event-study sample} \label{tab:app_coverage} \\
+\caption{GDP Country coverage in the event-study sample} \label{tab:app_coverage} \\
 \toprule
 \textbf{Country} & \textbf{ISO3} & \textbf{Period} & \textbf{Obs.} \\
 \midrule

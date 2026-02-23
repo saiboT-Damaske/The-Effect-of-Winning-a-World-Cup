@@ -10,6 +10,11 @@
 \usepackage{longtable}
 \usepackage{float}
 \usepackage{subcaption}
+\usepackage{caption}
+\captionsetup[figure]{font=small}
+
+% lightweight tablenotes environment (no threeparttable needed)
+\newenvironment{tablenotes}{\par\vspace{4pt}\noindent\footnotesize}{\par}
 \usepackage{setspace}
 \usepackage{amsmath}
 \DeclareMathOperator*{\argmin}{arg\,min}

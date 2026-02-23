@@ -3,73 +3,38 @@
 \caption{Summary statistics for the event-study sample}
 \label{tab:summary_stats}
 \small
-\begin{tabular}{lccc}
+\begin{tabular}{lcccccc}
 \toprule
- & \textbf{Winner} & \textbf{Non-winner} & \textbf{$t$-test} \\
- & Mean (SD) & Mean (SD) & \\
+ & \multicolumn{2}{c}{\textbf{Winner}} & \multicolumn{2}{c}{\textbf{Non-winner}} & \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+ & Mean & (SD) & Mean & (SD) & \textit{t-test} \\
 \midrule
-\textbf{1962--1980} \\
-\quad GDP (millions PPP USD) & 1317 (510) & 548 (1254) & 19.08*** \\
-\quad Private consumption & 712 (277) & 322 (767) & 16.59*** \\
-\quad Government consumption & 284 (122) & 114 (284) & 18.19*** \\
-\quad Gross fixed capital formation & 296 (134) & 113 (232) & 20.47*** \\
-\quad Exports & 146 (78) & 45 (54) & 23.92*** \\
-\quad Imports & 140 (75) & 49 (61) & 22.18*** \\
-\quad Population & 54.4 (13.9) & 26.2 (46.0) & 21.17*** \\
-\quad GDP growth (d4 log) & 3.96 (2.82) & 4.55 (3.42) & -3.47*** \\
-\quad Private cons. growth (d4 log) & 4.19 (2.57) & 4.40 (3.74) & -1.28 \\
-\quad Gov. cons. growth (d4 log) & 3.71 (2.09) & 4.99 (3.70) & -9.10*** \\
-\quad Investment growth (d4 log) & 3.74 (6.36) & 5.21 (10.26) & -3.58*** \\
-\quad Exports growth (d4 log) & 7.00 (6.82) & 7.12 (9.23) & -0.29 \\
-\quad Imports growth (d4 log) & 7.06 (9.15) & 6.69 (11.39) & 0.67 \\
-\textbf{1980--2000} \\
-\quad GDP (millions PPP USD) & 2198 (736) & 949 (2131) & 21.39*** \\
-\quad Private consumption & 1234 (407) & 557 (1344) & 19.22*** \\
-\quad Government consumption & 464 (155) & 176 (385) & 25.54*** \\
-\quad Gross fixed capital formation & 437 (172) & 208 (441) & 17.99*** \\
-\quad Exports & 386 (176) & 129 (165) & 27.36*** \\
-\quad Imports & 355 (165) & 128 (184) & 25.10*** \\
-\quad Population & 61.1 (22.4) & 41.3 (100.6) & 8.21*** \\
-\quad GDP growth (d4 log) & 2.37 (1.75) & 3.15 (3.55) & -6.75*** \\
-\quad Private cons. growth (d4 log) & 2.46 (2.02) & 2.92 (4.24) & -3.45*** \\
-\quad Gov. cons. growth (d4 log) & 2.11 (2.24) & 2.72 (5.92) & -3.63*** \\
-\quad Investment growth (d4 log) & 2.38 (5.42) & 3.89 (11.69) & -4.11*** \\
-\quad Exports growth (d4 log) & 5.60 (5.41) & 6.54 (8.53) & -2.88*** \\
-\quad Imports growth (d4 log) & 5.52 (6.73) & 6.01 (11.07) & -1.19 \\
-\textbf{2000--2021} \\
-\quad GDP (millions PPP USD) & 3125 (827) & 1386 (3063) & 27.34*** \\
-\quad Private consumption & 1777 (420) & 825 (2010) & 24.47*** \\
-\quad Government consumption & 656 (184) & 230 (469) & 37.29*** \\
-\quad Gross fixed capital formation & 606 (181) & 324 (669) & 20.28*** \\
-\quad Exports & 861 (419) & 323 (402) & 27.08*** \\
-\quad Imports & 801 (333) & 328 (458) & 28.27*** \\
-\quad Population & 85.1 (51.0) & 66.8 (198.4) & 4.52*** \\
-\quad GDP growth (d4 log) & 1.19 (3.85) & 2.68 (4.15) & -8.03*** \\
-\quad Private cons. growth (d4 log) & 1.06 (4.09) & 2.75 (4.67) & -8.50*** \\
-\quad Gov. cons. growth (d4 log) & 1.62 (2.80) & 2.38 (4.31) & -5.29*** \\
-\quad Investment growth (d4 log) & 1.20 (6.87) & 3.08 (12.37) & -5.06*** \\
-\quad Exports growth (d4 log) & 2.56 (7.74) & 4.28 (8.74) & -4.56*** \\
-\quad Imports growth (d4 log) & 2.58 (8.70) & 4.63 (10.72) & -4.78*** \\
-\textbf{Full sample} \\
-\quad GDP (millions PPP USD) & 2300 (1033) & 1065 (2505) & 30.14*** \\
-\quad Private consumption & 1292 (579) & 630 (1622) & 26.59*** \\
-\quad Government consumption & 486 (220) & 188 (411) & 38.35*** \\
-\quad Gross fixed capital formation & 461 (209) & 241 (539) & 25.64*** \\
-\quad Exports & 501 (414) & 202 (316) & 24.67*** \\
-\quad Imports & 465 (364) & 205 (354) & 23.85*** \\
-\quad Population & 68.5 (37.5) & 50.0 (149.9) & 9.10*** \\
-\quad GDP growth (d4 log) & 2.38 (3.22) & 3.24 (3.89) & -8.61*** \\
-\quad Private cons. growth (d4 log) & 2.42 (3.37) & 3.18 (4.40) & -7.07*** \\
-\quad Gov. cons. growth (d4 log) & 2.39 (2.58) & 3.08 (4.84) & -7.56*** \\
-\quad Investment growth (d4 log) & 2.32 (6.37) & 3.81 (11.74) & -6.63*** \\
-\quad Exports growth (d4 log) & 4.83 (7.06) & 5.59 (8.88) & -3.44*** \\
-\quad Imports growth (d4 log) & 4.83 (8.48) & 5.51 (11.01) & -2.53** \\
-\quad Number of countries & 6 & 42 & \\
-\quad Number of observations & 1295 & 7338 & \\
+& \multicolumn{5}{c}{1962--1980} \\
+\quad GDP (thousands of 2015 USD millions) & 1,316.75 & (509.62) & 547.79 & (1,253.81) & 19.08*** \\
+\quad Population (in millions) & 54.43 & (13.91) & 26.20 & (46.04) & 21.17*** \\
+\quad GDP per capita & 23,569 & (5,029) & 22,546 & (10,416) & 2.82*** \\
+\quad Year-on-Year GDP growth & 3.96 & (2.82) & 4.55 & (3.42) & $-$3.47*** \\
+& \multicolumn{5}{c}{1980--2000} \\
+\quad GDP (thousands of 2015 USD millions) & 2,175.99 & (735.53) & 941.77 & (2,113.88) & 21.73*** \\
+\quad Population (in millions) & 60.93 & (22.04) & 40.82 & (99.18) & 8.60*** \\
+\quad GDP per capita & 36,026 & (7,328) & 31,365 & (16,058) & 9.55*** \\
+\quad Year-on-Year GDP growth & 2.31 & (1.81) & 3.13 & (3.53) & $-$7.13*** \\
+& \multicolumn{5}{c}{2000--2021} \\
+\quad GDP (thousands of 2015 USD millions) & 3,104.57 & (828.70) & 1,368.76 & (3,036.07) & 28.07*** \\
+\quad Population (in millions) & 84.83 & (50.71) & 66.46 & (197.15) & 4.66*** \\
+\quad GDP per capita & 43,203 & (13,284) & 39,165 & (21,809) & 5.93*** \\
+\quad Year-on-Year GDP growth & 1.32 & (3.82) & 2.76 & (4.11) & $-$8.01*** \\
+& \multicolumn{5}{c}{Full sample} \\
+\quad GDP (thousands of 2015 USD millions) & 2,300.13 & (1,032.60) & 1,065.21 & (2,505.31) & 30.14*** \\
+\quad Population (in millions) & 68.50 & (37.53) & 49.96 & (149.91) & 9.10*** \\
+\quad GDP per capita & 35,319 & (12,616) & 33,258 & (19,353) & 4.94*** \\
+\quad Year-on-Year GDP growth & 2.38 & (3.22) & 3.24 & (3.89) & $-$8.61*** \\
+\quad Number of countries & \multicolumn{2}{c}{6} & \multicolumn{2}{c}{42} & \\
+\quad Number of observations & \multicolumn{2}{c}{1,295} & \multicolumn{2}{c}{7,338} & \\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
 \small
-\item \textit{Notes:} Standard deviations in parentheses. Level variables are in millions of PPP USD (2015 base); population in millions. Growth rates are $\Delta_4 \ln$ (year-over-year log differences $\times 100$). ``Winner'' denotes all observations from countries that won a World Cup during the sample period (BRA, DEU, ESP, FRA, GBR, ITA). *$p<0.10$, **$p<0.05$, ***$p<0.01$.
+\item \textit{Notes:} Summary statistics by winner status for the full sample and selected sub-periods. The \textit{t}-statistics reported in the last column test whether the mean differences between winning and non-winning countries are statistically significant. GDP and population figures come from OECD data provided at quarterly and yearly frequency, respectively. GDP in chain-linked volumes, PPP USD (2015 base). Year-on-Year growth is $\Delta_4 \ln$ (Equation~\ref{eq:yoy}). ``Winner'' denotes all observations from countries that won a World Cup during the sample period (BRA, DEU, ESP, FRA, GBR, ITA). *$p<0.10$, **$p<0.05$, ***$p<0.01$.
 \end{tablenotes}
 \end{table}
