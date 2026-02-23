@@ -177,45 +177,6 @@ for (f in features) {
   write_csv(tab, out_csv)
   cat("  Saved:", out_csv, "\n")
 
-  # Event study plot
-  es_plot_data <- tab %>% filter(!is.na(l))
-
-  # Add reference point at l = 0
-  es_plot_data <- bind_rows(
-    es_plot_data,
-    tibble(term = "ref", l = 0L, estimate = 0, se = 0, tval = 0, pval = 1,
-           feature = f$name)
-  ) %>% arrange(l)
-
-  es_plot_data <- es_plot_data %>%
-    mutate(ci_lo = estimate - 1.96 * se,
-           ci_hi = estimate + 1.96 * se)
-
-  gg <- ggplot(es_plot_data, aes(x = l, y = estimate)) +
-    geom_hline(yintercept = 0, color = "grey60", linewidth = 0.4) +
-    geom_vline(xintercept = -0.5, linetype = "dashed", color = "grey40", linewidth = 0.4) +
-    geom_errorbar(aes(ymin = ci_lo, ymax = ci_hi), color = "grey30",
-                  width = 0, linewidth = 0.4) +
-    geom_point(color = "black", size = 2) +
-    annotate("text", x = 3, y = Inf, label = "Post World Cup",
-             vjust = 1.5, hjust = 0.3, size = 3, color = "grey30") +
-    scale_x_continuous(breaks = seq(-16, 16, by = 2)) +
-    labs(
-      title = f$name,
-      x     = "Quarter to or from the World Cup",
-      y     = "ATT"
-    ) +
-    theme_minimal(base_size = 11) +
-    theme(panel.grid.minor = element_blank(), panel.grid.major.x = element_blank())
-
-  out_png <- paste0("underperformer_analysis/plots/underperformer_event_study_",
-                    f$file_tag, ".png")
-  out_pdf <- paste0("underperformer_analysis/plots/underperformer_event_study_",
-                    f$file_tag, ".pdf")
-  ggsave(out_png, gg, width = 7, height = 4, dpi = 300)
-  ggsave(out_pdf, gg, width = 7, height = 4, dpi = 300)
-  cat("  Saved:", out_png, "\n")
-
   all_results[[f$name]] <- tab
 }
 
@@ -224,7 +185,86 @@ combined <- bind_rows(all_results)
 write_csv(combined, "underperformer_analysis/results/underperformer_event_study_all_features.csv")
 cat("\nSaved: underperformer_analysis/results/underperformer_event_study_all_features.csv\n")
 
-# ---------- 7) Summary ----------
+# ---------- 7) Combined 6-panel event study plot ----------
+# Mirror the Mello replication Figure 2 style: faceted, coloured by feature
+feature_labels <- c(
+  "GDP"                            = "GDP",
+  "Private consumption"            = "Private consumption",
+  "Government consumption"         = "Government consumption",
+  "Gross fixed capital formation"  = "Capital formation",
+  "Exports"                        = "Exports",
+  "Imports"                        = "Imports"
+)
+
+feature_colors <- c(
+  "GDP"                     = "black",
+  "Private consumption"     = "#E69F00",
+  "Government consumption"  = "#9467BD",
+  "Capital formation"       = "#1F77B4",
+  "Exports"                 = "#2CA02C",
+  "Imports"                 = "#D62728"
+)
+
+plot_data <- combined %>%
+  filter(!is.na(l)) %>%
+  mutate(
+    feature_label = recode(feature, !!!feature_labels),
+    ci_lo = estimate - 1.96 * se,
+    ci_hi = estimate + 1.96 * se
+  ) %>%
+  bind_rows(
+    tibble(
+      feature_label = c("GDP", "Private consumption", "Government consumption",
+                        "Capital formation", "Exports", "Imports"),
+      l = 0L, estimate = 0, se = 0, ci_lo = 0, ci_hi = 0
+    )
+  ) %>%
+  mutate(
+    feature_label = factor(feature_label, levels = c(
+      "GDP", "Private consumption", "Government consumption",
+      "Capital formation", "Exports", "Imports"
+    ))
+  )
+
+# "Post World Cup" annotation data — one per facet
+annot_df <- data.frame(
+  feature_label = factor(
+    c("GDP", "Private consumption", "Government consumption",
+      "Capital formation", "Exports", "Imports"),
+    levels = levels(plot_data$feature_label)
+  ),
+  l = 3, estimate = Inf
+)
+
+p_all <- ggplot(plot_data, aes(x = l, y = estimate)) +
+  geom_hline(yintercept = 0, color = "grey60", linewidth = 0.4) +
+  geom_vline(xintercept = -0.5, linetype = "dashed", color = "grey40", linewidth = 0.4) +
+  geom_errorbar(aes(ymin = ci_lo, ymax = ci_hi, color = feature_label),
+                width = 0, linewidth = 0.4, alpha = 0.7) +
+  geom_point(aes(color = feature_label), size = 1.8) +
+  geom_text(data = annot_df,
+            aes(label = "Post World Cup"),
+            vjust = 1.5, hjust = 0.3, size = 2.8, color = "grey30") +
+  facet_wrap(~ feature_label, ncol = 1, scales = "free_y") +
+  scale_x_continuous(breaks = seq(-16, 16, 2)) +
+  scale_color_manual(values = feature_colors, guide = "none") +
+  labs(x = "Quarter to or from the World Cup", y = "ATT") +
+  theme_minimal(base_size = 11) +
+  theme(
+    strip.text = element_text(face = "bold", size = 10),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    axis.text = element_text(size = 8),
+    plot.margin = margin(5, 10, 5, 5)
+  )
+
+ggsave("underperformer_analysis/plots/underperformer_event_study_all_features.png",
+       p_all, width = 7, height = 14, dpi = 300)
+ggsave("underperformer_analysis/plots/underperformer_event_study_all_features.pdf",
+       p_all, width = 7, height = 14, dpi = 300)
+cat("Saved: underperformer_analysis/plots/underperformer_event_study_all_features.{png,pdf}\n")
+
+# ---------- 8) Summary ----------
 cat("\n========================================\n")
 cat("  UNDERPERFORMER EVENT STUDY SUMMARY\n")
 cat("========================================\n")

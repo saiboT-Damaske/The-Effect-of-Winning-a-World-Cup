@@ -1,67 +1,3 @@
-\subsection{Full Regression Output}
-
-Table~\ref{tab:full_event_study} presents the complete event study regression output with all 33 relative time indicators.
-
-\begin{longtable}{lcc}
-\caption{Full Event Study Regression Output} \label{tab:full_event_study} \\
-\toprule
-\textbf{Variable} & \textbf{Coefficient} & \textbf{Std. Error} \\
-\midrule
-\endfirsthead
-\multicolumn{3}{c}{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
-\toprule
-\textbf{Variable} & \textbf{Coefficient} & \textbf{Std. Error} \\
-\midrule
-\endhead
-\midrule
-\multicolumn{3}{r}{\textit{Continued on next page}} \\
-\endfoot
-\bottomrule
-\endlastfoot
-GDP$_{t-4}$ (logged) & -1.368** & (0.588) \\
-Host & -0.591 & (0.545) \\
-\midrule
-\multicolumn{3}{l}{\textit{Winning indicators relative to World Cup}} \\
-$k \leq -16$ (binned) & 0.640 & (0.673) \\
-$k = -15$ & 0.363 & (0.538) \\
-$k = -14$ & 0.276 & (0.655) \\
-$k = -13$ & 0.286 & (0.474) \\
-$k = -12$ & -0.082 & (0.503) \\
-$k = -11$ & -0.226 & (0.604) \\
-$k = -10$ & 0.074 & (0.769) \\
-$k = -9$ & -0.139 & (0.616) \\
-$k = -8$ & 0.098 & (0.695) \\
-$k = -7$ & 0.209 & (0.570) \\
-$k = -6$ & 0.196 & (0.589) \\
-$k = -5$ & 0.484 & (0.621) \\
-$k = -4$ & -0.107 & (0.535) \\
-$k = -3$ & -0.288 & (0.479) \\
-$k = -2$ & -0.605 & (0.432) \\
-$k = -1$ & \multicolumn{2}{c}{(reference category)} \\
-$k = +1$ & 0.454* & (0.246) \\
-$k = +2$ & 0.683* & (0.370) \\
-$k = +3$ & 0.233 & (0.335) \\
-$k = +4$ & 0.140 & (0.317) \\
-$k = +5$ & -0.189 & (0.357) \\
-$k = +6$ & -0.034 & (0.422) \\
-$k = +7$ & -0.288 & (0.761) \\
-$k = +8$ & -0.314 & (0.985) \\
-$k = +9$ & 0.418 & (0.387) \\
-$k = +10$ & -0.145 & (0.421) \\
-$k = +11$ & 0.021 & (0.461) \\
-$k = +12$ & 0.289 & (0.583) \\
-$k = +13$ & -0.593 & (0.606) \\
-$k = +14$ & -0.320 & (0.628) \\
-$k = +15$ & -0.412 & (0.676) \\
-$k \geq +16$ (binned) & -0.109 & (0.477) \\
-\midrule
-Observations & 8,637 & \\
-Within $R^2$ & 0.423 & \\
-Country FE & Yes & \\
-Quarter FE & Yes & \\
-\end{longtable}
-\floatfoot{\textit{Notes}: Event-study OLS estimates from \citet{Mello2024}. Standard errors clustered at the country level in parentheses. Significance levels: *$p<0.10$, **$p<0.05$, ***$p<0.01$.}
-
 \subsection{Event Study Comparison Tables}
 \label{sec:app_comparison_tables}
 
@@ -73,61 +9,30 @@ Table~\ref{tab:es_full_comparison} presents the complete GDP comparison across a
 
 \input{tables/event_study_all_features_comparison}
 
-\subsection{Robustness Checks}
-
-\subsubsection{Alternative Lag Specifications}
-
-\begin{table}[H]
-\centering
-\caption{Robustness: Alternative GDP Lag Specifications}
-\label{tab:app_lag_robust}
-\small
-\begin{tabular}{lcccccc}
-\toprule
-& \textbf{(1)} & \textbf{(2)} & \textbf{(3)} & \textbf{(4)} & \textbf{(5)} & \textbf{(6)} \\
-& No lag & Lag 3 & Lag 4 & Lag 5 & Lag 6 & All lags \\
-\midrule
-$k = +1$ & 0.458* & 0.454* & 0.454* & 0.456* & 0.451* & 0.539*** \\
-& (0.245) & (0.246) & (0.246) & (0.247) & (0.247) & (0.190) \\
-$k = +2$ & 0.694* & 0.691* & 0.683* & 0.687* & 0.683* & 0.239 \\
-& (0.370) & (0.372) & (0.370) & (0.371) & (0.373) & (0.171) \\
-\midrule
-Observations & 8,637 & 8,637 & 8,637 & 8,589 & 8,541 & 8,541 \\
-Within $R^2$ & 0.418 & 0.420 & 0.423 & 0.426 & 0.429 & 0.858 \\
-\bottomrule
-\multicolumn{7}{l}{\footnotesize *$p<0.10$, **$p<0.05$, ***$p<0.01$}
-\end{tabular}
-\end{table}
-
-\subsubsection{Matched Sample Results}
-
-\begin{table}[H]
-\centering
-\caption{Robustness: Matched Control Group}
-\label{tab:app_matched}
-\begin{tabular}{lcccc}
-\toprule
-& \multicolumn{2}{c}{\textbf{GDP Matched}} & \multicolumn{2}{c}{\textbf{Population Matched}} \\
-& Coef. & SE & Coef. & SE \\
-\midrule
-$k = +1$ & 0.513** & (0.219) & 0.665** & (0.307) \\
-$k = +2$ & 0.936** & (0.335) & 0.987*** & (0.307) \\
-$k = +3$ & 0.032 & (0.441) & 0.660 & (0.466) \\
-$k = +4$ & -0.079 & (0.581) & 0.652 & (0.543) \\
-\midrule
-Observations & 5,174 & & 5,710 & \\
-Within $R^2$ & 0.588 & & 0.445 & \\
-\bottomrule
-\end{tabular}
-\floatfoot{\textit{Notes}: Matching by GDP: Canada, India, Indonesia ($\times$2), Japan ($\times$3), Korea, Mexico ($\times$8), Russia ($\times$4). Matching by population: Colombia, Indonesia, Japan, Korea ($\times$3), Mexico ($\times$4), Russia, South Africa ($\times$3), Turkey ($\times$6).}
-\end{table}
-
 \subsection{Extension Event Study Comparison}
 \label{sec:app_extension_es}
 
 \input{tables/extension_event_study_comparison}
 
-\subsection{SDiD Component Figures}
+\subsection{Underperformer Event Study: GDP}
+\label{sec:app_underperformer_es}
+
+\input{tables/underperformer_event_study_gdp}
+
+\subsection{Underperformer: Individual GDP Overlay}
+\label{sec:app_underperformer_gdp_overlay}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{underperformer_all_gdp_overlay.png}
+\caption{All underperformers: individual $\Delta_4$ log GDP growth ($\pm 16$ quarters)}
+\label{fig:app_underperformer_gdp_overlay}
+\begin{tablenotes}
+\textit{Notes}: Each line represents an individual underperformance event.  Dashed vertical line marks the World Cup quarter ($l = 0$).  Shaded region: post-treatment window.  Treatment = top-10 pre-tournament ELO rating, eliminated in group stage.
+\end{tablenotes}
+\end{figure}
+
+\subsection{SDiD Component Figures: Winners}
 \label{sec:app_sdid_components}
 
 \begin{figure}[H]
@@ -207,6 +112,50 @@ Within $R^2$ & 0.588 & & 0.445 & \\
 \label{fig:sdid_app_imports}
 \begin{tablenotes}
 \textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control.  Bootstrap SEs from 1,000 replications.
+\end{tablenotes}
+\end{figure}
+
+
+\subsection{SDiD Component Figures: Underperformers}
+\label{sec:app_sdid_underperformer_components}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{underperformer_sdid_private_consumption.png}
+\caption{SDiD: effect of underperformance on private consumption growth}
+\label{fig:app_underperformer_sdid_priv_cons}
+\begin{tablenotes}
+\textit{Notes}: ATT $= 0.410$\,pp, SE $= 0.234$ (bootstrap, 1{,}000 replications), $p = 0.081$.  10~treated, 259~control subseries.
+\end{tablenotes}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{underperformer_sdid_government_consumption.png}
+\caption{SDiD: effect of underperformance on government consumption growth}
+\label{fig:app_underperformer_sdid_gov_cons}
+\begin{tablenotes}
+\textit{Notes}: ATT $= 0.570$\,pp, SE $= 0.635$ (bootstrap, 1{,}000 replications), $p = 0.370$.  10~treated, 259~control subseries.
+\end{tablenotes}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{underperformer_sdid_capital_formation.png}
+\caption{SDiD: effect of underperformance on capital formation growth}
+\label{fig:app_underperformer_sdid_capital}
+\begin{tablenotes}
+\textit{Notes}: ATT $= 2.566$\,pp, SE $= 1.967$ (bootstrap, 1{,}000 replications), $p = 0.192$.  10~treated, 259~control subseries.
+\end{tablenotes}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{underperformer_sdid_imports.png}
+\caption{SDiD: effect of underperformance on import growth}
+\label{fig:app_underperformer_sdid_imports}
+\begin{tablenotes}
+\textit{Notes}: ATT $= 2.147$\,pp, SE $= 1.105$ (bootstrap, 1{,}000 replications), $p = 0.052$.  10~treated, 259~control subseries.
 \end{tablenotes}
 \end{figure}
 

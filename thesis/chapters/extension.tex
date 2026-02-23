@@ -104,6 +104,20 @@ The raw dataset contains 41 underperformance events across 16 World Cups.  Notab
 
 The matched events span the entire sample period.  Spain has the most events (5), followed by the United Kingdom (4, representing England and Scotland) and Italy, Czech Republic, and others with 2--3 events each.  Of the 37 matched events, 22 have a complete 10-quarter GDP window required for the SDiD estimation, and 11 of these fall within the 1998--2018 SDiD subsample.  The treatment variable $U_c$ is time-invariant: $U_c = 1$ if country~$c$ has ever experienced an underperformance event (19 countries), and $U_c = 0$ otherwise (29 control countries).
 
+\subsubsection{Descriptive evidence}
+
+Before turning to formal estimation, Figure~\ref{fig:ext_underperformer_descriptive} provides a descriptive overview.  The plot shows the average $\Delta_4$ log growth across all six national accounts features in a $\pm 16$-quarter window around each underperformance event.  Exports and imports---the most volatile components---show the largest swings, while GDP, consumption, and government consumption cluster in a tighter band.  There is no obvious discontinuity at the event date for most features, though exports appear to dip mildly in the post-treatment window.  The individual-event GDP overlay is provided in Appendix Figure~\ref{fig:app_underperformer_gdp_overlay}, which reveals substantial heterogeneity across the 23 events.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{underperformer_all_features_avg.png}
+\caption{Average $\Delta_4$ log growth by feature around underperformance events}
+\label{fig:ext_underperformer_descriptive}
+\begin{tablenotes}
+\textit{Notes}: Average year-over-year log growth for each of the six national accounts features across all matched underperformance events.  Dashed vertical line marks the World Cup quarter ($l = 0$).  Shaded region: post-treatment window.
+\end{tablenotes}
+\end{figure}
+
 \subsubsection{Event study results}
 
 The event study specification replaces the winner indicator with the underperformer indicator:
@@ -116,96 +130,72 @@ The event study specification replaces the winner indicator with the underperfor
 \end{equation}
 where $U^{l}_{c,t}$ are relative-time indicators for underperformance events, following the same structure as Equation~\eqref{eq:mello_event_study}.  I estimate this specification for all six national accounts features: GDP, private consumption, government consumption, gross fixed capital formation, exports, and imports.  The sample includes 19~treated countries and 23~underperformance events.
 
-Table~\ref{tab:ext_underperformer_es_gdp} reports the GDP event study results.  The pre-treatment coefficients are uniformly insignificant, supporting the parallel trends assumption.  In the immediate post-treatment period, the $l = +1$ coefficient is \emph{positive} ($0.495$\,pp, SE $= 0.283$, $p = 0.087$), contrary to the negative-shock hypothesis.  This marginally significant \emph{positive} effect at one quarter after the tournament is surprising and may reflect confounding factors: underperforming countries tend to be large, diversified economies (e.g., Germany, France, Spain, Italy) whose macroeconomic trajectories are unlikely to be derailed by a single sporting event.  The $l = +2$ coefficient remains positive ($0.460$\,pp) but is highly imprecise (SE $= 0.646$).  At longer horizons, all post-treatment coefficients are insignificant and centred near zero, with large standard errors reflecting the heterogeneity of the treated group.
+Figure~\ref{fig:ext_underperformer_es_all} presents the event study coefficients for all six features.  The full set of GDP relative-time indicators is in Table~\ref{tab:ext_underperformer_es_gdp_full} (Appendix).  For GDP, the pre-treatment coefficients are uniformly insignificant across all 16 lags, supporting the parallel trends assumption.  In the immediate post-treatment period, the $l = +1$ coefficient is \emph{positive} ($0.495$\,pp, SE $= 0.283$, $p = 0.087$), contrary to the negative-shock hypothesis.  This marginally significant \emph{positive} effect at one quarter after the tournament is surprising and likely reflects the economic resilience of the large, diversified economies that dominate the underperformer sample (e.g., Germany, France, Spain, Italy).  The $l = +2$ coefficient remains positive ($0.460$\,pp) but is highly imprecise (SE $= 0.646$).  At longer horizons, all post-treatment coefficients are insignificant and centred near zero.
 
-\begin{table}[H]
-\centering
-\caption{Underperformer event study: GDP coefficients}
-\label{tab:ext_underperformer_es_gdp}
-\small
-\begin{tabular}{l rrrl}
-\toprule
-                     & Coeff. & (SE)    & $t$-stat & \\
-\midrule
-\multicolumn{5}{l}{\textit{Pre-treatment}} \\
-$l = -4$             &  0.327     & (0.981) &  0.333   & \\
-$l = -3$             &  0.367     & (0.762) &  0.481   & \\
-$l = -2$             &  0.356     & (0.497) &  0.718   & \\
-$l = -1$             &  0.124     & (0.298) &  0.415   & \\[4pt]
-\multicolumn{5}{l}{\textit{Post-treatment}} \\
-$l = +1$             &  0.495     & (0.283) &  1.749   & $^{*}$ \\
-$l = +2$             &  0.460     & (0.646) &  0.712   & \\
-$l = +3$             &  0.909     & (0.961) &  0.946   & \\
-$l = +4$             &  0.535     & (1.133) &  0.472   & \\
-\midrule
-Treated countries    & \multicolumn{4}{l}{19} \\
-Treatment events     & \multicolumn{4}{l}{23} \\
-Observations         & \multicolumn{4}{l}{8,633} \\
-\bottomrule
-\multicolumn{5}{l}{\footnotesize $^{*}\,p<0.10$,\; $^{**}\,p<0.05$,\; $^{***}\,p<0.01$.\; Country-clustered SEs.} \\
-\multicolumn{5}{l}{\footnotesize Treatment: top-10 ELO rated, group-stage exit.  Reference: $l = 0$.}
-\end{tabular}
-\end{table}
-
-The event study is also estimated for the five GDP sub-components.  The most striking result is for exports: the $l = +1$ coefficient is $-1.876$\,pp (SE $= 0.776$, $p = 0.020$), suggesting a statistically significant decline in export growth one quarter after the tournament.  This could reflect reduced international visibility or a pull-back in trade-related optimism following the shock.  However, the effect is not sustained at $l = +2$ ($-1.628$\,pp, $p = 0.345$).  Imports show a similar negative pattern ($l = +1$: $-1.724$\,pp, SE $= 1.303$) but with wide confidence intervals.  Private consumption, government consumption, and capital formation show no significant effects.  The event study plots for all six features are shown in Figures~\ref{fig:ext_underperformer_es_gdp}--\ref{fig:ext_underperformer_es_imports}.
+The most striking result is for \textbf{exports}: the $l = +1$ coefficient is $-1.876$\,pp (SE $= 0.776$, $p = 0.020$), suggesting a statistically significant decline in export growth one quarter after the tournament.  The effect persists with further significant negative coefficients at $l = +5$ through $l = +9$, indicating a sustained export decline.  This is consistent with the finding from the replication and from \citet{Mello2024} that the winner premium operates primarily through the trade channel---the mirror image appears to hold for underperformers.  Imports also show a negative pattern ($l = +1$: $-1.724$\,pp, SE $= 1.303$), with significant effects emerging at longer horizons ($l = +7$ through $l = +11$).  Private consumption, government consumption, and capital formation show no significant effects.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{underperformer_event_study_gdp.png}
-\caption{Underperformer event study: GDP}
-\label{fig:ext_underperformer_es_gdp}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{underperformer_event_study_private_consumption.png}
-\caption{Underperformer event study: private consumption}
-\label{fig:ext_underperformer_es_pcons}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{underperformer_event_study_government_consumption.png}
-\caption{Underperformer event study: government consumption}
-\label{fig:ext_underperformer_es_gcons}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{underperformer_event_study_capital_formation.png}
-\caption{Underperformer event study: gross fixed capital formation}
-\label{fig:ext_underperformer_es_capform}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{underperformer_event_study_exports.png}
-\caption{Underperformer event study: exports}
-\label{fig:ext_underperformer_es_exports}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{underperformer_event_study_imports.png}
-\caption{Underperformer event study: imports}
-\label{fig:ext_underperformer_es_imports}
+\includegraphics[width=0.85\textwidth]{underperformer_event_study_all_features.png}
+\caption{Underperformer event study: all six national accounts features}
+\label{fig:ext_underperformer_es_all}
+\begin{tablenotes}
+\textit{Notes}: Dependent variable: $\Delta_4 \ln Y_{c,t}$ for each feature.  Treatment = top-10 pre-tournament ELO rating, eliminated in group stage.  19~treated countries, 23~events, 8{,}633~observations.  Error bars: 95\%~CI.  Reference: $l = 0$ (Q2 of WC year).  Endpoints binned at $\pm 16$.
+\end{tablenotes}
 \end{figure}
 
 \subsubsection{Synthetic difference-in-differences}
 
-The SDiD specification follows the same stacked design as in Section~\ref{sec:sdid_spec}, with the underperformer indicator replacing the winner indicator.  Of the 37 matched events, 11 fall within the 1998--2018 SDiD window from 9 countries, providing sufficient variation for estimation.  The SDiD is estimated for GDP only, given the null results for most sub-components in the event study.
+The SDiD specification follows the same stacked design as in Section~\ref{sec:sdid_spec}, with the underperformer indicator replacing the winner indicator.  Of the 37 matched events, 11 fall within the 1998--2018 SDiD window from 9 countries, providing sufficient variation for estimation.  Unlike the winner analysis where SDiD was estimated for GDP only, I estimate SDiD for all six features to provide a complete picture of the underperformer effect.
 
-Figure~\ref{fig:ext_underperformer_sdid} shows the stacked SDiD plot.  The estimated ATT is reported in the figure notes.
+Figures~\ref{fig:ext_underperformer_sdid_gdp} and~\ref{fig:ext_underperformer_sdid_exports} show the SDiD plots for GDP and exports---the two features with the most informative results.  The remaining four component plots are in Appendix Figures~\ref{fig:app_underperformer_sdid_priv_cons}--\ref{fig:app_underperformer_sdid_imports}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{underperformer_sdid_gdp.png}
 \caption{SDiD: effect of World Cup underperformance on GDP growth}
-\label{fig:ext_underperformer_sdid}
+\label{fig:ext_underperformer_sdid_gdp}
 \begin{tablenotes}
-\textit{Notes}: Stacked SDiD with 10-quarter subseries $q \in [-7, +2]$ for World Cups 1998--2018.  Treatment = top-10 pre-tournament ELO rating, eliminated in group stage.  Bootstrap SE (1{,}000 replications).  Host-only controls excluded.
+\textit{Notes}: Stacked SDiD with 10-quarter subseries $q \in [-7, +2]$ for World Cups 1998--2018.  Treatment = top-10 pre-tournament ELO rating, eliminated in group stage.  ATT $= 0.763$\,pp, SE $= 0.688$ (bootstrap, 1{,}000 replications), $p = 0.268$.  11~treated, 261~control subseries.  Host-only controls excluded.
 \end{tablenotes}
 \end{figure}
 
-Overall, the underperformer analysis finds no evidence that early tournament exit depresses macroeconomic outcomes.  If anything, the GDP event study suggests a marginally significant \emph{positive} effect at $l = +1$, which is inconsistent with a negative sentiment channel and likely reflects the economic resilience of the large, diversified economies that dominate the underperformer sample.  The significant negative effect on exports at $l = +1$ is an intriguing result but is not robust at longer horizons.  These findings suggest that the mechanisms driving the winner premium---national pride, consumer confidence, international visibility---do not operate symmetrically: winning generates a detectable positive shock, but losing unexpectedly does not generate a corresponding negative one.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{underperformer_sdid_exports.png}
+\caption{SDiD: effect of World Cup underperformance on export growth}
+\label{fig:ext_underperformer_sdid_exports}
+\begin{tablenotes}
+\textit{Notes}: Stacked SDiD with 10-quarter subseries $q \in [-7, +2]$ for World Cups 1998--2018.  Treatment = underperformer.  ATT $= -1.290$\,pp, SE $= 1.435$ (bootstrap, 1{,}000 replications), $p = 0.369$.  10~treated, 259~control subseries.  Host-only controls excluded.
+\end{tablenotes}
+\end{figure}
+
+Table~\ref{tab:sdid_three_way_comparison} compares the SDiD ATTs across three analyses: the underperformer results, my replication of the winner effect, and the original \citet{Mello2024} estimates.  Several patterns stand out.
+
+\begin{table}[H]
+\centering
+\caption{SDiD average treatment effects: underperformers vs.\ winners}
+\label{tab:sdid_three_way_comparison}
+\small
+\begin{tabular}{l rr rr rr}
+\toprule
+ & \multicolumn{2}{c}{\textbf{Underperformer}} & \multicolumn{2}{c}{\textbf{Replication}} & \multicolumn{2}{c}{\textbf{Mello (2024)}} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+Component & ATT & (SE) & ATT & (SE) & ATT & (SE) \\
+\midrule
+GDP                       & $0.763$     & (0.688) & $0.544$     & (0.309) & $0.481$*   & (0.263) \\
+Private consumption       & $0.410$     & (0.234) & $-0.202$    & (0.361) & ---        &  ---    \\
+Government consumption    & $0.570$     & (0.635) & $-0.428$    & (0.575) & $-0.314$   & (0.463) \\
+Gross fixed capital form. & $2.566$     & (1.967) & $1.026$     & (1.087) & $1.214$    & (1.238) \\
+Exports                   & $-1.290$    & (1.435) & $5.073$     & (4.513) & $4.507$*   & (3.916) \\
+Imports                   & $2.147$*    & (1.105) & $-0.583$    & (1.075) & $-0.112$   & (1.095) \\
+\bottomrule
+\multicolumn{7}{l}{\footnotesize *\,$p<0.10$,\; **\,$p<0.05$,\; ***\,$p<0.01$.\; Bootstrap SEs (1,000 replications).} \\
+\multicolumn{7}{p{14cm}}{\footnotesize \textit{Notes}: ATT denotes the average treatment effect in the two post-World Cup quarters.  Underperformer: 11~treated (10 for components), 259--261~control subseries.  Replication \& Mello: 6~treated, ${\sim}$268~control subseries.  All estimates in percentage points.}
+\end{tabular}
+\end{table}
+
+Most underperformer ATTs are \emph{positive}---GDP ($0.763$\,pp), private consumption ($0.410$\,pp), government consumption ($0.570$\,pp), capital formation ($2.566$\,pp), and imports ($2.147$\,pp, marginally significant at $p = 0.052$)---which runs counter to the hypothesis that early elimination depresses economic activity.  The notable exception is \textbf{exports} ($-1.290$\,pp), which is the only component with a negative ATT for underperformers.  This is consistent with the findings from both the replication and \citet{Mello2024}, where exports are the feature most responsive to World Cup outcomes: winners see a large positive export boost (${\sim}5$\,pp), while underperformers experience a decline.  The trade channel thus appears to be the primary mechanism through which World Cup outcomes affect the economy, operating in both directions.
+
+None of the underperformer ATTs are statistically significant at conventional levels (except imports at $p = 0.052$), and the standard errors are generally large, reflecting the heterogeneity of the underperformer sample---which includes both large diversified economies (Germany 2018, France 2002) and smaller ones (Czech Republic 2006, Croatia 2002).  An interesting extension for future work would be to investigate ``overperformers''---countries that significantly exceeded pre-tournament expectations---to test whether the trade channel operates symmetrically on the positive side for non-winners as well.
 

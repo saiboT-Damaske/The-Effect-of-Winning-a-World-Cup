@@ -26,6 +26,7 @@ The relative time indicators span $k \in \{-16, \ldots, -1, +1, \ldots, +16\}$, 
 Standard errors are clustered at the country level to account for serial correlation within countries.
 
 \subsubsection{Synthetic Difference-in-Differences Specification}
+\label{sec:sdid_spec}
 
 The SDID analysis follows \citet{Mello2024} in constructing 10-quarter subseries around each post-1994 World Cup. For each tournament in $\{1998, 2002, 2006, 2010, 2014, 2018\}$, I create subseries spanning $q \in [-7, +2]$ relative to Q2 of the World Cup year. This yields 6 treated subseries (one per winner: France 1998 and 2018, Brazil 2002, Italy 2006, Spain 2010, Germany 2014) and approximately 260 control subseries from the donor pool.
 
@@ -38,7 +39,7 @@ Host country subseries are excluded from the donor pool to avoid contamination, 
 \end{equation}
 where $W_{n,q} = 1$ for treated subseries in post-treatment quarters ($q \geq 1$), and the unit weights $\hat{\omega}_n$ and time weights $\hat{\lambda}_q$ are constructed as described in Section~\ref{theory}.
 
-Inference uses 1,000 bootstrap replications with clustering at the country-subseries level, following \citet{Mello2024}.
+Inference relies on the \emph{placebo bootstrap} procedure recommended by \citet{Arkhangelsky2021}.  In each of 1{,}000 replications, entire country-subseries are resampled with replacement from the stacked panel---preserving the within-unit serial correlation structure---and the full SDID estimation pipeline is re-run on the resampled data (weight construction, regression, ATT extraction).  The bootstrap distribution of ATT estimates yields a standard error and, via the percentile method, a $p$-value.  Clustering at the country-subseries level accounts for the fact that the same country contributes multiple subseries across different World Cups and ensures that inference reflects the effective sample size of independent country trajectories rather than the larger number of individual quarterly observations.
 
 \subsubsection{GDP Components}
 
@@ -68,16 +69,16 @@ Reaching the semifinals represents exceptional tournament performance that may g
 \end{equation}
 where $S_c$ indicates countries reaching the semifinals (finishing in the top 4). This extends the treatment group considerably, providing more statistical power but potentially diluting the effect if only winning matters.
 
-\subsubsection{Early Elimination Effect}
+\subsubsection{Underperformer Effect}
 
-The psychological literature suggests that unexpected negative outcomes can affect sentiment and behavior. A highly-ranked team being eliminated in the group stage or early knockout rounds represents a negative shock to national expectations. To investigate whether such disappointments have measurable economic consequences, I identify cases where pre-tournament favorites (based on FIFA rankings or betting odds) exited earlier than expected.
+If winning generates economic effects through enhanced international visibility and confidence, then the inverse channel---a highly ranked team being eliminated in the group stage---may produce a negative sentiment shock.  I define underperformance using pre-tournament ELO ratings from \texttt{eloratings.net}: a country is an underperformer if it entered the World Cup ranked in the top~10 by ELO and was eliminated in the group stage.  This criterion captures sharp negative surprises---defending champions or top-ranked teams exiting far earlier than expected.  Candidate events include France in 2002 (ranked~1st, defending champion), Spain in 2014 (ranked~2nd, defending champion), and Germany in 2018 (ranked~2nd, defending champion).
 
-The specification is:
+The specification mirrors the winner event study:
 \begin{equation}
 \Delta_4 \ln GDP_{c,t} = \alpha_c + \lambda_t + \sum_{k \neq 0} \beta_k^{E} \cdot \mathbf{1}[K_{ct} = k] \cdot E_c + \theta \cdot HOST_{c,t} + \zeta \cdot \ln GDP_{c,t-4} + \varepsilon_{c,t}
 \label{eq:early_exit_event_study}
 \end{equation}
-where $E_c$ indicates unexpected early elimination. Candidate events include Italy's group stage exit in 2010 (defending champion), Spain's group stage exit in 2014 (defending champion), and Germany's group stage exit in 2018 (defending champion).
+where $E_c$ indicates countries that have ever experienced an underperformance event.  For the SDiD specification, the same stacked 10-quarter design is applied with the underperformer indicator replacing the winner indicator.  Both event study and SDiD are estimated for all six features (GDP, private consumption, government consumption, capital formation, exports, and imports) to identify whether the underperformer effect operates through the same trade channel documented for winners.
 
 This extension tests whether the psychological mechanisms operate symmetrically for positive and negative tournament outcomes.
 
