@@ -1,0 +1,162 @@
+========================================
+  UNDERPERFORMER ANALYSIS — DATA SUMMARY
+========================================
+
+Definition: Top-10 pre-tournament ELO rating, eliminated in group stage.
+Source: Data/world_cup/wc_underperformance_elo.csv
+
+--- All underperformer events (regardless of OECD panel membership) ---
+   wc_year elo_rank iso3      team_name elo_rating group_stage_exit
+1     1962        4  ARG      Argentina       1979                1
+2     1962        6  ESP          Spain       1963                1
+3     1962        9  URY        Uruguay       1905                1
+4     1966        1  BRA         Brazil       2010                1
+5     1966        4  ITA          Italy       1979                1
+6     1966        8  ESP          Spain       1895                1
+7     1966        9  MEX         Mexico       1868                1
+8     1970        5  CZE Czechoslovakia       1963                1
+9     1970        8  SWE         Sweden       1846                1
+10    1970        9  BGR       Bulgaria       1824                1
+11    1970       10  ROU        Romania       1784                1
+12    1974        3  ITA          Italy       2002                1
+13    1974       10  GBR       Scotland       1826                1
+14    1978        4  ESP          Spain       1961                1
+15    1978        5  GBR       Scotland       1944                1
+16    1978        9  HUN        Hungary       1907                1
+17    1978       10  FRA         France       1891                1
+18    1982        8  SRB     Yugoslavia       1917                1
+19    1982       10  CZE Czechoslovakia       1896                1
+20    1986        8  HUN        Hungary       1891                1
+21    1986       10  GBR       Scotland       1874                1
+22    1990        5  SWE         Sweden       1952                1
+23    1990        7  RUS   Soviet Union       1943                1
+24    1994        5  COL       Colombia       1945                1
+25    1994       10  RUS         Russia       1867                1
+26    1998        3  ESP          Spain       2040                1
+27    2002        1  FRA         France       2093                1
+28    2002        2  ARG      Argentina       2020                1
+29    2002        4  PRT       Portugal       1978                1
+30    2002        7  HRV        Croatia       1881                1
+31    2006        4  CZE Czech Republic       1971                1
+32    2010        6  ITA          Italy       1936                1
+33    2014        2  ESP          Spain       2108                1
+34    2014        6  PRT       Portugal       1942                1
+35    2014        7  GBR        England       1931                1
+36    2018        2  DEU        Germany       2076                1
+37    2018       10  PER           Peru       1915                1
+38    2022        5  BEL        Belgium       2006                1
+39    2022        8  DNK        Denmark       1971                1
+40    2022        9  DEU        Germany       1962                1
+41    2022       10  URY        Uruguay       1936                1
+
+--- Events matched to OECD panel ---
+Total matched events: 37 
+Unique countries: 19 
+Countries: ARG, BEL, BGR, BRA, COL, CZE, DEU, DNK, ESP, FRA, GBR, HRV, HUN, ITA, MEX, PRT, ROU, RUS, SWE 
+WC years with events: 1962, 1966, 1970, 1974, 1978, 1982, 1986, 1990, 1994, 1998, 2002, 2006, 2010, 2014, 2018, 2022 
+
+--- Events by country ---
+   iso3 n_events                     wc_years
+1   ESP        5 1962, 1966, 1978, 1998, 2014
+2   GBR        4       1974, 1978, 1986, 2014
+3   CZE        3             1970, 1982, 2006
+4   ITA        3             1966, 1974, 2010
+5   ARG        2                   1962, 2002
+6   DEU        2                   2018, 2022
+7   FRA        2                   1978, 2002
+8   HUN        2                   1978, 1986
+9   PRT        2                   2002, 2014
+10  RUS        2                   1990, 1994
+11  SWE        2                   1970, 1990
+12  BEL        1                         2022
+13  BGR        1                         1970
+14  BRA        1                         1966
+15  COL        1                         1994
+16  DNK        1                         2022
+17  HRV        1                         2002
+18  MEX        1                         1966
+19  ROU        1                         1970
+
+--- Events by WC year ---
+   wc_year n_events          countries
+1     1962        2           ARG, ESP
+2     1966        4 BRA, ITA, ESP, MEX
+3     1970        4 CZE, SWE, BGR, ROU
+4     1974        2           ITA, GBR
+5     1978        4 ESP, GBR, HUN, FRA
+6     1982        1                CZE
+7     1986        2           HUN, GBR
+8     1990        2           SWE, RUS
+9     1994        2           COL, RUS
+10    1998        1                ESP
+11    2002        4 FRA, ARG, PRT, HRV
+12    2006        1                CZE
+13    2010        1                ITA
+14    2014        3      ESP, PRT, GBR
+15    2018        1                DEU
+16    2022        3      BEL, DNK, DEU
+
+--- Events NOT in OECD panel ---
+  wc_year iso3  team_name elo_rank
+1    1962  URY    Uruguay        9
+2    1982  SRB Yugoslavia        8
+3    2018  PER       Peru       10
+4    2022  URY    Uruguay       10
+
+--- Data availability (10-quarter window for SDiD) ---
+   wc_year iso3      team_name elo_rank gdp_available complete_window
+1     1962  ARG      Argentina        4             0           FALSE
+2     1962  ESP          Spain        6             3           FALSE
+3     1966  BRA         Brazil        1             0           FALSE
+4     1966  ITA          Italy        4            10            TRUE
+5     1966  ESP          Spain        8            10            TRUE
+6     1966  MEX         Mexico        9            10            TRUE
+7     1970  CZE Czechoslovakia        5             0           FALSE
+8     1970  SWE         Sweden        8            10            TRUE
+9     1970  BGR       Bulgaria        9             0           FALSE
+10    1970  ROU        Romania       10             0           FALSE
+11    1974  ITA          Italy        3            10            TRUE
+12    1974  GBR       Scotland       10            10            TRUE
+13    1978  ESP          Spain        4            10            TRUE
+14    1978  GBR       Scotland        5            10            TRUE
+15    1978  HUN        Hungary        9             0           FALSE
+16    1978  FRA         France       10            10            TRUE
+17    1982  CZE Czechoslovakia       10             0           FALSE
+18    1986  HUN        Hungary        8             0           FALSE
+19    1986  GBR       Scotland       10            10            TRUE
+20    1990  SWE         Sweden        5            10            TRUE
+21    1990  RUS   Soviet Union        7             0           FALSE
+22    1994  COL       Colombia        5             0           FALSE
+23    1994  RUS         Russia       10             0           FALSE
+24    1998  ESP          Spain        3            10            TRUE
+25    2002  FRA         France        1            10            TRUE
+26    2002  ARG      Argentina        2            10            TRUE
+27    2002  PRT       Portugal        4            10            TRUE
+28    2002  HRV        Croatia        7            10            TRUE
+29    2006  CZE Czech Republic        4            10            TRUE
+30    2010  ITA          Italy        6            10            TRUE
+31    2014  ESP          Spain        2            10            TRUE
+32    2014  PRT       Portugal        6            10            TRUE
+33    2014  GBR        England        7            10            TRUE
+34    2018  DEU        Germany        2            10            TRUE
+35    2022  BEL        Belgium        5             7           FALSE
+36    2022  DNK        Denmark        8             7           FALSE
+37    2022  DEU        Germany        9             7           FALSE
+
+--- Feature-level availability ---
+  gdp_yoy_log_4q                               : 22 / 37 events with complete window
+  private_consumption_yoy_log_4q               : 21 / 37 events with complete window
+  government_consumption_yoy_log_4q            : 21 / 37 events with complete window
+  capital_formation_yoy_log_4q                 : 21 / 37 events with complete window
+  exports_yoy_log_4q                           : 21 / 37 events with complete window
+  imports_yoy_log_4q                           : 21 / 37 events with complete window
+
+--- Panel summary ---
+Total panel rows: 8633 
+underperformer == 1 rows: 23 
+ever_underperformer == 1 countries: 19 
+Ever-underperformer country list: ARG, BEL, BGR, BRA, COL, CZE, DEU, DNK, ESP, FRA, GBR, HRV, HUN, ITA, MEX, PRT, ROU, RUS, SWE 
+
+========================================
+  END OF SUMMARY
+========================================
