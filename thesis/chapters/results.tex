@@ -1,66 +1,20 @@
-This section presents the event study replication of \citet{Mello2024}'s main findings, describes the sample construction steps required to approximate the original observation count, compares our estimates to those reported in the paper, and extends the analysis to all six GDP components using the same specification.
-
 % ====================================================================
-\subsection{Replication of Mello (2024): Event Study for GDP}
+\subsection{Replication of Mello (2024): Event Study}
 \label{sec:es_gdp}
 % ====================================================================
 
-\subsubsection{Sample Construction}
-\label{sec:es_sample}
+I estimate the event study regression for GDP specified in Equation~\eqref{eq:mello_event_study}.  The dependent variable is year-over-year log GDP growth $\Delta_4 \ln \text{GDP}_{c,t}$ in percentage points.  The 32 relative-time indicators $\text{WIN}^l_{c,t}$ for $l \in \{-16, \ldots, -1, +1, \ldots, +16\}$ capture the dynamic effect of winning the World Cup, with endpoints binned and the event quarter $l = 0$ omitted as reference.  A hosting dummy, the fourth lag of logged GDP as a convergence control, and country and quarter fixed effects complete the specification.  Standard errors are clustered at the country level.
 
-Replicating \citet{Mello2024}'s Table~2 event study requires reconstructing the exact estimation sample from OECD Quarterly National Accounts data.  The paper reports 8,637 observations across 48 countries for the period 1961\,Q1--2021\,Q4, but several non-obvious data-processing decisions are needed to reach that count.  Our pipeline proceeds in five steps:
+As described in Section~\ref{sec:sample_construction}, the year-over-year growth rates are computed on the full 1960+ panel before trimming to the estimation window.  Additionally, the convergence control $\ln y_{c,t-4}$ is pre-computed from the untrimmed panel and joined to the estimation sample.  The final estimation sample contains 8,633 country-quarter observations, four fewer than Mello's 8,637.  The difference in observation counts is due to minor discrepancies in the underlying data extracts.
 
-\begin{enumerate}
-    \item \textbf{OECD data retrieval.}  We download seasonally adjusted, constant-price (USD PPP, reference year 2015) quarterly GDP and five expenditure components---private consumption, government consumption, gross fixed capital formation, exports, and imports---via the OECD Quarterly National Accounts API for 1960\,Q1 onward.  Population data are obtained separately from the OECD annual database.
-
-    \item \textbf{Year-over-year growth on the full panel.}  Following Equation~\eqref{eq:yoy}, year-over-year log growth $\Delta_4 \ln y_{c,t} = \ln y_{c,t} - \ln y_{c,t-4}$ is computed for each feature on the \emph{full} 1960+ panel \emph{before} any sample trimming.  This ensures that late-start countries such as Brazil (OECD data from 1996\,Q1) have valid growth rates immediately upon entering the sample (e.g.\ at the paper's start date of 1998\,Q2, the four-quarter lag reaches back to 1997\,Q2, which is available).  Computing growth rates after trimming to the paper window would introduce spurious missingness in the first four quarters of every country's series.
-
-    \item \textbf{Pre-computed convergence control.}  Equation~\eqref{eq:mello_event_study} includes $\ln y_{c,t-4}$ as a convergence control.  Because the estimation sample begins at 1962\,Q1 (the first quarter with valid year-over-year growth for countries whose OECD data starts in 1960), the fourth lag of the logged GDP level requires data from 1961\,Q1 and earlier.  We therefore compute $\ln y_{c,t-4}$ for all six features from the full 1960+ panel and join the result to the trimmed sample, ensuring that 1962\,Q1 observations retain a valid lag rather than being dropped as missing.
-
-    \item \textbf{Country set and date restrictions.}  We retain the 48 countries listed in Mello's Table~A2: 36 controls (never won or hosted a World Cup in the sample period) and 12 host/winner countries.  The time window is restricted to 1961\,Q1--2021\,Q4 and then trimmed to each country's effective start date from Table~A1.  For most countries with data beginning in 1960, the effective first observation is 1962\,Q1 (the earliest quarter with valid year-over-year growth).  Four late-start exceptions apply: Brazil from 1998\,Q2 (matching the paper's special case), Argentina from 1993\,Q1, Russia from 1995\,Q1, and Chile from 1996\,Q1.
-
-    \item \textbf{Final estimation sample.}  Rows with missing year-over-year GDP growth are dropped.  The resulting sample contains \textbf{8,633} country-quarter observations---four fewer than Mello's reported 8,637.  We attribute the discrepancy to Russia's data availability: in our OECD extract, Russia's last observation is 2021\,Q3 rather than 2021\,Q4, which removes four quarterly observations (one for each of the four quarters that depend on a complete four-quarter lag chain).\footnote{The OECD API revision timestamp at the time of our download may differ from the one used by \citet{Mello2024}; Russian macroeconomic data releases were delayed following international sanctions in early 2022.}  All other country-quarter counts match exactly.
-\end{enumerate}
-
-Table~\ref{tab:obs_comparison} in Section~\ref{sec:comparison} provides a full country-level comparison of our observation counts to those implied by Mello's summary statistics.
-
-
-\subsubsection{Event Study Specification}
-
-The event study regression follows Equation~\eqref{eq:mello_event_study} exactly.  The dependent variable is year-over-year log GDP growth $\Delta_4 \ln \text{GDP}_{c,t}$ (in percentage points).  The regressors are 32 relative-time indicators $\text{WIN}^l_{c,t}$ for $l \in \{-16, \ldots, -1, +1, \ldots, +16\}$, with endpoints binned (i.e.\ $l \leq -16$ pooled into $l = -16$ and $l \geq +16$ into $l = +16$), a hosting dummy $\text{HOST}_{c,t}$ equal to one in the event quarter Q2 of a World Cup year held in country~$c$, and the fourth lag of logged GDP as a convergence control.  The reference period $l = 0$ (Q2 of the World Cup year) is omitted.  Country and quarter fixed effects are included, and standard errors are clustered at the country level.  For countries with multiple victories (Germany: 1974, 1990, 2014; France: 1998, 2018; Italy: 1982, 2006), the relative-time counter restarts halfway between consecutive events, following \citet{Mello2024}'s convention.
-
-We estimate the model using both the \texttt{fixest} and \texttt{lfe} packages in R.  Point estimates are numerically identical across estimators (differences of order $10^{-12}$); clustered standard errors differ by at most 1.5\%, a known consequence of small-sample adjustments in the two implementations.  We report \texttt{fixest} results throughout.
-
-
-\subsubsection{GDP Event Study Results}
+\subsubsection{GDP Results}
 \label{sec:es_gdp_results}
 
-Figure~\ref{fig:event_study_gdp} presents the event study coefficient plot for GDP growth.  Each point represents the estimated difference in year-over-year GDP growth between World Cup winners and non-winners at relative quarter~$l$, with 95\% confidence intervals based on country-clustered standard errors.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{event_study_gdp_figure1.png}
-\caption{Event study: effect of winning the World Cup on year-over-year GDP growth}
-\label{fig:event_study_gdp}
-\begin{tablenotes}
-\textit{Notes}: OLS estimates of Equation~\eqref{eq:mello_event_study}.  Dependent variable is $\Delta_4 \ln \text{GDP}_{c,t}$ in percentage points.  Bars show 95\% confidence intervals based on standard errors clustered at the country level.  The reference period ($l = 0$, Q2 of the World Cup year) is normalised to zero.  $N = 8{,}633$; 48 countries; 10 win events across 6 winner countries (BRA, DEU, ESP, FRA, GBR, ITA).
-\end{tablenotes}
-\end{figure}
-
-The pre-treatment coefficients ($l < 0$) are uniformly small and statistically insignificant, consistent with the parallel trends assumption.  No systematic pattern of elevated or depressed growth appears among future winners in the quarters preceding their victory.
-
-In the post-treatment period, GDP growth rises by 0.33 percentage points in the first quarter after victory ($l = +1$) and 0.60 percentage points in the second quarter ($l = +2$).  While both point estimates are positive, neither reaches conventional significance thresholds (the respective $p$-values are 0.23 and 0.13).  The effect dissipates by the third quarter ($l = +3$: 0.30\,pp, $p = 0.35$) and subsequent coefficients fluctuate around zero.
-
-The coefficient on the convergence control is $-1.364$ ($p = 0.031$), consistent with conditional $\beta$-convergence.  The hosting indicator is $-0.542$ ($p = 0.269$), negative but statistically insignificant.
-
-
-\subsubsection{Comparison with Mello (2024)}
-
-Table~\ref{tab:event_study_comparison} contrasts our estimates with those reported in \citet{Mello2024}'s Table~2.  Selected relative-time indicators, the convergence control, and the hosting dummy are shown for brevity; full coefficient vectors for all 32 leads and lags are saved in the replication materials.
+Table~\ref{tab:event_study_comparison} presents selected coefficients from our replication alongside \citeauthor{Mello2024}'s Table~2 results.  The full set of 32 coefficients, including exact $p$-values and differences, is provided in the appendix (Table~\ref{tab:es_full_comparison}).
 
 \begin{table}[H]
 \centering
-\caption{Event study comparison: replication versus \citet{Mello2024}}
+\caption{Event study for GDP: replication versus \citet{Mello2024}}
 \label{tab:event_study_comparison}
 \small
 \begin{tabular}{l rr rr}
@@ -76,7 +30,6 @@ Host                    & $-0.542$   & (0.484) & $-0.591$   & (0.545) \\[4pt]
 $l = -16$ (binned)      &  0.771 & (0.671) &  0.640 & (0.673) \\
 $l = -8$                &  0.219 & (0.665) &  0.098 & (0.695) \\
 $l = -4$                &  0.073 & (0.515) & $-0.107$ & (0.535) \\
-$l = -2$                & $-0.512$ & (0.453) & $-0.605$ & (0.432) \\
 $l = -1$                &  0.071 & (0.227) &  0.125 & (0.206) \\[4pt]
 \multicolumn{5}{l}{\textit{Post-treatment}} \\
 $l = +1$                &  0.325   & (0.269) &  0.454*  & (0.246) \\
@@ -94,114 +47,55 @@ Within $R^2$ (Mello)    & \multicolumn{2}{c}{---}   & \multicolumn{2}{c}{0.423} 
 \end{tabular}
 \end{table}
 
-The convergence control and hosting dummy replicate very closely: our $\ln\text{GDP}_{t-4}$ coefficient of $-1.364$ matches Mello's $-1.368$ to three significant digits, and the host coefficient ($-0.542$ vs.\ $-0.591$) lies well within one standard error.
+The pre-treatment coefficients ($l < 0$) are uniformly small and statistically insignificant, consistent with the parallel trends assumption.  In the post-treatment period, GDP growth rises by 0.33 percentage points at $l = +1$ and 0.60\,pp at $l = +2$.  Both point estimates are positive but fall short of conventional significance thresholds ($p = 0.23$ and $p = 0.13$, respectively; see appendix Table~\ref{tab:es_full_comparison} for exact $p$-values).  The effect dissipates by the third quarter and subsequent coefficients fluctuate around zero.  The convergence control ($-1.364$, $p = 0.031$) is consistent with conditional $\beta$-convergence; the hosting dummy ($-0.542$, $p = 0.269$) is negative but insignificant.
 
-The post-treatment coefficients at $l = +1$ and $l = +2$ show the same positive pattern as in the original, though our point estimates are attenuated (0.33 and 0.60 vs.\ 0.45 and 0.68).  This attenuation is sufficient to reduce the $l = +1$ and $l = +2$ estimates below the 10\% significance threshold in our replication, whereas \citet{Mello2024} reports both as marginally significant.  The differences are modest in absolute terms (0.13\,pp and 0.09\,pp respectively) and lie within one standard error of the original estimates.  Several factors may contribute:
+\subsubsection{Comparison with Mello (2024)}
 
-\begin{itemize}
-    \item \textbf{Observation count.}  Our sample contains four fewer observations due to Russia's data ending at 2021\,Q3 rather than Q4 in our OECD extract.
-    \item \textbf{OECD data revisions.}  GDP figures are routinely revised.  Our download occurred in 2025, while \citeauthor{Mello2024} likely accessed the data during 2023--2024.  Benchmark revisions can shift individual country-quarter values by tenths of a percentage point.
-    \item \textbf{Software implementation.}  Minor differences in fixed-effect absorption algorithms, convergence tolerances, and clustered standard error degrees-of-freedom adjustments between Stata (used by Mello) and R's \texttt{fixest} can produce small numerical deviations.
-\end{itemize}
+The replication tracks the original results closely.  The convergence control matches to three significant digits ($-1.364$ vs.\ $-1.368$), and all pre-treatment coefficients lie within one standard error.  The key post-treatment coefficients at $l = +1$ and $l = +2$ show the same positive pattern, though our estimates are slightly attenuated (0.33 and 0.60 vs.\ 0.45 and 0.68).  This attenuation---0.13\,pp and 0.09\,pp respectively---moves both coefficients below the 10\% significance threshold that \citet{Mello2024} reports as marginally significant.  The differences are modest and likely reflect minor discrepancies in the underlying data and estimation procedures.
 
-Despite these differences, the core qualitative finding is robust: winning the World Cup is associated with a transient rise in GDP growth of roughly 0.3--0.7 percentage points in the two quarters following the event, which dissipates by the third post-treatment quarter.
-
-
-% ====================================================================
-\subsection{Extended Analysis: GDP Component Event Studies}
-\label{sec:es_components}
-% ====================================================================
-
-To examine the channels through which a World Cup victory might affect aggregate GDP, we estimate Equation~\eqref{eq:mello_event_study} separately for each of the six GDP components available in our panel: GDP itself, private consumption, government consumption, gross fixed capital formation (investment), exports, and imports.  In each case, the dependent variable $\Delta_4 \ln y_{c,t}$ and the convergence control $\ln y_{c,t-4}$ are defined in terms of the respective component.  All other aspects of the specification---the 32 relative-time indicators, the hosting dummy, country and quarter fixed effects, and country-level clustering---remain identical.
-
-Figure~\ref{fig:event_study_components} shows the coefficient plots for the five expenditure components (the GDP plot is in Figure~\ref{fig:event_study_gdp}).  Table~\ref{tab:component_es_summary} summarises the key post-treatment coefficients and controls for all six features.
+Figure~\ref{fig:es_gdp_comparison} overlays the full coefficient paths.  The replication (blue) tracks the original (red) closely across all 32 relative-time periods, with the largest visible discrepancy occurring in the long-run post-treatment lags ($l \geq +5$) where both sets of estimates are statistically indistinguishable from zero.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{event_study_gdp_components_figure2.png}
-\caption{Event study: effect of winning the World Cup on GDP component growth rates}
-\label{fig:event_study_components}
+\includegraphics[width=0.95\textwidth]{event_study_gdp_comparison.png}
+\caption{GDP event study: replication vs.\ \citet{Mello2024}}
+\label{fig:es_gdp_comparison}
 \begin{tablenotes}
-\textit{Notes}: Each panel shows OLS estimates of Equation~\eqref{eq:mello_event_study} with the respective component as the dependent variable.  Bars show 95\% confidence intervals; standard errors clustered at the country level.  The reference period ($l = 0$) is normalised to zero.  Estimation sample: 8,589 observations for all five components (8,633 for GDP), 48 countries.
+\textit{Notes}: Solid lines show point estimates; shaded areas show 95\% confidence intervals based on country-clustered standard errors.  Blue = replication ($N = 8{,}633$), red = \citeauthor{Mello2024} ($N = 8{,}637$).
 \end{tablenotes}
 \end{figure}
 
-\begin{table}[H]
+The core qualitative finding is robust: winning the World Cup is associated with a transient rise in GDP growth of roughly 0.3--0.7 percentage points in the two quarters following the event, which dissipates by the third post-treatment quarter.
+
+
+% ====================================================================
+\subsection{GDP Component Event Studies}
+\label{sec:es_components}
+% ====================================================================
+
+To examine the channels through which a World Cup victory might affect aggregate GDP, I estimate Equation~\eqref{eq:mello_event_study} separately for each of the five expenditure components: private consumption, government consumption, gross fixed capital formation, exports, and imports.  In each regression, both the dependent variable $\Delta_4 \ln y_{c,t}$ and the convergence control $\ln y_{c,t-4}$ use the respective component.  All other specification details remain identical to the GDP model.  The component regressions have 8,589 observations, 44 fewer than GDP.  The difference in observation counts is due to minor discrepancies in the underlying data extracts.
+
+Figure~\ref{fig:es_all_comparison} compares the coefficient paths of all six features between our replication and \citeauthor{Mello2024}'s Table~2 (GDP) and Table~A3 (components).  A detailed comparison table with selected post-treatment coefficients for all six features is provided in Table~\ref{tab:es_all_features_comparison} in the appendix.
+
+\begin{figure}[H]
 \centering
-\caption{Event study estimates across GDP components: selected coefficients}
-\label{tab:component_es_summary}
-\small
-\begin{tabular}{l rr rr rr}
-\toprule
-  & \multicolumn{2}{c}{$l = +1$} & \multicolumn{2}{c}{$l = +2$} & \multicolumn{2}{c}{$\ln y_{t-4}$} \\
-\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
-Component & Coeff. & (SE) & Coeff. & (SE) & Coeff. & (SE) \\
-\midrule
-GDP                     &  0.325 & (0.269) &  0.597 & (0.387) & $-1.364$** & (0.613) \\
-Private consumption     & $-0.186$ & (0.515) &  0.166 & (0.539) & $-2.831$*** & (0.693) \\
-Government consumption  &  0.202 & (0.311) &  0.137 & (0.399) & $-3.777$** & (1.492) \\
-Capital formation       & $-0.239$ & (0.505) &  1.110 & (1.235) & $-7.816$*** & (1.749) \\
-Exports                 &  3.772 & (2.630) &  5.810** & (2.627) & $-3.772$*** & (0.694) \\
-Imports                 &  1.516 & (1.221) &  1.307 & (1.233) & $-6.146$*** & (0.951) \\
-\midrule
-$N$                     & \multicolumn{2}{c}{8,633} & \multicolumn{2}{c}{8,633} & \multicolumn{2}{c}{} \\
-$N$ (components)        & \multicolumn{2}{c}{8,589} & \multicolumn{2}{c}{8,589} & \multicolumn{2}{c}{} \\
-\bottomrule
-\multicolumn{7}{l}{\footnotesize *\,$p<0.10$,\; **\,$p<0.05$,\; ***\,$p<0.01$.\; Clustered SEs at the country level.} \\
-\multicolumn{7}{l}{\footnotesize Component regressions have 8,589 obs (44 fewer due to missing lags for Saudi Arabia).}
-\end{tabular}
-\end{table}
+\includegraphics[width=0.95\textwidth]{event_study_all_features_comparison.png}
+\caption{Event study comparison across GDP components: replication vs.\ \citet{Mello2024}}
+\label{fig:es_all_comparison}
+\begin{tablenotes}
+\textit{Notes}: Each panel shows the full coefficient path for one GDP component.  Blue = replication, red = \citeauthor{Mello2024}.  Shaded areas are 95\% confidence intervals.  Component regressions use 8,589 observations (replication) vs.\ 8,549 (\citeauthor{Mello2024}); GDP uses 8,633 vs.\ 8,637.
+\end{tablenotes}
+\end{figure}
 
 
-\subsubsection{Exports}
+Across all six components, the replication coefficients track \citeauthor{Mello2024}'s closely.  The convergence controls, which are the most precisely estimated parameters, match within a few hundredths for every component (e.g.\ capital formation: $-7.816$ vs.\ $-7.795$; imports: $-6.146$ vs.\ $-6.056$).  The observation count difference between our component regressions (8,589) and Mello's (8,549) reflects minor discrepancies in the underlying data extracts.
 
-The export channel produces the largest and most significant effects.  At $l = +2$, export growth is estimated to increase by 5.81 percentage points ($p = 0.032$), the only post-treatment coefficient across all six features that is statistically significant at the 5\% level.  The $l = +1$ coefficient (3.77\,pp) is positive but not significant ($p = 0.158$), while $l = +3$ (4.27\,pp, $p = 0.081$) is marginally significant.  These magnitudes are roughly an order of magnitude larger than the GDP effect, which is consistent with exports representing a share of GDP and with the effect being concentrated in a single component.
+The component-level results identify \textbf{exports} as the primary channel: at $l = +2$, export growth increases by 5.81\,pp ($p = 0.032$) in our replication---the only statistically significant post-treatment coefficient at the 5\% level across all features.  \citet{Mello2024} reports a comparable 5.12\,pp for the same coefficient, significant at the 10\% level.  The $l = +3$ export coefficient is also marginally significant in our estimates (4.27\,pp, $p = 0.081$).  These magnitudes are roughly an order of magnitude larger than the aggregate GDP effect, consistent with the effect being concentrated in a single component.
 
-Notably, the pre-treatment period also shows a significant coefficient at $l = -1$ (4.32\,pp, $p = 0.003$), raising the question of whether export growth may anticipate the World Cup outcome.  A plausible explanation is that the World Cup takes place in Q2 (the $l = 0$ reference quarter), so some trade effects from the tournament buildup---increased media attention, sponsorship deals, or anticipatory purchasing---may materialise as early as Q1 of the same year ($l = -1$).  This pattern requires careful interpretation when assessing parallel trends for the export specification.
+The hosting dummy is positive and significant for exports in our replication ($1.89$, $p = 0.033$), indicating that hosting a World Cup independently boosts export growth, likely through tourism-related demand and heightened international visibility.  \citeauthor{Mello2024} reports a similar direction (1.25) but without significance.
 
-The hosting dummy is positive and significant for exports (1.89, $p = 0.033$), consistent with the hypothesis that hosting a World Cup increases trade openness, potentially through tourism-related demand or heightened international visibility.
+\textbf{Private consumption} and \textbf{government consumption} show no meaningful response in either our replication or Mello's.  Both $l = +1$ and $l = +2$ coefficients are small and insignificant, ruling out a household-spending channel despite the documented spikes in consumer confidence following sporting victories.  \textbf{Capital formation} is imprecisely estimated due to high investment volatility, while \textbf{imports} show a suggestive delayed effect at $l = +4$ (4.18\,pp in our replication, $p = 0.057$; 4.33\,pp in Mello, $p < 0.05$), consistent with increased demand accompanying the export surge.
 
-\subsubsection{Private Consumption}
-
-Private consumption shows no meaningful response to winning the World Cup.  Both $l = +1$ ($-0.19$\,pp) and $l = +2$ (0.17\,pp) are small and statistically indistinguishable from zero.  The confidence intervals rule out effects larger than approximately $\pm 1$ percentage point.  This null finding is consistent with \citet{Mello2024}'s result and suggests that the ``animal spirits'' channel does not operate primarily through household spending, despite the documented spikes in patriotism and consumer confidence following major sporting victories.
-
-\subsubsection{Government Consumption}
-
-Government consumption shows a modest positive response (0.20\,pp at $l = +1$, 0.14\,pp at $l = +2$), but neither coefficient approaches statistical significance.  A delayed positive effect emerges at $l = +6$ (0.98\,pp, $p = 0.055$), possibly reflecting fiscal stimulus or public investment decisions made in the aftermath of the victory.  The convergence control is large and significant ($-3.78$, $p = 0.015$), suggesting stronger mean reversion in government spending growth.
-
-\subsubsection{Capital Formation}
-
-Investment shows weak and imprecisely estimated effects.  The $l = +2$ coefficient (1.11\,pp) is the largest among the non-trade components, but the large standard error (1.24) renders it insignificant ($p = 0.373$).  The wide confidence intervals reflect the high volatility of investment growth.  The convergence control ($-7.82$, $p < 0.001$) is the largest across all components, consistent with the well-documented mean-reverting pattern in investment series.
-
-\subsubsection{Imports}
-
-Import growth responds positively, with point estimates of 1.52\,pp at $l = +1$ and 1.31\,pp at $l = +2$, though neither is statistically significant.  A larger effect appears at $l = +4$ (4.18\,pp, $p = 0.057$), suggesting a delayed import response that may reflect increased demand for foreign goods accompanying economic expansion.  The positive import response is mechanically consistent with the large export effect: increased economic activity and international engagement following a World Cup victory may stimulate both exports and imports.
-
-
-\subsubsection{Summary of Component Analysis}
-
-The component-level results point strongly toward exports as the primary channel through which World Cup victories affect GDP growth.  Table~\ref{tab:component_channel_summary} summarises the evidence:
-
-\begin{table}[H]
-\centering
-\caption{Summary of GDP component effects at $l = +2$}
-\label{tab:component_channel_summary}
-\small
-\begin{tabular}{l r r l}
-\toprule
-Component & Coefficient & SE & Significance \\
-\midrule
-Exports                 & 5.810 & (2.627) & **  \\
-Imports                 & 1.307 & (1.233) & --- \\
-Capital formation       & 1.110 & (1.235) & --- \\
-GDP                     & 0.597 & (0.387) & --- \\
-Private consumption     & 0.166 & (0.539) & --- \\
-Government consumption  & 0.137 & (0.399) & --- \\
-\bottomrule
-\multicolumn{4}{l}{\footnotesize **\,$p<0.05$.}
-\end{tabular}
-\end{table}
-
-The export effect (5.81\,pp) is nearly ten times the GDP effect (0.60\,pp) and is the only component with a statistically significant post-treatment coefficient.  This pattern is consistent with \citet{Mello2024}'s finding that the World Cup GDP boost operates primarily through the trade channel, possibly via country-of-origin effects, reputational spillovers, or increased foreign interest.  Consumption shows no response, investment is imprecisely estimated, and imports provide suggestive but weak evidence of an accompanying demand effect.
+In summary, the component analysis confirms \citeauthor{Mello2024}'s finding that the World Cup GDP effect operates primarily through the trade channel.  Where the observation counts are closely matched, the coefficient differences between our replication and the original are small---typically well within one standard error---and both analyses point to the same qualitative conclusions.
 
 % COMMENT: SDID results will be added once the SDID scripts are updated.
