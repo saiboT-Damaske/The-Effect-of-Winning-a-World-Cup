@@ -1,21 +1,16 @@
 This section details the empirical implementation of the methods introduced in Section~\ref{theory}. I first describe the replication of \citet{Mello2024}, then present the extensions that constitute the novel contributions of my thesis.
 
 \subsection{Replication of Mello (2024)}
-\label{sec:replication_mello}
 
 The primary objective of this thesis is to replicate and compare the analysis in \citet{Mello2024}. As a first step, this involves reconstructing the dataset from OECD sources as the author did not make his code publicly available\footnote{The \citet{Mello2024} paper included a replication package link: \url{https://doi.org/10.3886/E188961} but it leads to a completely different research paper of droughts in Brazil (last visited 02/26).}, reproducing the summary statistics, and estimating both the event study and synthetic difference-in-differences models. The full replication should serve two purposes: validate the original findings using independently constructed data, and additionally establish the foundation for the extensions that follow.
 \subsubsection{Data Construction}
 
-The replication uses quarterly national accounts data from the OECD, covering the period 1961--2021. The sample includes 48 countries: 6 World Cup winners during the sample period, 12 host countries, and 36 countries that neither won nor hosted. Following \citet{Mello2024}, Argentina is classified as a control country because its GDP series begins only in 1993---ten years after its last victory in 1986. Brazil enters the treated group starting in 1998-Q2, four years after its 1994 victory, contributing only its 2002 win to the analysis.
-
-The outcome variable is year-over-year (YoY) GDP growth, computed as:
+The replication uses quarterly national accounts data from the OECD, covering the period 1961--2021. The sample includes 48 countries: 6 World Cup winners during the sample period, 12 host countries, and 36 countries that neither won nor hosted. Following \citet{Mello2024}, I reconstruct the data set he describes and follow the mentioned data transformation steps (see Section \ref{data}). The outcome variable of each feature is year-over-year (YoY) growth, computed for GDP as:
 \begin{equation}
 \Delta_4 \ln GDP_{c,t} = \ln GDP_{c,t} - \ln GDP_{c,t-4}
 \label{eq:yoy_gdp}
 \end{equation}
-which compares GDP in quarter $t$ to the same quarter one year earlier. This transformation removes seasonal patterns and provides a directly interpretable measure of annual growth at quarterly frequency.
-
-For descriptive statistics and sample composition, see Section~\ref{data}.
+which compares GDP in quarter $t$ to the same quarter one year earlier. For descriptive statistics and sample composition, see Section~\ref{data}. In this calculation my differences in absolute GDP levels compared to Mello's cancel out as long as they are proportional to each other. 
 
 \subsubsection{Event Study Specification}
 
