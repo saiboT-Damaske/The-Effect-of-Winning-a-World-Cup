@@ -98,6 +98,28 @@ write_csv(paper_replication_df, "Data/mello_paper_replication/paper_replication_
 
 df <- paper_replication_df
 
+# Pre-compute 4th lags of log(feature_level) from the FULL 1960+ data.
+# This ensures 1962-Q1 has a valid 4th lag (= log value at 1961-Q1),
+# which would otherwise be NA if computed only within the 1962+ sample.
+# Mello's Eq. (1) includes ln(y_{c,t-4}) as a convergence control.
+feature_levels <- c("gdp", "private_consumption", "government_consumption",
+                    "capital_formation", "exports", "imports")
+
+ln_lag_all <- gdp_pop %>%
+  filter(country %in% paper_countries) %>%
+  mutate(
+    year = if ("year" %in% names(.)) year else as.integer(str_extract(quarter, "^\\d{4}")),
+    qtr  = if ("qtr" %in% names(.)) qtr  else as.integer(str_extract(quarter, "(?<=-Q)\\d")),
+    tq   = year * 4L + qtr
+  ) %>%
+  group_by(country) %>%
+  arrange(tq, .by_group = TRUE) %>%
+  mutate(across(all_of(feature_levels),
+                ~ dplyr::lag(log(.x), 4),
+                .names = "ln_{.col}_l4")) %>%
+  ungroup() %>%
+  select(country, tq, starts_with("ln_") & ends_with("_l4"))
+
 # Table A1 start dates for late-start countries
 paper_starts <- tibble::tribble(
   ~country, ~paper_start,
@@ -118,6 +140,8 @@ df_es <- df %>%
     tq = year * 4L + qtr,
     winner = as.integer(rank1 == 1)
   ) %>%
+  # Join pre-computed lags for all 6 features (from 1960+ data)
+  left_join(ln_lag_all, by = c("country", "tq")) %>%
   arrange(country, tq) %>%
   filter(!is.na(gdp_yoy_log_4q))
 
