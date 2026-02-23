@@ -123,7 +123,7 @@ periods <- list(
 results <- bind_rows(lapply(names(periods), function(p) {
   compute_block(periods[[p]], p)
 }))
-
+print(results, n = Inf)
 # ---------------------------------------------------------------------------
 # 4. Save CSV
 # ---------------------------------------------------------------------------

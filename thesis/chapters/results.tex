@@ -98,4 +98,92 @@ The hosting dummy is positive and significant for exports in our replication ($1
 
 In summary, the component analysis confirms \citeauthor{Mello2024}'s finding that the World Cup GDP effect operates primarily through the trade channel.  Where the observation counts are closely matched, the coefficient differences between our replication and the original are small---typically well within one standard error---and both analyses point to the same qualitative conclusions.
 
-% COMMENT: SDID results will be added once the SDID scripts are updated.
+
+% ====================================================================
+\subsection{Synthetic Difference-in-Differences}
+\label{sec:sdid}
+% ====================================================================
+
+Following \citet{Mello2024}, we complement the event-study analysis with the synthetic difference-in-differences~(SDiD) estimator of \citet{Arkhangelsky2021}.  Whereas the event study traces out the full dynamic path, the SDiD approach focuses on a narrow 10-quarter window around each World Cup and asks a single, sharply identified question: \emph{Is the average YoY growth rate higher in the two post-tournament quarters for the winning country than for a data-driven synthetic control?}
+
+\subsubsection{Implementation}
+
+We implement the SDiD estimator using the \texttt{synthdid} R package.  For each of the six World Cups held between 1998 and 2018, we split every country's quarterly GDP series into a 10-quarter subseries running from $q = -7$ (seven quarters before the World Cup) to $q = +2$ (two quarters after).  The subseries of the winning country constitutes the treated unit; all other subseries form the donor pool.  In total this yields 274 subseries---6 treated and 268 control---comprising 2,740 quarterly growth records for GDP.
+
+Three design choices mirror those of \citeauthor{Mello2024}:
+\begin{enumerate}[nosep]
+  \item \textbf{Host exclusion.}  Subseries that belong to the host country of a given World Cup are dropped from the control pool, because hosting may independently affect GDP growth.  The sole exception is France around the 1998 tournament, which both hosted and won, and is therefore retained as a treated unit.
+  \item \textbf{Stacking.}  Countries that won more than once (France: 1998, 2018) contribute one treated subseries per victory.  Their remaining subseries enter the control pool, enabling within-country comparisons.
+  \item \textbf{Balanced panel.}  Any subseries with missing outcome values in the 10-quarter window is dropped to satisfy the completeness requirement of the \texttt{synthdid\_estimate} routine.
+\end{enumerate}
+
+The SDiD estimator solves for unit weights $\hat{\omega}_n$ and time weights $\hat{\tau}_q$ that, respectively, align the pre-treatment trends between treated and synthetic control units and re-weight pre-treatment periods to best predict post-treatment outcomes.  Inference is based on bootstrap standard errors with 1,000 replications clustered at the country-subseries level.
+
+\subsubsection{GDP Results}
+\label{sec:sdid_gdp}
+
+Figure~\ref{fig:sdid_gdp_comparison} displays the SDiD plot for GDP growth from our replication (left) alongside \citeauthor{Mello2024}'s Figure~1 (right).  Each panel shows two lines: the solid line traces the average YoY GDP growth of the treated (winning) subseries, and the dashed line traces the growth of the synthetic control constructed from the weighted donor pool.  The shaded bars at the bottom of each panel indicate the time weights $\hat{\tau}_q$, which show how the estimator distributes importance across the eight pre-treatment quarters when constructing the counterfactual.
+
+In the pre-treatment period ($q \leq 0$), the two lines run approximately parallel, differing by a roughly constant level that is absorbed by unit fixed effects.  This parallel movement validates the key identifying assumption: absent treatment, the treated and synthetic control units would have continued on parallel paths.  After the World Cup ($q = +1, +2$), the treated line rises above the counterfactual, indicating a positive treatment effect.  The vertical gap between the lines in the post-period is the estimated ATT.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{sdid_replication_gdp.png}
+  \caption{Replication: ATT $= 0.544$\,pp, SE $= 0.309$, $p = 0.078$}
+  \label{fig:sdid_gdp_replication}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{mello_sdid_gdp.png}
+  \caption{\citet{Mello2024}: ATT $= 0.481$\,pp, SE $= 0.263$, $p = 0.067$}
+  \label{fig:sdid_gdp_mello}
+\end{subfigure}
+\caption{SDiD: effect of winning the World Cup on YoY GDP growth}
+\label{fig:sdid_gdp_comparison}
+\begin{tablenotes}
+\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control.  Shaded bars = time weights $\hat{\tau}_q$.  Both analyses use 10-quarter subseries around the six World Cups 1998--2018.  Bootstrap SEs from 1,000 replications.
+\end{tablenotes}
+\end{figure}
+
+Our replication yields an ATT of 0.544\,pp (SE $= 0.309$, $p = 0.078$), compared with \citeauthor{Mello2024}'s 0.481\,pp (SE $= 0.263$, $p = 0.067$).  Both estimates are positive and marginally significant at the 10\% level, confirming the core finding: winning the World Cup temporarily boosts GDP growth by roughly half a percentage point.  The 0.06\,pp difference between the two ATTs is well within one standard error and likely reflects minor differences in the underlying OECD data vintage.
+
+\subsubsection{Comparison Across GDP Components}
+
+Table~\ref{tab:sdid_comparison} summarises the SDiD results for all six GDP components.  GDP is the only component for which the ATT is marginally significant ($p < 0.10$) in both our replication and \citeauthor{Mello2024}'s analysis.  Exports show the largest point estimate (5.07\,pp in our replication versus 4.51\,pp in the original), consistent with the event-study finding that the trade channel is the primary mechanism.  However, the export ATT is imprecisely estimated in both analyses ($p \approx 0.25$--$0.26$) owing to the high volatility of export growth, which increases bootstrap standard errors.
+
+\input{tables/sdid_comparison}
+
+Private consumption, government consumption, capital formation, and imports all yield ATTs that are small, mixed in sign, and far from significant ($p > 0.30$ in every case).  These null results mirror the event-study evidence and confirm that the aggregate GDP effect does not operate through domestic demand or investment channels.
+
+\subsubsection{Export Results}
+
+Given the prominence of the export channel in both the event-study and SDiD analyses, Figure~\ref{fig:sdid_exports_comparison} shows the SDiD plot for exports alongside \citeauthor{Mello2024}'s Figure~3.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{sdid_replication_exports.png}
+  \caption{Replication: ATT $= 5.073$\,pp, SE $= 4.513$, $p = 0.261$}
+  \label{fig:sdid_exports_replication}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{mello_sdid_exports.png}
+  \caption{\citet{Mello2024}: ATT $= 4.507$\,pp, SE $= 3.916$, $p = 0.250$}
+  \label{fig:sdid_exports_mello}
+\end{subfigure}
+\caption{SDiD: effect of winning the World Cup on YoY export growth}
+\label{fig:sdid_exports_comparison}
+\begin{tablenotes}
+\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control.  Shaded bars = time weights $\hat{\tau}_q$.  Bootstrap SEs from 1,000 replications.
+\end{tablenotes}
+\end{figure}
+
+In both panels, the synthetic control tracks the treated export growth well in the pre-treatment period, and a pronounced gap opens in the two post-World Cup quarters.  The magnitude---roughly 5\,pp---is an order of magnitude larger than the aggregate GDP effect, consistent with exports being one of several (partially offsetting) GDP components.  Although the ATT is not statistically significant, the point estimate is economically substantial and directionally consistent with the event-study result ($l = +2$: 5.81\,pp, $p = 0.032$).
+
+The SDiD plots for the remaining four components (private consumption, government consumption, capital formation, and imports) are presented in Appendix Figures~\ref{fig:sdid_app_private_cons}--\ref{fig:sdid_app_imports}.  None shows a meaningful post-treatment divergence, consistent with the null results in Table~\ref{tab:sdid_comparison}.

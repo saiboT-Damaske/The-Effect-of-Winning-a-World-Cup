@@ -122,6 +122,90 @@ Within $R^2$ & 0.588 & & 0.445 & \\
 \floatfoot{\textit{Notes}: Matching by GDP: Canada, India, Indonesia ($\times$2), Japan ($\times$3), Korea, Mexico ($\times$8), Russia ($\times$4). Matching by population: Colombia, Indonesia, Japan, Korea ($\times$3), Mexico ($\times$4), Russia, South Africa ($\times$3), Turkey ($\times$6).}
 \end{table}
 
+\subsection{SDiD Component Figures}
+\label{sec:app_sdid_components}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{sdid_replication_private_cons.png}
+  \caption{Replication: ATT $= -0.202$\,pp, SE $= 0.361$, $p = 0.577$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{mello_sdid_private_cons.png}
+  \caption{\citet{Mello2024}: SE $= 0.355$, $p = 0.980$}
+\end{subfigure}
+\caption{SDiD: effect of winning the World Cup on YoY private consumption growth}
+\label{fig:sdid_app_private_cons}
+\begin{tablenotes}
+\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control.  Bootstrap SEs from 1,000 replications.
+\end{tablenotes}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{sdid_replication_gov_cons.png}
+  \caption{Replication: ATT $= -0.428$\,pp, SE $= 0.575$, $p = 0.456$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{mello_sdid_gov_cons.png}
+  \caption{\citet{Mello2024}: SE $= 0.463$, $p = 0.498$}
+\end{subfigure}
+\caption{SDiD: effect of winning the World Cup on YoY government consumption growth}
+\label{fig:sdid_app_gov_cons}
+\begin{tablenotes}
+\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control.  Bootstrap SEs from 1,000 replications.
+\end{tablenotes}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{sdid_replication_capital.png}
+  \caption{Replication: ATT $= 1.026$\,pp, SE $= 1.087$, $p = 0.345$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{mello_sdid_capital.png}
+  \caption{\citet{Mello2024}: SE $= 1.238$, $p = 0.327$}
+\end{subfigure}
+\caption{SDiD: effect of winning the World Cup on YoY capital formation growth}
+\label{fig:sdid_app_capital}
+\begin{tablenotes}
+\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control.  Bootstrap SEs from 1,000 replications.
+\end{tablenotes}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{sdid_replication_imports.png}
+  \caption{Replication: ATT $= -0.583$\,pp, SE $= 1.075$, $p = 0.588$}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{mello_sdid_imports.png}
+  \caption{\citet{Mello2024}: SE $= 1.095$, $p = 0.919$}
+\end{subfigure}
+\caption{SDiD: effect of winning the World Cup on YoY import growth}
+\label{fig:sdid_app_imports}
+\begin{tablenotes}
+\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control.  Bootstrap SEs from 1,000 replications.
+\end{tablenotes}
+\end{figure}
+
+
 \subsection{Data Appendix}
 
 \subsubsection{Variable Definitions}

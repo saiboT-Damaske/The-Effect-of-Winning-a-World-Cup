@@ -33,8 +33,8 @@ df <- read_csv("Data/mello_paper_replication/paper_replication_sample.csv", show
     qtr     = as.integer(qtr)
   )
 
-# Outcome used in Figure 1: YoY GDP growth (percentage points)
-y_col <- "gross_domestic_product_chain_linked_volume_rebased_us_dollars_ppp_converted_yoy_pct"
+# Outcome used in Figure 1: YoY GDP log growth (percentage points)
+y_col <- "gdp_yoy_log_4q"
 stopifnot(y_col %in% names(df))
 
 # Create a clean quarterly index (must be strictly increasing in time within country)
@@ -169,36 +169,45 @@ cat("\n--- SDiD estimate ---\n")
 print(tau_hat)
 cat("Bootstrap SE:", se_hat, "\n\n")
 
-# -----------------------------
-# 10) Plot (Figure 1 style)
-# -----------------------------
-# Base-graphics plot
-synthdid::synthdid_plot(tau_hat)
-title(main = "Synthetic DiD: Effect of winning the World Cup on YoY GDP growth",
-      xlab = "Quarter to or from the World Cup (q = rel_time)",
-      ylab = "YoY GDP growth (pp)")
+p <- synthdid::synthdid_plot(tau_hat)
 
+# -----------------------------
+# 10) Plot (Figure 1 style) and save
+# -----------------------------
+plot_path <- "mello_paper_replication/sdid_plots/sdid_plot_GDP.png"
 
+# Significance indicator
+sig_str <- if (p_value < 0.05) {
+  "*"
+} else if (p_value < 0.10) {
+  "."
+} else {
+  ""
+}
+subtitle_str <- sprintf("ATT = %.3f, p = %.3f %s", ATT, p_value, sig_str)
 
 p <- synthdid::synthdid_plot(tau_hat)
 
 if (inherits(p, "ggplot")) {
-  # ggplot path: must print explicitly, and use ggplot labels
-  print(
-    p +
-      ggplot2::ggtitle("Synthetic DiD: Effect of winning the World Cup on YoY GDP growth") +
-      ggplot2::labs(
-        x = "Quarter to or from the World Cup (q = rel_time)",
-        y = "YoY GDP growth (pp)"
-      )
-  )
+  ggplot2::ggsave(plot_path, plot = p +
+    ggplot2::ggtitle("Synthetic DiD: Effect of winning the World Cup on YoY GDP growth") +
+    ggplot2::labs(
+      x = "Quarter to or from the World Cup (q = rel_time)",
+      y = "YoY GDP growth (pp)",
+      subtitle = subtitle_str
+    ), width = 7, height = 5)
+  cat("Plot saved to:", plot_path, "\n")
 } else {
-  # base-graphics path: plot was drawn; now add title/labels
+  png(plot_path, width = 700, height = 500)
+  synthdid::synthdid_plot(tau_hat)
   graphics::title(
     main = "Synthetic DiD: Effect of winning the World Cup on YoY GDP growth",
     xlab = "Quarter to or from the World Cup (q = rel_time)",
-    ylab = "YoY GDP growth (pp)"
+    ylab = "YoY GDP growth (pp)",
+    sub = subtitle_str
   )
+  dev.off()
+  cat("Plot saved to:", plot_path, "\n")
 }
 
 

@@ -1,0 +1,22 @@
+\begin{table}[H]
+\centering
+\caption{SDiD average treatment effects: replication versus \citet{Mello2024}}
+\label{tab:sdid_comparison}
+\small
+\begin{tabular}{l rr rr}
+\toprule
+ & \multicolumn{2}{c}{\textbf{Replication}} & \multicolumn{2}{c}{\textbf{Mello (2024)}} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+Component & ATT (pp) & (SE) & ATT (pp) & (SE) \\
+\midrule
+GDP                       & $0.544$     & (0.309) & $0.481$*   & (0.263) \\
+Private consumption       & $-0.202$    & (0.361) & $1.214$    & (1.238) \\
+Government consumption    & $-0.428$    & (0.575) & $-0.314$   & (0.463) \\
+Gross fixed capital form. & $1.026$     & (1.087) & $1.214$    & (1.238) \\
+Exports                   & $5.073$     & (4.513) & $4.507$    & (3.916) \\
+Imports                   & $-0.583$    & (1.075) & $-0.112$   & (1.095) \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize *\,$p<0.10$,\; **\,$p<0.05$,\; ***\,$p<0.01$.\; Bootstrap SEs (1,000 replications).} \\
+\multicolumn{5}{p{12cm}}{\footnotesize \textit{Notes}: ATT denotes the average treatment effect in the two post-World Cup quarters, estimated via synthetic difference-in-differences (SDiD).  Replication results use log YoY growth columns from the OECD QNA panel with host-only controls excluded from the donor pool.  \citeauthor{Mello2024}'s ATTs are taken from Figures~1 and~3 (GDP and exports) and Figures~A2--A5 (remaining components).}
+\end{tabular}
+\end{table}

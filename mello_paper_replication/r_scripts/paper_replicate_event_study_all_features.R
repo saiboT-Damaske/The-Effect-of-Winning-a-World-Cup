@@ -182,7 +182,7 @@ for (f in features) {
 
 # Combine and save
 results_df <- bind_rows(all_coefs)
-
+results_df
 write_csv(results_df, "mello_paper_replication/results/event_study_all_features_coefficients.csv")
 cat("\nSaved: mello_paper_replication/results/event_study_all_features_coefficients.csv\n")
 cat("  Total rows:", nrow(results_df), "\n\n")
@@ -299,7 +299,7 @@ p <- ggplot(plot_data, aes(x = l, y = estimate)) +
     axis.text = element_text(size = 8),
     plot.margin = margin(5, 10, 5, 5)
   )
-
+p
 ggsave("mello_paper_replication/event_study_plots/event_study_gdp_components_figure2.pdf",
        p, width = 7, height = 12, dpi = 300)
 ggsave("mello_paper_replication/event_study_plots/event_study_gdp_components_figure2.png",

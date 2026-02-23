@@ -185,14 +185,17 @@ run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000) {
   cat(sprintf("z       = %.3f\n", z))
   cat(sprintf("p-value = %.3f\n", p))
   
-  # Plot
+  # Plot (treated = red, synthetic control = blue)
   p_obj <- synthdid::synthdid_plot(tau_hat)
+  color_vals <- c("synthetic control" = "#4269d0", "treated" = "#ff585d")
   if (inherits(p_obj, "ggplot")) {
     print(
       p_obj +
         ggplot2::ggtitle(paste0("SDiD: World Cup win effect on YoY ", outcome_name, " growth (pp)")) +
         ggplot2::labs(x = "Quarter to/from World Cup (q = rel_time)",
-                      y = "YoY growth (pp)")
+                      y = "YoY growth (pp)") +
+        ggplot2::scale_colour_manual(values = color_vals) +
+        ggplot2::scale_fill_manual(values = color_vals)
     )
   } else {
     # base path
@@ -206,51 +209,42 @@ run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000) {
   invisible(list(tau_hat = tau_hat, ATT = ATT, SE = se_hat, z = z, p = p))
 }
 
-# ============================================================
-# 5) One section per feature (as requested)
-#    IMPORTANT: We use *_yoy_pct columns (YoY percent change, in pp).
-# ============================================================
 
-# GDP
-run_one_outcome(
-  df,
-  outcome_name = "GDP",
-  y_col = "gross_domestic_product_chain_linked_volume_rebased_us_dollars_ppp_converted_yoy_pct",
-  reps = 1000
+# Define features and columns
+features <- list(
+  list(name = "GDP", col = "gdp_yoy_log_4q"),
+  list(name = "Private consumption", col = "private_consumption_yoy_log_4q"),
+  list(name = "Government consumption", col = "government_consumption_yoy_log_4q"),
+  list(name = "Gross fixed capital formation", col = "capital_formation_yoy_log_4q"),
+  list(name = "Exports", col = "exports_yoy_log_4q"),
+  list(name = "Imports", col = "imports_yoy_log_4q")
 )
 
-# Final consumption (you only have "final consumption", not gov/private split)
-run_one_outcome(
-  df,
-  outcome_name = "Final consumption",
-  y_col = "final_consumption_expenditure_chain_linked_volume_rebased_us_dollars_ppp_converted_yoy_pct",
-  reps = 1000
+# Run and collect results
+results_list <- list()
+for (f in features) {
+  results_list[[f$name]] <- run_one_outcome(
+    df,
+    outcome_name = f$name,
+    y_col = f$col,
+    reps = 1000
+  )
+}
+
+# Convert results to a data frame
+results_df <- tibble(
+  Feature = names(results_list),
+  ATT = sapply(results_list, function(x) x$ATT),
+  SE = sapply(results_list, function(x) x$SE),
+  z = sapply(results_list, function(x) x$z),
+  p_value = sapply(results_list, function(x) x$p),
+  CI_lower = sapply(results_list, function(x) x$ATT - 1.96 * x$SE),
+  CI_upper = sapply(results_list, function(x) x$ATT + 1.96 * x$SE)
 )
 
-# Gross fixed capital formation
-run_one_outcome(
-  df,
-  outcome_name = "Gross fixed capital formation",
-  y_col = "gross_fixed_capital_formation_chain_linked_volume_rebased_us_dollars_ppp_converted_yoy_pct",
-  reps = 1000
-)
-
-# Exports
-run_one_outcome(
-  df,
-  outcome_name = "Exports",
-  y_col = "exports_of_goods_and_services_chain_linked_volume_rebased_us_dollars_ppp_converted_yoy_pct",
-  reps = 1000
-)
-
-# Imports
-run_one_outcome(
-  df,
-  outcome_name = "Imports",
-  y_col = "imports_of_goods_and_services_chain_linked_volume_rebased_us_dollars_ppp_converted_yoy_pct",
-  reps = 1000
-)
-
+# Write results to CSV
+write_csv(results_df, "mello_paper_replication/sdid_results/sdid_results_full_features.csv")
+cat("\nResults written to: mello_paper_replication/sdid_results/sdid_results_full_features.csv\n")
 cat("\nDone.\n")
 
 
