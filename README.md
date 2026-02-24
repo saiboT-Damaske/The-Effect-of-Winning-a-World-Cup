@@ -17,12 +17,11 @@ All data collection was done programmatically through API calls (OECD and World 
 ├── finalist_analysis/
 ├── semi_finalist_analysis/
 ├── underperformer_analysis/
-├── argentina_2022/
 ├── archive/
 └── literature/
 ```
 
-`Data/` contains all raw and processed datasets as well as the scripts that pull data from the OECD API and assemble the estimation panels. `mello_paper_replication/` holds the core replication of Mello (2024) — event study regressions and SDiD estimation for GDP and its components. The three extension folders (`finalist_analysis/`, `semi_finalist_analysis/`, `underperformer_analysis/`) each follow the same layout and apply the same methods to their respective treatment groups. `argentina_2022/` contains the preliminary case study. `thesis/` is the full LaTeX source. Each analysis folder has subfolders for R scripts, plots, and results.
+`Data/` contains all raw and processed datasets as well as the scripts that pull data from the OECD API and assemble the estimation panels. `mello_paper_replication/` holds the core replication of Mello (2024) — event study regressions and SDiD estimation for GDP and its components. The three extension folders (`finalist_analysis/`, `semi_finalist_analysis/`, `underperformer_analysis/`) each follow the same layout and apply the same methods to their respective treatment groups.  `thesis/` is the full LaTeX source (not commited publicly). Each analysis folder has subfolders for R scripts, plots, and results.
 
 ## Replication
 
