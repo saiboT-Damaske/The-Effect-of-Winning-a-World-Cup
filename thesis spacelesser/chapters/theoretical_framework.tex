@@ -101,16 +101,16 @@ where $\bar{Y}_{tr,pre}^{\lambda} = \sum_{t=1}^{T_0} \hat{\lambda}_t \bar{Y}_{tr
 
 Like the event study, SDID requires assumptions for the estimated ATT to have a causal interpretation.
 
-\textbf{No anticipation:} Treatment does not affect outcomes before it occurs -- the same condition as in Equation~\eqref{eq:no_anticipation}.  For the World Cup setting, this means that winning does not influence GDP growth before the tournament has taken place.
+\textbf{No anticipation:} Treatment does not affect outcomes before it occurs -- the same condition as in Equation~\eqref{eq:no_anticipation}. For the World Cup setting, this means that winning does not influence GDP growth before the tournament has taken place.
 
-\textbf{Overlap (common support):} The control pool must be rich enough to approximate the treated unit's pre-treatment trajectory through a weighted combination.  Formally, the weighted synthetic control $\sum_{j \in \mathcal{C}} \hat{\omega}_j Y_{j,t}$ must be able to track $\bar{Y}_{tr,t}$ during the pre-treatment window.  With roughly 45 OECD countries in the donor pool per World Cup, this condition is comfortably satisfied.
+\textbf{Overlap (common support):} The control pool must be rich enough to approximate the treated unit's pre-treatment trajectory through a weighted combination. Formally, the weighted synthetic control $\sum_{j \in \mathcal{C}} \hat{\omega}_j Y_{j,t}$ must be able to track $\bar{Y}_{tr,t}$ during the pre-treatment window. With an average of 45 OECD countries in the donor pool per World Cup, this condition is comfortably satisfied.
 
-\textbf{Weak dependence of errors:} The idiosyncratic shocks $\varepsilon_{it}$ must be weakly dependent over time with bounded moments \citep{Arkhangelsky2021}.  This rules out highly persistent or explosive error processes but is standard for quarterly GDP growth data.
+\textbf{Weak dependence of errors:} The idiosyncratic shocks $\varepsilon_{it}$ must be weakly dependent over time with bounded moments \citep{Arkhangelsky2021}. This rules out highly persistent or explosive error processes but is standard for quarterly GDP growth data.
 
-A key advantage of SDID over standard DiD is its \textit{double robustness}: the estimator remains consistent if either parallel trends hold globally \textit{or} the unit weights successfully match the treated unit's pre-treatment path.  This means that even if the unweighted control countries follow a different growth trajectory than the winner, the ATT is still identified as long as the synthetic control constructed from the weighted donors tracks the winner closely before the World Cup.
+A key advantage of SDID over standard DiD is its \textit{double robustness}: the estimator remains consistent if either parallel trends hold globally \textit{or} the unit weights successfully match the treated unit's pre-treatment path. This means that even if the unweighted control countries follow a different growth trajectory than the winner, the ATT is still identified as long as the synthetic control constructed from the weighted donors tracks the winner closely before the World Cup.
 
 \subsubsection{Properties and Inference}
 
-\citet{Arkhangelsky2021} establish that under the conditions above, the SDID estimator is consistent and asymptotically normal.  In practice, inference relies on bootstrap methods that resample at the unit level, preserving within-unit serial correlation. Following \citet{Mello2024}, I use 1,000 bootstrap replications with standard errors clustered at the country-subseries level.
+\citet{Arkhangelsky2021} establish that under the conditions above, the SDID estimator is consistent and asymptotically normal. In practice, inference relies on bootstrap methods that resample at the unit level, preserving within-unit serial correlation. Following \citet{Mello2024}, I use 1,000 bootstrap replications with standard errors clustered at the country-subseries level.
 
 SDID is well-suited for the World Cup setting because it can construct tailored counterfactuals for each of the winner countries by optimally weighting the control/never-winning OECD countries according to their pre-victory trajectories. 

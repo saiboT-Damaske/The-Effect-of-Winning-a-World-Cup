@@ -1,0 +1,32 @@
+This thesis has replicated and extended the analysis of \citet{Mello2024}, providing some evidence on the economic effects for a country based on its FIFA World Cup performance.
+
+\subsection{Summary of Findings}
+
+The independent replication confirms the core result: winning the World Cup temporarily boosts year-over-year GDP growth by roughly 0.3--0.7 percentage points in the two quarters following victory. My event study estimates ($l{=}+1$: $0.325$\,pp; $l{=}+2$: $0.597$\,pp) closely track Mello's ($0.454$\,pp and $0.683$\,pp), as does the SDiD ATT ($0.527$\,pp vs.\ $0.481$\,pp). Both analyses identify \textbf{exports} as the primary channel, with the event study $l{=}+2$ export coefficient reaching 5.81\,pp ($p = 0.032$) in the replication. Domestic consumption, government spending, and investment show no significant response, indicating that the effect operates through international trade rather than domestic demand.
+
+Given the close alignment between my replication and the original results, I did not pursue further robustness checks (alternative lag specifications, matched samples) beyond those reported by \citet{Mello2024}. The near-identical estimates obtained from independently constructed data and separate code provide strong evidence that the original findings are robust and replicating his robustness checks would yield the same results.
+
+The extensions reveal a clear gradient: the effect attenuates as the treatment group broadens. Finalists (ATT $= 0.109$\,pp) and semi-finalists (ATT $= 0.207$\,pp) show positive but insignificant effects, confirming that the economic premium is concentrated in winning itself. The underperformer analysis -- focusing on top-10 ELO-rated teams eliminated in the group stage -- finds no evidence that early exit depresses GDP. In fact, most underperformer SDiD ATTs are positive (GDP: $0.763$\,pp, capital formation: $2.566$\,pp), likely reflecting the resilience of the large OECD economies that dominate this sample or overall World Cup participation effects. The exception is exports ($-1.290$\,pp), the only component with a negative underperformer ATT, which is consistent with the export-driven mechanism documented for winners operating in reverse.
+
+\subsection{Contributions}
+
+This thesis makes three main contributions:
+\begin{enumerate}[nosep]
+    \item \textbf{Independent replication.}  This is an independent replication of \citet{Mello2024}. Obtaining near-identical results from separately constructed data and code validates the original findings and strengthens confidence in the causal interpretation of his work.
+    
+    \item \textbf{Gradient of tournament performance.}  The finalist, semi-finalist, and underperformer extensions show that the economic effect shrinks as the treatment group broadens beyond winners, and that early elimination does not produce a negative GDP shock. Only winning itself generates a meaningful premium but participating also has a positive contribution.
+    
+    \item \textbf{Export channel confirmation.}  The consistent pattern -- winners gain in exports, underperformers lose -- across both event study and SDiD, and across independent samples, reinforces the interpretation that international visibility and country-of-origin effects in trade are the primary economic mechanism.
+\end{enumerate}
+
+\subsection{Limitations and Future Research}
+
+In my opinion the analysis faces some sample constraints: only 10 World Cup victories are observed in the OECD panel, and both the winner and the underperformer sample, while larger (37 events), is dominated by a handful of large economies. The SDiD window is further restricted to 1998--2018, reducing the treated sample to 6 winners and 11 underperformers. These small samples limit statistical power and make it difficult to distinguish true effects of winning the World Cup. 
+
+Several directions for future research emerge from this thesis. \textit{First}, examining more granular economic features and industries such as tourism receipts, employment, or firm-level trade data and would help pinpoint exactly which sectors respond to a World Cup victory and which do not. \textit{Second}, applying the framework to other major sporting events that generate comparable national euphoria for different winners, such as the Rugby World Cup or the Cricket World Cup, would test whether the mechanism generalises beyond football. \textit{Third}, Argentina's 2022 victory in Qatar offers a natural out-of-sample test. Because the tournament was held in Q4 rather than Q2 and falls outside Mello's estimation window, it could not be included in the main replication, but OECD quarterly data for Argentina are available through 2024, making a single-event SDiD feasible; the unusual timing and Argentina's concurrent hyperinflation, however, complicate the construction of a clean counterfactual. \textit{Fourth}, studying ``overperformers'' -- countries that significantly exceeded pre-tournament expectations, such as Croatia's run to the 2018 final or Morocco's semi-final appearance in 2022 -- would help sharpen the mechanism. If the export channel operates symmetrically, overperformers should exhibit positive export effects even without winning.
+
+
+
+\subsection{Concluding Remarks}
+
+Winning the FIFA World Cup generates a modest, temporary boost to GDP growth, operating primarily through exports. The effect is specific to winning and merely reaching the final or semi-finals is not enough. The effect does not operate in reverse for underperformers, except in the trade channel. The close replication of \citet{Mello2024}'s results across independently constructed data provides confidence that this finding is robust. While I assume that the magnitude is too small to have meaningful policy implications, the result offers tangible evidence that collective sentiment and international visibility can have real, if fleeting, macroeconomic consequences. With the 2026 FIFA World Cup approaching, the next victory will provide a timely opportunity to test whether these effects persist.

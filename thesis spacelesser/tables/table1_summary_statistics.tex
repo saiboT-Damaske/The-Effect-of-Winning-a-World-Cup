@@ -1,0 +1,40 @@
+\begin{table}[htbp]
+\centering
+\caption{Summary statistics for the event-study sample}
+\label{tab:summary_stats}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+ & \multicolumn{2}{c}{\textbf{Winner}} & \multicolumn{2}{c}{\textbf{Non-winner}} & \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+ & Mean & (SD) & Mean & (SD) & \textit{t-test} \\
+\midrule
+& \multicolumn{5}{c}{1962--1980} \\
+\quad GDP (thousands of 2015 USD millions) & 1,316.75 & (509.62) & 547.79 & (1,253.81) & 19.08*** \\
+\quad Population (in millions) & 54.43 & (13.91) & 26.20 & (46.04) & 21.17*** \\
+\quad GDP per capita & 23,569 & (5,029) & 22,546 & (10,416) & 2.82*** \\
+\quad Year-on-Year GDP growth & 3.96 & (2.82) & 4.55 & (3.42) & $-$3.47*** \\
+& \multicolumn{5}{c}{1980--2000} \\
+\quad GDP (thousands of 2015 USD millions) & 2,175.99 & (735.53) & 941.77 & (2,113.88) & 21.73*** \\
+\quad Population (in millions) & 60.93 & (22.04) & 40.82 & (99.18) & 8.60*** \\
+\quad GDP per capita & 36,026 & (7,328) & 31,365 & (16,058) & 9.55*** \\
+\quad Year-on-Year GDP growth & 2.31 & (1.81) & 3.13 & (3.53) & $-$7.13*** \\
+& \multicolumn{5}{c}{2000--2021} \\
+\quad GDP (thousands of 2015 USD millions) & 3,104.57 & (828.70) & 1,368.76 & (3,036.07) & 28.07*** \\
+\quad Population (in millions) & 84.83 & (50.71) & 66.46 & (197.15) & 4.66*** \\
+\quad GDP per capita & 43,203 & (13,284) & 39,165 & (21,809) & 5.93*** \\
+\quad Year-on-Year GDP growth & 1.32 & (3.82) & 2.76 & (4.11) & $-$8.01*** \\
+& \multicolumn{5}{c}{Full sample} \\
+\quad GDP (thousands of 2015 USD millions) & 2,300.13 & (1,032.60) & 1,065.21 & (2,505.31) & 30.14*** \\
+\quad Population (in millions) & 68.50 & (37.53) & 49.96 & (149.91) & 9.10*** \\
+\quad GDP per capita & 35,319 & (12,616) & 33,258 & (19,353) & 4.94*** \\
+\quad Year-on-Year GDP growth & 2.38 & (3.22) & 3.24 & (3.89) & $-$8.61*** \\
+\quad Number of countries & \multicolumn{2}{c}{6} & \multicolumn{2}{c}{42} & \\
+\quad Number of observations & \multicolumn{2}{c}{1,295} & \multicolumn{2}{c}{7,338} & \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes:} Summary statistics by winner status for the full sample and selected sub-periods. The \textit{t}-statistics reported in the last column test whether the mean differences between winning and non-winning countries are statistically significant. GDP and population figures come from OECD data provided at quarterly and yearly frequency, respectively. GDP in chain-linked volumes, PPP USD (2015 base). Year-on-Year growth is $\Delta_4 \ln$ (Equation~\ref{eq:yoy}). ``Winner'' denotes all observations from countries that won a World Cup during the sample period (BRA, DEU, ESP, FRA, GBR, ITA). *$p<0.10$, **$p<0.05$, ***$p<0.01$.
+\end{tablenotes}
+\end{table}

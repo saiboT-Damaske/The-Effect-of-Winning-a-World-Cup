@@ -1,10 +1,11 @@
 \subsection{Event Study Comparison Tables}
 \label{sec:app_comparison_tables}
 
+Table~\ref{tab:es_full_comparison} presents the complete GDP comparison across all 32 relative-time coefficients.
 
 \input{tables/event_study_full_comparison}
 
-
+\noindent Table~\ref{tab:es_all_features_comparison} presents the comparison for all six GDP components at selected post-treatment horizons.
 
 \input{tables/event_study_all_features_comparison}
 
@@ -13,11 +14,11 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.70\textwidth]{event_study_gdp_components_figure2.png}
+\includegraphics[width=0.85\textwidth]{event_study_gdp_components_figure2.png}
 \caption{Event study coefficients for the five GDP expenditure components}
 \label{fig:app_es_components}
 \begin{tablenotes}
-\textit{Notes}: Each panel shows the estimated relative-time coefficients ($\beta_l$) for one GDP component.  Error bars represent 95\% confidence intervals based on country-clustered standard errors.  Reference period: $l = 0$ (Q2 of World Cup year).  Endpoints binned at $\pm 16$.
+\textit{Notes}: Each panel shows the estimated relative-time coefficients ($\beta_l$) for one GDP component. Error bars represent 95\% confidence intervals based on country-clustered standard errors. Reference period: $l = 0$ (Q2 of World Cup year). Endpoints binned at $\pm 16$.
 \end{tablenotes}
 \end{figure}
 
@@ -40,7 +41,7 @@
 \caption{SDiD: effect of winning the World Cup on YoY private consumption growth}
 \label{fig:sdid_app_private_cons}
 \begin{tablenotes}
-\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control.  Bootstrap SEs from 1,000 replications.
+\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control. Bootstrap SEs from 1,000 replications.
 \end{tablenotes}
 \end{figure}
 
@@ -60,7 +61,7 @@
 \caption{SDiD: effect of winning the World Cup on YoY government consumption growth}
 \label{fig:sdid_app_gov_cons}
 \begin{tablenotes}
-\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control.  Bootstrap SEs from 1,000 replications.
+\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control. Bootstrap SEs from 1,000 replications.
 \end{tablenotes}
 \end{figure}
 
@@ -80,7 +81,7 @@
 \caption{SDiD: effect of winning the World Cup on YoY capital formation growth}
 \label{fig:sdid_app_capital}
 \begin{tablenotes}
-\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control.  Bootstrap SEs from 1,000 replications.
+\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control. Bootstrap SEs from 1,000 replications.
 \end{tablenotes}
 \end{figure}
 
@@ -100,7 +101,7 @@
 \caption{SDiD: effect of winning the World Cup on YoY import growth}
 \label{fig:sdid_app_imports}
 \begin{tablenotes}
-\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control.  Bootstrap SEs from 1,000 replications.
+\textit{Notes}: Solid line = average treated (winning) subseries; dashed line = synthetic control. Bootstrap SEs from 1,000 replications.
 \end{tablenotes}
 \end{figure}
 
@@ -123,7 +124,7 @@
 \caption{All underperformers: individual $\Delta_4$ log GDP growth ($\pm 16$ quarters)}
 \label{fig:app_underperformer_gdp_overlay}
 \begin{tablenotes}
-\textit{Notes}: Each line represents an individual underperformance event.  Dashed vertical line marks the World Cup quarter ($l = 0$).  Shaded region: post-treatment window.  Treatment = top-10 pre-tournament ELO rating, eliminated in group stage.
+\textit{Notes}: Each line represents an individual underperformance event. Dashed vertical line marks the World Cup quarter ($l = 0$). Shaded region: post-treatment window. Treatment = top-10 pre-tournament ELO rating, eliminated in group stage.
 \end{tablenotes}
 \end{figure}
 
@@ -132,11 +133,11 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.60\textwidth]{underperformer_event_study_all_features.png}
+\includegraphics[width=0.85\textwidth]{underperformer_event_study_all_features.png}
 \caption{Underperformer event study: all six national accounts features}
 \label{fig:app_underperformer_es_all}
 \begin{tablenotes}
-\textit{Notes}: Estimated relative-time coefficients ($\beta_l$) for each feature.  Treatment = top-10 pre-tournament ELO rating, eliminated in group stage.  Error bars: 95\% CI.  Reference: $l = 0$ (Q2 of WC year).  Endpoints binned at $\pm 16$.
+\textit{Notes}: Estimated relative-time coefficients ($\beta_l$) for each feature. Treatment = top-10 pre-tournament ELO rating, eliminated in group stage. Error bars: 95\% CI. Reference: $l = 0$ (Q2 of WC year). Endpoints binned at $\pm 16$.
 \end{tablenotes}
 \end{figure}
 
@@ -145,41 +146,41 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.70\textwidth]{underperformer_sdid_private_consumption.png}
+\includegraphics[width=0.95\textwidth]{underperformer_sdid_private_consumption.png}
 \caption{SDiD: effect of underperformance on private consumption growth}
 \label{fig:app_underperformer_sdid_priv_cons}
 \begin{tablenotes}
-\textit{Notes}: ATT $= 0.410$\,pp, SE $= 0.234$ (bootstrap, 1{,}000 replications), $p = 0.081$.  10~treated, 259~control subseries.
+\textit{Notes}: ATT $= 0.410$\,pp, SE $= 0.234$ (bootstrap, 1{,}000 replications), $p = 0.081$. 10~treated, 259~control subseries.
 \end{tablenotes}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.70\textwidth]{underperformer_sdid_government_consumption.png}
+\includegraphics[width=0.95\textwidth]{underperformer_sdid_government_consumption.png}
 \caption{SDiD: effect of underperformance on government consumption growth}
 \label{fig:app_underperformer_sdid_gov_cons}
 \begin{tablenotes}
-\textit{Notes}: ATT $= 0.570$\,pp, SE $= 0.635$ (bootstrap, 1{,}000 replications), $p = 0.370$.  10~treated, 259~control subseries.
+\textit{Notes}: ATT $= 0.570$\,pp, SE $= 0.635$ (bootstrap, 1{,}000 replications), $p = 0.370$. 10~treated, 259~control subseries.
 \end{tablenotes}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.70\textwidth]{underperformer_sdid_capital_formation.png}
+\includegraphics[width=0.95\textwidth]{underperformer_sdid_capital_formation.png}
 \caption{SDiD: effect of underperformance on capital formation growth}
 \label{fig:app_underperformer_sdid_capital}
 \begin{tablenotes}
-\textit{Notes}: ATT $= 2.566$\,pp, SE $= 1.967$ (bootstrap, 1{,}000 replications), $p = 0.192$.  10~treated, 259~control subseries.
+\textit{Notes}: ATT $= 2.566$\,pp, SE $= 1.967$ (bootstrap, 1{,}000 replications), $p = 0.192$. 10~treated, 259~control subseries.
 \end{tablenotes}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.70\textwidth]{underperformer_sdid_imports.png}
+\includegraphics[width=0.95\textwidth]{underperformer_sdid_imports.png}
 \caption{SDiD: effect of underperformance on import growth}
 \label{fig:app_underperformer_sdid_imports}
 \begin{tablenotes}
-\textit{Notes}: ATT $= 2.147$\,pp, SE $= 1.105$ (bootstrap, 1{,}000 replications), $p = 0.052$.  10~treated, 259~control subseries.
+\textit{Notes}: ATT $= 2.147$\,pp, SE $= 1.105$ (bootstrap, 1{,}000 replications), $p = 0.052$. 10~treated, 259~control subseries.
 \end{tablenotes}
 \end{figure}
 
@@ -219,7 +220,7 @@ Host & Indicator for country hosting World Cup in year containing quarter $t$. \
 \caption{All World Cup winners: individual $\Delta_4$ log export growth ($\pm 16$ quarters)}
 \label{fig:app_winners_exports_overlay}
 \begin{tablenotes}
-\textit{Notes}: Each line represents one World Cup victory event.  The dashed red line marks the World Cup quarter ($l = 0$).  The shaded region marks the post-treatment window.  10 winner events from 6 countries (1966--2018).
+\textit{Notes}: Each line represents one World Cup victory event. The dashed red line marks the World Cup quarter ($l = 0$). The shaded region marks the post-treatment window. 10 winner events from 6 countries (1966--2018).
 \end{tablenotes}
 \end{figure}
 
@@ -337,7 +338,7 @@ Host & Indicator for country hosting World Cup in year containing quarter $t$. \
 \end{tabular}
 \begin{tablenotes}
 \scriptsize
-\item \textit{Notes:} 41 underperformance events across 16 World Cups (1962--2022).  ``Underperformer'' = top-10 pre-tournament ELO ranking among WC participants and eliminated in the group stage.  ELO and FIFA ranks are among WC participants only.  FIFA World Rankings begin in 1992; ``---'' indicates no FIFA data available.  ``FIFA underperf.''\ indicates whether the team was also top-10 by FIFA ranking among participants.  The midrule separates the pre-FIFA era (1962--1990) from the FIFA-era tournaments (1994--2022).
+\item \textit{Notes:} 41 underperformance events across 16 World Cups (1962--2022). ``Underperformer'' = top-10 pre-tournament ELO ranking among WC participants and eliminated in the group stage. ELO and FIFA ranks are among WC participants only. FIFA World Rankings begin in 1992; ``---'' indicates no FIFA data available. ``FIFA underperf.''\ indicates whether the team was also top-10 by FIFA ranking among participants. The midrule separates the pre-FIFA era (1962--1990) from the FIFA-era tournaments (1994--2022).
 \end{tablenotes}
 \end{table}
 
