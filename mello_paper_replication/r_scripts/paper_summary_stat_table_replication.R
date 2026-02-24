@@ -1,23 +1,13 @@
-# =============================================================================
 # paper_summary_stat_table_replication.R
-#
-# Compute summary statistics for the event-study sample by period and
-# winner-country status. Outputs:
-#   1. mello_paper_replication/results/table1_summary_statistics.csv  (tidy CSV)
-#   2. thesis/tables/table1_summary_statistics.tex                    (LaTeX)
-#
-# Input: Data/mello_paper_replication/paper_replication_event_study_sample.csv
-# Run from repo root:
-#   Rscript mello_paper_replication/r_scripts/paper_summary_stat_table_replication.R
-# =============================================================================
+# Summary statistics by period and winner status. Produces a CSV and LaTeX table (Table 1 replication).
 
 library(readr)
 library(dplyr)
 library(tidyr)
 
-# ---------------------------------------------------------------------------
-# 1. Load data
-# ---------------------------------------------------------------------------
+#######################################################
+# 1) Load data
+#######################################################
 df <- read_csv(
   "Data/mello_paper_replication/paper_replication_event_study_sample.csv",
   show_col_types = FALSE
@@ -37,9 +27,9 @@ df <- df %>%
     )
   )
 
-# ---------------------------------------------------------------------------
-# 2. Variables to summarise
-# ---------------------------------------------------------------------------
+#######################################################
+# 2) Variables to summarise
+#######################################################
 level_vars <- c(
   "gdp", "private_consumption", "government_consumption",
   "capital_formation", "exports", "imports", "population"
@@ -68,9 +58,9 @@ var_labels <- c(
   imports_yoy_log_4q = "Imports growth (d4 log)"
 )
 
-# ---------------------------------------------------------------------------
-# 3. Compute stats by period x winner_group x variable
-# ---------------------------------------------------------------------------
+#######################################################
+# 3) Compute stats by period x winner group
+#######################################################
 compute_block <- function(data, period_label) {
   rows <- list()
   for (v in all_vars) {
@@ -124,24 +114,23 @@ results <- bind_rows(lapply(names(periods), function(p) {
   compute_block(periods[[p]], p)
 }))
 print(results, n = Inf)
-# ---------------------------------------------------------------------------
-# 4. Save CSV
-# ---------------------------------------------------------------------------
+#######################################################
+# 4) Save CSV
+#######################################################
 csv_path <- "mello_paper_replication/results/table1_summary_statistics.csv"
 write_csv(results, csv_path)
 cat("Saved CSV:", csv_path, "\n")
 
-# ---------------------------------------------------------------------------
-# 5. Generate LaTeX table
-# ---------------------------------------------------------------------------
-# Focus on the full-sample block for the main thesis table (matching Mello's
-# Table 1 format). Sub-period details can go in appendix if desired.
+#######################################################
+# 5) LaTeX table
+#######################################################
+# focus on the full-sample block for the main thesis table (like Mello's Table 1)
 
 make_latex_row <- function(row) {
   # Format mean (sd) strings
   if (row$variable == "_counts") return(NULL)  # handled separately
   
-  # Determine formatting: levels in thousands/millions, growth in 2 decimals
+  # format mean (sd) -- levels in thousands, growth in 2 decimals
   is_growth <- grepl("yoy_log_4q", row$variable)
   is_pop    <- row$variable == "population"
   

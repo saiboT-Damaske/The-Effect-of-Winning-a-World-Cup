@@ -1,27 +1,9 @@
-# ============================================================
-# Event Study Replication - ALL 6 GDP Features (fixest only)
-# Paper: Mello (Oxford OBES 2024)
-#
-# Features:
-#   1. GDP (gross domestic product)
-#   2. Private consumption (households)
-#   3. Government consumption (general government)
-#   4. Capital formation (GFCF)
-#   5. Exports
-#   6. Imports
-#
-# Model (Eq. 1 from the paper, applied to each feature y):
-#   delta4 log(y_ct) ~ sum_l beta_l * WIN^l_ct + theta HOST_ct + zeta ln(y_{c,t-4})
-#                     | country + tq
-#   SE clustered at country level, ref period l = 0 (Q2 of WC year)
-#
-# Input:  Data/mello_paper_replication/paper_replication_sample.csv
-# Output: mello_paper_replication/results/event_study_all_features_coefficients.csv
-#         mello_paper_replication/event_study_plots/event_study_gdp_figure1.{pdf,png}
-#         mello_paper_replication/event_study_plots/event_study_gdp_components_figure2.{pdf,png}
-# ============================================================
+# paper_replicate_event_study_all_features.R
+# Runs the Mello (2024) event study for all 6 GDP components (fixest only), produces Figure 1 and Figure 2.
 
-# ---------- 0) Setup ----------
+#######################################################
+# 0) Setup
+#######################################################
 library(readr)
 library(dplyr)
 library(stringr)
@@ -29,7 +11,9 @@ library(tidyr)
 library(fixest)
 library(ggplot2)
 
-# ---------- 1) Load prepared replication sample ----------
+#######################################################
+# 1) Load data
+#######################################################
 df0 <- read_csv(
   "Data/mello_paper_replication/paper_replication_sample.csv",
   show_col_types = FALSE
@@ -37,7 +21,10 @@ df0 <- read_csv(
 
 cat("Loaded:", nrow(df0), "rows,", n_distinct(df0$country), "countries\n")
 
-# ---------- 2) Feature definitions ----------
+#######################################################
+# 2) Feature definitions
+#######################################################
+# each feature needs a YoY growth column (dependent var) and a lagged level (control)
 features <- list(
   list(name  = "gdp",
        yoy   = "gdp_yoy_log_4q",
@@ -65,14 +52,16 @@ features <- list(
        label = "Imports")
 )
 
-# Check availability
+# quick check that all columns exist
 for (f in features) {
   ok_yoy <- f$yoy %in% names(df0)
   ok_lag <- f$lag %in% names(df0)
   cat(sprintf("  %s: yoy=%s lag=%s\n", f$label, ok_yoy, ok_lag))
 }
 
-# ---------- 3) Winner events and country-level indicator ----------
+#######################################################
+# 3) Winner events and country indicator
+#######################################################
 win_events <- df0 %>%
   filter(winner == 1) %>%
   select(country, year, qtr, tq) %>%
@@ -89,7 +78,9 @@ df <- df0 %>%
     host      = as.integer(host)
   )
 
-# ---------- 4) Relative time (nearest win; bin at +/-16) ----------
+#######################################################
+# 4) Relative time (nearest win, binned at +-16)
+#######################################################
 assign_nearest_event <- function(tq_vec, event_tq_vec) {
   sapply(tq_vec, function(tq0) {
     diffs <- tq0 - event_tq_vec
@@ -118,7 +109,9 @@ df <- df %>%
     )
   )
 
-# ---------- 5) Estimate each feature ----------
+#######################################################
+# 5) Loop over features and estimate
+#######################################################
 all_coefs <- list()
 
 for (f in features) {
@@ -126,7 +119,7 @@ for (f in features) {
   cat("  Feature:", f$label, "\n")
   cat("========================================\n")
 
-  # Prepare complete-case data
+  # complete cases only — different features can have different coverage
   df_f <- df %>%
     rename(dy = !!f$yoy, ln_l4 = !!f$lag) %>%
     filter(!is.na(dy), !is.na(ln_l4), !is.na(host), !is.na(rel_time_bin))
@@ -176,8 +169,7 @@ for (f in features) {
   cat("  l=+1:", round(coef_tbl$estimate[coef_tbl$l == 1 & !is.na(coef_tbl$l)], 3),
       "  l=+2:", round(coef_tbl$estimate[coef_tbl$l == 2 & !is.na(coef_tbl$l)], 3), "\n")
 
-  # Restore original column names for next iteration
-  df <- df
+  df <- df  # restore original names for next iteration
 }
 
 # Combine and save
@@ -187,7 +179,9 @@ write_csv(results_df, "mello_paper_replication/results/event_study_all_features_
 cat("\nSaved: mello_paper_replication/results/event_study_all_features_coefficients.csv\n")
 cat("  Total rows:", nrow(results_df), "\n\n")
 
-# ---------- 6) Summary table ----------
+#######################################################
+# 6) Summary table
+#######################################################
 cat("============================================================\n")
 cat("  SUMMARY: ATT estimates at l = {-1, +1, +2, +4, +8}\n")
 cat("============================================================\n\n")
@@ -209,9 +203,10 @@ summary_tbl <- results_df %>%
 
 print(as.data.frame(summary_tbl), row.names = FALSE)
 
-# ============================================================
-# 7) FIGURE 1: GDP-only event study plot
-# ============================================================
+#######################################################
+# 7) Figure 1: GDP-only event study plot
+#######################################################
+# add back l=0 as the reference point for the plot
 gdp_plot_data <- results_df %>%
   filter(feature == "gdp", !is.na(l)) %>%
   mutate(ci_lo = estimate - 1.96 * se,
@@ -240,9 +235,9 @@ ggsave("mello_paper_replication/event_study_plots/event_study_gdp_figure1.png",
        p_gdp, width = 7, height = 4, dpi = 300)
 cat("\nPlot saved: event_study_plots/event_study_gdp_figure1.{pdf,png}\n")
 
-# ============================================================
-# 8) FIGURE 2: 5-panel GDP components
-# ============================================================
+#######################################################
+# 8) Figure 2: 5-panel GDP components
+#######################################################
 plot_features <- c("private_consumption", "government_consumption",
                    "capital_formation", "exports", "imports")
 

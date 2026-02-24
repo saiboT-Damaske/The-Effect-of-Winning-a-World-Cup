@@ -1,15 +1,11 @@
-# ============================================================
-# SDiD replication — GDP + components (Figure + ATT/SE/P-value)
-# Paper: Mello (OBES) "A Kick for the GDP"
-# Data: Data/mello_paper_replication/paper_replication_sample.csv
-# Robust version: NO panel.matrices() (avoids false "no variation")
-# ============================================================
+# paper_replicate_sdid_full_features.R
+# SDiD replication for GDP + all 5 components. Builds panel matrices manually to avoid synthdid quirks.
 
 rm(list = ls())
 
-# -----------------------------
+#######################################################
 # 0) Packages
-# -----------------------------
+#######################################################
 library(readr)
 library(dplyr)
 library(tidyr)
@@ -25,9 +21,9 @@ library(synthdid)
 # Set once in your R session, or uncomment:
 # setwd("~/The-Effect-of-Winning-a-World-Cup")
 
-# -----------------------------
+#######################################################
 # 1) Load data
-# -----------------------------
+#######################################################
 df <- read_csv("Data/mello_paper_replication/paper_replication_sample.csv", show_col_types = FALSE) %>%
   mutate(
     country = as.character(country),
@@ -41,11 +37,10 @@ df <- read_csv("Data/mello_paper_replication/paper_replication_sample.csv", show
     tq_num = 4L * year + (qtr - 1L)  # strictly increasing quarterly index
   )
 
-# -----------------------------
-# 2) SDiD event years and event quarter
-#    World Cups used in SDiD: 1998, 2002, 2006, 2010, 2014, 2018
-#    Set q=0 at Q2 of the WC year (paper convention)
-# -----------------------------
+#######################################################
+# 2) SDiD event definitions
+#######################################################
+# WC 1998–2018, q=0 at Q2 of each WC year
 wc_years <- c(1998L, 2002L, 2006L, 2010L, 2014L, 2018L)
 
 events <- tibble(
@@ -53,7 +48,7 @@ events <- tibble(
   event_tq = 4L * wc_year + (2L - 1L)   # Q2 index on tq_num scale
 )
 
-# Winners for those tournaments (treated subseries)
+# which subseries are treated (the WC winner for that tournament)
 # NOTE: OECD codes: FRA, BRA, ITA, ESP, DEU
 is_treated_subseries <- function(country, wc_year) {
   (country == "FRA" && wc_year %in% c(1998L, 2018L)) ||
@@ -63,15 +58,15 @@ is_treated_subseries <- function(country, wc_year) {
     (country == "DEU" && wc_year == 2014L)
 }
 
-# -----------------------------
-# 3) Core builder: stacked 10-quarter subseries, then build Y/N0/T0
-#    This is the robust replacement for panel.matrices().
-# -----------------------------
+#######################################################
+# 3) Core builder: stacked subseries -> Y/N0/T0 matrices
+#######################################################
+# this replaces panel.matrices() which can choke on tibbles
 build_sdid_mats <- function(df_in, y_col, drop_host_only_controls = TRUE) {
   
   stopifnot(y_col %in% names(df_in))
   
-  # 3a) stack: each (country × wc_year) is one unit_id, keep q in [-7,2]
+  # 3a) stack: each (country x wc_year) is one subseries, keep q in [-7,2]
   d <- df_in %>%
     select(country, host, tq_num, !!y_col) %>%
     rename(y = !!y_col) %>%
@@ -95,8 +90,7 @@ build_sdid_mats <- function(df_in, y_col, drop_host_only_controls = TRUE) {
       select(-host_subseries)
   }
   
-  # 3c) enforce balanced panel in this window and NO missing outcomes
-  # synthdid cannot handle NA in Y, so we must drop any unit with NA anywhere.
+  # 3c) balanced panel + no missing outcomes (synthdid can't handle NA in Y)
   d <- d %>%
     group_by(unit_id) %>%
     filter(
@@ -105,7 +99,7 @@ build_sdid_mats <- function(df_in, y_col, drop_host_only_controls = TRUE) {
     ) %>%
     ungroup()
   
-  # Diagnostics (important with sparse components)
+  # diagnostics -- especially useful for sparse components
   cat("\n--- Sample diagnostics for", y_col, "---\n")
   cat("Units:", n_distinct(d$unit_id), "\n")
   cat("Treated units:", d %>% distinct(unit_id, treated) %>% filter(treated == 1L) %>% nrow(), "\n")
@@ -114,13 +108,12 @@ build_sdid_mats <- function(df_in, y_col, drop_host_only_controls = TRUE) {
   print(table(d$D))
   cat("rel_time range:", paste(range(d$rel_time), collapse = " to "), "\n")
   
-  # Hard stop if treatment units got dropped (common with NA-heavy components)
+  # stop early if all treated units got dropped (happens with NA-heavy components)
   if (d %>% distinct(unit_id, treated) %>% summarise(n = sum(treated)) %>% pull(n) == 0) {
     stop("No treated subseries left after NA filtering for this outcome.")
   }
   
-  # 3d) build Y matrix: units x time, ordered
-  # time order: -7,-6,...,2
+  # 3d) build Y matrix (units x time), controls first then treated
   time_levels <- seq(-7L, 2L, by = 1L)
   
   Y_wide <- d %>%
@@ -129,7 +122,7 @@ build_sdid_mats <- function(df_in, y_col, drop_host_only_controls = TRUE) {
     distinct(unit_id, treated, rel_time, .keep_all = TRUE) %>%
     tidyr::pivot_wider(names_from = rel_time, values_from = y)
   
-  # unit ordering: controls first, then treated (required by synthdid_estimate interface)
+  # unit ordering: controls first, treated last (synthdid convention)
   unit_order <- Y_wide %>%
     distinct(unit_id, treated) %>%
     arrange(treated, unit_id)
@@ -138,11 +131,10 @@ build_sdid_mats <- function(df_in, y_col, drop_host_only_controls = TRUE) {
     right_join(unit_order, by = c("unit_id", "treated")) %>%
     arrange(treated, unit_id)
   
-  # Extract numeric matrix in correct time column order
+  # Extract numeric matrix
   time_cols <- as.character(time_levels)
   Y <- as.matrix(Y_wide[, time_cols])
-  
-  # Final checks
+
   stopifnot(!anyNA(Y))
   treated_vec <- unit_order$treated
   stopifnot(length(unique(treated_vec)) > 1)  # both 0 and 1 exist
@@ -159,9 +151,9 @@ build_sdid_mats <- function(df_in, y_col, drop_host_only_controls = TRUE) {
   )
 }
 
-# -----------------------------
-# 4) Runner: estimate ATT, bootstrap SE, p-value, plot
-# -----------------------------
+#######################################################
+# 4) Runner: estimate ATT, bootstrap SE, plot
+#######################################################
 run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000,
                             output_dir = "mello_paper_replication/sdid_plots") {
   
@@ -172,7 +164,7 @@ run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000,
   
   tau_hat <- synthdid::synthdid_estimate(mats$Y, mats$N0, mats$T0)
   
-  # Bootstrap SE via S3 vcov method for synthdid_estimate (called through stats::vcov)
+  # Bootstrap SE (paper uses bootstrap with 1000 reps)
   V <- stats::vcov(tau_hat, method = "bootstrap", replications = reps)
   se_hat <- sqrt(V[1, 1])
   
@@ -186,12 +178,12 @@ run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000,
   cat(sprintf("z       = %.3f\n", z))
   cat(sprintf("p-value = %.3f\n", p))
   
-  # Build output filename from outcome name
+  # filename from outcome name
   if (!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
   safe_name <- tolower(gsub("\\s+", "_", outcome_name))
   plot_path <- file.path(output_dir, paste0("sdid_replication_", safe_name, ".png"))
   
-  # Plot (treated = red, synthetic control = blue)
+  # Plot (red = treated, blue = synthetic control)
   p_obj <- synthdid::synthdid_plot(tau_hat)
   color_vals <- c("synthetic control" = "#4269d0", "treated" = "#ff585d")
   if (inherits(p_obj, "ggplot")) {
@@ -220,7 +212,9 @@ run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000,
 }
 
 
-# Define features and columns
+#######################################################
+# 5) Define features and run
+#######################################################
 features <- list(
   list(name = "GDP", col = "gdp_yoy_log_4q"),
   list(name = "Private consumption", col = "private_consumption_yoy_log_4q"),
@@ -230,7 +224,7 @@ features <- list(
   list(name = "Imports", col = "imports_yoy_log_4q")
 )
 
-# Run and collect results
+# loop over all features and collect results
 results_list <- list()
 for (f in features) {
   results_list[[f$name]] <- run_one_outcome(
@@ -241,7 +235,7 @@ for (f in features) {
   )
 }
 
-# Convert results to a data frame
+# Convert results to a data frame and save
 results_df <- tibble(
   Feature = names(results_list),
   ATT = sapply(results_list, function(x) x$ATT),
@@ -252,7 +246,7 @@ results_df <- tibble(
   CI_upper = sapply(results_list, function(x) x$ATT + 1.96 * x$SE)
 )
 
-# Write results to CSV
+# Write results
 write_csv(results_df, "mello_paper_replication/sdid_results/sdid_results_full_features.csv")
 cat("\nResults written to: mello_paper_replication/sdid_results/sdid_results_full_features.csv\n")
 cat("\nDone.\n")

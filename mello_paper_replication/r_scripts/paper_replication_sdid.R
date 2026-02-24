@@ -1,14 +1,11 @@
-# ============================================================
-# Replicate Figure 1 (SDiD) — Mello (OBES)
-# Data: Data/mello_paper_replication/paper_replication_sample.csv
-# ============================================================
+# paper_replication_sdid.R
+# Replicates the SDiD estimate from Mello (2024) Figure 1 for GDP growth.
 
 rm(list = ls())
 
-
-# -----------------------------
+#######################################################
 # 0) Packages
-# -----------------------------
+#######################################################
 library(readr)
 library(dplyr)
 library(tidyr)
@@ -23,9 +20,9 @@ library(synthdid)
 # Set once in your R session, or uncomment:
 # setwd("~/The-Effect-of-Winning-a-World-Cup")
 
-# -----------------------------
+#######################################################
 # 1) Load data
-# -----------------------------
+#######################################################
 df <- read_csv("Data/mello_paper_replication/paper_replication_sample.csv", show_col_types = FALSE) %>%
   mutate(
     country = as.character(country),
@@ -33,19 +30,18 @@ df <- read_csv("Data/mello_paper_replication/paper_replication_sample.csv", show
     qtr     = as.integer(qtr)
   )
 
-# Outcome used in Figure 1: YoY GDP log growth (percentage points)
+# Outcome: YoY GDP log growth in percentage points
 y_col <- "gdp_yoy_log_4q"
 stopifnot(y_col %in% names(df))
 
-# Create a clean quarterly index (must be strictly increasing in time within country)
+# quarterly index (must be strictly increasing within country)
 df <- df %>%
   mutate(tq_num = 4L * year + (qtr - 1L))
 
-# -----------------------------
-# 2) Define SDiD event years and event quarter
-#    Paper SDiD uses World Cups: 1998, 2002, 2006, 2010, 2014, 2018
-#    and sets q=0 at Q2 of the WC year
-# -----------------------------
+#######################################################
+# 2) SDiD event definitions
+#######################################################
+# paper uses WC 1998–2018, q=0 at Q2 of each WC year
 wc_years <- c(1998, 2002, 2006, 2010, 2014, 2018)
 
 events <- tibble(
@@ -53,10 +49,10 @@ events <- tibble(
   event_tq = 4L * wc_year + (2L - 1L)   # Q2 index on tq_num scale
 )
 
-# -----------------------------
-# 3) Create stacked 10-quarter subseries per country × WC year
-#    Keep q in [-7, 2]
-# -----------------------------
+#######################################################
+# 3) Stacked subseries (country x WC year)
+#######################################################
+# each subseries is 10 quarters: q in [-7, 2]
 sdid_df <- df %>%
   select(country, year, qtr, tq_num, host, !!y_col) %>%
   rename(dy_gdp_pp = !!y_col) %>%
@@ -67,11 +63,9 @@ sdid_df <- df %>%
   ) %>%
   filter(rel_time >= -7, rel_time <= 2)
 
-# -----------------------------
-# 4) Define treated subseries (winner × WC-year)
-#    Winners in SDiD sample:
-#      FRA-1998, BRA-2002, ITA-2006, ESP-2010, DEU-2014, FRA-2018
-# -----------------------------
+#######################################################
+# 4) Define treated subseries
+#######################################################
 sdid_df <- sdid_df %>%
   mutate(
     treated = as.integer(
@@ -83,31 +77,29 @@ sdid_df <- sdid_df %>%
     )
   )
 
-# -----------------------------
-# 5) Drop host-only subseries from donor pool
-#    Keep France-1998 (host+winner) automatically because treated==1
-# -----------------------------
+#######################################################
+# 5) Drop host-only controls from donor pool
+#######################################################
+# France 1998 stays because it's treated (host + winner)
 sdid_df <- sdid_df %>%
   group_by(unit_id) %>%
   mutate(host_subseries = max(host, na.rm = TRUE)) %>%
   ungroup() %>%
   filter(!(host_subseries == 1L & treated == 0L))
 
-# -----------------------------
-# 6) Define SDiD treatment path:
-#    D_it = 1 for treated units in post quarters (q >= 1), else 0
-# -----------------------------
+#######################################################
+# 6) Treatment indicator D
+#######################################################
+# D_it = 1 for treated units in post periods (q >= 1)
 sdid_df <- sdid_df %>%
   mutate(
     post = as.integer(rel_time >= 1),
     D    = as.integer(treated * post)
   )
 
-# -----------------------------
-# 7) Hard requirements for synthdid:
-#    - balanced 10-quarter panel per unit_id (q=-7..2)
-#    - no missing outcomes in the estimation sample
-# -----------------------------
+#######################################################
+# 7) Balanced panel, no missing outcomes
+#######################################################
 sdid_df <- sdid_df %>%
   group_by(unit_id) %>%
   filter(
@@ -124,11 +116,10 @@ cat("Units:", n_distinct(sdid_df$unit_id), "\n")
 cat("Treated units:", sdid_df %>% distinct(unit_id, treated) %>% filter(treated == 1) %>% nrow(), "\n")
 cat("rel_time range:", paste(range(sdid_df$rel_time), collapse = " to "), "\n\n")
 
-# -----------------------------
-# 8) Critical FIX:
-#    Convert tibble -> base data.frame and force atomic vectors
-#    (avoids false 'no variation' errors in some setups)
-# -----------------------------
+#######################################################
+# 8) Convert to base data.frame
+#######################################################
+# tibble + vctrs can cause false "no variation" errors in synthdid
 sdid_df2 <- sdid_df %>%
   arrange(unit_id, rel_time) %>%
   mutate(
@@ -142,9 +133,9 @@ sdid_df2 <- as.data.frame(sdid_df2)
 
 stopifnot(length(unique(sdid_df2$D)) > 1)
 
-# -----------------------------
+#######################################################
 # 9) Build panel matrices + estimate SDiD
-# -----------------------------
+#######################################################
 panel <- synthdid::panel.matrices(
   sdid_df2,
   unit = "unit_id",
@@ -171,9 +162,9 @@ cat("Bootstrap SE:", se_hat, "\n\n")
 
 p <- synthdid::synthdid_plot(tau_hat)
 
-# -----------------------------
-# 10) Plot (Figure 1 style) and save
-# -----------------------------
+#######################################################
+# 10) Plot and save
+#######################################################
 plot_path <- "mello_paper_replication/sdid_plots/sdid_plot_GDP.png"
 
 # Significance indicator
@@ -211,7 +202,7 @@ if (inherits(p, "ggplot")) {
 }
 
 
-## METRICS
+## save metrics and results
 ATT <- as.numeric(tau_hat)
 ATT
 
@@ -247,13 +238,12 @@ cat("\nResults saved to: mello_paper_replication/results/sdid_results_R.csv\n")
 
 
 
-# control-unit weights (length N0)
+# have a look at the unit and time weights
 omega <- synthdid::synthdid_controls(tau_hat)
 
-# time weights (length T0)
+# time weights
 lambda <- synthdid::synthdid_times(tau_hat)
 
-# quick summaries
 summary(omega)
 summary(lambda)
 

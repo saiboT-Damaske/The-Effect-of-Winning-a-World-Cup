@@ -1,18 +1,6 @@
-# =============================================================================
 # event_study_comparison_all_features.R
-#
-# Compare our GDP-component event study coefficients with Mello (2024) Table A3.
-# Outputs:
-#   1. 6-panel line plot (GDP + 5 components) with shaded CIs
-#      -> mello_paper_replication/event_study_plots/
-#   2. Concise comparison table CSV (selected lags) for all 6 features
-#      -> mello_paper_replication/results/
-#   3. LaTeX table for appendix
-#      -> thesis/tables/
-#
-# Run from repo root:
-#   Rscript mello_paper_replication/r_scripts/event_study_comparison_all_features.R
-# =============================================================================
+# Compares all 6 GDP-component event study coefficients against Mello (2024) Table A3.
+# Produces a 6-panel plot, a comparison CSV, and a LaTeX table.
 
 library(readr)
 library(dplyr)
@@ -20,9 +8,9 @@ library(tidyr)
 library(ggplot2)
 library(patchwork)
 
-# ---------------------------------------------------------------------------
-# 1. Load our fixest results (all 6 features)
-# ---------------------------------------------------------------------------
+#######################################################
+# 1) Load our fixest results (all 6 features)
+#######################################################
 ours_all <- read_csv(
   "mello_paper_replication/results/event_study_all_features_coefficients.csv",
   show_col_types = FALSE
@@ -34,13 +22,10 @@ ours_rt <- ours_all %>%
   select(feature, feature_label, l, estimate, se, pval) %>%
   arrange(feature, l)
 
-# ---------------------------------------------------------------------------
-# 2. Mello (2024) Table A3 — hardcoded from the published paper
-#    Columns: PCons, GCons, CapForm, Exports, Imports
-#    Also include GDP from Table 2 for completeness.
-# ---------------------------------------------------------------------------
-
-# GDP (Table 2) - already in the GDP comparison script but repeat here
+#######################################################
+# 2) Mello (2024) Table A3 — hardcoded from the paper
+#######################################################
+# GDP from Table 2, components from Table A3
 mello_gdp <- tibble::tribble(
   ~l, ~estimate, ~se,
   -16,  0.640, 0.673, -15,  0.363, 0.538, -14,  0.276, 0.655, -13,  0.286, 0.474,
@@ -53,7 +38,7 @@ mello_gdp <- tibble::tribble(
    13, -0.593, 0.606,  14, -0.320, 0.628,  15, -0.412, 0.676,  16, -0.109, 0.477
 ) %>% mutate(feature = "gdp", feature_label = "GDP")
 
-# Private Consumption (Table A3, cols 1-2)
+# Private Consumption
 mello_pcons <- tibble::tribble(
   ~l, ~estimate, ~se,
   -16,  1.046, 0.518, -15,  0.059, 0.578, -14,  0.353, 0.557, -13,  0.308, 0.413,
@@ -66,7 +51,7 @@ mello_pcons <- tibble::tribble(
    13, -0.136, 0.950,  14,  0.185, 0.679,  15,  0.395, 0.528,  16,  0.186, 0.538
 ) %>% mutate(feature = "private_consumption", feature_label = "Private Consumption")
 
-# Government Consumption (Table A3, cols 3-4)
+# Government Consumption
 mello_gcons <- tibble::tribble(
   ~l, ~estimate, ~se,
   -16,  0.454, 0.731, -15,  1.024, 0.566, -14,  0.860, 0.471, -13,  0.766, 0.492,
@@ -79,7 +64,7 @@ mello_gcons <- tibble::tribble(
    13, -1.105, 0.679,  14, -0.646, 0.568,  15, -0.424, 0.631,  16, -0.060, 0.520
 ) %>% mutate(feature = "government_consumption", feature_label = "Government Consumption")
 
-# Capital Formation (Table A3, cols 5-6)
+# Capital Formation
 mello_capform <- tibble::tribble(
   ~l, ~estimate, ~se,
   -16,  2.723, 1.438, -15,  2.417, 1.451, -14,  2.260, 1.734, -13,  0.230, 1.551,
@@ -92,7 +77,7 @@ mello_capform <- tibble::tribble(
    13,  0.535, 1.282,  14,  0.212, 1.672,  15,  1.755, 1.464,  16,  0.185, 1.256
 ) %>% mutate(feature = "capital_formation", feature_label = "Capital Formation")
 
-# Exports (Table A3, cols 7-8)
+# Exports
 mello_exports <- tibble::tribble(
   ~l, ~estimate, ~se,
   -16,  2.040, 2.171, -15,  0.185, 1.769, -14,  1.025, 2.032, -13,  1.935, 2.591,
@@ -105,7 +90,7 @@ mello_exports <- tibble::tribble(
    13, -0.430, 2.692,  14, -0.466, 2.418,  15,  0.714, 1.945,  16,  0.501, 1.726
 ) %>% mutate(feature = "exports", feature_label = "Exports")
 
-# Imports (Table A3, cols 9-10)
+# Imports
 mello_imports <- tibble::tribble(
   ~l, ~estimate, ~se,
   -16,  3.603, 2.417, -15,  3.202, 1.685, -14,  4.664, 2.192, -13,  1.808, 1.514,
@@ -137,7 +122,7 @@ mello_controls <- tibble::tribble(
   "imports",                "Imports",                   -6.056, 0.952,  -0.390, 1.909
 )
 
-# Mello observation counts and within R²
+# Mello N and within-R2 per feature
 mello_stats <- tibble::tribble(
   ~feature,                  ~mello_n,  ~mello_r2,
   "gdp",                    8637,       0.423,
@@ -148,9 +133,9 @@ mello_stats <- tibble::tribble(
   "imports",                8549,       0.364
 )
 
-# ---------------------------------------------------------------------------
-# 3. Helper: significance stars
-# ---------------------------------------------------------------------------
+#######################################################
+# 3) Significance stars helper
+#######################################################
 stars_fn <- function(p) {
   case_when(
     p < 0.01 ~ "***",
@@ -160,12 +145,10 @@ stars_fn <- function(p) {
   )
 }
 
-# ---------------------------------------------------------------------------
-# 4. Build combined plotting dataframe — join on 'feature' (avoids label case
-#    mismatches between our CSV and hardcoded Mello labels)
-# ---------------------------------------------------------------------------
-
-# Canonical labels keyed on feature id
+#######################################################
+# 4) Build combined plotting data
+#######################################################
+# join on feature id to avoid label case mismatches
 feat_labels <- c(
   gdp                    = "GDP",
   private_consumption    = "Private Consumption",
@@ -185,9 +168,9 @@ plot_df <- bind_rows(
     ci_hi = estimate + 1.96 * se
   )
 
-# ---------------------------------------------------------------------------
-# 5. Build individual plots per feature and combine with patchwork
-# ---------------------------------------------------------------------------
+#######################################################
+# 5) Build 6-panel comparison plot
+#######################################################
 colours <- c("Replication" = "#2166AC", "Mello (2024)" = "#B2182B")
 
 make_panel <- function(feat_id, show_legend = FALSE) {
@@ -216,6 +199,7 @@ make_panel <- function(feat_id, show_legend = FALSE) {
 
 panels <- lapply(names(feat_labels), make_panel)
 
+# combine panels with patchwork and grab a shared legend
 combined <- (panels[[1]] | panels[[2]]) /
             (panels[[3]] | panels[[4]]) /
             (panels[[5]] | panels[[6]]) +
@@ -246,10 +230,9 @@ ggsave("mello_paper_replication/event_study_plots/event_study_all_features_compa
        final_plot, width = 12, height = 10, dpi = 300)
 cat("Saved plot: mello_paper_replication/event_study_plots/event_study_all_features_comparison.png\n")
 
-# ---------------------------------------------------------------------------
-# 6. Concise comparison table: selected lags (l = +1..+4, +8, +16)
-#    plus convergence control and host, for all 6 features
-# ---------------------------------------------------------------------------
+#######################################################
+# 6) Concise comparison CSV (selected lags)
+#######################################################
 selected_lags <- c(1, 2, 3, 4, 8, 16)
 
 # Our data — selected relative-time + controls from all-features CSV
@@ -288,11 +271,10 @@ write_csv(csv_table,
           "mello_paper_replication/results/event_study_all_features_comparison_table.csv")
 cat("Saved CSV: mello_paper_replication/results/event_study_all_features_comparison_table.csv\n")
 
-# ---------------------------------------------------------------------------
-# 7. LaTeX appendix table — one page, all 6 features, selected lags
-#    Layout: rows = selected lags × features, columns = Repl coeff(SE) | Mello coeff(SE)
-#    We do one sub-block per feature to keep it readable.
-# ---------------------------------------------------------------------------
+#######################################################
+# 7) LaTeX appendix table
+#######################################################
+# one sub-block per feature, selected post-treatment lags
 fmt <- function(x, d = 3) formatC(round(x, d), format = "f", digits = d)
 
 tex <- c(

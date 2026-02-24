@@ -1,46 +1,34 @@
-# =============================================================================
 # event_study_comparison.R
-#
-# Compare our GDP event study coefficients with Mello (2024) Table 2.
-# Outputs:
-#   1. Line plot with shaded CIs  -> mello_paper_replication/event_study_plots/
-#   2. Full comparison table (CSV) -> mello_paper_replication/results/
-#   3. LaTeX table (all 32 leads/lags + controls) -> thesis/tables/
-#
-# Run from repo root:
-#   Rscript mello_paper_replication/r_scripts/event_study_comparison.R
-# =============================================================================
+# Compares our GDP event study coefficients against Mello (2024) Table 2. Produces a plot, CSV, and LaTeX table.
 
 library(readr)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-# ---------------------------------------------------------------------------
-# 1. Load our fixest results
-# ---------------------------------------------------------------------------
+#######################################################
+# 1) Load our fixest results
+#######################################################
 ours <- read_csv(
   "mello_paper_replication/results/event_study_coefficients_R_fixest.csv",
   show_col_types = FALSE
 )
 
-# Keep only the 32 relative-time dummies (l = -16 ... -1, +1 ... +16)
+# just the 32 relative-time dummies (drop controls for the plot)
 ours_rt <- ours %>%
   filter(!is.na(l)) %>%
   select(l, estimate, se, pval) %>%
   arrange(l)
 
-# Controls (convergence + host)
+# convergence + host controls separately
 ours_controls <- ours %>%
   filter(is.na(l)) %>%
   select(term, estimate, se, pval)
 
-# ---------------------------------------------------------------------------
-# 2. Mello (2024) Table 2 — hardcoded from the published paper
-#    SE in parentheses; significance from the paper text.
-#    Mello reports * p<0.10, ** p<0.05, *** p<0.01
-#    Only l=+1 and l=+2 are marked * in the paper.
-# ---------------------------------------------------------------------------
+#######################################################
+# 2) Mello (2024) Table 2 — hardcoded from the paper
+#######################################################
+# only l=+1 and l=+2 are marked significant in the paper
 mello_rt <- tibble::tribble(
   ~l,  ~estimate,  ~se,
   -16,  0.640,  0.673,
@@ -77,8 +65,7 @@ mello_rt <- tibble::tribble(
    16, -0.109,  0.477
 )
 
-# Mello does not report p-values; we back-compute from t = coeff/SE, two-sided,
-# using N = 8637, df ≈ 8637 - 48 - 244 - 34 ≈ 8311 (effectively normal)
+# back-compute p from t = coeff/SE (large N, effectively normal)
 mello_rt <- mello_rt %>%
   mutate(
     tval = estimate / se,
@@ -95,9 +82,9 @@ mello_controls <- tibble::tribble(
     pval = 2 * pnorm(-abs(tval))
   )
 
-# ---------------------------------------------------------------------------
-# 3. Helper: significance stars
-# ---------------------------------------------------------------------------
+#######################################################
+# 3) Significance stars helper
+#######################################################
 stars <- function(p) {
   case_when(
     p < 0.01 ~ "***",
@@ -107,9 +94,9 @@ stars <- function(p) {
   )
 }
 
-# ---------------------------------------------------------------------------
-# 4. Merge for plotting
-# ---------------------------------------------------------------------------
+#######################################################
+# 4) Merge for plotting
+#######################################################
 plot_df <- bind_rows(
   ours_rt %>%
     mutate(source = "Replication",
@@ -122,9 +109,9 @@ plot_df <- bind_rows(
            ci_hi  = estimate + 1.96 * se)
 )
 
-# ---------------------------------------------------------------------------
-# 5. Line plot with shaded CIs
-# ---------------------------------------------------------------------------
+#######################################################
+# 5) Line plot with shaded CIs
+#######################################################
 p <- ggplot(plot_df, aes(x = l, y = estimate, colour = source, fill = source)) +
   # Shaded confidence bands
   geom_ribbon(aes(ymin = ci_lo, ymax = ci_hi), alpha = 0.15, colour = NA) +
@@ -166,9 +153,9 @@ ggsave("mello_paper_replication/event_study_plots/event_study_gdp_comparison.png
        p, width = 10, height = 6, dpi = 300)
 cat("Saved plot: mello_paper_replication/event_study_plots/event_study_gdp_comparison.png\n")
 
-# ---------------------------------------------------------------------------
-# 6. Full comparison table (all 32 + controls)
-# ---------------------------------------------------------------------------
+#######################################################
+# 6) Full comparison table (all 32 + controls)
+#######################################################
 table_rt <- ours_rt %>%
   select(l, estimate, se, pval) %>%
   rename(repl_coeff = estimate, repl_se = se, repl_pval = pval) %>%
@@ -206,9 +193,9 @@ write_csv(full_table,
           "mello_paper_replication/results/event_study_gdp_comparison_table.csv")
 cat("Saved CSV: mello_paper_replication/results/event_study_gdp_comparison_table.csv\n")
 
-# ---------------------------------------------------------------------------
-# 7. LaTeX table
-# ---------------------------------------------------------------------------
+#######################################################
+# 7) LaTeX table
+#######################################################
 fmt <- function(x, d = 3) formatC(round(x, d), format = "f", digits = d)
 
 tex <- c(
@@ -239,10 +226,10 @@ for (i in seq_len(nrow(table_controls))) {
   ))
 }
 
+# pre-treatment block
 tex <- c(tex, "[4pt]",
          "\\multicolumn{6}{l}{\\textit{Pre-treatment}} \\\\")
 
-# Pre-treatment rows
 pre <- table_rt %>% filter(l < 0)
 for (i in seq_len(nrow(pre))) {
   r <- pre[i, ]
@@ -256,10 +243,10 @@ for (i in seq_len(nrow(pre))) {
   ))
 }
 
+# post-treatment block
 tex <- c(tex, "[4pt]",
          "\\multicolumn{6}{l}{\\textit{Post-treatment}} \\\\")
 
-# Post-treatment rows
 post <- table_rt %>% filter(l > 0)
 for (i in seq_len(nrow(post))) {
   r <- post[i, ]

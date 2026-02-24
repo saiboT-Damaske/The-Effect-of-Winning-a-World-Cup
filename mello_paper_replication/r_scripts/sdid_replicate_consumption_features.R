@@ -1,8 +1,5 @@
-# ============================================================
-# SDiD replication — Private and Government Consumption only
-# Paper: Mello (OBES) "A Kick for the GDP"
-# Data: Data/mello_paper_replication/paper_replication_sample.csv
-# ============================================================
+# sdid_replicate_consumption_features.R
+# SDiD for private and government consumption only. Appends results to the summary CSV.
 
 rm(list = ls())
 
@@ -43,6 +40,7 @@ is_treated_subseries <- function(country, wc_year) {
     (country == "DEU" && wc_year == 2014L)
 }
 
+# same builder function as in the full features script
 build_sdid_mats <- function(df_in, y_col, drop_host_only_controls = TRUE) {
   stopifnot(y_col %in% names(df_in))
   d <- df_in %>%
@@ -100,6 +98,7 @@ build_sdid_mats <- function(df_in, y_col, drop_host_only_controls = TRUE) {
   )
 }
 
+# runner: estimate, bootstrap, plot
 run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000) {
   cat("\n================================================\n")
   cat("Outcome:", outcome_name, "\nColumn:", y_col, "\n")
@@ -116,7 +115,7 @@ run_one_outcome <- function(df_in, outcome_name, y_col, reps = 1000) {
   cat(sprintf("z       = %.3f\n", z))
   cat(sprintf("p-value = %.3f\n", p))
 
-  # Plot and save (treated = red, synthetic control = blue)
+  # Plot and save
   p_obj <- synthdid::synthdid_plot(tau_hat)
   plot_title <- paste0("SDiD: World Cup win effect on YoY ", outcome_name, " growth (pp)")
   plot_path <- paste0("mello_paper_replication/sdid_plots/sdid_plot_", outcome_name, ".png")
@@ -158,7 +157,7 @@ gov_res <- run_one_outcome(
   reps = 1000
 )
 
-# Update sdid_results_summary.csv
+# append to existing summary or create new one
 summary_path <- "mello_paper_replication/sdid_results/sdid_results_summary.csv"
 if (file.exists(summary_path)) {
   summary_df <- read_csv(summary_path)

@@ -1,6 +1,5 @@
-# SDiD Diagnostics Check — Compare sample sizes and event years to Mello (OBES)
-# This script checks the number of treated/control units and event years for each feature
-# It does NOT run SDiD estimation, just diagnostics
+# sdid_diagnostics_check.R
+# Quick diagnostics: checks sample sizes and treated/control units for each feature. No estimation.
 
 library(readr)
 library(dplyr)
@@ -21,7 +20,7 @@ df <- read_csv(file_path, show_col_types = FALSE) %>%
     tq_num = 4L * year + (qtr - 1L)
   )
 
-# World Cup years (as in Mello)
+# same event definitions as the main SDiD scripts
 wc_years <- c(1998L, 2002L, 2006L, 2010L, 2014L, 2018L)
 events <- tibble(
   wc_year  = wc_years,
@@ -36,6 +35,7 @@ is_treated_subseries <- function(country, wc_year) {
     (country == "DEU" && wc_year == 2014L)
 }
 
+# check both pct and log growth columns
 features <- c(
   "gdp_yoy_pct", "private_consumption_yoy_pct", "government_consumption_yoy_pct",
   "capital_formation_yoy_pct", "exports_yoy_pct", "imports_yoy_pct",
