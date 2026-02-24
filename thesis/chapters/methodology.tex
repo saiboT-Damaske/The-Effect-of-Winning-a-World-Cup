@@ -2,7 +2,7 @@ This section details the empirical implementation of the methods introduced in S
 
 \subsection{Replication of Mello (2024)}
 
-The primary objective of this thesis is to replicate and compare the analysis in \citet{Mello2024}. As a first step, this involves reconstructing the dataset from OECD sources as the author did not make his code publicly available\footnote{The \citet{Mello2024} paper included a replication package link: \url{https://doi.org/10.3886/E188961} but it leads to a completely different research paper of droughts in Brazil (last visited 02/26).}, reproducing the summary statistics, and estimating both the event study and synthetic difference-in-differences models. The full replication should serve two purposes: validate the original findings using independently constructed data, and additionally establish the foundation for the extensions that follow.
+The primary objective of this thesis is to replicate and compare the analysis in \citet{Mello2024}. As a first step, this involves reconstructing the dataset from OECD sources as the author did not make his code publicly available,\footnote{The \citet{Mello2024} paper included a replication package link: \url{https://doi.org/10.3886/E188961} but it leads to a completely different research paper of droughts in Brazil (last accessed 2026-02-20).} reproducing the summary statistics, and estimating both the event study and synthetic difference-in-differences models. The full replication should serve two purposes: validate the original findings using independently constructed data, and additionally establish the foundation for the extensions that follow.
 \subsubsection{Data Construction}
 
 The replication uses quarterly national accounts data from the OECD, covering the period 1961--2021. The sample includes 48 countries: 6 World Cup winners during the sample period, 12 host countries, and 36 countries that neither won nor hosted. Following \citet{Mello2024}, I reconstruct the data set he describes and follow the mentioned data transformation steps (see Section \ref{data}). The outcome variable of each feature is year-over-year (YoY) growth, computed for GDP as:
@@ -86,6 +86,4 @@ This extension tests whether the psychological mechanisms operate symmetrically 
 \subsection{Implementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-All analyses are implemented in R. The event study regressions use the \texttt{fixest} package \citep{fixest}, which provides efficient estimation of high-dimensional fixed effects models with clustered standard errors. The SDID estimation uses the \texttt{synthdid} package \citep{synthdid_package}, which implements the \citet{Arkhangelsky2021} estimator with bootstrap inference.
-
-Code and data for full replication are available in the accompanying repository.
+All analyses are implemented in R. The event study regressions use the \texttt{fixest} package \citep{fixest}, which provides efficient estimation of high-dimensional fixed effects models with clustered standard errors. The SDID estimation uses the \texttt{synthdid} package \citep{synthdid_package}, which implements the \citet{Arkhangelsky2021} estimator with bootstrap inference. Code and data for full replication are available in the accompanying repository (see Appendix~\ref{el_app}).

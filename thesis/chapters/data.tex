@@ -32,7 +32,7 @@ World Cup results---winners, runners-up, semi-finalists, and host countries---we
 
 Six countries contribute as World Cup winners in the estimation sample: Brazil, Germany, Spain, France, the United Kingdom, and Italy, covering 10 distinct victory events between 1966 and 2018 (Table~\ref{tab:wc_events}). \citet{Mello2024} also notes that ``GDP data are available only at the aggregate level of the UK'' for England's 1966 victory---a quirk I replicate by using the United Kingdom's GDP series for the England entry.\footnote{This means the treatment indicator for 1966 is assigned to the UK aggregate, which includes Scotland, Wales, and Northern Ireland. Mello adopts the same convention.}
 
-As discussed in Section~\ref{sec:sample_construction}, data availability excludes several victory events. Argentina's 1978 and 1986 victories predate its OECD coverage, and the 2022 victory falls outside the estimation window; it is therefore classified as a control country in the main analysis and examined separately in Section~\ref{sec:argentina_case}. Brazil contributes only through its 2002 success, with earlier victories excluded by analogous data constraints.
+As discussed in Section~\ref{sec:sample_construction}, data availability excludes several victory events. Argentina's 1978 and 1986 victories predate its OECD coverage, and the 2022 victory falls outside the estimation window; Argentina is therefore classified as a control country throughout the main analysis. Brazil contributes only through its 2002 success, with earlier victories excluded by analogous data constraints.
 
 \begin{table}[H]
 \centering
@@ -59,7 +59,7 @@ As discussed in Section~\ref{sec:sample_construction}, data availability exclude
 2014 & Germany        & Brazil         & Q2 & \checkmark & \checkmark \\
 2018 & France         & Russia         & Q2 & \checkmark & \checkmark \\
 \midrule
-2022 & Argentina      & Qatar          & Q4 & \multicolumn{2}{c}{\textit{Potential case study}} \\
+2022 & Argentina      & Qatar          & Q4 & \multicolumn{2}{c}{\textit{Outside estimation window}} \\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -95,7 +95,7 @@ This study         & 1,295 & 7,338 & 8,633 \\
 
 The winner count matches exactly at 1,295. The non-winner count differs by only four observations (7,338 versus 7,342), which I guess is Russia's OECD series ending earlier than the rest in my download. Assuming that 1,295 winner quarters are the exact same as Mello's, the four differing observations are only controls and can be neglected. \citet{Mello2024} reports a total of ``8,637 observations, with an average of about 180 quarterly GDP records per country''; my total of 8,633 is consistent with this.
 
-Table~\ref{tab:summary_comparison} presents the core validation step: a side-by-side comparison of the summary statistics from \citet[Table~1]{Mello2024} (reproduced in the left panel) and the corresponding statistics from this replication (right panel). The table follows the same format as the original, reporting GDP, population, GDP per capita, and year-over-year GDP growth by sub-period and winner status.
+Table~\ref{tab:summary_comparison} presents the core validation step: a side-by-side comparison of the summary statistics from Mello's Table 1 (reproduced in the left panel) and the corresponding statistics from this replication (right panel). The table follows the same format as the original, reporting GDP, population, GDP per capita, and year-over-year GDP growth by sub-period and winner status.
 
 \begin{table}[htbp]
 \centering

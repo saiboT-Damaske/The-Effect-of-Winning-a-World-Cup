@@ -9,6 +9,19 @@ Table~\ref{tab:es_full_comparison} presents the complete GDP comparison across a
 
 \input{tables/event_study_all_features_comparison}
 
+\subsection{GDP Component Event Study}
+\label{sec:app_component_es}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{event_study_gdp_components_figure2.png}
+\caption{Event study coefficients for the five GDP expenditure components}
+\label{fig:app_es_components}
+\begin{tablenotes}
+\textit{Notes}: Each panel shows the estimated relative-time coefficients ($\beta_l$) for one GDP component.  Error bars represent 95\% confidence intervals based on country-clustered standard errors.  Reference period: $l = 0$ (Q2 of World Cup year).  Endpoints binned at $\pm 16$.
+\end{tablenotes}
+\end{figure}
+
 \subsection{SDiD Component Figures: Winners}
 \label{sec:app_sdid_components}
 
@@ -101,6 +114,29 @@ Table~\ref{tab:es_full_comparison} presents the complete GDP comparison across a
 \label{sec:app_underperformer_es}
 
 \input{tables/underperformer_event_study_gdp}
+
+\subsection{Underperformer: All Features}
+\label{sec:app_underperformer_all_features}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{underperformer_all_features_avg.png}
+\caption{Average $\Delta_4$ log growth by feature around underperformance events}
+\label{fig:app_underperformer_avg}
+\begin{tablenotes}
+\textit{Notes}: Average year-over-year log growth for each of the six national accounts features across all matched underperformance events.  Dashed vertical line marks the World Cup quarter ($l = 0$).  Shaded region: post-treatment window.
+\end{tablenotes}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{underperformer_event_study_all_features.png}
+\caption{Underperformer event study: all six national accounts features}
+\label{fig:app_underperformer_es_all}
+\begin{tablenotes}
+\textit{Notes}: Estimated relative-time coefficients ($\beta_l$) for each feature.  Treatment = top-10 pre-tournament ELO rating, eliminated in group stage.  Error bars: 95\% CI.  Reference: $l = 0$ (Q2 of WC year).  Endpoints binned at $\pm 16$.
+\end{tablenotes}
+\end{figure}
 
 \subsection{Underperformer: Individual GDP Overlay}
 \label{sec:app_underperformer_gdp_overlay}
@@ -243,71 +279,110 @@ Host & Indicator for country hosting World Cup in year containing quarter $t$. \
 \end{tablenotes}
 \end{table}
 
+\subsubsection{World Cup Underperformers: ELO and FIFA Rankings}
+
+\begin{table}[H]
+\centering
+\caption{World Cup underperformers by pre-tournament ELO ranking (top-10, group-stage exit)}
+\label{tab:app_underperformers_elo}
+\scriptsize
+\begin{tabular}{@{}clcrcc@{}}
+\toprule
+\textbf{WC Year} & \textbf{Team} & \textbf{ELO Rank} & \textbf{ELO Rating} & \textbf{FIFA Rank} & \textbf{FIFA underperf.} \\
+\midrule
+1962 & Argentina      &  4 & 1{,}979 & --- & --- \\
+1962 & Spain          &  6 & 1{,}963 & --- & --- \\
+1962 & Uruguay        &  9 & 1{,}905 & --- & --- \\
+1966 & Brazil         &  1 & 2{,}010 & --- & --- \\
+1966 & Italy          &  4 & 1{,}979 & --- & --- \\
+1966 & Spain          &  8 & 1{,}895 & --- & --- \\
+1966 & Mexico         &  9 & 1{,}868 & --- & --- \\
+1970 & Czechoslovakia &  5 & 1{,}963 & --- & --- \\
+1970 & Sweden         &  8 & 1{,}846 & --- & --- \\
+1970 & Bulgaria       &  9 & 1{,}824 & --- & --- \\
+1970 & Romania        & 10 & 1{,}784 & --- & --- \\
+1974 & Italy          &  3 & 2{,}002 & --- & --- \\
+1974 & Scotland       & 10 & 1{,}826 & --- & --- \\
+1978 & Spain          &  4 & 1{,}961 & --- & --- \\
+1978 & Scotland       &  5 & 1{,}944 & --- & --- \\
+1978 & Hungary        &  9 & 1{,}907 & --- & --- \\
+1978 & France         & 10 & 1{,}891 & --- & --- \\
+1982 & Yugoslavia     &  8 & 1{,}917 & --- & --- \\
+1982 & Czechoslovakia & 10 & 1{,}896 & --- & --- \\
+1986 & Hungary        &  8 & 1{,}891 & --- & --- \\
+1986 & Scotland       & 10 & 1{,}874 & --- & --- \\
+1990 & Sweden         &  5 & 1{,}952 & --- & --- \\
+1990 & Soviet Union   &  7 & 1{,}943 & --- & --- \\
+\midrule
+1994 & Colombia       &  5 & 1{,}945 & 14 & No \\
+1994 & Russia         & 10 & 1{,}867 & 15 & No \\
+1998 & Spain          &  3 & 2{,}040 & 14 & No \\
+2002 & France         &  1 & 2{,}093 &  1 & Yes \\
+2002 & Argentina      &  2 & 2{,}020 &  3 & Yes \\
+2002 & Portugal       &  4 & 1{,}978 &  4 & Yes \\
+2002 & Croatia        &  7 & 1{,}881 & 16 & No \\
+2006 & Czech Republic &  4 & 1{,}971 &  2 & Yes \\
+2010 & Italy          &  6 & 1{,}936 &  5 & Yes \\
+2014 & Spain          &  2 & 2{,}108 &  1 & Yes \\
+2014 & Portugal       &  6 & 1{,}942 &  4 & Yes \\
+2014 & England        &  7 & 1{,}931 & 10 & Yes \\
+2018 & Germany        &  2 & 2{,}076 &  1 & Yes \\
+2018 & Peru           & 10 & 1{,}915 & 10 & Yes \\
+2022 & Belgium        &  5 & 2{,}006 &  2 & Yes \\
+2022 & Denmark        &  8 & 1{,}971 &  9 & Yes \\
+2022 & Germany        &  9 & 1{,}962 & 10 & Yes \\
+2022 & Uruguay        & 10 & 1{,}936 & 13 & No \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\scriptsize
+\item \textit{Notes:} 41 underperformance events across 16 World Cups (1962--2022).  ``Underperformer'' = top-10 pre-tournament ELO ranking among WC participants and eliminated in the group stage.  ELO and FIFA ranks are among WC participants only.  FIFA World Rankings begin in 1992; ``---'' indicates no FIFA data available.  ``FIFA underperf.''\ indicates whether the team was also top-10 by FIFA ranking among participants.  The midrule separates the pre-FIFA era (1962--1990) from the FIFA-era tournaments (1994--2022).
+\end{tablenotes}
+\end{table}
+
 \subsubsection{Country Coverage}
 
-\begin{longtable}{llcc}
-\caption{GDP Country coverage in the event-study sample} \label{tab:app_coverage} \\
+\begin{table}[H]
+\centering
+\caption{GDP country coverage in the event-study sample}
+\label{tab:app_coverage}
+\scriptsize
+\begin{tabular}{@{}llcr@{\hskip 18pt}llcr@{}}
 \toprule
+\textbf{Country} & \textbf{ISO3} & \textbf{Period} & \textbf{Obs.} &
 \textbf{Country} & \textbf{ISO3} & \textbf{Period} & \textbf{Obs.} \\
 \midrule
-\endfirsthead
-\multicolumn{4}{c}{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
-\toprule
-\textbf{Country} & \textbf{ISO3} & \textbf{Period} & \textbf{Obs.} \\
-\midrule
-\endhead
-\midrule
-\multicolumn{4}{r}{\textit{Continued on next page}} \\
-\endfoot
+Argentina      & ARG & 1994-Q1--2021-Q4 & 112 & Latvia         & LVA & 1996-Q1--2021-Q4 & 104 \\
+Australia      & AUS & 1962-Q1--2021-Q4 & 240 & Mexico         & MEX & 1962-Q1--2021-Q4 & 240 \\
+Austria        & AUT & 1962-Q1--2021-Q4 & 240 & Netherlands    & NLD & 1962-Q1--2021-Q4 & 240 \\
+Belgium        & BEL & 1962-Q1--2021-Q4 & 240 & Norway         & NOR & 1962-Q1--2021-Q4 & 240 \\
+Brazil         & BRA & 1998-Q2--2021-Q4 &  95 & New Zealand    & NZL & 1962-Q1--2021-Q4 & 240 \\
+Bulgaria       & BGR & 1997-Q1--2021-Q4 & 100 & Poland         & POL & 1996-Q1--2021-Q4 & 104 \\
+Canada         & CAN & 1962-Q1--2021-Q4 & 240 & Portugal       & PRT & 1962-Q1--2021-Q4 & 240 \\
+Chile          & CHL & 1997-Q1--2021-Q4 & 100 & Romania        & ROU & 1996-Q1--2021-Q4 & 104 \\
+Colombia       & COL & 1995-Q1--2021-Q4 & 108 & Russia         & RUS & 1996-Q1--2021-Q3 & 103 \\
+Costa Rica     & CRI & 1992-Q1--2021-Q4 & 120 & Saudi Arabia   & SAU & 2011-Q1--2021-Q4 &  44 \\
+Croatia        & HRV & 1996-Q1--2021-Q4 & 104 & Slovakia       & SVK & 1994-Q1--2021-Q4 & 112 \\
+Czechia        & CZE & 1996-Q1--2021-Q4 & 104 & Slovenia       & SVN & 1997-Q1--2021-Q4 & 100 \\
+Denmark        & DNK & 1962-Q1--2021-Q4 & 240 & South Africa   & ZAF & 1962-Q1--2021-Q4 & 240 \\
+Estonia        & EST & 1996-Q1--2021-Q4 & 104 & South Korea    & KOR & 1962-Q1--2021-Q4 & 240 \\
+Finland        & FIN & 1962-Q1--2021-Q4 & 240 & Spain          & ESP & 1962-Q1--2021-Q4 & 240 \\
+France         & FRA & 1962-Q1--2021-Q4 & 240 & Sweden         & SWE & 1962-Q1--2021-Q4 & 240 \\
+Germany        & DEU & 1962-Q1--2021-Q4 & 240 & Switzerland    & CHE & 1962-Q1--2021-Q4 & 240 \\
+Greece         & GRC & 1962-Q1--2021-Q4 & 240 & Turkey         & TUR & 1962-Q1--2021-Q4 & 240 \\
+Hungary        & HUN & 1996-Q1--2021-Q4 & 104 & United Kingdom & GBR & 1962-Q1--2021-Q4 & 240 \\
+Iceland        & ISL & 1962-Q1--2021-Q4 & 240 & United States  & USA & 1962-Q1--2021-Q4 & 240 \\
+India          & IND & 1997-Q2--2021-Q4 &  99 &                &     &                   &     \\
+Indonesia      & IDN & 1991-Q1--2021-Q4 & 124 &                &     &                   &     \\
+Ireland        & IRL & 1962-Q1--2021-Q4 & 240 &                &     &                   &     \\
+Israel         & ISR & 1996-Q1--2021-Q4 & 104 &                &     &                   &     \\
+Italy          & ITA & 1962-Q1--2021-Q4 & 240 &                &     &                   &     \\
+Japan          & JPN & 1962-Q1--2021-Q4 & 240 &                &     &                   &     \\
+Lithuania      & LTU & 1996-Q1--2021-Q4 & 104 &                &     &                   &     \\
+Luxembourg     & LUX & 1962-Q1--2021-Q4 & 240 &                &     &                   &     \\
 \bottomrule
-\endlastfoot
-Argentina      & ARG & 1994-Q1 -- 2021-Q4 & 112 \\
-Australia      & AUS & 1962-Q1 -- 2021-Q4 & 240 \\
-Austria        & AUT & 1962-Q1 -- 2021-Q4 & 240 \\
-Belgium        & BEL & 1962-Q1 -- 2021-Q4 & 240 \\
-Bulgaria       & BGR & 1997-Q1 -- 2021-Q4 & 100 \\
-Brazil         & BRA & 1998-Q2 -- 2021-Q4 & 95 \\
-Canada         & CAN & 1962-Q1 -- 2021-Q4 & 240 \\
-Switzerland    & CHE & 1962-Q1 -- 2021-Q4 & 240 \\
-Chile          & CHL & 1997-Q1 -- 2021-Q4 & 100 \\
-Colombia       & COL & 1995-Q1 -- 2021-Q4 & 108 \\
-Costa Rica     & CRI & 1992-Q1 -- 2021-Q4 & 120 \\
-Czechia        & CZE & 1996-Q1 -- 2021-Q4 & 104 \\
-Germany        & DEU & 1962-Q1 -- 2021-Q4 & 240 \\
-Denmark        & DNK & 1962-Q1 -- 2021-Q4 & 240 \\
-Spain          & ESP & 1962-Q1 -- 2021-Q4 & 240 \\
-Estonia        & EST & 1996-Q1 -- 2021-Q4 & 104 \\
-Finland        & FIN & 1962-Q1 -- 2021-Q4 & 240 \\
-France         & FRA & 1962-Q1 -- 2021-Q4 & 240 \\
-United Kingdom & GBR & 1962-Q1 -- 2021-Q4 & 240 \\
-Greece         & GRC & 1962-Q1 -- 2021-Q4 & 240 \\
-Croatia        & HRV & 1996-Q1 -- 2021-Q4 & 104 \\
-Hungary        & HUN & 1996-Q1 -- 2021-Q4 & 104 \\
-Indonesia      & IDN & 1991-Q1 -- 2021-Q4 & 124 \\
-India          & IND & 1997-Q2 -- 2021-Q4 & 99 \\
-Ireland        & IRL & 1962-Q1 -- 2021-Q4 & 240 \\
-Iceland        & ISL & 1962-Q1 -- 2021-Q4 & 240 \\
-Israel         & ISR & 1996-Q1 -- 2021-Q4 & 104 \\
-Italy          & ITA & 1962-Q1 -- 2021-Q4 & 240 \\
-Japan          & JPN & 1962-Q1 -- 2021-Q4 & 240 \\
-South Korea    & KOR & 1962-Q1 -- 2021-Q4 & 240 \\
-Lithuania      & LTU & 1996-Q1 -- 2021-Q4 & 104 \\
-Luxembourg     & LUX & 1962-Q1 -- 2021-Q4 & 240 \\
-Latvia         & LVA & 1996-Q1 -- 2021-Q4 & 104 \\
-Mexico         & MEX & 1962-Q1 -- 2021-Q4 & 240 \\
-Netherlands    & NLD & 1962-Q1 -- 2021-Q4 & 240 \\
-Norway         & NOR & 1962-Q1 -- 2021-Q4 & 240 \\
-New Zealand    & NZL & 1962-Q1 -- 2021-Q4 & 240 \\
-Poland         & POL & 1996-Q1 -- 2021-Q4 & 104 \\
-Portugal       & PRT & 1962-Q1 -- 2021-Q4 & 240 \\
-Romania        & ROU & 1996-Q1 -- 2021-Q4 & 104 \\
-Russia         & RUS & 1996-Q1 -- 2021-Q3 & 103 \\
-Saudi Arabia   & SAU & 2011-Q1 -- 2021-Q4 & 44 \\
-Slovakia       & SVK & 1994-Q1 -- 2021-Q4 & 112 \\
-Slovenia       & SVN & 1997-Q1 -- 2021-Q4 & 100 \\
-Sweden         & SWE & 1962-Q1 -- 2021-Q4 & 240 \\
-Turkey         & TUR & 1962-Q1 -- 2021-Q4 & 240 \\
-United States  & USA & 1962-Q1 -- 2021-Q4 & 240 \\
-South Africa   & ZAF & 1962-Q1 -- 2021-Q4 & 240 \\
-\end{longtable}
-\floatfoot{\textit{Notes}: 48 countries. Full-coverage countries (1962-Q1 to 2021-Q4) account for 26 of 48 countries (6,240 of 8,633 observations). Winner countries (BRA, DEU, ESP, FRA, GBR, ITA) contribute 1,295 observations.}
+\end{tabular}
+\begin{tablenotes}
+\textit{Notes}: 48 countries. Full-coverage countries (1962-Q1 to 2021-Q4) account for 26 of 48 (6{,}240 of 8{,}633 observations). Winner countries (BRA, DEU, ESP, FRA, GBR, ITA) contribute 1{,}295 observations.
+\end{tablenotes}
+\end{table}

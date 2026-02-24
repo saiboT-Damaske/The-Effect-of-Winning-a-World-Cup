@@ -15,7 +15,7 @@ In observational settings with panel data and staggered treatment adoption, such
 \tau^{ATT} = E[Y_i(1) - Y_i(0) \mid D_i = 1]
 \label{eq:att}
 \end{equation}
-which measures the effect specifically for units that received treatment, i.e., winners of a FIFA World Cup. This is the quantity estimated by both the event study and SDID approaches in this thesis.
+which measures the effect specifically for units that received treatment, i.e. winners of a FIFA World Cup. This is the quantity estimated by both the event study and SDID approaches in this thesis.
 
 \subsection{Event Study Design}
 
@@ -30,21 +30,21 @@ where $\alpha_i$ are unit fixed effects absorbing time-invariant country charact
 
 \subsubsection{Identification Assumptions}
 
-Event study identification rests on two key assumptions:
+Event study identification rests on two key assumptions.
 
-\textbf{Parallel trends:} Absent treatment, treated and control units would follow parallel outcome paths. Formally:
+\textbf{Parallel trends:} Absent treatment, treated and control units would follow parallel outcome paths. Formally,
 \begin{equation}
 E[Y_{it}(0) - Y_{i,t-1}(0) \mid D_i = 1] = E[Y_{it}(0) - Y_{i,t-1}(0) \mid D_i = 0]
 \label{eq:parallel_trends}
 \end{equation}
 
-\textbf{No anticipation:} Treatment does not affect outcomes before it occurs:
+\textbf{No anticipation:} Treatment does not affect outcomes before it occurs,
 \begin{equation}
 Y_{it}(1) = Y_{it}(0) \quad \text{for all } t < E_i
 \label{eq:no_anticipation}
 \end{equation}
 
-The pre-treatment coefficients $\{\beta_k : k < 0\}$ provide a testable implication: under these assumptions, they should be statistically indistinguishable from zero. A flat pre-trend supports the parallel trends assumption, though it cannot definitively prove it.
+The pre-treatment coefficients $\{\beta_k : k < 0\}$ provide a testable implication that under these assumptions, they should be statistically indistinguishable from zero. A flat pre-trend supports the parallel trends assumption, though it cannot definitively prove it.
 
 \subsubsection{Challenges with Heterogeneous Treatment Effects}
 
@@ -70,7 +70,7 @@ Figure~\ref{fig:sdid_comparison} illustrates the intuition behind SDID by compar
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{sdid_comparison.png}
-\caption{Comparison of difference-in-differences (DID), synthetic control (SC), and synthetic difference-in-differences (SDID). In DID, the treatment effect is estimated as the difference between the treated unit's post-treatment outcome and a simple average of control units. In SC, unit weights are optimized to match the pre-treatment trajectory exactly. SDID combines both: unit weights create a synthetic control while time weights emphasize periods most predictive of post-treatment outcomes. Adapted from \citet{Arkhangelsky2021}.}
+\caption[Comparison of DID, synthetic control, and SDID]{Comparison of difference-in-differences (DID), synthetic control (SC), and synthetic difference-in-differences (SDID). In DID, the treatment effect is estimated as the difference between the treated unit's post-treatment outcome and a simple average of control units. In SC, unit weights are optimized to match the pre-treatment trajectory exactly. SDID combines both: unit weights create a synthetic control while time weights emphasize periods most predictive of post-treatment outcomes. Adapted from \citet{Arkhangelsky2021}.}
 \label{fig:sdid_comparison}
 \end{figure}
 
