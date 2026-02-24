@@ -2,7 +2,7 @@ This section presents the theoretical foundations of the causal inference method
 
 \subsection{The Potential Outcomes Framework}
 
-The fundamental goal of causal inference is to estimate the effect of a treatment on an outcome. Following the potential outcomes framework formalized by \citet{Rubin1974}, each unit $i$ has two potential outcomes: $Y_i(1)$ under treatment and $Y_i(0)$ under control. Since each unit is observed in only one state---the ``fundamental problem of causal inference'' \citep{Holland1986}---individual treatment effects $\tau_i = Y_i(1) - Y_i(0)$ are not directly identified.
+The fundamental goal of causal inference is to estimate the effect of a treatment on an outcome. Following the potential outcomes framework formalized by \citet{Rubin1974}, each unit $i$ has two potential outcomes: $Y_i(1)$ under treatment and $Y_i(0)$ under control. Since each unit is observed in only one state -- the ``fundamental problem of causal inference'' \citep{Holland1986} -- individual treatment effects $\tau_i = Y_i(1) - Y_i(0)$ are not directly identified.
 
 The average treatment effect (ATE) is defined as:
 \begin{equation}
@@ -48,7 +48,7 @@ The pre-treatment coefficients $\{\beta_k : k < 0\}$ provide a testable implicat
 
 \subsubsection{Challenges with Heterogeneous Treatment Effects}
 
-There exist potential problems with two-way fixed effects (TWFE) estimators -- regressions that include both unit- and time fixed effects -- when treatment occurs at different times for different units. The issue arises because TWFE implicitly constructs comparisons between all groups, not just treated versus never-treated. Suppose that Germany wins in 1974 and Italy wins in 1982. To estimate the effect of winning, TWFE compares winners against never-winners (a valid comparison), but it also compares Italy (newly treated in 1982) against Germany (already treated in 1974). The second comparison treats Germany as a ``control'' after it has already won---if winning has persistent effects, this comparison is contaminated.
+There exist potential problems with two-way fixed effects (TWFE) estimators -- regressions that include both unit- and time fixed effects -- when treatment occurs at different times for different units. The issue arises because TWFE implicitly constructs comparisons between all groups, not just treated versus never-treated. Suppose that Germany wins in 1974 and Italy wins in 1982. To estimate the effect of winning, TWFE compares winners against never-winners (a valid comparison), but it also compares Italy (newly treated in 1982) against Germany (already treated in 1974). The second comparison treats Germany as a ``control'' after it has already won -- if winning has persistent effects, this comparison is contaminated.
 
 \citet{Goodman-Bacon2021} formalizes this intuition by showing that the TWFE estimator $\hat{\beta}^{TWFE}$ can be decomposed as a weighted average of all such pairwise comparisons:
 \begin{equation}
@@ -63,7 +63,7 @@ For the World Cup application, these concerns are not handled by Mello and are m
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Synthetic Difference-in-Differences}
 
-Synthetic difference-in-differences (SDID), proposed by \citet{Arkhangelsky2021}, combines the strengths of synthetic control methods with difference-in-differences logic. While standard DiD assumes parallel trends hold globally, and synthetic control requires exact pre-treatment matching, SDID relaxes both requirements by constructing optimal weights for both units and time periods. This flexibility makes it particularly valuable when pre-treatment trajectories may not be perfectly parallel---a realistic concern when comparing GDP growth across heterogeneous economies.
+Synthetic difference-in-differences (SDID), proposed by \citet{Arkhangelsky2021}, combines the strengths of synthetic control methods with difference-in-differences logic. While standard DiD assumes parallel trends hold globally, and synthetic control requires exact pre-treatment matching, SDID relaxes both requirements by constructing optimal weights for both units and time periods. This flexibility makes it particularly valuable when pre-treatment trajectories may not be perfectly parallel -- a realistic concern when comparing GDP growth across heterogeneous economies.
 
 Figure~\ref{fig:sdid_comparison} illustrates the intuition behind SDID by comparing three approaches using the canonical California tobacco control example from \citet{Abadie2010}.
 
