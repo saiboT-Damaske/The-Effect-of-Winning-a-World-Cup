@@ -63,7 +63,7 @@ In the post-treatment period, $l = +1$ shows a positive but insignificant effect
 \end{figure}
 
 \paragraph{Synthetic difference-in-differences.}
-The SDiD estimate for the semi-finalist treatment group is shown in Figure~\ref{fig:ext_semi_finalist_sdid}.  The ATT is $0.207$\,pp (SE $= 0.202$, $p = 0.305$): positive but insignificant, and roughly half the magnitude of the winner ATT.  With 22~treated subseries (compared to 11 for finalists and 7 for winners), the larger treatment pool slightly reduces the standard error.  Nevertheless, the dilution from including third- and fourth-place finishers pushes the point estimate further from significance.
+The SDiD estimate for the semi-finalist treatment group is shown in Figure~\ref{fig:ext_semi_finalist_sdid}.  The ATT is $0.207$\,pp (SE $= 0.202$, $p = 0.305$): positive but insignificant, and roughly half the magnitude of the winner ATT.  With 22~treated subseries (compared to 11 for finalists and 6 for winners), the larger treatment pool slightly reduces the standard error.  Nevertheless, the dilution from including third- and fourth-place finishers pushes the point estimate further from significance.
 
 \begin{figure}[H]
 \centering
@@ -130,17 +130,17 @@ The event study specification replaces the winner indicator with the underperfor
 \end{equation}
 where $U^{l}_{c,t}$ are relative-time indicators for underperformance events, following the same structure as Equation~\eqref{eq:mello_event_study}.  I estimate this specification for all six national accounts features: GDP, private consumption, government consumption, gross fixed capital formation, exports, and imports.  The sample includes 19~treated countries and 23~underperformance events.
 
-Figure~\ref{fig:ext_underperformer_es_all} presents the event study coefficients for all six features.  The full set of GDP relative-time indicators is in Table~\ref{tab:ext_underperformer_es_gdp_full} (Appendix).  For GDP, the pre-treatment coefficients are uniformly insignificant across all 16 lags, supporting the parallel trends assumption.  In the immediate post-treatment period, the $l = +1$ coefficient is positive ($0.495$\,pp, SE $= 0.283$, $p = 0.087$), contrary to the negative-shock hypothesis.  This marginally significant positive effect at one quarter after the tournament is surprising and likely reflects the economic resilience of the large, diversified economies that dominate the underperformer sample (e.g., Germany, France, Spain, Italy).  The $l = +2$ coefficient remains positive ($0.460$\,pp) but is highly imprecise (SE $= 0.646$).  At longer horizons, all post-treatment coefficients are insignificant and centred near zero.
+Figure~\ref{fig:ext_underperformer_es_gdp} presents the GDP event study coefficients.  The full set of GDP relative-time indicators is in Table~\ref{tab:ext_underperformer_es_gdp_full} (Appendix), and the event study plots for all six features are shown in Appendix Figure~\ref{fig:app_underperformer_es_all}.  The pre-treatment coefficients are uniformly insignificant across all 16 lags, supporting the parallel trends assumption.  In the immediate post-treatment period, the $l = +1$ coefficient is positive ($0.495$\,pp, SE $= 0.283$, $p = 0.087$), contrary to the negative-shock hypothesis.  This marginally significant positive effect at one quarter after the tournament is surprising and likely reflects the economic resilience of the large, diversified economies that dominate the underperformer sample (e.g., Germany, France, Spain, Italy).  The $l = +2$ coefficient remains positive ($0.460$\,pp) but is highly imprecise (SE $= 0.646$).  At longer horizons, all post-treatment coefficients are insignificant and centred near zero.
 
 The most striking result is for \textbf{exports}: the $l = +1$ coefficient is $-1.876$\,pp (SE $= 0.776$, $p = 0.020$), suggesting a statistically significant decline in export growth one quarter after the tournament.  The effect persists with further significant negative coefficients at $l = +5$ through $l = +9$, indicating a sustained export decline.  This is consistent with the finding from the replication and from \citet{Mello2024} that the winner premium operates primarily through the trade channel -- the mirror image appears to hold for underperformers.  Imports also show a negative pattern ($l = +1$: $-1.724$\,pp, SE $= 1.303$), with significant effects emerging at longer horizons ($l = +7$ through $l = +11$).  Private consumption, government consumption, and capital formation show no significant effects.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{underperformer_event_study_all_features.png}
-\caption{Underperformer event study: all six national accounts features}
-\label{fig:ext_underperformer_es_all}
+\includegraphics[width=0.85\textwidth]{underperformer_event_study_gdp.png}
+\caption{Underperformer event study: effect on GDP growth}
+\label{fig:ext_underperformer_es_gdp}
 \begin{tablenotes}
-\textit{Notes}: Dependent variable: $\Delta_4 \ln Y_{c,t}$ for each feature.  Treatment = top-10 pre-tournament ELO rating, eliminated in group stage.  19~treated countries, 23~events, 8{,}633~observations.  Error bars: 95\%~CI.  Reference: $l = 0$ (Q2 of WC year).  Endpoints binned at $\pm 16$.
+\textit{Notes}: Dependent variable: $\Delta_4 \ln \text{GDP}_{c,t}$.  Treatment = top-10 pre-tournament ELO rating, eliminated in group stage.  19~treated countries, 23~events, 8{,}633~observations.  Shaded region: 95\%~CI.  Reference: $l = 0$ (Q2 of WC year).  Endpoints binned at $\pm 16$.
 \end{tablenotes}
 \end{figure}
 
@@ -187,7 +187,7 @@ GDP                       & $0.763$     & (0.688) & $0.527$*    & (0.274) & $0.4
 Private consumption       & $0.410$     & (0.234) & $-0.212$    & (0.338) & $-0.009$   & (0.355) \\
 Government consumption    & $0.570$     & (0.635) & $-0.331$    & (0.591) & $-0.314$   & (0.463) \\
 Gross fixed capital form. & $2.566$     & (1.967) & $1.251$     & (1.120) & $1.214$    & (1.238) \\
-Exports                   & $-1.290$    & (1.435) & $4.769$     & (3.989) & $4.507$*   & (3.916) \\
+Exports                   & $-1.290$    & (1.435) & $4.769$     & (3.989) & $4.507$    & (3.916) \\
 Imports                   & $2.147$*    & (1.105) & $-0.247$    & (1.169) & $-0.112$   & (1.095) \\
 \bottomrule
 \multicolumn{7}{l}{\footnotesize *\,$p<0.10$,\; **\,$p<0.05$,\; ***\,$p<0.01$.\; Bootstrap SEs (1,000 replications).} \\

@@ -115,29 +115,6 @@ Table~\ref{tab:es_full_comparison} presents the complete GDP comparison across a
 
 \input{tables/underperformer_event_study_gdp}
 
-\subsection{Underperformer: All Features}
-\label{sec:app_underperformer_all_features}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\textwidth]{underperformer_all_features_avg.png}
-\caption{Average $\Delta_4$ log growth by feature around underperformance events}
-\label{fig:app_underperformer_avg}
-\begin{tablenotes}
-\textit{Notes}: Average year-over-year log growth for each of the six national accounts features across all matched underperformance events.  Dashed vertical line marks the World Cup quarter ($l = 0$).  Shaded region: post-treatment window.
-\end{tablenotes}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.85\textwidth]{underperformer_event_study_all_features.png}
-\caption{Underperformer event study: all six national accounts features}
-\label{fig:app_underperformer_es_all}
-\begin{tablenotes}
-\textit{Notes}: Estimated relative-time coefficients ($\beta_l$) for each feature.  Treatment = top-10 pre-tournament ELO rating, eliminated in group stage.  Error bars: 95\% CI.  Reference: $l = 0$ (Q2 of WC year).  Endpoints binned at $\pm 16$.
-\end{tablenotes}
-\end{figure}
-
 \subsection{Underperformer: Individual GDP Overlay}
 \label{sec:app_underperformer_gdp_overlay}
 
@@ -148,6 +125,19 @@ Table~\ref{tab:es_full_comparison} presents the complete GDP comparison across a
 \label{fig:app_underperformer_gdp_overlay}
 \begin{tablenotes}
 \textit{Notes}: Each line represents an individual underperformance event.  Dashed vertical line marks the World Cup quarter ($l = 0$).  Shaded region: post-treatment window.  Treatment = top-10 pre-tournament ELO rating, eliminated in group stage.
+\end{tablenotes}
+\end{figure}
+
+\subsection{Underperformer Event Study: All Features}
+\label{sec:app_underperformer_all_features}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{underperformer_event_study_all_features.png}
+\caption{Underperformer event study: all six national accounts features}
+\label{fig:app_underperformer_es_all}
+\begin{tablenotes}
+\textit{Notes}: Estimated relative-time coefficients ($\beta_l$) for each feature.  Treatment = top-10 pre-tournament ELO rating, eliminated in group stage.  Error bars: 95\% CI.  Reference: $l = 0$ (Q2 of WC year).  Endpoints binned at $\pm 16$.
 \end{tablenotes}
 \end{figure}
 
