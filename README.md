@@ -2,12 +2,7 @@
 
 **Master's Thesis — LMU Munich, February 2026**
 
-This thesis investigates whether winning the FIFA World Cup has a measurable effect on the winner's GDP growth. It replicates and extends Mello (2024, *Oxford Bulletin of Economics and Statistics*), who finds a short-lived positive effect on GDP in the quarters following a World Cup victory. The analysis uses event study regressions and synthetic difference-in-differences (SDiD) on quarterly OECD national accounts data (1962–2021).
-
-Beyond the GDP replication, the thesis extends the analysis in three directions:
-- **GDP components** — private consumption, government consumption, capital formation, exports, and imports
-- **Tournament performance gradient** — separate analyses for finalists, semi-finalists, and Elo-based underperformers
-- **Argentina 2022** — a preliminary pre/post case study of the most recent World Cup winner
+This thesis replicates and extends the analysis of Mello (2024), who examines whether winning the FIFA World Cup boosts GDP growth. Using quarterly data from OECD countries and implementing both event-study and synthetic difference-in-differences (SDiD) methodologies, this study confirms that winning the World Cup increases year-over-year GDP growth by approximately 0.5 percentage points in the two subsequent quarters, driven primarily by enhanced export growth. Beyond replication, this thesis extends the analysis to finalists, semi-finalists, and underperformers — top-10 Elo-rated countries eliminated in the group stage. The finalist and semi-finalist extensions show positive but insignificant effects that attenuate as the treatment group broadens, confirming the premium is specific to winning. The underperformer analysis finds no evidence that early elimination depresses GDP; most SDiD estimates are positive, with the notable exception of exports, where the ATT turns negative which is consistent with the export channel operating in reverse. The findings reinforce the idea that international visibility and trade are the primary mechanism for economic growth after a victory, and suggest that investigating more detailed economic components (e.g. tourism or employment) as well as the effect for unexpected overperformers would be a valuable direction for future research.
 
 All data collection was done programmatically through API calls (OECD and World Cup results) and can be fully replicated by running the scripts in `Data/scripts/`.
 
@@ -16,59 +11,18 @@ All data collection was done programmatically through API calls (OECD and World 
 ## Repository Structure
 
 ```
-├── thesis/                          # LaTeX source for the full thesis
-│   ├── thesis.tex                   #   main document
-│   ├── chapters/                    #   chapter .tex files
-│   ├── tables/                      #   generated LaTeX tables
-│   ├── figures/                     #   figures referenced in the text
-│   └── bibliography.bib             #   references
-│
+├── thesis/
 ├── Data/
-│   ├── scripts/                     # data collection & processing scripts
-│   │   ├── get_data_OECD_population.R
-│   │   ├── get_OECD_6_features_test.R
-│   │   ├── get_describe_WC_winner_data.R
-│   │   ├── get_wc_underperformance_elo.R
-│   │   ├── join_and_calculate_metrics_gdp_pop_wc.R
-│   │   └── create_paper_replication_csv.R
-│   ├── oecd_source/                 # raw OECD quarterly national accounts
-│   ├── oecd_processed/              # cleaned & merged panel datasets
-│   ├── oecd_metadata/               # feature dictionaries, coverage info
-│   ├── world_cup/                   # World Cup results & Elo ratings
-│   └── mello_paper_replication/     # estimation-ready samples
-│
-├── mello_paper_replication/         # core replication of Mello (2024)
-│   ├── r_scripts/                   #   event study & SDiD estimation
-│   ├── event_study_plots/           #   event study regression figures
-│   ├── descriptive_plots/           #   winner/host descriptive plots
-│   ├── sdid_plots/                  #   SDiD figures
-│   ├── sdid_results/                #   SDiD ATT estimates
-│   ├── results/                     #   coefficient tables, comparison CSVs
-│   └── notebooks/                   #   exploratory Python notebooks
-│
-├── finalist_analysis/               # extension: World Cup finalists
-│   ├── r_scripts/
-│   ├── plots/
-│   └── results/
-│
-├── semi_finalist_analysis/          # extension: semi-finalists
-│   ├── r_scripts/
-│   ├── plots/
-│   └── results/
-│
-├── underperformer_analysis/         # extension: Elo-based underperformers
-│   ├── r_scripts/
-│   ├── plots/
-│   └── results/
-│
-├── argentina_2022/                  # Argentina 2022 case study
-│   ├── notebooks/
-│   ├── plots/
-│   └── results/
-│
-├── archive/                         # earlier drafts and data experiments
-└── literature/                      # reference material
+├── mello_paper_replication/
+├── finalist_analysis/
+├── semi_finalist_analysis/
+├── underperformer_analysis/
+├── argentina_2022/
+├── archive/
+└── literature/
 ```
+
+`Data/` contains all raw and processed datasets as well as the scripts that pull data from the OECD API and assemble the estimation panels. `mello_paper_replication/` holds the core replication of Mello (2024) — event study regressions and SDiD estimation for GDP and its components. The three extension folders (`finalist_analysis/`, `semi_finalist_analysis/`, `underperformer_analysis/`) each follow the same layout and apply the same methods to their respective treatment groups. `argentina_2022/` contains the preliminary case study. `thesis/` is the full LaTeX source. Each analysis folder has subfolders for R scripts, plots, and results.
 
 ## Replication
 
