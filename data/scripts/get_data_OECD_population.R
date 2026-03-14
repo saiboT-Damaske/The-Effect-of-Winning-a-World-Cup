@@ -2,10 +2,11 @@ library(readr)
 library(dplyr)
 library(janitor)
 
-# Working directory = repo root (~/The-Effect-of-Winning-a-World-Cup)
-# Set once in your R session, or uncomment:
+# Working directory
 # setwd("~/The-Effect-of-Winning-a-World-Cup")
 
+# Here I get population data set for the countries OECD countries to replicate 
+# the summary statistics table
 base <- "https://sdmx.oecd.org/public/rest/data"
 flow <- "OECD.ELS.SAE,DSD_POPULATION@DF_POP_HIST,1.0"
 

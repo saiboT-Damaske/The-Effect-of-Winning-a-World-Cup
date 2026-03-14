@@ -3,8 +3,8 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-# Working directory = repo root (~/The-Effect-of-Winning-a-World-Cup)
-# Set once in your R session, or uncomment:
+# Working directory
+# Set once in your R session
 # setwd("~/The-Effect-of-Winning-a-World-Cup")
 
 # read generated dataset
